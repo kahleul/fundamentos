@@ -1,0 +1,231 @@
+\documentclass[12pt, a4paper, openany, oneside]{book}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazilian]{babel}
+\usepackage{libertine}
+
+\usepackage{geometry}
+\geometry{
+    a4paper,            % Redundante com a classe, mas boa prática manter
+    left=3cm,           % Margem esquerda
+    right=3cm,          % Margem direita (Garante a simetria com a esquerda)
+    top=3cm,            % Margem superior
+    bottom=3cm,         % Margem inferior
+    marginparwidth=2cm, % Define exatamente 2cm para as notas do comando \fonte
+    marginparsep=4mm    % Define um respiro de 4mm entre o texto principal e a nota
+}
+
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{etoolbox}
+
+\usepackage{csquotes}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage{esvect}
+\usepackage{verbatim}
+%\usepackage{cancel}
+\usepackage{xcolor}
+\usepackage{marginnote}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\setlength{\parskip}{8pt}
+\setlength{\parindent}{0pt}
+\setlist[itemize]{itemsep=0pt, topsep=0pt}
+\setlist[description]{itemsep=0pt, topsep=0pt}
+\setlist[enumerate]{itemsep=0pt, topsep=0pt}
+
+\newlist{iffe}{description}{1}
+\setlist[iffe]{
+  font=\normalfont,
+  labelwidth=2.6em,
+  labelsep=0.5em,
+  leftmargin=3.1em,
+  align=right,
+  nosep
+}
+
+\allowdisplaybreaks
+\raggedbottom
+%\setlength\emergencystretch{0.5em}
+%\tolerance=300
+
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{3}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[backend=biber]{biblatex}
+\addbibresource{bibliografia.bib}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Inverte a posição padrão das notas de margem (joga para a esquerda)
+\reversemarginpar
+
+% Cria a chave (toggle) para controlar a exibição das notas internas
+\newtoggle{mostrarfontes}
+
+% Escolha UM dos dois abaixo comentando o outro:
+\toggletrue{mostrarfontes}  % MODO DE REVISÃO: Mostra as fontes na margem
+%\togglefalse{mostrarfontes} % MODO FINAL: Oculta todas as fontes, PDF limpo
+
+% Comando para inserir a fonte na margem quando o modo de revisão estiver ativo
+\newcommand{\fonte}[2][]{%
+  \iftoggle{mostrarfontes}{%
+    \marginnote{\tiny\sffamily\color{blue}Fonte: \cite[#1]{#2}}%
+  }{}%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Pb}{\mathbb{P}}
+\newcommand{\ds}{\displaystyle}
+\newcommand{\op}{\operatorname}
+\newcommand{\id}{\operatorname{Id}}
+\renewcommand{\Im}{\operatorname{Im}}
+\DeclareMathOperator{\ind}{Ind}
+\DeclareMathOperator{\Img}{Im}
+\DeclareMathOperator{\sen}{sen}
+\DeclareMathOperator{\Dom}{Dom}
+\DeclareMathOperator{\Int}{int} %interior
+
+\newcommand{\itemproof}{\hfill$\blacksquare$\par}
+\newcommand{\blackproof}{\hfill$\blacksquare$\par}
+\newcommand{\whiteproof}{\hfill$\square$\par}
+
+\let\oldrestriction\restriction
+\DeclareRobustCommand{\restriction}{\mathord{\oldrestriction}}
+
+\makeatletter
+\NewDocumentCommand{\lowerint}{}{\mathop{}\mathpalette\lowerint@\relax\!\int}
+\NewDocumentCommand{\upperint}{}{\mathop{}\mathpalette\upperint@\relax\!\int}
+\newcommand{\lowerint@}[2]{%
+  \begingroup
+  \sbox\z@{$\m@th#1\int$}%
+  \lowup@{l}{\underline}{#1}%
+  \endgroup
+}
+\newcommand{\upperint@}[2]{%
+  \begingroup
+  \sbox\z@{$\m@th#1\int$}%
+  \lowup@{r}{\overline}{#1}%
+  \endgroup
+}
+\newcommand{\lowup@}[3]{%
+  % #1 = l (lower) or r (upper)
+  % #2 = \underline (lower) or \overline (upper)
+  % #3 = math style
+  \rlap{%
+    \hspace{0.05\wd\z@}%
+    \makebox[0.9\wd\z@][#1]{%
+      $\m@th#2{%
+        \hspace{0.4\wd\z@}%
+        \ifx#3\displaystyle\else\hspace{0.1\wd\z@}\fi
+        \vphantom{\copy\z@}%
+      }$%
+    }%
+    \hspace{0.05\wd\z@}%
+  }%
+}
+\makeatother
+
+\makeatletter
+\newcommand{\repeatitem}{\addtocounter{\@enumctr}{-1}\item}
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=blue,
+    urlcolor=blue,
+    breaklinks=true
+]{hyperref}
+\usepackage[noabbrev]{cleveref}
+
+\newtheoremstyle{meuestilo}
+  {8pt}                     % Espaço acima
+  {0pt}                     % Espaço abaixo
+  {\normalfont}             % Fonte do corpo do teorema
+  {}                        % Indentação (vazio = nenhuma)
+  {\bfseries}               % Fonte do cabeçalho do teorema
+  {.}                       % Pontuação após o cabeçalho
+  { }                       % Espaço após o cabeçalho
+  {}                        % Especificação do cabeçalho (vazio = `Teorema 1.1`)
+
+\theoremstyle{meuestilo}
+
+\newtheorem{definition}{Definição}[section]
+\newtheorem{theorem}{Teorema}[section]
+\newtheorem{proposition}{Proposição}[section]
+\newtheorem{lemma}{Lema}[section]
+\newtheorem{corollary}{Corolário}[section]
+\newtheorem{remark}{Observação}[section]
+\newtheorem{example}{Exemplo}[section]
+\newtheorem{axiom}{Axioma}[section]
+\newtheorem{notation}{Notação}[section]
+\newtheorem{claim}{Afirmação}
+
+\crefname{definition}{definição}{definições}
+\crefname{theorem}{teorema}{teoremas}
+\crefname{proposition}{proposição}{proposições}
+\crefname{lemma}{lema}{lemas}
+\crefname{corollary}{corolário}{corolários}
+\crefname{remark}{observação}{observações}
+\crefname{example}{exemplo}{exemplos}
+\crefname{axiom}{axioma}{axiomas}
+\crefname{notation}{notação}{notações}
+\crefname{claim}{afirmação}{afirmações}
+
+\crefname{equation}{equação}{equações}
+\crefname{chapter}{capítulo}{capítulos}
+\crefname{section}{seção}{seções}
+\crefname{subsection}{subseção}{subseções}
+\crefname{appendix}{apêndice}{apêndices}
+\crefname{figure}{figura}{figuras}
+\crefname{table}{tabela}{tabelas}
+
+\newcommand{\crefpairconjunction}{ e }
+\newcommand{\crefmiddleconjunction}{, }
+\newcommand{\creflastconjunction}{ e }
+
+\AtBeginEnvironment{proof}{\setcounter{claim}{0}} % 2. Forçamos o contador a voltar para 0 sempre que um 'proof' começar
+\renewenvironment{proof}[1][Prova.]{\par\noindent\textbf{#1} }{}
+\newenvironment{midproof}[1][Prova.]{\par\noindent\emph{#1} }{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{Fundamentos}
+\author{Alexander Kahleul}
+\date{\today}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\maketitle
+\setcounter{page}{2}
+\tableofcontents
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\part{Cálculo I}
+\include{partes/calc1}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\nocite{*}
+\printbibliography[heading=bibintoc]
+
+\end{document}
