@@ -1,0 +1,352 @@
+%!TEX root = main.tex
+
+\chapter{Os Axiomas}
+
+\section{Primeiros Axiomas} \label{sec1}
+
+\subsection{O Axioma da Extensão}
+
+\begin{axiom}[da Extensão] \label{ax:1}
+    Se dois conjuntos têm os mesmos elementos, então eles são iguais.
+        \[
+            \boxed{
+                \forall x \forall y (\forall z((z \in x) \leftrightarrow (z \in y)) \rightarrow (x=y))
+            }
+        \]
+\end{axiom}
+
+\begin{remark}
+    Com a definição de $\subseteq$, o axioma da extensão pode ser enunciado como
+        \[
+            \forall x \forall y (((x \subseteq y) \land (y \subseteq x)) \rightarrow (x=y)).
+        \] 
+\end{remark}
+
+\begin{corollary}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $\forall x (x \subseteq x)$.
+            \item $\forall x \forall y ((x \subseteq y) \land (y \subseteq x) \rightarrow (x=y))$.
+            \item $\forall x \forall y \forall z (((x \subseteq y) \land (y \subseteq z)) \rightarrow (x \subseteq z))$.
+        \end{enumerate}
+\end{corollary}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\subsection{O Axioma do Vazio}
+
+\begin{definition}
+    Um conjunto $x$ é \emph{vazio} se $\forall y (y \notin x)$.
+\end{definition}
+
+\begin{axiom}[do Vazio] \label{ax:2}
+    Existe um conjunto vazio.
+        \[
+            \boxed{
+                \exists x \forall y (y \notin x)
+            }
+        \]
+\end{axiom}
+
+\begin{proposition} \label{prop.set:extensaounico1}
+    Quaisquer dois conjuntos vazios são iguais.
+        \[
+            \forall x_1 \forall x_2 ( (\forall y (y \notin x_1) \land \forall y (y \notin x_2)) \rightarrow (x_1 = x_2) ).
+        \]
+\end{proposition}
+
+\begin{proof}
+Se $x_1 \neq x_2$, então ou existe $z \in x_1$ tal que $z \notin x_2$, ou existe $z \in x_2$ tal que $z \notin x_1$. No primeiro caso, $x_1$ não é vazio, e, no segundo caso, $x_2$ não é vazio. Em ambos os casos, temos uma contradição. Logo $x_1 = x_2$. \blackproof
+\end{proof}
+
+\begin{remark}
+    O \cref{ax:2} do vazio, junto com a \cref{prop.set:extensaounico1}, nos permite estabelecer que existe um único conjunto vazio:
+        \[
+            \exists x (\forall y  (y \notin x) \land \forall z(\forall y ( y \notin z ) \rightarrow (z=x) )).
+        \]
+    Podemos então falar \emph{do} conjunto vazio (em vez de \emph{de um}). Ele é denotado por $\emptyset$.
+\end{remark}
+
+\begin{proposition}
+    O conjunto vazio está contido em qualquer conjunto:
+        \[
+          \forall x (\emptyset \subseteq x).
+        \]
+\end{proposition}
+
+\begin{proof}
+    Se existisse $x$ tal que $\emptyset \not\subseteq x$, então existiria $y \in \emptyset$ tal que $y \notin x$, uma contradição pois $\forall y (y \notin \emptyset)$. Logo, $\forall x (\emptyset \subseteq x)$. \blackproof
+\end{proof}
+
+\subsection{O Axioma do Par}
+
+\begin{axiom}[do Par] \label{ax:3}
+    Para quaisquer conjuntos $x$ e $y$, existe um conjunto cujos elementos são $x$ e $y$.
+        \[
+            \boxed{
+                \forall x \forall y \exists z \forall w ((w \in z) \leftrightarrow ((w = x) \lor (w = y)))
+            }
+        \]
+\end{axiom}
+
+\begin{proposition} \label{prop.set:extensaounico2}
+    O conjunto $z$ do \cref{ax:3} do par é único. Ele é denotado por $\{x,y\}$.
+\end{proposition}
+
+\begin{proof}
+    Se
+        $
+            \forall w ( (w \in z') \leftrightarrow ((w=x) \lor (w=y)) ),
+        $
+    então, como
+        $
+            \forall w ((w \in z) \leftrightarrow ((w = x) \lor (w = y))),
+        $
+    temos $\forall w ((w \in z') \leftrightarrow (w \in z) )$, de modo que, pelo axioma da extensão, $z' = z$. \blackproof
+\end{proof}
+
+\begin{proposition}
+    $\forall x \forall y((x \in y) \leftrightarrow \{x\} \subseteq y)$.
+\end{proposition}
+
+\begin{proof}
+    Por um lado ($\Rightarrow$), suponha que $x \in y$. Se $z \in \{x\}$, então $z = x$. Como, por hipótese, $x \in y$, de $z=x$ vem $z \in y$. Logo $\{x\} \subseteq y$. Por outro lado ($\Leftarrow$), suponha que $\{x\} \subseteq y$. Temos $x \in \{x\}$, e como $\{x\} \subseteq y$, temos $x \in y$. \blackproof
+\end{proof}
+
+\subsection{O Axioma da União}
+
+\begin{axiom}[da União] \label{ax:4}
+    Para todo conjunto $x$ existe o conjunto de todos os conjuntos que pertencem a algum elemento de $x$.
+        \[
+            \boxed{
+                \forall x \exists y \forall z ((z \in y) \leftrightarrow \exists w ( (z \in w) \land (w \in x)))
+            }
+        \]
+\end{axiom}
+
+\begin{proposition} \label{prop.set:extensaounico3}
+    O conjunto $y$ do \cref{ax:4} da união é único. Ele é denotado por $\bigcup x $.
+\end{proposition}
+
+\begin{proof}
+    Se
+        $
+            \forall z ((z \in y') \leftrightarrow \exists w ( (z \in w) \land (w \in x))),
+        $
+    então, como
+        $
+            \forall z ((z \in y) \leftrightarrow \exists w ( (z \in w) \land (w \in x))),
+        $
+    temos $\forall z ((z \in y') \leftrightarrow (z \in y)) $, de modo que, pelo axioma da extensão, $y' = y$. \blackproof
+\end{proof}
+
+\begin{theorem}
+    Para quaisquer conjuntos $x$ e $y$, existe o conjunto dos conjuntos que pertencem a $x$ ou a $y$.
+        \[
+            \forall x \forall y \exists z \forall w ((w \in z) \leftrightarrow ((w \in x) \lor (w \in y)))
+        \]
+    Ademais, esse conjunto é único, sendo denotado por $x \cup y$.
+\end{theorem}
+
+\begin{proof}
+    Provemos que $z := \bigcup \{x,y\}$, que existe pelos axiomas do par e da união, funciona. De fato, para todo $w$, temos $w \in z$ se, e somente se, existe $u \in \{x,y \}$ tal que $w \in u$. Como $u \in \{ x,y \}$ se, e somente se, $u = x$ ou $u=y$, temos $w \in x$ ou $w \in y$. A unicidade de $z$ segue do axioma da extensão, de modo que podemos denotar $x \cup y := z$. \blackproof
+\end{proof}
+
+\subsection{O Axioma das Partes}
+
+\begin{axiom}[das Partes] \label{ax:5}
+    Para todo conjunto $x$, existe o conjunto dos subconjuntos de $x$.
+        \[
+            \boxed{
+                \forall x \exists y \forall z ( (z \in y) \leftrightarrow (z \subseteq x) )
+            }
+        \]
+\end{axiom}
+
+\begin{proposition} \label{prop.set:extensaounico4}
+    O conjunto $y$ do \cref{ax:5} das partes é único. Ele é denotado por $\mathcal{P}(x)$.
+\end{proposition}
+
+\begin{proof}
+    Pelo axioma das partes, temos $\forall z ( (z \in y) \leftrightarrow (z \subseteq x) )$. Seja $y'$ tal que $\forall z ( (z \in y') \leftrightarrow (z \subseteq x) )$. Logo, $\forall z ((z \in y' )\leftrightarrow(z \in y))$, de modo que, pelo axioma da extensão, $y' = y$. \blackproof
+\end{proof}
+
+\subsection{O Esquema de Axiomas da Separação}
+
+\begin{axiom}[da Separação] \label{ax:6}
+    Para toda fórmula $P$ em que $z$ não ocorre livre, a fórmula
+        \[
+            \boxed{
+                \forall y \exists z \forall x ( (x \in z) \leftrightarrow ((x \in y) \land P) )
+            }    
+        \]
+    é um axioma.
+\end{axiom}
+
+\begin{remark}
+    O axioma da separação também é chamado de axioma da compreensão ou axioma da especificação. O conjunto $y$ é chamado de ``universo'' da discussão.
+\end{remark}
+
+\begin{proposition}
+    O conjunto $z$ do \cref{ax:6} da separação é único. Ele é denotado por $\{x \in y : P(x) \}$.
+\end{proposition}
+
+\begin{proof}
+    Segue do axioma da extensão. \blackproof
+\end{proof}
+
+\begin{theorem}[Paradoxo de Russell] Não existe o conjunto de todos os conjuntos.
+        \[
+            \forall x \exists y (y \notin x)
+        \]
+\end{theorem}
+
+\begin{proof}
+    Suponha, por absurdo, que $\exists x \forall y (y \in x)$. Pelo axioma da separação em $x$ com a fórmula $y \notin y$, existe $z$ tal que $\forall y ( (y \in z) \leftrightarrow ((y \in x) \land (y \notin y)))$ (note que $z$ não ocorre livre em $y \notin y$). Como $\forall y (y \in x)$, temos $\forall y ((y \in z) \leftrightarrow (y \notin y))$. Particularmente para $y = z$, temos $((z \in z) \leftrightarrow (z \notin z))$, uma contradição. Logo $\forall x \exists y (y \notin x)$. \blackproof
+\end{proof}
+
+\begin{theorem} \label{teo.set:intfamilia}
+    Para todo conjunto $x \neq \emptyset$ existe o conjunto de todos os conjuntos que pertencem simultaneamente a todos os elementos de $x$.
+        \[
+            \forall x ((x \neq \emptyset) \rightarrow \exists y \forall z ((z \in y) \leftrightarrow \forall w ( (w \in x) \rightarrow (z \in w))))
+        \]
+    Ademais, esse conjunto é único, sendo denotado por $\bigcap x$.
+\end{theorem}
+
+\begin{proof}
+    Precisamos provar que existe $y$ tal que
+        \[
+           \forall z ( (z \in y) \leftrightarrow \forall w ( (w \in x) \rightarrow (z \in w)) ). 
+        \]
+    Como $x \neq \emptyset$, tome $v \in x$. Pelo axioma da separação com universo $v$ e a fórmula $\forall w ( (w \in x) \rightarrow (z \in w))$, onde $y$ não ocorre livre, existe $y$ tal que
+        \[
+            \forall z ( (z \in y) \leftrightarrow ( (z \in v) \land  (\forall w ( (w \in x) \rightarrow (z \in w))) ) ),
+        \]
+    isto é, existe 
+        \[
+            y := \{ z \in v : \forall w ( (w \in x) \rightarrow (z \in w)) \}.
+        \]
+    Afirmamos que esse $y$ funciona. De fato, por um lado ($\Rightarrow$), se $z \in y$, então, trivialmente, $\forall w ((w \in x) \rightarrow (z \in w))$. Por outro lado ($\Leftarrow$), se $z$ é tal que $\forall w ((w \in x) \rightarrow (z \in w))$, então, particularmente para $w = v$, temos $v \in x \rightarrow z \in v$, e como $v \in x$, temos $z \in v$. Como $z \in v$ e $\forall w ((w \in x) \rightarrow (z \in w))$, temos que $z \in y$. Isso completa a prova da existência. A unicidade de $y$ segue do axioma da extensão, de modo que podemos denotar $\bigcap x := y$. \blackproof
+\end{proof}
+
+\begin{definition} \label{defi.set:capminus}
+    Sejam $x$ e $y$ conjuntos.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item A \emph{interseção} entre $x$ e $y$ é definida como
+                \[
+                    x \cap y :=  \{ z \in x : z \in y\}.
+                \]
+            Dizemos que $x$ e $y$ são \emph{disjuntos} se $x \cap y = \emptyset$. 
+            \item A \emph{diferença} entre $x$ e $y$ é definida como
+                \[
+                    x \setminus y := \{z \in x : z \notin y \}.
+                \]
+            Dizemos que $x \setminus y$ é o \emph{complementar} de $y$ relativo a $x$ se $y \subseteq x$. Isso é denotado por $y^{C} := x \setminus y$.
+            \item A \emph{diferença simétrica} entre $x$ e $y$ é definida como
+                \[
+                    x \Delta y := \{ z \in x \cup y :z \notin x \cap y \}.
+                \]
+        \end{enumerate}
+\end{definition}
+
+\begin{remark}
+    A boa definição da \cref{defi.set:capminus} segue do \cref{ax:6} da separação. Vejamos como isso é feito, por exemplo, na definição de $x \cap y$. Sendo $x$ o universo, o axioma da separação é a fórmula $\forall x \exists w \forall z ((z \in w) \leftrightarrow ((z \in x) \land P) )$, onde $P$ é uma fórmula em que $w$ não ocorre livre. Se $P$ é a fórmula $z \in y$, então existe $w$ que cumpre $\forall z ( (z \in w) \leftrightarrow (z \in x) \land (z \in y) )$, isto é, $w = \{z \in x : z \in y \}$. Denotamos esse $w$ por $x \cap y$.
+\end{remark}
+
+\subsection{Propriedades Algébricas}
+
+Apresentamos a seguir algumas propriedades algébricas de algumas operações com conjuntos, como união e interseção. Por serem simples e de caráter operacional, omitimos as suas demonstrações.
+
+\begin{proposition}[Propriedades da União]
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $\forall x (x \cup x = x)$.
+            \item $\forall x (x \cup \emptyset = x)$.
+            \item $\forall x \forall y (x \cup y = y \cup x)$.
+            \item $\forall x \forall y \forall z (x \cup (y \cup z) = (x \cup y) \cup z)$.
+            \item $\forall x \forall y (x \cup y = y \leftrightarrow x \subseteq y)$.
+            \item $\forall x \forall y ( (x \subseteq x \cup y) \land (y \subseteq x \cup y))$.
+            \item $\forall x \forall y \forall z (x \subseteq y \rightarrow x \cup z \subseteq y \cup z )$.
+            \item $\forall x \forall y (x \subseteq y \rightarrow \bigcup x \subseteq \bigcup y)$.
+        \end{enumerate}
+\end{proposition}
+
+\begin{proposition}[Propriedades da Interseção]
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $\forall x (x \cap x = x)$.
+            \item $\forall x (x \cap \emptyset = \emptyset)$.
+            \item $\forall x \forall y (x \cap y = y \cap x)$.
+            \item $\forall x \forall y \forall z (x \cap (y \cap z) = (x \cap y) \cap z)$.
+            \item $\forall x \forall y (x \cap y = x \leftrightarrow x \subseteq y)$.
+            \item $\forall x \forall y ( (x \cap y \subseteq x) \land (x \cap y \subseteq y))$.
+            \item $\forall x \forall y \forall z (x \subseteq y \rightarrow x \cap z \subseteq y \cap z)$.
+            \item $\forall x \forall y (x \subseteq y \land x \neq \emptyset \rightarrow \bigcap y \subseteq \bigcap x)$.
+        \end{enumerate}
+\end{proposition}
+
+\begin{proposition}[Distributividade]
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $\forall x \forall y \forall z (x \cap (y \cup z) = (x \cap y) \cup (x \cap z))$.
+            \item $\forall x \forall y \forall z (x \cup (y \cap z) = (x \cup y) \cap (x \cup z))$.
+        \end{enumerate}
+\end{proposition}
+
+\begin{proposition}[Propriedades da Diferença]
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item (Imediatas).
+                \begin{enumerate}[label=\roman*.]
+                    \item $\forall x (x \setminus \emptyset = x)$.
+                    \item $\forall x (x \setminus x = \emptyset)$.
+                    \item $\forall x (\emptyset \setminus x = \emptyset)$.
+                \end{enumerate}
+            \item \leavevmode
+                \begin{enumerate}[label=\roman*.]
+                    \item $\forall x \forall y (x \setminus y = x \leftrightarrow x \cap y = \emptyset)$.
+                    \item $\forall x \forall y (x \setminus y = \emptyset \leftrightarrow x \subseteq y)$.
+                \end{enumerate}
+            \item (Leis de De Morgan).
+                \begin{enumerate}[label=\roman*.]
+                    \item $\forall x \forall y \forall z ( x \setminus (y \cup z) = (x \setminus y) \cap (x \setminus z) )$.
+                    \item $\forall x \forall y \forall z ( x \setminus (y \cap z) = (x \setminus y) \cup (x \setminus z) )$.
+                \end{enumerate}
+            \item $\forall x \forall y \forall z ( x \setminus (y \setminus z) = (x \setminus y) \cup (x \cap z) )$.
+            \item (Diferenças entre interseções).
+                \begin{enumerate}[label=\roman*.]
+                    \item $\forall x \forall y \forall z ( x \cap (y \setminus z) = (x \cap y) \setminus (x \cap z) )$.
+                    \item $\forall x \forall y \forall z ( (x \setminus y) \cap z = (x \cap z) \setminus y )$.
+                \end{enumerate}
+            \item (Monotonocidade da diferença).
+                \begin{enumerate}[label=\roman*.]
+                    \item $\forall x \forall y \forall z (x \subseteq y \rightarrow x \setminus z \subseteq y \setminus z)$.
+                    \item $\forall x \forall y \forall z (y \subseteq z \rightarrow x \setminus z \subseteq x \setminus y)$.
+                \end{enumerate}
+        \end{enumerate}
+\end{proposition}
+
+\begin{proposition}[Propriedades do Complemento Relativo]
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $\forall x \forall y (y \subseteq x \rightarrow (y^C)^C = y)$.
+            \item $\forall x \forall y (y \subseteq x \rightarrow (y \cup y^C = x) \land (y \cap y^C = \emptyset))$.
+            \item $\forall x \forall y \forall z (z \subseteq y \subseteq x \rightarrow y^C \subseteq z^C)$.
+            \item $\forall x \forall y \forall z (y \subseteq x \land z \subseteq x \rightarrow y \setminus z = y \cap z^C)$.
+            \item (Leis de De Morgan para complementos).
+                \begin{enumerate}[label=\roman*.]
+                    \item $\forall x \forall y \forall z (y \subseteq x \land z \subseteq x \rightarrow (y \cup z)^C = y^C \cap z^C)$.
+                    \item $\forall x \forall y \forall z (y \subseteq x \land z \subseteq x \rightarrow (y \cap z)^C = y^C \cup z^C)$.
+                \end{enumerate}
+        \end{enumerate}
+\end{proposition}
+
+\begin{proposition}[Variadas]
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $\forall x \forall y \forall z ( ((x \in y) \land (y \in z)) \rightarrow ( ( x \in \bigcup z) \land (y \subseteq \bigcup z)))$.
+            \item $\forall A (\bigcup \mathcal{P}{(A)} = A)$.
+        \end{enumerate}
+\end{proposition}
