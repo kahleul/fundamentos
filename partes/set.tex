@@ -350,3 +350,1413 @@ Apresentamos a seguir algumas propriedades algébricas de algumas operações co
             \item $\forall A (\bigcup \mathcal{P}{(A)} = A)$.
         \end{enumerate}
 \end{proposition}
+
+\section{O Axioma do Infinito e os Números Naturais}
+
+\subsection{Sistemas de Peano}
+
+\begin{definition}
+    Um \emph{sistema de Peano} é uma tripla $(N, s, a)$ com as seguintes propriedades.
+        \begin{enumerate}[label=\roman*.]
+            \item $s: N \to N$ é uma função injetiva.
+            \item $a \in N \setminus s[N]$.
+            \item Para todo $A \subseteq N$, se $a \in A$ e $s(x) \in A$ sempre que $x \in A$, então $A = N$.
+        \end{enumerate}
+\end{definition}
+
+\begin{example}
+    Seja $(N,s,a)$ um sistema de Peano.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Para todo $n \in N$, $s(n) \neq n$.
+            \item Para todo $n \in N_{\neq a}$ existe um único $k \in N$ tal que $n = s(k)$.
+        \end{enumerate}
+\end{example}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Defina $A := \{n \in N : s(n) \neq n\}$. Como $a \notin s[N]$ e $s(a) \in s[N]$, temos $s(a) \neq a$, de modo que $a \in A$. Agora, supondo que $n \in A$, provemos que $s(n) \in A$. Se $s(s(n)) = s(n)$, então, como $s$ é injetiva, teríamos $s(n)=n$, uma contradição, pois $n \in A$. Logo, $s(s(n)) \neq s(n)$, isto é, $s(n) \in A$. Logo, pelo princípio de indução, temos $A = N$. Logo, $s(n) \neq n$, para todo $n \in N$. \blackproof
+            \item Defina
+                \[
+                    A := \{n \in N : n=a \text{ ou existe } k \in N \text{ tal que } n=s(k)\}.
+                \]
+            Como $a=a$, temos $a \in A$. Agora, supondo que $n \in A$, provemos que $s(n) \in A$. De fato, tomando $k=n$, temos $s(n)=s(k)$, de modo que $s(n) \in A$. Logo, pelo princípio de indução, temos $A=N$. Assim, se $n \in N_{\neq a}$, então $n \neq a$, e como $n \in A$, existe $k \in N$ tal que $n=s(k)$. Ademais, se $k,l \in N$ são tais que $n=s(k)$ e $n=s(l)$, então $s(k)=s(l)$; como $s$ é injetiva, temos $k=l$. Logo, para todo $n \in N_{\neq a}$ existe um único $k \in N$ tal que $n=s(k)$. \blackproof
+        \end{enumerate}
+\end{proof}
+
+\begin{theorem}[Recursão] \label{teo.set:recursao_peano}
+    Seja $(N,s,a)$ um sistema de Peano. Sejam $X \neq \emptyset$, $x_0 \in X$ e $f:X \to X$. Existe uma única $\varphi : N \to X$ tal que
+        \begin{itemize}
+            \item $\varphi(a) = x_0$;
+            \item $\varphi(s(n)) = f(\varphi(n))$, para todo $n \in N$.
+        \end{itemize}
+\end{theorem}
+
+\begin{proof} \fonte[113]{fajardo2024conjuntos}
+    A ideia é considerar todas as relações de $N$ em $X$ que têm as propriedades desejadas e provar que a interseção de todas elas resulta em uma única função de domínio $N$. Defina
+        \[
+            \mathcal{C} := \left\{ R \subseteq N \times X : (a,x_0) \in R \land \forall n \forall x ((n,x) \in R \rightarrow (s(n),f(x)) \in R) \right\}.
+        \]
+    Temos $N \times X \in \mathcal{C}$; logo, $\mathcal{C} \neq \emptyset$, e então existe $\varphi := \bigcap \mathcal{C}$. Essa é a função procurada. Provemos isso.
+        \begin{claim}
+           $\varphi \in \mathcal{C}$.
+        \end{claim}
+        \begin{midproof}
+            Como $(a,x_0) \in R$ para toda $R \in \mathcal{C}$, temos $(a,x_0) \in \varphi$. Analogamente, se $(n,x) \in \varphi$, então $(n,x) \in R$ para toda $R \in \mathcal{C}$, de modo que $(s(n),f(x)) \in R$ para toda $R \in \mathcal{C}$, isto é, $(s(n),f(x)) \in \varphi$. Logo, $\varphi \in \mathcal{C}$. \whiteproof
+        \end{midproof}
+        \begin{claim}
+            $\Dom \varphi = N$.
+        \end{claim}
+        \begin{midproof}
+            Por indução. Temos $\Dom \varphi \subseteq N$. Como $(a,x_0) \in \varphi$, temos $a \in \Dom \varphi$. Agora, se $n \in \Dom\varphi$, então existe $x \in X$ tal que $(n,x) \in \varphi$. Com isso, vem $(s(n),f(x)) \in \varphi$, donde $s(n) \in \Dom \varphi$. Logo, pelo princípio de indução, temos $\Dom \varphi = N$. \whiteproof
+        \end{midproof}
+        \begin{claim}
+            A relação $\varphi \subseteq N \times X$ é uma função.
+        \end{claim}
+        \begin{midproof}
+            Por indução. Seja
+                \[
+                    A := \{n \in N : \forall x \forall y ((n,x) \in \varphi \land (n,y) \in \varphi \rightarrow x=y) \}.
+                \]
+            Temos $(a, x_0) \in \varphi$. Suponha, por absurdo, que existe $y \in X \setminus \{x_0 \}$ tal que $(a, y) \in \varphi$. Então $(a, x_0) \in \varphi \setminus \{(a,y)\}$, e se $(m,z) \in \varphi \setminus \{(a,y)\}$, então $(s(m), f(z)) \in \varphi$, e como $s(m) \neq a$ para todo $m \in N$ pois $a \in N \setminus s[N]$, temos $(s(m), f(z)) \in \varphi \setminus \{(a,y)\}$, de modo que $\varphi \setminus \{(a,y)\} \in \mathcal{C}$, uma contradição. De fato, teríamos $\varphi \subseteq \varphi \setminus \{(a,y)\}$, e como $\varphi \setminus \{(a,y)\} \subseteq \varphi$, teríamos $\varphi \setminus \{(a,y)\} = \varphi$, donde $(a,y) \notin \varphi$, o que contraria $(a,y) \in \varphi$. Logo, se $(a,y) \in \varphi$, então $y=x_0$, isto é, $a \in A$. Agora, supondo que $n \in A$, provemos que $s(n) \in A$. Se $n \in \Dom \varphi$, então existe $x \in X$ tal que $(n,x) \in \varphi$. De $(n,x) \in \varphi$, vem $(s(n),f(x)) \in \varphi$. Pela hipótese de indução, se $(n,y) \in \varphi$, então $y=x$; provemos que, se $(s(n),y) \in \varphi$, então $y=f(x)$. Suponha, por absurdo, que existe $y \in X \setminus \{f(x) \}$ tal que $(s(n),y) \in \varphi$. Como $s(n) \neq a$, temos $(a,x_0) \in \varphi \setminus \{(s(n),y)\}$. Se $(m,z) \in \varphi \setminus \{(s(n),y)\}$, então $(s(m),f(z)) \in \varphi$. Se $s(m) \neq s(n)$, então $(s(m), f(z)) \in \varphi \setminus \{(s(n),y)\}$. Se $s(m) = s(n)$, então, pela injetividade de $s$, temos $m=n$, e pela hipótese de indução, temos $z=x$, de modo que $f(z) = f(x) \neq y$, o que implica $(s(m), f(z)) \in \varphi \setminus \{(s(n),y)\}$. Em qualquer caso, temos $\varphi \setminus \{(s(n),y)\} \in \mathcal{C}$, uma contradição (pelo mesmo motivo visto na base de indução). Logo, se $(s(n),y) \in \varphi$, então $y=f(x)$, isto é, $s(n) \in A$. Logo, pelo princípio de indução, temos $A = N$, de modo que $\varphi$ é uma função. \whiteproof
+        \end{midproof}
+    Como $\Dom \varphi = N$ e $\varphi$ é uma função, existe $\varphi: N \to X$ com as propriedades desejadas. Provemos, por fim, sua unicidade.
+        \begin{claim}
+            A função $\varphi : N \to X$ é única.
+        \end{claim}
+        \begin{midproof}
+            Por indução. Seja $\Phi : N \to X$ tal que $\Phi(a) = x_0$ e $\Phi(s(n)) = f(\Phi(n))$ para todo $n \in N$, e seja $A := \{ n \in N : \Phi(n) = \varphi(n)\}$. Como $\Phi(a) = \varphi(a)$, temos $a \in A$. Agora, supondo que $n \in A$, provemos que $s(n) \in A$. Se $n \in A$, então, pela hipótese de indução, temos $\Phi(n) = \varphi(n)$, de modo que
+                \[
+                    \Phi(s(n)) = f(\Phi(n)) = f(\varphi(n)) = \varphi(s(n)),
+                \]
+            isto é, $s(n) \in A$. Logo, pelo princípio de indução, temos $A = N$. \whiteproof
+        \end{midproof}
+    Logo, existe uma única função $\varphi: N \to X$ tal que $\varphi(a) = x_0$ e $\varphi(s(n)) = f(\varphi(n))$ para todo $n \in N$. \blackproof
+\end{proof}
+
+\begin{theorem} \label{teo.set:isomorfismo_sistemas_peano} \fonte[52]{moschovakis}
+    Sejam $(N, s, a)$ e $(M, t, b)$ sistemas de Peano. Existe uma única bijeção $\varphi : N \to M$ tal que
+        \begin{itemize}
+            \item $\varphi(a) = b$.
+            \item $\varphi(s(n)) = t(\varphi(n))$ para todo $n \in N$.
+        \end{itemize}
+\end{theorem}
+
+\begin{proof} \fonte[52]{moschovakis}
+    Pelo teorema da recursão, existe uma única função $\varphi : N \to M$ tal que $\varphi(a) = b$ e $\varphi(s(n)) = t(\varphi(n))$ para todo $n \in N$. Resta provar que $\varphi$ é uma bijeção.
+        \begin{claim}
+            $\Img \varphi = M$.
+        \end{claim}
+        \begin{midproof}
+            Por indução. Temos $\Img \varphi \subseteq M$. Como $\varphi(a) = b$, temos $b \in \Img \varphi$. Agora, supondo que $m \in \Img \varphi$, provemos que $t(m) \in \Img \varphi$. Se $m \in \Img \varphi$, então existe $n \in N$ tal que $\varphi(n) = m$. Logo, $\varphi(s(n)) = t(\varphi(n)) = t(m)$, de modo que $t(m) \in \Img \varphi$. Pelo princípio de indução, temos $\Img \varphi = M$. \whiteproof
+        \end{midproof}
+        \begin{claim}
+            $\varphi$ é injetiva.
+        \end{claim}
+        \begin{midproof}
+            Por indução. Seja
+                \[
+                    A := \{n \in N : \forall m (m \in N \rightarrow (\varphi(m) = \varphi(n) \rightarrow m=n)) \}.
+                \]
+            Seja $m \in N$ tal que $\varphi(m) = \varphi(a) = b$ e suponha, por absurdo, que $m \neq a$. Então existe $k \in N$ tal que $m = s(k)$, de modo que
+                \[
+                    b = \varphi(m) = \varphi(s(k)) = t(\varphi(k)) \in t(M),
+                \]
+            o que contradiz $b \notin t[M]$. Logo, $m=a$, isto é, $a \in A$. Agora, supondo que $n \in A$, provemos que $s(n) \in A$. Se $n \in A$, então, pela hipótese de indução, $\varphi(m) = \varphi(n)$ implica $m=n$; provemos que $\varphi(m) = \varphi(s(n))$ implica $m = s(n)$. Se $m=a$, então
+                \[
+                    b = \varphi(a) = \varphi(s(n)) = t(\varphi(n)) \in t(M),
+                \]
+            o que contradiz $b \notin t[M]$. Logo, $m \neq a$, e então existe $k \in N$ tal que $m = s(k)$. Com isso,
+                \[
+                    t(\varphi(k)) = \varphi(s(k)) = \varphi(m) = \varphi(s(n)) = t(\varphi(n)),
+                \]
+            e então $\varphi(k) = \varphi(n)$ pela injetividade de $t$. Pela hipótese de indução, temos $k=n$, de modo que $m = s(k) = s(n)$, isto é, $s(n) \in A$. Pelo princípio de indução, temos $A = N$. Logo, $\varphi$ é injetiva. \whiteproof
+        \end{midproof}
+    Logo, $\varphi : N \to M$ é uma bijeção. \blackproof
+\end{proof}
+
+\subsection{Aritmética em Sistemas de Peano}
+
+\begin{theorem}[Recursão com parâmetro] \label{teo.set:recpar1} \fonte[47]{jechhrbacek1999}
+    Seja $(N,s,a)$ um sistema de Peano. Sejam $X \neq \emptyset$, $x_0 \in X$ e $f : X \times N \to X$. Existe uma única função $\varphi : N \to X$ com as seguintes propriedades.
+        \begin{itemize}
+            \item $\varphi(a) = x_0$.
+            \item $\varphi(s(n)) = f(\varphi(n), n)$, para todo $n \in N$.
+        \end{itemize}
+\end{theorem}
+
+\begin{proof} \fonte[115]{fajardo2024conjuntos}
+    Defina $g : X \times N \to X \times N$ por $g(y,n) = (f(y,n),s(n))$. Pelo \cref{teo.set:recursao_peano}, existe uma única função $\psi : N \to X \times N$ tal que $\psi(a) = (x_0,a)$ e $\psi(s(n)) = g(\psi(n))$ para todo $n \in N$.
+        \begin{claim}
+            $\pi_2(\psi(n)) = n$ para todo $n \in N$.
+        \end{claim}
+        \begin{midproof}
+            Por indução. Seja $A := \{n \in N: \pi_2(\psi(n)) = n\}$. Como $\pi_2(\psi(a)) = \pi_2 (x_0,a) = a$, temos $a \in A$. Agora, supondo que $n \in A$, provemos que $s(n) \in A$. Se $n \in A$, então, pela hipótese de indução, temos $\pi_2(\psi(n)) = n$, de modo que
+                \begin{align*}
+                    \pi_2(\psi(s(n))) &= \pi_2(g(\psi(n))) \\
+                    &= \pi_2(g(\pi_1(\psi(n)), \pi_2(\psi(n)))) \\
+                    &= \pi_2 (g(\pi_1(\psi(n)), n)) \\
+                    &= \pi_2 (f(\pi_1(\psi(n)),n),s(n)) \\
+                    &= s(n),
+                \end{align*}
+            isto é, $s(n) \in A$. Logo, $\pi_2(\psi(n)) = n$ para todo $n \in N$. \whiteproof
+        \end{midproof}
+    Agora, defina $\varphi := \pi_1 \circ \psi : N \to X$, isto é, $\varphi(n) = \pi_1(\psi(n))$ para todo $n \in N$. Essa é a função procurada. Provemos isso.
+        \begin{claim}
+            $\varphi(a) = x_0$ e, para todo $n \in N$, $\varphi(s(n)) = f(\varphi(n), n)$.
+        \end{claim}
+        \begin{midproof}
+            Como $\psi(a) = (x_0,a)$, temos $\varphi(a) = \pi_1(x_0, a) = x_0$. Como $\psi(n) = (\varphi(n),n)$, para todo $n \in N$, temos
+                \[
+                    \psi(s(n)) = g(\psi(n)) = g(\varphi(n),n) = (f(\varphi(n),n),s(n)),
+                \]
+            para todo $n \in N$. Logo,
+                \[
+                    \varphi(s(n)) = \pi_1(\psi(s(n))) = \pi_1(f(\varphi(n),n),s(n)) = f(\varphi(n),n)
+                \]
+            para todo $n \in N$. \whiteproof
+        \end{midproof}
+    Logo, existe $\varphi : N \to X$ com as propriedades desejadas. Provemos, por fim, sua unicidade.
+        \begin{claim}
+            A função $\varphi: N \to X$ é única.
+        \end{claim}
+        \begin{midproof}
+            Por indução. Seja $\Phi : N \to X$ tal que $\Phi(a) = x_0$ e $\Phi(s(n)) = f(\Phi(n), n)$ para todo $n \in N$, e seja $A := \{ n \in N : \Phi(n) = \varphi(n)\}$. Como $\Phi(a) = \varphi(a)$, temos $a \in A$. Agora, supondo que $n \in A$, provemos que $s(n) \in A$. Se $n \in A$, então, pela hipótese de indução, temos $\Phi(n) = \varphi(n)$, de modo que
+                \[
+                    \Phi(s(n)) = f(\Phi(n), n) = f(\varphi(n), n) = \varphi(s(n)),
+                \]
+            isto é, $s(n) \in A$. Logo, pelo princípio de indução, temos $A = N$. \whiteproof
+        \end{midproof}
+    Logo, existe uma única função $\varphi: N \to X$ tal que $\varphi(a) = x_0$ e $\varphi(s(n)) = f(\varphi(n), n)$ para todo $n \in N$. \blackproof
+\end{proof}
+
+\begin{theorem} \label{lema.set:recpar2} \fonte[51]{jechhrbacek1999}
+    Seja $(N,s,a)$ um sistema de Peano. Sejam $f : X \to Y$ e $g : X \times Y \times N \to Y$. Existe uma única função $\varphi : X \times N \to Y$ com as seguintes propriedades.
+        \begin{itemize}
+            \item $\varphi(x,a) = f(x)$ para todo $x \in X$.
+            \item $\varphi(x, s(n)) = g(x,\varphi(x,n),n)$ para quaisquer $x \in X$ e $n \in N$.
+        \end{itemize}
+\end{theorem}
+
+\begin{proof} \fonte[51]{jechhrbacek1999}
+    Defina $G : Y^X \times N \to Y^X$ de modo que $G(h,n)(x) := g(x,h(x),n)$ para quaisquer $h \in Y^X$, $n \in N$ e $x \in X$.
+        \begin{claim}
+            A função $G$ está bem definida.
+        \end{claim}
+        \begin{midproof}
+            Defina
+                \[
+                    G := \{((h,n),F) \in (Y^X \times N) \times Y^X : F = \{(x,y)\in X\times Y : y=g(x,h(x),n)\}\}.
+                \]
+            Sejam $h \in Y^X$ e $n \in N$. Para todo $x \in X$, como $h: X \to Y$, temos $h(x) \in Y$, de modo que $(x,h(x),n) \in X \times Y \times N$. Com isso, existe um único $y \in Y$ tal que $y = g(x,h(x),n)$, donde
+                \[
+                    \{(x,y)\in X\times Y : y=g(x,h(x),n)\} \in Y^X.
+                \]
+            Logo, $G$ é uma função de $Y^X \times N$ em $Y^X$. \whiteproof
+        \end{midproof}
+    Pelo \cref{teo.set:recpar1} da recursão, defina $\psi : N \to Y^X$ por $\psi(a) = f$ e $\psi(s(n)) = G(\psi(n),n)$ para todo $n \in N$. Por fim, defina $\varphi : X \times N \to Y$ por $\varphi(x,n) := \psi(n)(x)$, para quaisquer $x \in X$ e $n \in N$. Para todo $x \in X$, temos $\varphi(x,a) = \psi(a)(x) = f(x)$. Para todo $x \in X$ e todo $n \in N$, temos
+        \begin{align*}
+            \varphi(x,s(n)) &= \psi(s(n))(x) \\
+            &= G(\psi(n),n)(x) \\
+            &= g(x, \psi(n)(x), n) \\
+            &= g(x, \varphi(x,n), n).
+        \end{align*}
+    Logo, existe $\varphi : X \times N \to Y$ com as propriedades desejadas. Provemos, por fim, sua unicidade.
+        \begin{claim}
+            A função $\varphi : X \times N \to Y$ é única.
+        \end{claim}
+        \begin{midproof}
+            Por indução. Seja $\Phi : X \times N \to Y$ tal que $\Phi(x,a) = f(x)$ para todo $x \in X$ e $\Phi(x,s(n)) = g(x,\Phi(x,n), n)$ para quaisquer $x \in X$ e $n \in N$, e seja $A := \{ n \in N : \forall x (x \in X \rightarrow \Phi(x,n) = \varphi(x,n))\}$. Como $\Phi(x,a) = \varphi(x,a)$ para todo $x \in X$, temos $a \in A$. Agora, supondo que $n \in A$, provemos que $s(n) \in A$. Se $n \in A$, então, pela hipótese de indução, temos $\Phi(x,n) = \varphi(x,n)$ para todo $x \in X$, de modo que
+                \[
+                    \Phi(x,s(n)) = g(x,\Phi(x,n), n) = g(x,\varphi(x,n), n) = \varphi(x,s(n)),
+                \]
+            para todo $x \in X$, isto é, $s(n) \in A$. Logo, pelo princípio de indução, temos $A = N$. \whiteproof
+        \end{midproof}
+    Logo, existe uma única função $\varphi: X \times N \to Y$ tal que $\varphi(x,a) = f(x)$ para todo $x \in X$ e $\varphi(x,s(n)) = g(x,\varphi(x,n), n)$ para quaisquer $x \in X$ e $n \in N$. \blackproof
+\end{proof}
+
+\begin{comment}
+\begin{proof}
+    A ideia é considerar todas as relações de $X \times N$ em $Y$ que têm as propriedades desejadas e provar que a interseção de todas elas resulta em uma única função de domínio $X \times N$. Defina
+        \[
+            \mathcal{C} := \left\{ R \subseteq (X \times N) \times Y : ((x,a),f(x)) \in R \land \forall x \forall n \forall y ( ((x,n),y) \in R \rightarrow ((x,s(n)), g(x,y,n)) \in R) \right\}.
+        \]
+\end{proof}
+\end{comment}
+
+\subsubsection{Adição}
+
+\begin{corollary}
+    Seja $(N,s,a)$ um sistema de Peano. Existe uma única função $+_N : N \times N \to N$ com as seguintes propriedades.
+        \begin{itemize}
+            \item $+_N (m,a) = m$ para todo $m \in N$.
+            \item $+_N (m,s(n)) =s(+_N (m,n))$ para quaisquer $m,n \in N$.
+        \end{itemize}
+\end{corollary}
+
+\begin{proof} \fonte[52]{jechhrbacek1999}
+    Defina $f : N \to N$ por $f(m) = m$ para todo $m \in N$, e $g : N \times N \times N \to N$ por $g(m,x,n) = s(x)$ para quaisquer $m,x,n \in N$. Pelo \cref{lema.set:recpar2}, existe uma única função $+_N : N \times N \to N$ tal que $+_N(m,a) = f(m) = m$ para todo $m \in N$, e $+_N(m,s(n)) = g(m,+_N(m,n),n) = s(+_N(m,n))$ para quaisquer $m,n \in N$. \blackproof
+\end{proof}
+
+\begin{lemma} \label{lema.fund:comutatividade_soma_naturais}
+    Seja $(N,s,a)$ um sistema de Peano.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $+_N(a,n)=n$, para todo $n \in N$.
+            \item $+_N(s(m),n) = +_N(m,s(n))$, para quaisquer $m,n \in N$.
+        \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Defina $A := \{n \in N : +_N(a,n)=n\}$. Como $+_N (a,a) = a$, temos $a \in A$. Agora, supondo que $n \in A$, provemos que $s(n) \in A$. Se $n \in A$, então, pela hipótese de indução, temos $+_N (a, n) = n$, de modo que
+                \[
+                    +_N (a, s(n)) = s(+_N (a, n)) = s(n),
+                \]
+            isto é, $s(n) \in A$. Logo, pelo princípio de indução, temos $A = N$. Logo, $a +_N n = n$, para todo $n \in N$. \blackproof
+            \item Fixe $m \in N$ e defina
+                \[
+                    A := \{n \in N : +_N(s(m),n) = +_N(m,s(n)) \}.    
+                \]
+            Como $+_N (s(m),a) = s(m)$ e $+_N (m,s(a)) = s(+_N (m,a)) = s(m)$, temos $+_N (s(m),a) = +_N (m,s(a))$, de modo que $a \in A$. Agora, supondo que $n \in A$, provemos que $s(n) \in A$. Se $n \in A$, então, pela hipótese de indução, temos $+_N (s(m),n) = +_N (m,s(n))$, de modo que
+                \begin{align*}
+                    +_N (s(m), s(n)) &= s(+_N (s(m), n)) \\
+                    &= s(+_N (m, s(n))) \\
+                    &= +_N (m, s(s(n))),
+                \end{align*}
+            isto é, $s(n) \in A$. Logo, pelo princípio de indução, temos $A = N$. Logo, $s(m) +_N n = m +_N s(n)$, para quaisquer $m,n \in N$. \blackproof
+        \end{enumerate}
+\end{proof}
+
+\begin{theorem}
+    Seja $(N,s,a)$ um sistema de Peano.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $m +_N n = n +_N m$, para quaisquer $m,n \in N$.
+            \item $m +_N (n +_N p)=(m +_N n) +_N p$, para quaisquer $m,n,p \in N$.
+        \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Fixe $m \in N$ e defina
+                \[
+                    A := \{n \in N : m +_N n = n +_N m\}.
+                \]
+            Pelo \cref{lema.fund:comutatividade_soma_naturais}, temos $a +_N m = m$, e como $m +_N a = m$, temos $m +_N a = a +_N m$, de modo que $a \in A$. Agora, supondo que $n \in A$, provemos que $s(n) \in A$. Se $n \in A$, então, pela hipótese de indução, temos $m +_N n = n +_N m$, de modo que
+                \[
+                    m +_N s(n) = s(m +_N n) = s(n +_N m) = n +_N s(m);
+                \]
+            como, pelo \cref{lema.fund:comutatividade_soma_naturais}, $n +_N s(m) = s(n) +_N m$, temos $m +_N s(n) = s(n) +_N m$, de modo que $s(n) \in A$. Logo, pelo princípio de indução, temos $A = N$. Logo, a adição $+_N$ é comutativa. \blackproof
+            \item Fixe $m,n \in N$ e defina
+                \[
+                    A := \{p \in N : m +_N (n +_N p) = (m +_N n) +_N p\}.    
+                \]
+            Como $n +_N a = n$, temos $m +_N (n +_N a) = m +_N n$, e como $(m +_N n) +_N a = m +_N n$, temos $m +_N (n +_N a) = (m +_N n) +_N a$, de modo que $a \in A$. Agora, supondo que $p \in A$, provemos que $s(p) \in A$. Se $p \in A$, então, pela hipótese de indução, temos $m +_N (n +_N p) = (m +_N n) +_N p$, de modo que
+                \begin{align*}
+                    m +_N (n +_N s(p)) &= m +_N s(n +_N p) \\
+                    &= s(m +_N (n +_N p)) \\
+                    &= s((m +_N n) +_N p) \\
+                    &= (m +_N n) +_N s(p),
+                \end{align*}
+            isto é, $s(p) \in A$. Logo, pelo princípio de indução, temos $A = N$. Logo, a adição $+_N$ é associativa. \blackproof
+        \end{enumerate}
+\end{proof}
+
+\begin{definition}
+    Seja $(N,s,a)$ um sistema de Peano. Definimos $1_N := s(a)$.
+\end{definition}
+
+\begin{proposition}
+    Seja $(N,s,a)$ um sistema de Peano. Para todo $n \in N$, temos
+        \[
+            s(n) = n +_N 1_N.
+        \]
+\end{proposition}
+
+\begin{proof}
+    Para todo $n \in N$, temos
+        \[
+            n +_N 1_N = n +_N s(a) = s(n +_N a) = s(n),
+        \]
+    isto é, $n +_N 1_N = s(n)$. \blackproof
+\end{proof}
+
+\begin{proposition}
+    Sejam $(N,s,a)$ um sistema de Peano e $m,n,p \in N$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Se $m +_N n = a$, então $m = n = a$.
+            \item Se $m +_N p = n +_N p$, então $m=n$.
+        \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Sejam $m,n \in N$ tais que $m +_N n = a$. Se $n \neq a$, então existiria $k \in N$ tal que $n=s(k)$, donde
+                \[
+                    m +_N n = m +_N s(k) = s(m +_N k) = a,
+                \]
+            uma contradição pois $a \notin s[N]$. Logo, $n=a$. Com isso, como $m +_N n = a$ e $m +_N a = m$, temos $m = a$. \blackproof
+            \item Fixe $m,n \in N$ e defina
+                \[
+                    A := \{p \in N : m +_N p = n +_N p \Rightarrow m=n\}.    
+                \]
+            Como $m +_N a = m$ e $n +_N a = n$, se $m +_N a = n +_N a$, temos $m = n$, de modo que $a \in A$. Agora, supondo que $p \in A$, provemos que $s(p) \in A$. Se $m +_N s(p) = n +_N s(p)$, então $s(m +_N p) = s(n +_N p)$, e como $s$ é injetiva, temos $m +_N p = n +_N p$; com isso, pela hipótese de indução, temos $m = n$, de modo que $s(p) \in A$. Logo, pelo princípio de indução, temos $A = N$. Logo, se $m +_N p = n +_N p$, então $m=n$. \blackproof
+        \end{enumerate}
+\end{proof}
+
+\subsubsection{Multiplicação}
+
+\begin{corollary}
+    Seja $(N,s,a)$ um sistema de Peano. Existe uma única função $\cdot_N : N \times N \to N$ com as seguintes propriedades.
+        \begin{itemize}
+            \item $\cdot_N (m,a) = a$ para todo $m \in N$.
+            \item $\cdot_N (m,s(n)) = +_N (\cdot_N (m,n),m)$ para quaisquer $m,n \in N$.
+        \end{itemize}
+\end{corollary}
+
+\begin{proof} \fonte[52]{jechhrbacek1999}
+    Defina $f : N \to N$ por $f(m) = a$ para todo $m \in N$, e $g : N \times N \times N \to N$ por $g(m,x,n) = +_N(x,m)$ para quaisquer $m,x,n \in N$. Pelo \cref{lema.set:recpar2}, existe uma única função $\cdot_N : N \times N \to N$ tal que $\cdot_N(m,a) = f(m) = a$ para todo $m \in N$, e $\cdot_N(m,s(n)) = g(m,\cdot_N(m,n),n) = +_N(\cdot_N(m,n),m)$ para quaisquer $m,n \in N$. \blackproof
+\end{proof}
+
+\begin{lemma} \label{lema.fund:comutatividade_produto_naturais}
+    Seja $(N,s,a)$ um sistema de Peano.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $\cdot_N (a, n) = a$, para todo $n \in N$.
+            \item $\cdot_N (s(m),n) = +_N (\cdot_N (m,n), n)$, para quaisquer $m,n \in N$.
+        \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Defina $A := \{n \in N : \cdot_N (a,n) = a\}$. Como $\cdot_N (a,a) = a$, temos $a \in A$. Agora, supondo que $n \in A$, provemos que $s(n) \in A$. Se $n \in A$, então, pela hipótese de indução, temos $\cdot_N (a,n) = a$, de modo que
+                \[
+                    \cdot_N (a, s(n)) = +_N (\cdot_N (a, n), a) = +_N (a, a) = a,
+                \]
+            isto é, $s(n) \in A$. Logo, pelo princípio de indução, temos $A = N$. Logo, $a \cdot_N n = a$, para todo $n \in N$. \blackproof
+            \item Fixe $m \in N$ e defina
+                \[
+                    A := \{n \in N : \cdot_N (s(m),n) = +_N (\cdot_N (m,n), n)\}.
+                \]
+            Como $\cdot_N (s(m),a) = a$ e $+_N (\cdot_N (m,a), a) = +_N (a, a) = a$, temos $\cdot_N (s(m),a) = +_N (\cdot_N (m,a), a)$, de modo que $a \in A$. Agora, supondo que $n \in A$, provemos que $s(n) \in A$. Se $n \in A$, então, pela hipótese de indução, temos $\cdot_N (s(m),n) = +_N (\cdot_N (m,n), n)$, de modo que
+                \begin{align*}
+                    \cdot_N (s(m), s(n)) &= +_N (\cdot_N (s(m), n), s(m)) \\
+                    &= +_N (+_N (\cdot_N (m, n), n), s(m)) \\
+                    &= +_N (\cdot_N (m, n), +_N (n, s(m))) \\
+                    &= +_N (\cdot_N (m, n), +_N (s(m), n)) \\
+                    &= +_N (\cdot_N (m, n), +_N (m, s(n))) \\
+                    &= +_N (+_N (\cdot_N (m, n), m), s(n)) \\
+                    &= +_N (\cdot_N (m, s(n)), s(n)),
+                \end{align*}
+            isto é, $s(n) \in A$. Logo, pelo princípio de indução, temos $A = N$. Logo, $s(m) \cdot_N n = (m \cdot_N n) +_N n$, para quaisquer $m,n \in N$. \blackproof
+        \end{enumerate}
+\end{proof}
+
+\begin{proposition}
+    Seja $(N,s,a)$ um sistema de Peano. Para quaisquer $m,n,p \in N$, temos
+        \[
+            m \cdot_N (n +_N p) = m \cdot_N n +_N m \cdot_N p.
+        \] 
+\end{proposition}
+
+\begin{proof}
+    Fixe $m,n \in N$ e defina
+        \[
+            A := \{p \in N : m \cdot_N (n +_N p) = (m \cdot_N n) +_N (m \cdot_N p)\}.
+        \]
+    Como $n +_N a = n$, temos $m \cdot_N (n +_N a) = m \cdot_N n$, e como $m \cdot_N a = a$, temos
+        \[
+            (m \cdot_N n) +_N (m \cdot_N a) = (m \cdot_N n) +_N a = m \cdot_N n,
+        \]
+    de modo que, $m \cdot_N (n +_N a) = (m \cdot_N n) +_N (m \cdot_N a)$, isto é, $a \in A$. Agora, supondo que $p \in A$, provemos que $s(p) \in A$. Se $p \in A$, então, pela hipótese de indução, temos $m \cdot_N (n +_N p) = (m \cdot_N n) +_N (m \cdot_N p)$, de modo que
+        \begin{align*}
+            m \cdot_N (n +_N s(p)) &= m \cdot_N s(n +_N p) \\
+            &= (m \cdot_N (n +_N p)) +_N m \\
+            &= ((m \cdot_N n) +_N (m \cdot_N p)) +_N m \\
+            &= (m \cdot_N n) +_N ((m \cdot_N p) +_N m) \\
+            &= (m \cdot_N n) +_N (m \cdot_N s(p)),
+        \end{align*}
+    isto é, $s(p) \in A$. Logo, pelo princípio de indução, temos $A = N$. Logo, $m \cdot_N (n +_N p) = (m \cdot_N n) +_N (m \cdot_N p)$, para quaisquer $m,n,p \in N$. \blackproof
+\end{proof}
+
+\begin{theorem}
+    Seja $(N,s,a)$ um sistema de Peano.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $m \cdot_N n = n \cdot_N m$, para quaisquer $m,n \in N$.
+            \item $m \cdot_N (n \cdot_N p)= (m \cdot_N n) \cdot_N p$, para quaisquer $m,n,p \in N$.
+        \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Fixe $m \in N$ e defina
+                \[
+                    A := \{n \in N : m \cdot_N n = n \cdot_N m \}.
+                \]
+            Pelo \cref{lema.fund:comutatividade_produto_naturais}, temos $a \cdot_N m = a$, e como $m \cdot_N a = a$, temos $m \cdot_N a = a \cdot_N m$, de modo que $a \in A$. Agora, supondo que $n \in A$, provemos que $s(n) \in A$. Se $n \in A$, então, pela hipótese de indução, temos $m \cdot_N n = n \cdot_N m$, de modo que
+                \[
+                    m \cdot_N s(n) = (m \cdot_N n) +_N m = (n \cdot_N m) +_N m;
+                \]
+            como, pelo \cref{lema.fund:comutatividade_produto_naturais}, $(n \cdot_N m) +_N m = s(n) \cdot_N m$, temos $m \cdot_N s(n) = s(n) \cdot_N m$, de modo que $s(n) \in A$. Logo, pelo princípio de indução, temos $A = N$. Logo, a multiplicação $\cdot_N$ é comutativa. \blackproof
+            \item Fixe $m,n \in N$ e defina
+                \[
+                    A := \{p \in N : m \cdot_N (n \cdot_N p) = (m \cdot_N n) \cdot_N p\}.
+                \]
+            Como $n \cdot_N a = a$, temos $m \cdot_N (n \cdot_N a) = m \cdot_N a = a$, e como $(m \cdot_N n) \cdot_N a = a$, temos $m \cdot_N (n \cdot_N a) = (m \cdot_N n) \cdot_N a$, de modo que $a \in A$. Agora, supondo que $p \in A$, provemos que $s(p) \in A$. Se $p \in A$, então, pela hipótese de indução, temos $m \cdot_N (n \cdot_N p) = (m \cdot_N n) \cdot_N p$, de modo que
+                \begin{align*}
+                    m \cdot_N (n \cdot_N s(p)) &= m \cdot_N ((n \cdot_N p) +_N n) \\
+                    &= (m \cdot_N (n \cdot_N p)) +_N (m \cdot_N n) \\
+                    &= ((m \cdot_N n) \cdot_N p) +_N (m \cdot_N n) \\
+                    &= (m \cdot_N n) \cdot_N s(p),
+                \end{align*}
+            isto é, $s(p) \in A$. Logo, pelo princípio de indução, temos $A = N$. Logo, a multiplicação $\cdot_N$ é associativa. \blackproof
+        \end{enumerate}
+\end{proof}
+
+\begin{proposition}
+    Seja $(N,s,a)$ um sistema de Peano. Para todo $n \in N$, temos
+        \[
+            n \cdot_N 1_N = n.
+        \]
+\end{proposition}
+
+\begin{proof}
+    Para todo $n \in N$, temos
+        \[
+            n \cdot_N 1_N = n \cdot_N s(a) = (n \cdot_N a) +_N n = a +_N n = n,
+        \]
+    isto é, $n \cdot_N 1_N = n$. \blackproof
+\end{proof}
+
+\subsubsection{Ordem}
+
+\begin{proposition}
+    Seja $(N,s,a)$ um sistema de Peano.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item A relação
+                \[
+                    {\leq_N} := \{(m,n) \in N \times N : \exists p (p \in N \land m +_N p=n) \}
+                \]
+            é de ordem parcial em $N$.
+            \item A relação
+                \[
+                    {<_N} := \{(m,n) \in N \times N : \exists p (p \in N_{\neq a} \land m +_N p=n) \}
+                \]
+            é de ordem estrita em $N$.
+            \item 
+                \begin{enumerate}[label=\roman*.]
+                    \item ${<_N} = \{(m,n) \in N \times N : m \leq_N n \land m \neq n\}$.
+                    \item ${\leq_N} = \{(m,n) \in N \times N : m <_N n \lor m = n\}$.
+                \end{enumerate}
+        \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item 
+                \begin{claim}
+                    ${\leq_N}$ é reflexiva.
+                \end{claim}
+                \begin{midproof}
+                    Seja $m \in N$. Como $m +_N a = m$, temos $m \leq_N m$. Logo, ${\leq_N}$ é reflexiva. \whiteproof
+                \end{midproof}
+                \begin{claim}
+                    ${\leq_N}$ é antissimétrica.
+                \end{claim}
+                \begin{midproof}
+                    Sejam $m,n \in N$ tais que $m \leq_N n$ e $n \leq_N m$. Então, existem $p,q \in N$ tais que $m +_N p = n$ e $n +_N q = m$. Com isso,
+                        \[
+                            m +_N (p +_N q) = (m +_N p) +_N q = n +_N q = m = m +_N a,
+                        \]
+                    de modo que $p +_N q = a$, isto é, $p=q=a$. Logo, como $m +_N p = n$, temos $m=n$. Logo, ${\leq_N}$ é antissimétrica. \whiteproof
+                \end{midproof}
+                \begin{claim}
+                    ${\leq_N}$ é transitiva.
+                \end{claim}
+                \begin{midproof}
+                    Sejam $m,n,r \in N$ tais que $m \leq_N n$ e $n \leq_N r$. Então, existem $p,q \in N$ tais que $m +_N p = n$ e $n +_N q = r$. Com isso,
+                        \[
+                            m +_N (p +_N q) = (m +_N p) +_N q = n +_N q = r,
+                        \]
+                    de modo que $m \leq_N r$. Logo, ${\leq_N}$ é transitiva. \whiteproof
+                \end{midproof}
+            Logo, ${\leq_N}$ é uma relação de ordem parcial em $N$. \blackproof
+            \item 
+                \begin{claim}
+                    ${<_N}$ é irreflexiva.
+                \end{claim}
+                \begin{midproof}
+                    Seja $m \in N$. Se $m <_N m$, então existiria $p \in N_{\neq a}$ tal que $m +_N p = m$; como $m=m+_N a$, teríamos $m +_N p = m +_N a$, donde $p=a$, uma contradição. Logo, não ocorre $m <_N m$, para todo $m \in N$. Logo, ${<_N}$ é irreflexiva. \whiteproof
+                \end{midproof}
+                \begin{claim}
+                    ${<_N}$ é transitiva.
+                \end{claim}
+                \begin{midproof}
+                    Sejam $m,n,r \in N$ tais que $m <_N n$ e $n <_N r$. Então, existem $p,q \in N_{\neq a}$ tais que $m +_N p = n$ e $n +_N q = r$. Com isso,
+                        \[
+                            m +_N (p +_N q) = (m +_N p) +_N q = n +_N q = r,
+                        \]
+                    e como $p +_N q \neq a$ (pois, se fosse $p +_N q = a$, teríamos, $p=q=a$, uma contradição), existe $p +_N q \in N_{\neq a}$ tal que $m +_N (p +_N q) = r$, de modo que $m <_N r$. Logo, ${<_N}$ é transitiva. \whiteproof
+                \end{midproof}
+            Logo, ${<_N}$ é uma relação de ordem estrita em $N$. \blackproof
+            \item 
+                \begin{enumerate}[label=\roman*.]
+                    \item Por um lado ($\subseteq$), se $(m,n) \in {<_N}$, então existe $p \in N_{\neq a}$ tal que $m +_N p = n$. Logo, existe $p \in N$ tal que $m +_N p=n$, de modo que $m \leq_N n$. Além disso, se fosse $m=n$, teríamos $m +_N p = m = m +_N a$, donde $p=a$, uma contradição. Logo, $m \neq n$, o que prova a inclusão $\subseteq$. Por outro lado ($\supseteq$), se $(m,n) \in N \times N$ é tal que $m \leq_N n$ e $m \neq n$, então existe $p \in N$ tal que $m +_N p=n$. Se fosse $p=a$, teríamos $n=m+_N a=m$, uma contradição. Logo, $p \in N_{\neq a}$, de modo que $m <_N n$, o que prova a inclusão $\supseteq$.
+                    \item Por um lado ($\subseteq$), se $(m,n) \in {\leq_N}$, então existe $p \in N$ tal que $m +_N p=n$. Se $p=a$, então $n=m+_N a=m$. Se $p \neq a$, então $p \in N_{\neq a}$, de modo que $m <_N n$. Logo, $m <_N n$ ou $m=n$, o que prova a inclusão $\subseteq$. Por outro lado ($\supseteq$), se $(m,n) \in N \times N$ é tal que $m <_N n$ ou $m=n$, então, se $m <_N n$, existe $p \in N_{\neq a}$ tal que $m +_N p=n$; em particular, existe $p \in N$ tal que $m +_N p=n$, de modo que $m \leq_N n$. Se $m=n$, então $m+_N a=n$, de modo que $m \leq_N n$. Logo, $m \leq_N n$, o que prova a inclusão $\supseteq$.
+                \end{enumerate}
+            Logo, ${<_N}$ e ${\leq_N}$ se comportam como na \cref{prop.set:parcial_e_estrita}. \blackproof
+        \end{enumerate}
+\end{proof}
+
+\begin{proposition}
+    Sejam $(N,s,a)$ um sistema de Peano e $m,n,p \in N$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Se $m \leq_N n$, então
+                \begin{enumerate}[label=\roman*.]
+                    \item $m +_N p \leq_N n +_N p$.
+                    \item $m \cdot_N p \leq_N n \cdot_N p$.
+                \end{enumerate}
+            \item Se $m <_N n$, então
+                \begin{enumerate}[label=\roman*.]
+                    \item $m +_N p <_N n +_N p$.
+                    \item $m \cdot_N p <_N n \cdot_N p$, desde que $p \neq a$.
+                \end{enumerate}
+        \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Suponha que $m \leq_N n$. Então, existe $q \in N$ tal que $m +_N q=n$.
+                \begin{enumerate}[label=\roman*.]
+                    \item Temos
+                        \[
+                            (m +_N p) +_N q = (m +_N q) +_N p = n +_N p,
+                        \]
+                    de modo que existe $q \in N$ tal que $(m +_N p) +_N q = n +_N p$. Logo, $m +_N p \leq_N n +_N p$.
+
+                    \item Temos
+                        \begin{align*}
+                            (m \cdot_N p) +_N (q \cdot_N p) &= (p \cdot_N m) +_N (p \cdot_N q) \\
+                            &= p \cdot_N (m +_N q) \\
+                            &= p \cdot_N n \\
+                            &= n \cdot_N p,
+                        \end{align*}
+                    de modo que existe $q \cdot_N p \in N$ tal que $(m \cdot_N p) +_N (q \cdot_N p) = n \cdot_N p$. Logo, $m \cdot_N p \leq_N n \cdot_N p$.
+                \end{enumerate}
+            Logo, se $m \leq_N n$, então $m +_N p \leq_N n +_N p$ e $m \cdot_N p \leq_N n \cdot_N p$. \blackproof
+            \item Suponha que $m <_N n$. Então, existe $q \in N_{\neq a}$ tal que $m +_N q=n$.
+                \begin{enumerate}[label=\roman*.]
+                    \item Temos
+                        \[
+                            (m +_N p) +_N q = (m +_N q) +_N p = n +_N p,
+                        \]
+                    de modo que existe $q \in N_{\neq a}$ tal que $(m +_N p) +_N q = n +_N p$. Logo, $m +_N p <_N n +_N p$.
+                    \item Seja $p \neq a$. Como $q \neq a$ e $p \neq a$, existe $k \in N$ tal que $p=s(k)$. Com isso,
+                        \[
+                            q \cdot_N p = q \cdot_N s(k) = (q \cdot_N k) +_N q.
+                        \]
+                    Se fosse $q \cdot_N p=a$, teríamos $(q \cdot_N k) +_N q=a$, donde $q=a$, uma contradição. Logo, $q \cdot_N p \in N_{\neq a}$. Além disso,
+                        \begin{align*}
+                            (m \cdot_N p) +_N (q \cdot_N p) &= (p \cdot_N m) +_N (p \cdot_N q) \\
+                            &= p \cdot_N (m +_N q) \\
+                            &= p \cdot_N n \\
+                            &= n \cdot_N p,
+                        \end{align*}
+                    de modo que existe $q \cdot_N p \in N_{\neq a}$ tal que $(m \cdot_N p) +_N (q \cdot_N p) = n \cdot_N p$. Logo, $m \cdot_N p <_N n \cdot_N p$.
+                \end{enumerate}
+            Logo, se $m <_N n$, então $m +_N p <_N n +_N p$, e se $p \neq a$, então $m \cdot_N p <_N n \cdot_N p$. \blackproof
+        \end{enumerate}
+\end{proof}
+
+\begin{proposition}
+    Seja $(N,s,a)$ um sistema de Peano.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Para todo $n \in N$, temos $n \geq_N a$.
+            \item Para todo $n \in N$, temos $s(n) >_N n$.
+        \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Como $a +_N n = n$ para todo $n \in N$, temos $n \geq_N a$. \blackproof
+            \item Como $s(n) = n +_N 1_N$ para todo $n \in N$, temos $s(n) >_N n$. \blackproof
+        \end{enumerate}
+\end{proof}
+
+\begin{theorem} \label{teo.fund:tricotomia_naturais}
+    Sejam $(N,s,a)$ um sistema de Peano e $m,n \in N$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Para quaisquer $m,n\in N$, $m \leq_N n$ ou $n \leq_N m$.
+            \item Para quaisquer $m,n\in N$, ou $m <_N n$, ou $n <_N m$, ou $m=n$.
+        \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Fixe $m \in N$ e defina
+                \[
+                    A := \{n \in N : m \leq_N n \lor n \leq_N m\}.
+                \]
+            Como $a \leq_N m$, temos $a \in A$. Agora, supondo que $n \in A$, provemos que $s(n) \in A$. Se $n \in A$, então, pela hipótese de indução, $m \leq_N n$ ou $n \leq_N m$.
+                \begin{itemize}
+                    \item Se $m \leq_N n$, então existe $p \in N$ tal que $m +_N p = n$. Com isso, $s(n) = s(m +_N p) = m +_N s(p)$, de modo que $m \leq_N s(n)$, isto é, $s(n) \in A$.
+                    \item Se $n \leq_N m$, existe $p \in N$ tal que $n +_N p = m$. Se $p=a$, então $n=m$, e como $n <_N s(n)$, temos $m <_N s(n)$, donde $m \leq_N s(n)$, de modo que $s(n) \in A$. Por outro lado, se $p \neq a$, então existe $k \in N$ tal que $p = s(k)$, de modo que
+                        \[
+                            m = n +_N s(k) = s(n +_N k) = s(k +_N n) = k +_N s(n) = s(n) +_N k,
+                        \]
+                    isto é, existe $k \in N$ tal que $s(n) +_N k = m$, donde $s(n) \leq_N m$, isto é, $s(n) \in A$. Em qualquer caso, $s(n) \in A$.
+                \end{itemize}
+            Logo, pelo princípio de indução, $A = N$. Logo, a ordem $\leq_N$ é total. \blackproof
+            \item Para quaisquer $m,n \in N$, temos $m \leq_N n$ ou $n \leq_N m$. Se $m \leq_N n$, então, se $m=n$, vale uma das condições; se $m \neq n$, então $m <_N n$ e vale uma das condições. Analogamente, se $n \leq_N m$, então, se $m=n$, vale uma das condições; se $m \neq n$, então $n <_N m$ e vale uma das condições. Logo, ao menos uma das condições das três condições deve valer. Resta provar a exclusividade. Se $m <_N n$, então $m \neq n$. Analogamente, se $n <_N m$, então $n \neq m$. Por fim, se fosse $m <_N n$ e $n <_N m$, então, como $<_N$ é transitiva, teríamos $n < _N n$, o que contradiz a irreflexividade de $<_N$. Logo, vale uma, e só uma, dessas três condições. \blackproof
+        \end{enumerate}
+\end{proof}
+
+\begin{corollary}
+    Sejam $(N,s,a)$ um sistema de Peano e $m,n,p \in N$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Se $m \cdot_N n = a$, então $m = a$ ou $n=a$.
+            \item Se $m \cdot_N p = n \cdot_N p$ e $p \neq a$, então $m=n$.
+        \end{enumerate}
+\end{corollary}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Se fosse $m \neq a$ e $n \neq a$, então, como $m \geq_N a$, teríamos $a <_N m$, de modo que $a \cdot_N n <_N m \cdot_N n$; como $a \cdot_N n = a$ e $m \cdot_N n = a$, teríamos $a <_N a$, uma contradição. Logo, $m=a$ ou $n=a$. \blackproof
+            \item Pela tricotomia de $<_N$, ou $m <_N n$, ou $n <_N m$, ou $m=n$. Se fosse $m <_N n$, então, como $p \neq a$, teríamos $m \cdot_N p <_N n \cdot_N p$, e como $m \cdot_N p = n \cdot_N p$, teríamos $m \cdot_N p <_N m \cdot_N p$, uma contradição. Analogamente, se fosse $n <_N m$, então, como $p \neq a$, teríamos $n \cdot_N p <_N m \cdot_N p$,
+            donde $n \cdot_N p <_N n \cdot_N p$, uma contradição. Logo, $m=n$. \blackproof
+        \end{enumerate}
+\end{proof}
+
+\begin{proposition}
+    Sejam $(N,s,a)$ um sistema de Peano e $m,n \in N$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $m \leq_N n$ se, e somente se, $m <_N s(n)$.
+            \item $m <_N n$ se, e somente se, $s(m) \leq_N n$.
+        \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item 
+                \begin{itemize}
+                    \item[($\Rightarrow$)] Se $m \leq_N n$, então existe $p \in N$ tal que $m +_N p = n$. Com isso, $m +_N s(p) = s(m +_N p) = s(n)$, e como $s(p) \in N_{\neq a}$, temos $m <_N s(n)$. \blackproof
+                    \item[($\Leftarrow$)] Se $m <_N s(n)$, então existe $p \in N_{\neq a}$ tal que $m +_N p = s(n)$. Como $p \neq a$, existe $k \in N$ tal que $p = s(k)$. Com isso, $s(m +_N k) = m +_N s(k) = m +_N p = s(n)$, e como $s$ é injetiva, temos $m +_N k = n$, de modo que $m \leq_N n$. \blackproof
+                \end{itemize}
+            Logo, $m \leq_N n \Leftrightarrow m <_N s(n)$. \blackproof
+            \item 
+                \begin{itemize}
+                    \item[($\Rightarrow$)] Se $m <_N n$, então existe $p \in N_{\neq a}$ tal que $m +_N p = n$. Como $p \neq a$, existe $k \in N$ tal que $p = s(k)$. Com isso, $s(m) +_N k = m +_N s(k) = m +_N p = n$, de modo que $s(m) \leq_N n$. \blackproof
+                    \item[($\Leftarrow$)] Se $s(m) \leq_N n$, então existe $p \in N$ tal que $s(m) +_N p = n$. Com isso, $m +_N s(p) = s(m) +_N p = n$, e como $s(p) \in N_{\neq a}$, temos $m <_N n$. \blackproof
+                \end{itemize}
+            Logo, $m <_N n \Leftrightarrow s(m) \leq_N n$. \blackproof
+        \end{enumerate}
+\end{proof}
+
+\begin{theorem} \label{teo.fund:inducao_e_boaordem}
+    Seja $(N,s,a)$ um sistema de Peano.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Seja $A \subseteq N$ tal que, para todo $n \in N$, se $m \in A$ para todo $m \in N$ tal que $m <_N n$, então $n \in A$. Então, $A = N$.
+            \item Para todo $A \in \mathcal{P}(N)_{\neq \emptyset}$ existe $b \in A$ tal que $b \leq_N x$ para todo $x \in A$.
+            \item As afirmações acima são equivalentes.
+        \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Defina
+                \[
+                    B := \{n \in N : \forall m (m \in N \land m \leq_N n \rightarrow m \in A)\}.
+                \]
+            Provemos por indução que $B = N$.
+                \begin{claim}
+                    $a \in B$.
+                \end{claim}
+                \begin{midproof}
+                    Seja $m \in N$ tal que $m \leq_N a$. Então existe $p \in N$ tal que $m +_N p = a$, de modo que $m = p = a$. Como para todo $k \in N$ tal que $k <_N a$ temos $k \in A$ (por vacuidade, já que não existe um tal $k$), temos $a \in A$. Logo, temos $m \in A$, de modo que $a \in B$. \whiteproof
+                \end{midproof}
+                \begin{claim}
+                    Para todo $n \in N$, se $n \in B$, então $s(n) \in B$.
+                \end{claim}
+                \begin{midproof}
+                    Suponha, por hipótese de indução, que $n \in B$. Então, para todo $m \in N$, se $m \leq_N n$, então $m \in A$. Provemos que, para todo $m \in N$, se $m \leq_N s(n)$, então $m \in A$. Seja $m \in N$ tal que $m \leq_N s(n)$. Então $m <_N s(n)$ ou $m = s(n)$.
+                        \begin{itemize}
+                            \item Se $m <_N s(n)$, então $m \leq_N n$, de modo que, pela hipótese de indução, $m \in A$.
+                            \item Se $m = s(n)$, então, se $k \in N$ é tal que $k <_N s(n)$, então $k \leq_N n$; com isso, pela hipótese de indução, temos $k \in A$, de modo que, pela hipótese sobre $A$, temos $s(n) \in A$, isto é, $m \in A$.
+                        \end{itemize}
+                    Logo, em qualquer caso, temos $m \in A$, de modo que $s(n) \in B$. \whiteproof
+                \end{midproof}
+            Logo, pelo princípio de indução, temos $B = N$. Por fim, seja $n \in N$. Como $n \in B$, para todo $m \in N$, se $m \leq_N n$, então $m \in A$, e como $n \leq_N n$, temos $n \in A$, de modo que $B = N \subseteq A$. Como $A \subseteq N$, temos $A = N$. \blackproof
+            \item Seja $A \subseteq N$ tal que $A \neq \emptyset$. Suponha, por absurdo, que $A$ não tenha elemento mínimo. Então, para todo $b \in A$, existe $x \in A$ tal que $x < b$. Defina
+                \[
+                    B := \{n \in N : \forall m (m \in N \land m \leq_N n \rightarrow m \notin A)\}.
+                \]
+            Provemos por indução que $B = N$.
+                \begin{claim}
+                    $a \in B$.
+                \end{claim}
+                \begin{midproof}
+                    Como $a$ é o elemento mínimo de $N$ e $A \subseteq N$ não tem elemento mínimo, temos $a \notin A$. Seja $m \in N$ tal que $m \leq_N a$. Como $a \leq_N m$, temos $m = a$, e como $a \notin A$, temos $m \notin A$. Logo, $a \in B$. \whiteproof
+                \end{midproof}
+                \begin{claim}
+                    Para todo $n \in N$, se $n \in B$, então $s(n) \in B$.
+                \end{claim}
+                \begin{midproof}
+                    Suponha, por hipótese de indução, que $n \in B$. Então, para todo $m \in N$, se $m \leq_N n$, então $m \notin A$. Provemos que, para todo $m \in N$, se $m \leq_N s(n)$, então $m \notin A$. Seja $m \in N$ tal que $m \leq_N s(n)$. Então $m <_N s(n)$ ou $m = s(n)$.
+                        \begin{itemize}
+                            \item Se $m <_N s(n)$, então $m \leq_N n$, de modo que, pela hipótese de indução, $m \notin A$.
+                            \item Se $m = s(n)$, então, se $s(n) \in A$, então existiria $k \in A$ tal que $k <_N s(n)$, isto é, $k \leq_N n$; com isso, pela hipótese de indução, teríamos $k \notin A$, uma contradição. Logo, $s(n) \notin A$, isto é, $m \notin A$.
+                        \end{itemize}
+                    Logo, em qualquer caso, temos $m \notin A$, de modo que $s(n) \in B$. \whiteproof
+                \end{midproof}
+            Logo, pelo princípio de indução, temos $B = N$. Por fim, como $A \neq \emptyset$, existe $n \in A$, e como $n \in N$, temos $n \in B$, de modo que, para todo $m \in N$, se $m \leq_N n$, então $m \notin A$. Como $n \leq_N n$, temos $n \notin A$, uma contradição. Logo, $A$ tem elemento mínimo. \blackproof
+            \item 
+                \begin{itemize}
+                    \item[($\Rightarrow$)] Seja $A \subseteq N$ tal que $A \neq \emptyset$. Suponha, por absurdo, que $A$ não tenha elemento mínimo. Defina $B:= N \setminus A$. Seja $n \in N$ tal que, para todo $m \in N$, se $m <_N n$, então $m \in B$, isto é, $m \notin A$. Se fosse $n \notin B$, teríamos $n \in A$, e como para todo $x \in A$ não se tem $x <_N n$, pois $m \notin A$ para todo $m \in N$ tal que $m <_N n$, teríamos $n \leq_N x$ para todo $x \in A$, de modo que $n = \min A$, uma contradição; logo, $n \in B$. Logo, pelo princípio de indução forte, temos $B = N$, e como $B = N \setminus A$, temos $A = \emptyset$, uma contradição. Logo, $A$ tem elemento mínimo.
+                    \item[($\Leftarrow$)] Seja $A \subseteq N$ tal que, para todo $n \in N$, se $m \in A$ para todo $m \in N$ tal que $m <_N n$, então $n \in A$. Suponha, por absurdo, que $A \neq N$. Defina $B := N \setminus A$. Como $A \neq N$, temos $B \neq \emptyset$. Logo, pelo princípio da boa ordem, existe $b := \min B$. Como $b \in B$, temos $b \notin A$. Agora, para todo $m \in N$ tal que $m <_N b$, temos $m \notin B$ (pois $b \leq_N x$ para todo $x \in B$), isto é, $m \in A$, de modo que $b \in A$, uma contradição. Logo, $A = N$.
+                \end{itemize}
+            Logo, o princípio de indução forte é equivalente ao princípio da boa ordem. \blackproof
+        \end{enumerate}
+\end{proof}
+
+\begin{theorem} \label{teo.fund:isomorfismo_sistemas_peano_soma_produto_ordem}
+    Sejam $(N,s,a)$ e $(M,t,b)$ sistemas de Peano. Existe uma única bijeção $\varphi : N \to M$ tal que, para quaisquer $m,n \in N$,
+        \begin{enumerate}[label=\roman*.]
+            \item $\varphi(m +_N n) = \varphi(m) +_M \varphi(n)$.
+            \item $\varphi(m \cdot_N n) = \varphi(m) \cdot_M \varphi(n)$.
+            \item $m \leq_N n \Leftrightarrow \varphi(m) \leq_M \varphi(n)$.
+        \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    Pelo \cref{teo.set:isomorfismo_sistemas_peano}, existe uma única bijeção $\varphi : N \to M$ tal que $\varphi(a) = b$ e $\varphi(s(n)) = t(\varphi(n))$ para todo $n \in N$.
+        \begin{enumerate}[label=\roman*.]
+            \item Fixe $m \in N$ e defina
+                $
+                    A := \{n \in N : \varphi(m +_N n) = \varphi(m) +_M \varphi(n)\}.
+                $
+            Como
+                \[
+                    \varphi(m +_N a) = \varphi(m) = \varphi(m) +_M b = \varphi(m) +_M \varphi(a),
+                \]
+            temos $a \in A$. Agora, supondo que $n \in A$, provemos que $s(n) \in A$. Se $n \in A$, então, pela hipótese de indução, temos $\varphi(m +_N n) = \varphi(m) +_M \varphi(n)$, de modo que
+                \begin{align*}
+                    \varphi(m +_N s(n)) &= \varphi(s(m +_N n)) \\
+                    &= t(\varphi(m +_N n)) \\
+                    &= t(\varphi(m) +_M \varphi(n)) \\
+                    &= \varphi(m) +_M t(\varphi(n)) \\
+                    &= \varphi(m) +_M \varphi(s(n)),
+                \end{align*}
+            isto é, $s(n) \in A$. Logo, $A = N$, isto é, $\varphi(m +_N n) = \varphi(m) +_M \varphi(n)$, para quaisquer $m, n \in N$.
+            \item Fixe $m \in N$ e defina $A := \{n \in N : \varphi(m \cdot_N n) = \varphi(m) \cdot_M \varphi(n)\}$. Como
+                \[
+                    \varphi(m \cdot_N a) = \varphi(a) = b = \varphi(m) \cdot_M b = \varphi(m) \cdot_M \varphi(a),
+                \]
+            temos $a \in A$. Agora, supondo que $n \in A$, provemos que $s(n) \in A$. Se $n \in A$, então, pela hipótese de indução, temos $\varphi(m \cdot_N n) = \varphi(m) \cdot_M \varphi(n)$, de modo que
+                \begin{align*}
+                    \varphi(m \cdot_N s(n)) &= \varphi((m \cdot_N n) +_N m) \\
+                    &= \varphi(m \cdot_N n) +_M \varphi(m) \\
+                    &= (\varphi(m) \cdot_M \varphi(n)) +_M \varphi(m) \\
+                    &= \varphi(m) \cdot_M t(\varphi(n)) \\
+                    &= \varphi(m) \cdot_M \varphi(s(n)),
+                \end{align*}
+            isto é, $s(n) \in A$. Logo, $A = N$, isto é, $\varphi(m \cdot_N n) = \varphi(m) \cdot_M \varphi(n)$, para quaisquer $m, n \in N$.
+            \item Se $m = n$, então $\varphi(m) = \varphi(n)$, e se $\varphi(m) = \varphi(n)$, então, pela injetividade de $\varphi$, temos $m=n$. 
+                \begin{itemize}
+                    \item[($\Rightarrow$)] Suponha que $m <_N n$. Então existe $k \in N_{\neq a}$ tal que $m +_N k = n$. Logo, $\varphi(m) +_M \varphi(k) = \varphi(n)$, e como $\varphi(k) \neq b$, temos $\varphi(m) <_M \varphi(n)$.
+                    \item[($\Leftarrow$)] Suponha que $\varphi(m) <_M \varphi(n)$. Se $m \geq_N n$, então $\varphi(m) \geq_M \varphi(n)$, uma contradição. Logo, $m <_N n$. 
+                \end{itemize}
+            Logo, $m \leq_N n \Leftrightarrow \varphi(m) \leq_M \varphi(n)$.
+        \end{enumerate}
+    Logo, $\varphi$ também traduz a adição, a multiplicação e a ordem entre os sistemas de Peano $(N,s,a)$ e $(M,t,b)$. \blackproof
+\end{proof}
+
+\subsection{O Axioma do Infinito}
+
+\begin{definition}
+    O \emph{sucessor} de um conjunto $x$ é definido como $x^+ := x \cup \{x\}$.
+\end{definition}
+
+\begin{proposition}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $\forall x \forall y ((y \in x^+) \leftrightarrow ((y \in x) \lor (y = x)))$.
+            \item $\forall x (x \in x^+)$.
+            \item $\forall x (x \subseteq x^+)$.
+        \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Pela definição de sucessor, $x^+ = x \cup \{x\}$. Como $y \in x \cup \{x\}$ equivale a $y \in x$ ou $y \in \{x\}$, e como $y \in \{x\}$ equivale a $y = x$, temos $y \in x^+$ se, e somente se, $y \in x$ ou $y = x$. \blackproof
+            \item Tomando $y=x$ no item anterior, obtemos $(x \in x^+) \leftrightarrow ((x \in x) \lor (x = x))$. Como $x = x$, temos $(x \in x) \lor (x = x)$. Logo, $x \in x^+$. \blackproof
+            \item Se $z \in x$, então $(z \in x) \lor (z = x)$, de modo que $z \in x^+$. Logo, $x \subseteq x^+$. \blackproof
+        \end{enumerate}
+\end{proof}
+
+\begin{definition}
+    Um conjunto $x$ é \emph{indutivo} se
+        \[
+            (\emptyset \in x) \land \forall y ( (y \in x) \rightarrow (y^+ \in x)).
+        \]
+\end{definition}
+
+\begin{axiom}[Infinito]
+    Existe um conjunto indutivo.
+        \[
+            \boxed{
+                \exists x ( (\emptyset \in x) \land \forall y ((y \in x) \rightarrow (y^+ \in x)) )
+            }
+        \]
+\end{axiom}
+
+\begin{proposition} \label{prop.fund:omega}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Para todo $I$ indutivo,
+                \[
+                    \omega(I) := \bigcap \{A \in \mathcal{P}{(I)} : A \text{ é indutivo}\}.
+                \]
+            é indutivo.
+            \item Para quaisquer $I$ e $J$ é indutivos, $\omega(J) = \omega(I)$.
+        \end{enumerate}  
+\end{proposition}
+
+\begin{proof} 
+    Pelo axioma das partes, existe $\mathcal{P}{(I)}$. Pelo axioma da separação em $\mathcal{P}{(I)}$ com a fórmula ``$A$ é indutivo'', existe $z(I) :=  \{A \in \mathcal{P}{(I)} : A \text{ é indutivo} \}$. Como $z(I) \neq \emptyset$ pois $I \in z(I)$, existe $\omega(I) := \bigcap z(I)$. Logo, $\omega(I)$ está bem definido.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Como $\emptyset \in A$ para todo $A \subseteq I$ indutivo, temos $\emptyset \in \omega(I)$. Se $x \in \omega(I)$, então $x \in A$ para todo $A \subseteq I$ indutivo, de modo que $x^+ \in A$ para todo $A \subseteq I$ indutivo, isto é, $x^+ \in \omega(I)$. Logo, $\omega(I)$ é indutivo. \blackproof
+            \item 
+                \begin{claim}
+                    $I \cap J$ é indutivo.
+                \end{claim}
+                \begin{midproof}
+                    Como $I$ e $J$ são indutivos, temos $\emptyset \in I$ e $\emptyset \in J$, de modo que $\emptyset \in I \cap J$. Se $x \in I \cap J$, então $x \in I$ e $x \in J$, e como $I$ e $J$ são indutivos, temos $x^+ \in I$ e $x^+ \in J$, de modo que $x^+ \in I \cap J$. Logo, a interseção de conjuntos indutivos é um conjunto indutivo.  
+                    \whiteproof
+                \end{midproof}
+            Como $I \cap J \subseteq I$, temos $I \cap J \in z(I)$, e como $\omega(I) \subseteq I \cap J \subseteq J$, temos $\omega(I) \in z(J)$ de modo que $\omega(J) \subseteq \omega(I)$. Analogamente, $\omega(I) \subseteq \omega(J)$. Logo, $\omega(I) = \omega(J)$. \blackproof
+        \end{enumerate}
+\end{proof}
+
+\begin{remark}
+    A \cref{prop.fund:omega} nos diz que $\omega(I)$ é a interseção da família de todos os conjuntos indutivos e que o parâmtro $I$ pode ser suprimido. A seguinte definição só é possível devido a esse teorema.
+\end{remark}
+
+\begin{definition}
+    O conjunto dos números naturais é definido como a interseção de todos os conjuntos indutivos. Ele é denotado por $\omega$.
+\end{definition}
+
+\subsubsection{A Existência de um Sistema de Peano}
+
+\begin{theorem} \label{teo.fund:omega_indução}
+    Seja $A \subseteq \omega$ indutivo. Então $A = \omega$.
+\end{theorem}
+
+\begin{proof}
+    Como $A$ é indutivo, temos $\omega \subseteq A$. Como $A \subseteq \omega$, temos $A = \omega$. \blackproof
+\end{proof}
+
+\begin{definition}
+    Dizemos que $A$ é \emph{transitivo} se
+        \[
+            \forall x \forall y (x \in y \land y \in A \rightarrow x \in A).
+        \]
+\end{definition}
+
+\begin{proposition}
+    Um conjunto $A$ é transitivo se, e somente se, $a \subseteq A$ para todo $a \in A$.    
+\end{proposition}
+
+\begin{proof}
+    \leavevmode
+        \begin{itemize}[align=left]
+            \item[($\Rightarrow$)] Suponha, primeiro, que $A$ é transitivo. Seja $a \in A$. Se $x \in a$, então, como $a \in A$ e $A$ é transitivo, temos $x \in A$. Logo, $a \subseteq A$.
+            \item[($\Leftarrow$)] Reciprocamente, suponha que $a \subseteq A$ para todo $a \in A$. Se $x \in y$ e $y \in A$, então, pela hipótese, temos $y \subseteq A$, de modo que $x \in A$. Logo, $A$ é transitivo.
+        \end{itemize}
+    \blackproof
+\end{proof}
+
+\begin{lemma}
+    Todo $n \in \omega$ é transitivo.
+\end{lemma}
+
+\begin{proof}
+    Por indução. Defina $A := \{n \in \omega : n \text{ é transitivo} \}$. Como $\emptyset$ é trivialmente transitivo (por vacuidade), temos $\emptyset \in A$. Agora, supondo que $n \in A$, provemos que $n^+ \in A$. Se $n \in A$, então, pela hipótese de indução, temos $x \subseteq n$ para todo $x \in n$. Seja $x \in n^+$. Então $x \in n$ ou $x=n$. Se $x \in n$, então, pela hipótese de indução, temos $x \subseteq n$, e como $n \subseteq n^+$, temos $x \subseteq n^+$. Se $x = n$, então, como $n \subseteq n^+$, temos $x \subseteq n^+$. Logo, $n^+ \in A$. Logo, pelo princípio de indução, $A = \omega$. \blackproof
+\end{proof}
+
+\begin{corollary} \label{lema.fund:omega_irreflexivo}
+    $n \notin n$ para todo $n \in \omega$.
+\end{corollary}
+
+\begin{proof}
+    Por indução. Defina $A := \{n \in \omega : n \notin n\}$. Como $\emptyset \notin \emptyset$, temos $\emptyset \in A$. Agora, supondo que $n \in A$, provemos que $n^+ \in A$. Se $n \in A$, então, pela hipótese de indução, temos $n \notin n$. Se fosse $n^+ \in n^+$, teríamos $n^+ \in n \cup \{n\}$, de modo que $n^+ = n$ ou $n^+ \in n$. Se $n^+ = n$, então $n \cup \{n\} = n$, de modo que $n \in n$, o que contradiz a hipótese de indução. Se $n^+ \in n$, então, como $n$ é transitivo, teríamos $n^+ \subseteq n$, e como $n \in n^+$, teríamos $n \in n$, o que contradiz a hipótese de indução. Logo, $n^+ \notin n^+$, de modo que $n^+ \in A$. Pelo princípio de indução, $A = \omega$. \blackproof
+\end{proof}
+
+\begin{theorem} \label{teo.set:existe_peano}
+    A tripla $(\omega, x \mapsto x^+, \emptyset)$ é um sistema de Peano.
+\end{theorem}
+
+\begin{proof}
+    Defina $s : \omega \to \omega$ por $s(x) = x^+$, isto é,
+        \[
+            s := \{(x,y) \in \omega \times \omega : y = x^+ \}.
+        \]
+        \begin{claim}
+            $s$ é injetiva.
+        \end{claim}
+        \begin{midproof}
+            Sejam $x,y \in \omega$ tais que $s(x)=s(y)$. Então $x^+ = y^+$. Como $x \in x^+$, temos $x \in y^+$, de modo que $x \in y$ ou $x=y$. Analogamente, como $y \in y^+$, temos $y \in x^+$, de modo que $y \in x$ ou $y=x$. Se fosse $x \neq y$, teríamos $x \in y$ e $y \in x$, e como $y$ é transitivo, teríamos $x \subseteq y$, de modo que $y \in y$, o que contradiz o \cref{lema.fund:omega_irreflexivo}. Logo, $x=y$. Logo, $s$ é injetiva. \whiteproof
+        \end{midproof}
+        \begin{claim}
+            $\emptyset \in \omega \setminus s(\omega)$.
+        \end{claim}
+        \begin{midproof}
+            Como $\omega$ é indutivo, temos $\emptyset \in \omega$. Suponha, por absurdo, que $\emptyset \in s(\omega)$. Então existe $x \in \omega$ tal que $s(x)=\emptyset$, isto é, $x^+=\emptyset$. Como $x \in x^+$, temos $x \in \emptyset$, uma contradição. Logo, $\emptyset \notin s(\omega)$, de modo que $\emptyset \in \omega \setminus s(\omega)$. \whiteproof
+        \end{midproof}
+        \begin{claim}
+            Para todo $A \subseteq \omega$, se $\emptyset \in A$ e $x^+ \in A$ para todo $x \in A$, então $A = \omega$.
+        \end{claim}
+        \begin{midproof}
+            Segue do \cref{teo.fund:omega_indução}. \whiteproof
+        \end{midproof}
+    Logo, $(\omega, x \mapsto x^+, \emptyset)$ é um sistema de Peano. \blackproof
+\end{proof}
+
+\subsection*{Algumas Propriedades}
+
+\begin{theorem}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $\omega$ é transitivo.
+            \item $\bigcup \omega = \omega$.
+        \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Por indução. Defina $A := \{n \in \omega : n \subseteq \omega\}$. Como $\emptyset \subseteq \omega$, temos $\emptyset \in A$. Agora, supondo que $n \in A$, provemos que $n^+ \in A$. Se $n \in A$, então, pela hipótese de indução, temos $n \subseteq \omega$. Como $n \in \omega$, temos $\{n\} \subseteq \omega$, de modo que $n \cup \{n\} \subseteq \omega$, isto é, $n^+ \subseteq \omega$. Isso completa o passo indutivo. Logo, pelo princípio de indução, temos $A = \omega$. Logo, $\omega$ é transitivo. \blackproof
+            \item Por um lado ($\subseteq$), se $x \in \bigcup \omega$, então existe $y \in \omega$ tal que $x \in y$, e como $y \subseteq \omega$ pois $y$ é transitivo, temos $x \in \omega$, de modo que $\bigcup \omega \subseteq \omega$. Por outro lado ($\supseteq$), se $x \in \omega$, então existe $x^+ \in \omega$ tal que $x \in x^+$, de modo que $x \in \bigcup \omega$, isto é, $\bigcup \omega \supseteq \omega$. Logo, $\bigcup \omega = \omega$. \blackproof
+        \end{enumerate}
+\end{proof}
+
+\begin{proposition}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Para quaisquer $m,n \in \omega$, temos $m <_{\omega} n$ se, e somente se, $m \in n$.
+            \item Para quaisquer $m,n \in \omega$, temos $m \leq_{\omega} n$ se, e somente se, $m \subseteq n$.
+        \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item 
+        \end{enumerate}
+\end{proof}
+
+\begin{corollary}
+    Para todo $n \in \omega$,
+        \[
+            n = \{k \in \omega : k < n\}.
+        \]
+\end{corollary}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\subsection{Os Teoremas da Recursão}
+
+\begin{theorem}[da recursão finita] \label{teo.fund:recfin}
+    Sejam $A \neq \emptyset$, $a \in A$ e $f:A \to A$. Existe uma única função $\varphi : \omega \to A$ tal que
+        \begin{itemize}
+            \item $\varphi(0) = a$;
+            \item $\varphi(n^+) = f(\varphi(n))$, para todo $n \in \omega$.
+        \end{itemize}
+\end{theorem}
+
+\begin{proof}
+    Segue como corolário dos \cref{teo.set:recursao_peano,teo.set:existe_peano}. \blackproof
+\end{proof}
+
+\begin{theorem}[da recursão com parâmetro] \label{teo.fund:recpar}
+    Sejam $a \in A$ e $f : A \times \omega \to A$. Existe uma única função $\varphi : \omega \to A$ tal que
+        \begin{itemize}
+            \item $\varphi(0) = a$;
+            \item $\varphi(n^+) = f(\varphi(n), n)$, para todo $n \in \omega$.
+        \end{itemize}
+\end{theorem}
+
+\begin{proof}
+    Segue como corolário dos \cref{teo.set:recpar1,teo.set:existe_peano}. \blackproof
+\end{proof}
+
+\begin{definition}
+    O conjunto de todas as funções de um certo $n \in \omega$ em $X$ é denotado por $X^{< \omega}$, isto é,
+        \[
+            X^{< \omega} := \{f \in \mathcal{P}(\omega \times X) : \exists n (n \in \omega \land f \in X^n) \}.
+        \]
+\end{definition}
+
+\begin{theorem}[da recursão completa] \label{teo.set:reccom}
+    Seja $f :  X^{<\omega} \to X$. Existe uma única  $\varphi : \omega \to X$ tal que $\varphi(n) = f(\varphi \restriction_n)$ para todo $n \in \omega$.
+\end{theorem}
+
+\begin{proof}
+    Defina $h : X^{< \omega} \to X^{< \omega}$ por $h(g) := g \cup \{(\Dom{(g)}, f(g)) \}$. Pelo \cref{teo.fund:recfin}, existe uma única função $\psi : \omega \to X^{< \omega}$ tal que $\psi(0) = \emptyset$ e $\psi(n^+) = h(\psi(n))$.
+        \begin{claim} \label{fund:reccom.claim.dompsin}
+            $\psi(n) \in X^n$ para todo $n \in \omega$.
+        \end{claim}
+        \begin{midproof}
+            Dado $n \in \omega$, como $\psi(n) \in X^{< \omega}$, existe $m \in \omega$ para o qual $\psi(n) : m \to X$. Com isso, $\Img{(\psi(n))} \subseteq X$ e a afirmação equivale a provar que $m = n$, isto é, basta provar que $\Dom{(\psi(n))} = n$ para todo $n \in \omega$. Façamos isso por indução em $n$. Para $n=0$, como $\psi(0) = \emptyset$, temos $\Dom{(\psi(0))} = \Dom{(\emptyset)} = \emptyset = 0$. Suponha, por hipótese de indução, que $\Dom{(\psi(n))} = n$. Como
+                \[
+                    \psi(n^+) = h(\psi(n)) = \psi(n) \cup \{ (\Dom{(\psi(n))}, f(\psi(n)))\},
+                \]
+            obtemos
+                \[
+                    \Dom{(\psi(n^+))} = \Dom{(\psi(n))} \cup \{ \Dom{(\psi(n))} \},
+                \]
+            e como $\Dom{(\psi(n))} = n$, vem $\Dom{(\psi(n^+))} = n \cup \{ n \} = n^+$. Isso completa o passo indutivo. Como $\Dom{(\psi(n))} = n$ e $\Img{\psi(n)} \subseteq X$, vem $\psi(n) : n \to X$, isto é, $\psi(n) \in X^n$, para todo $n \in \omega$. \whiteproof
+        \end{midproof}
+        \begin{claim} \label{fund:reccom.claim.restricao}
+            Para quaisquer $m,n \in \omega$, se $m \subseteq n$, então $\psi(n) \restriction_m = \psi(m)$.
+        \end{claim}
+        \begin{midproof}
+            A prova se dará por indução em $n$. Para $n=0$, obtemos $\psi(0) \restriction_m = \emptyset \restriction_m = \emptyset$, e como $m \subseteq \emptyset$, vem $m = \emptyset$, de modo que $\psi(0) \restriction_{\emptyset} = \emptyset = \psi(\emptyset) = \psi(0)$. Supondo, por hipótese de indução, que $\psi(n) \restriction_m = \psi(m)$ para todo $m \subseteq n$, provemos que $\psi(n^+) \restriction_m = \psi(m)$ para todo $m \subseteq n^+$. Se $m = n^+$, então $\psi(n^+) \restriction_{n^+} = \psi(n^+)$ trivialmente. Se $m \neq n^+$, então $m \subsetneq n^+$, de modo que $m \subseteq n$ (\cref{cor.set:bigcupomega}). 
+                \begin{itemize}
+                    \item Por um lado ($\subseteq$), seja $(k,x) \in \psi(n^+) \restriction_m$. Então $(k,x) \in \psi(n^+)$, com $k \in m$. Como $\psi(n^+) = \psi(n) \cup \{(n, f(\psi(n)))\}$, vem $(k,x) \in \psi(n)$ ou $(k,x) = (n, f(\psi(n)))$. Se fosse $(k,x) = (n, f(\psi(n)))$, então seria $k=n$, de modo que $n \in n$ pois $k \in m \subseteq n$, uma contradição. Logo, só pode ser $(k,x) \in \psi(n)$, e como $k \in m$, vem $(k,x) \in \psi(m)$ pois $\psi(n) \restriction_m = \psi(m)$ pela hipótese de indução. Assim, fica provado que $\psi(n^+) \restriction_m \subseteq \psi(m)$.
+                    \item Por outro lado ($\supseteq$), seja $(k,x) \in \psi(m)$. Então, como $\psi(m) = \psi(n) \restriction_m$ pela hipótese de indução, temos $(k,x) \in \psi(n) \restriction_m$. Como $\psi(n) \subseteq \psi(n^+)$, temos $(k,x) \in \psi(n^+)$, como $k \in m$, temos $(k,x) \in \psi(n^+) \restriction_m$. Assim, fica provado que $\psi(n^+) \restriction_m \supseteq \psi(m)$.
+                \end{itemize}
+            Com isso, vem $\psi(n^+) \restriction_m = \psi(m)$ para todo $m \subseteq n^+$. Isso completa o passo indutivo. \whiteproof
+        \end{midproof}
+    Agora, defina $\varphi := \bigcup \Img{(\psi)}$. Essa é a função procurada. Provemos isso.
+        \begin{claim} \label{fund:reccom.claim.varphifuncao}
+            $\varphi$ é uma função de $\omega$ em $X$.
+        \end{claim}
+        \begin{midproof}
+            Comecemos com $\varphi$ ser função. Como $\varphi \subseteq \omega \times X$, provemos que se $(k,x) \in \varphi$ e $(k,y) \in \varphi$, então $x=y$. Se $(k,x), (k,y) \in \varphi = \bigcup \Img{(\psi)}$, então existem $n,m \in \omega$ tais que $(k,x) \in \psi(n)$ e $(k,y) \in \psi(m)$. Como a relação $\subseteq$ é total em $\omega$, suponha, sem perda de generalidade, que $m \subseteq n$. Com isso, $\psi(n) \restriction_m = \psi(m)$, e como $k \in m$ pois $(k,y) \in \psi(m)$, vem $(k,x) \in \psi(m)$. Como $\psi(m)$ é uma função, vem $x=y$, de modo que $\varphi$ é uma função. Agora, vejamos que $\Dom{(\varphi)} = \omega$. Como
+                \[
+                    \varphi = \bigcup \Img{(\psi)} = \bigcup \{\psi(n) : n \in \omega \} = \bigcup_{n \in \omega} \psi(n),
+                \]
+            obtemos
+                \[
+                    \Dom{(\varphi)} = \Dom{\left( \bigcup_{n \in \omega} \psi(n) \right)} = \bigcup_{n \in \omega} \Dom{(\psi(n))} = \bigcup_{n \in \omega} n = \bigcup \omega = \omega,
+                \]
+            pois $\Dom{(\psi(n))} = n$ para todo $n \in \omega$ (\cref{fund:reccom.claim.dompsin}) e $\bigcup \omega = \omega$ (\cref{cor.set:bigcupomega}). Por fim, verifiquemos que $\Img{(\varphi)} \subseteq X$. Para isso, basta ver que
+                \[
+                    \Img{(\varphi)} = \Img{\left(\bigcup_{n \in \omega} \psi(n) \right)} = \bigcup_{n \in \omega} \Img{(\psi(n))} \subseteq X,
+                \]
+            pois $\Img{(\psi(n))} \subseteq X$ para todo $n \in \omega$. Com isso, $\varphi : \omega \to X$. \whiteproof
+        \end{midproof}
+        \begin{claim} \label{fund:reccom.claim.propriedaderecursiva}
+            $\varphi(n) = f(\varphi \restriction_n)$ para todo $n \in \omega$.
+        \end{claim}
+        \begin{midproof}
+            Seja $n \in \omega$. Temos $(n, f(\psi(n))) \in \psi(n^+)$ pois 
+                \[
+                    \psi(n^+) = \psi(n) \cup \{ (n, f(\psi(n)))\},
+                \]
+            e como $\varphi = \bigcup \Img{(\psi)}$, temos $\psi(n^+) \subseteq \varphi$, de modo que $(n, f(\psi(n))) \in \varphi$; como $\varphi : \omega \to X$ é uma função (\cref{fund:reccom.claim.varphifuncao}), vem  $\varphi(n) = f(\psi(n))$. Para finalizarmos, vejamos que $\psi(n) = \varphi \restriction_n$. Por um lado ($\subseteq$), se $(k,x) \in \psi(n)$, então, como $\psi(n) \in \Img{(\psi)}$, temos $(k,x) \in \bigcup \Im{(\psi)} = \varphi$. Com isso, como $k \in n$ pois $\Dom{(\psi(n))} = n$ (\cref{fund:reccom.claim.dompsin}), vem $(k,x) \in \varphi \restriction_n$. Por outro lado ($\supseteq$), se $(k,x) \in \varphi \restriction_n$, então $(k,x) \in \varphi$ com $k \in n$ e existe $m \in \omega$ tal que $(k,x) \in \psi(m)$. Se $n \subseteq m$, então $\psi(m) \restriction_n = \psi(n)$ (\cref{fund:reccom.claim.restricao}), e como $k \in n$, temos $(k,x) \in \psi(m) \restriction_n$, de modo que $(k,x) \in \psi(n)$. Se $m \subseteq n$, então $\psi(m) = \psi(n) \restriction_m$, e como $k \in m$, temos $(k,x) \in \psi(n) \restriction_m$, isto é, $(k,x) \in \psi(n)$. Com isso, temos $\psi(n) = \varphi \restriction_n$ para todo $n \in \omega$, de modo que, por fim, como $\varphi(n) = f(\psi(n))$, temos $\varphi(n) = f(\varphi \restriction_n)$ para todo $n \in \omega$. \whiteproof
+        \end{midproof}
+    Com isso, fica provada a existência de uma função $\varphi: \omega \to X$ que tem as propriedades do enunciado. Provemos, por fim, sua unicidade.
+        \begin{claim}
+            A função $\varphi : \omega \to X$ é única.
+        \end{claim}
+        \begin{midproof}
+            Seja $\Phi : \omega \to X$ tal que $\Phi(n) = f(\Phi \restriction_n)$ para todo $n \in \omega$. Provemos que $\Phi \restriction_n = \varphi \restriction_n$ para todo $n \in \omega$ por indução em $n$. Para $n=0$, trivialmente $\Phi \restriction_{0} = \emptyset = \varphi \restriction_{0}$. Suponha, por hipótese de indução, que $\Phi \restriction_n = \varphi \restriction_n$. Com isso,
+                \begin{align*}
+                    \Phi \restriction_{n^+} &= \Phi \restriction_n \cup \{ (n, \Phi(n)) \} \\
+                    &= \varphi \restriction_n \cup \{ (n, f(\Phi \restriction_n)) \} \\
+                    &= \varphi \restriction_n \cup \{ (n, f(\varphi \restriction_n)) \} \\
+                    &= h(\varphi \restriction_n) = h(\psi(n)) \\
+                    &= \psi(n^+) = \varphi \restriction_{n^+},
+                \end{align*}
+            o que completa o passo indutivo. Logo
+                \[
+                    \Phi(n) = \Phi \restriction_{n^+}(n) = \varphi \restriction_{n^+}(n) = \varphi(n)
+                \]
+            para todo $n \in \omega$, de modo que $\Phi = \varphi$. \whiteproof
+        \end{midproof}
+    Logo, existe uma única função $\varphi : \omega \to X$ tal que $\varphi(n) = f(\varphi \restriction_n)$ para todo $n \in \omega$. \blackproof
+\end{proof}
+
+\subsection{Produto Cartesiano Generalizado}
+
+\begin{definition} \label{defi.fund:produtocartesianogeneralizado}
+    O produto cartesiano de uma função $f$ é definido como
+        \[
+            \prod f := \left\{ \varphi \in \left(\bigcup \Im f \right)^{\Dom f} : \forall x (x \in \Dom f \rightarrow \varphi(x) \in f(x)) \right\}.
+        \]
+\end{definition}
+
+\begin{proposition}
+    Seja $f$ uma função. Se $f(x) = A$ para todo $x \in \Dom f$, então
+        \[
+            \prod f = A^{\Dom f}.
+        \]
+\end{proposition}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\chapter{Equipotência}
+
+\section{Os Teoremas de Cantor}
+
+\begin{definition}
+    Dizemos que $A$ e $B$ são \emph{equipotentes} se existe $f : A \to B$ bijetiva. Isso é denotado por $|A| = |B|$.
+\end{definition}
+
+\begin{proposition}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $|A| = |A|$.
+            \item Se $|A| = |B|$, então $|B| = |A|$.
+            \item Se $|A| = |B|$ e $|B| = |C|$, então $|A| = |C|$.
+        \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $\id_A$ é uma bijeção de $A$ em $A$. \blackproof
+            \item Se $f$ é uma bijeção de $A$ em $B$, então $f^{-1}$ é uma bijeção de $B$ em $A$. \blackproof
+            \item Se $f$ é uma bijeção de $A$ em $B$ e $g$ é uma bijeção de $B$ em $C$, então $g \circ f$ é uma bijeção de $A$ em $C$. \blackproof
+        \end{enumerate}
+\end{proof}
+
+\begin{theorem}
+    $|\mathcal{P}(A)| = |2^A|$.
+\end{theorem}
+
+\begin{proof}
+    Seja $B \in \mathcal{P}(A)$. Defina $\mathcal{X}_B : A \to 2$ por
+        \[
+            \mathcal{X}_B(x) :=
+                \begin{cases}
+                    1, & \text{se } x \in B \\
+                    0, & \text{se } x \in A \setminus B
+                \end{cases}.
+        \]
+    Por fim, defina $\varphi : \mathcal{P}(A) \to 2^A$ por $\varphi(B) = \mathcal{X}_B$.
+        \begin{claim}
+            $\varphi$ é injetora.
+        \end{claim}
+        \begin{midproof}
+            Sejam $B, C \in \mathcal{P}(A)$ tais que $\varphi(B) = \varphi(C)$, isto é, $\mathcal{X}_B = \mathcal{X}_C$. Com isso, para todo $x \in A$, temos $\mathcal{X}_B(x) = \mathcal{X}_C(x)$. Por um lado ($\subseteq$), se $x \in B$, então $\mathcal{X}_B(x) = 1$, donde $\mathcal{X}_C(x) = 1$, de modo que $x \in C$, isto é, $B \subseteq C$. Por outro lado ($\supseteq$), se $x \in C$, então $\mathcal{X}_C(x) = 1$, donde $\mathcal{X}_B(x) = 1$, de modo que $x \in B$, isto é, $C \subseteq B$. Logo, $B = C$. Logo, $\varphi$ é injetora. \whiteproof
+        \end{midproof}
+        \begin{claim}
+            $\varphi$ é sobrejetora.
+        \end{claim}
+        \begin{midproof}
+            Seja $f \in 2^A$, isto é, $f : A \to 2$. Defina $B := \{x \in A : f(x) = 1\}$. Como $B \subseteq A$, temos $B \in \mathcal{P}(A)$. Provemos que $\varphi(B) = f$, isto é, $\mathcal{X}_B = f$. Seja $x \in A$. Se $x \in B$, então $f(x) = 1$ e $\mathcal{X}_B(x) = 1$. Se $x \notin B$, então $f(x) \neq 1$, e como $f(x) \in 2 = \{0,1\}$, temos $f(x) = 0$; por outro lado, como $x \notin B$, temos $\mathcal{X}_B(x) = 0$. Em ambos os casos, $\mathcal{X}_B(x) = f(x)$. Logo, $\varphi(B) = f$. Logo, $\varphi$ é sobrejetora. \whiteproof
+        \end{midproof}
+    Logo, $\varphi$ é bijetora. Logo, $|\mathcal{P}(A)| = |2^A|$. \blackproof
+\end{proof}
+
+\begin{definition}
+    Dizemos que \emph{$B$ domina $A$}, e que \emph{a cardinalidade de $A$ é menor ou igual que a de $B$}, se existe $f : A \to B$ injetiva. Isso é denotado por $|A| \leq |B|$.
+\end{definition}
+
+\begin{proposition}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $|A| \leq |A|$.
+            \item Se $|A| \leq |B|$ e $|B| \leq |A|$, então $|A| = |B|$.
+            \item Se $|A| \leq |B|$ e $|B| \leq |C|$, então $|A| \leq |C|$.
+        \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $\id_A$ é uma injeção de $A$ em $A$. \blackproof
+            \item Segue do \cref{teo.fund:CSB}. \blackproof
+            \item Se $f$ é uma injeção de $A$ em $B$ e $g$ é uma injeção de $B$ em $C$, então $g \circ f$ é uma injeção de $A$ em $C$. \blackproof
+        \end{enumerate}
+\end{proof}
+
+\begin{proposition}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Se $|A| \leq |B|$ e $|A| = |C|$, então $|C| \leq |B|$.
+            \item Se $|A| \leq |B|$ e $|B| = |C|$, então $|A| \leq |C|$.
+        \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Seja $f : A \to B$ injetora e $g : C \to A$ bijetora. Então, $f \circ g : C \to B$ é injetora. Logo, $|C| \leq |B|$. \blackproof
+            \item Seja $f : A \to B$ injetora e $g : B \to C$ bijetora. Então, $g \circ f : A \to C$ é injetora. Logo, $|A| \leq |C|$. \blackproof
+        \end{enumerate}
+\end{proof}
+
+\begin{lemma} \label{lema.fund:CSB}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item \fonte[157]{hercules}
+            Se $B \subseteq A$ e $|A| \leq |B|$, então $|B| = |A|$.
+            \item \fonte[67]{jechhrbacek1999} 
+            Se $C \subseteq B \subseteq A$ e $|C| = |A|$, então $|B| = |A|$.
+            \item \fonte[138]{fajardo2024conjuntos}
+            Seja $F : \mathcal{P}(A) \to \mathcal{P}(A)$ tal que, para quaisquer $X,Y \in \mathcal{P}(A)$, se $X \subseteq Y$, então $F(X) \subseteq F(Y)$. Existe $C \in \mathcal{P}(A)$ tal que $F(C) = C$.
+        \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Como $|A| \leq |B|$, existe $f : A \to B$ injetiva. Defina $F : \mathcal{P}(A) \to \mathcal{P}(A)$ por $F(S) := f[S]$ para todo $S \in \mathcal{P}(A)$. Pelo \cref{teo.fund:recursao_peano}, defina recursivamente $X : \N \to \mathcal{P}(A)$ por $X_0 = A \setminus B$ e $X_{n+1} = F(X_n) = f[X_n]$ para todo $n \in \N$, e seja
+                \[
+                    Y := \bigcup_{n \geq 0} X_n.
+                \]
+                \begin{claim}
+                    $f \restriction_Y \cup \id_{A \setminus Y}$ é uma bijeção de $A$ em $B$.
+                \end{claim}
+                \begin{midproof}
+                    Como $Y \cap (A \setminus Y) = \emptyset$, temos 
+                        \[
+                            \Dom \, (f \restriction_Y \cup \id_{A \setminus Y}) = \Dom f \restriction_Y \cup \Dom \id_{A \setminus Y} = Y \cup (A \setminus Y) = A.
+                        \]
+                    Como
+                        \[
+                            \Img f \restriction_Y = f[Y] = f \left[ \bigcup_{n \geq 0} X_n \right] = \bigcup_{n \geq 0} f[X_n] = \bigcup_{n \geq 0} X_{n+1} = \bigcup_{n \geq 1} X_n,
+                        \]
+                    temos $Y = X_0 \cup f[Y]$. Temos
+                        \begin{align*}
+                            \Img f \restriction_Y \cap \Img \id_{A \setminus Y} &= f[Y] \cap (A \setminus Y) \\
+                            &= f[Y] \cap (A \setminus (X_0 \cup f[Y])) \\
+                            &= f[Y] \cap ( (A \setminus X_0) \cap (A \setminus f[Y]) ) \\
+                            &= (A \setminus X_0) \cap (f[Y] \cap (A \setminus f[Y])) \\
+                            &= (A \setminus X_0) \cap \emptyset = \emptyset,
+                        \end{align*}
+                    donde
+                        \begin{align*}
+                            \Img \, (f \restriction_Y \cup \id_{A \setminus Y}) &= \Img f \restriction_Y \cup \Img \id_{A \setminus Y} \\
+                            &= f[Y] \cup (A \setminus Y) \\
+                            &= f[Y] \cup (A \setminus (X_0 \cup f[Y])) \\
+                            &= f[Y] \cup ( (A \setminus X_0) \cap (A \setminus f[Y]) ) \\
+                            &= (f[Y] \cup (A \setminus X_0) ) \cap (f[Y] \cup (A \setminus f[Y]) ) \\
+                            &= (f[Y] \cup (A \setminus (A \setminus B) ) ) \cap A \\
+                            &= f[Y] \cup ( (A \setminus A) \cup (A \cap B) ) \\
+                            &= f[Y] \cup B.
+                        \end{align*}
+                    Como $X_n \subseteq B$ para todo $n \geq 1$, temos $f[Y] \subseteq B$, donde $f[Y] \cup B = B$, isto é,
+                        \[
+                            \Img \, (f \restriction_Y \cup \id_{A \setminus Y}) = B.
+                        \]
+                    Como $f \restriction_Y$ é bijetiva em $f[Y]$ e $\id_{A \setminus Y}$ é bijetiva em $A \setminus Y$, das observações acima segue que $f \restriction_Y \cup \id_{A \setminus Y}$ é bijetiva em $B$.
+                    \whiteproof
+                \end{midproof}
+            Logo, $|B| = |A|$. \blackproof
+            \item Como $|C| = |A|$, existe $f : A \to C$ bijetiva. Defina $F : \mathcal{P}(A) \to \mathcal{P}(A)$ por $F(S) := f[S]$ para todo $S \in \mathcal{P}(A)$. Pelo \cref{teo.fund:recursao_peano}, defina recursivamente $X, Y : \N \to \mathcal{P}(A)$ por $X_0 = A$, $Y_0 = B$, e para todo $n \in \N$, $X_{n+1} = F(X_n) = f[X_n]$ e $Y_{n+1} = F(Y_n) = f[Y_n]$. Por fim, defina $Z : \N \to \mathcal{P}(A)$ por $Z_n := X_n \setminus Y_n$, para todo $n \in \N$, e seja
+                \[
+                    D := \bigcup_{n \geq 0} Z_n.
+                \]
+                \begin{claim}
+                    $f \restriction_D \cup \id_{A \setminus D}$ é uma bijeção de $A$ em $B$.
+                \end{claim}
+                \begin{midproof}
+                    Como $D \cap (A \setminus D) = \emptyset$, temos
+                        \[
+                            \Dom \, (f \restriction_D \cup \id_{A \setminus D}) = \Dom f \restriction_D \cup \Dom \id_{A \setminus D} = D \cup (A \setminus D) = A.
+                        \]
+                    Como
+                        \[
+                            f[Z_n] = f[X_n \setminus Y_n] = f[X_n] \setminus f[Y_n] = X_{n+1} \setminus Y_{n+1} = Z_{n+1},
+                        \]
+                    temos
+                        \[
+                            \Img f \restriction_D = f[D] = f \left[ \bigcup_{n \geq 0} Z_n \right] = \bigcup_{n \geq 0} f[Z_n] = \bigcup_{n \geq 0} Z_{n+1} = \bigcup_{n \geq 1} Z_n,
+                        \]
+                    donde $D = Z_0 \cup f[D]$. Temos
+                        \begin{align*}
+                            \Img f \restriction_D \cap \Img \id_{A \setminus D} &= f[D] \cap (A \setminus D) \\
+                            &= f[D] \cap (A \setminus (Z_0 \cup f[D])) \\
+                            &= f[D] \cap ( (A \setminus Z_0) \cap (A \setminus f[D]) ) \\
+                            &= (A \setminus Z_0) \cap (f[D] \cap (A \setminus f[D])) \\
+                            &= (A \setminus Z_0) \cap \emptyset = \emptyset,
+                        \end{align*}
+                    donde
+                        \begin{align*}
+                            \Img \, (f \restriction_D \cup \id_{A \setminus D}) &= \Img f \restriction_D \cup \Img \id_{A \setminus D} \\
+                            &= f[D] \cup (A \setminus D) \\
+                            &= f[D] \cup (A \setminus (Z_0 \cup f[D])) \\
+                            &= f[D] \cup ( (A \setminus Z_0) \cap (A \setminus f[D]) ) \\
+                            &= (f[D] \cup (A \setminus Z_0) ) \cap (f[D] \cup (A \setminus f[D]) ) \\
+                            &= (f[D] \cup (A \setminus (X_0 \setminus Y_0) ) ) \cap A \\
+                            &= f[D] \cup ( (A \setminus X_0) \cup (A \cap Y_0) ) \\
+                            &= f[D] \cup Y_0 = f[D] \cup B.
+                        \end{align*}
+                    Como $Z_n \subseteq B$ para todo $n \geq 1$, temos $f[D] \subseteq B$, donde $f[D] \cup B = B$, isto é,
+                        \[
+                            \Img \, (f \restriction_D \cup \id_{A \setminus D}) = B.
+                        \]
+                    Como $f \restriction_D$ é bijetiva em $f[D]$ e $\id_{A \setminus D}$ é bijetiva em $A \setminus D$, das observações acima segue que $f \restriction_D \cup \id_{A \setminus D}$ é bijetiva em $B$. \whiteproof
+                \end{midproof}
+            Logo, $|B| = |A|$. \blackproof
+            \item \blackproof
+        \end{enumerate}
+\end{proof}
+
+\begin{theorem}[Cantor-Schröder-Bernstein] \label{teo.fund:CSB}
+    Se $|A| \leq |B|$ e $|B| \leq |A|$, então $|A| = |B|$.
+\end{theorem}
+
+\begin{proof} \fonte[158]{hercules}
+    Como $|A| \leq |B|$, existe $f : A \to B$ injetiva. Como $|B| \leq |A|$, existe $g : B \to A$ injetiva. Como $g$ é bijetiva em $g[B]$, temos $|g[B]| = |B|$. Como $g \circ f : A \to g[B]$ é injetiva, temos $|A| \leq |g[B]|$. Como $g[B] \subseteq A$, pelo \cref{lema.fund:CSB}, temos $|g[B]| = |A|$, de modo que $|A|=|B|$. \blackproof    
+\end{proof}
+
+\begin{proof} \fonte[66]{jechhrbacek1999}
+    Como $|A| \leq |B|$, existe $f : A \to B$ injetiva. Como $|B| \leq |A|$, existe $g : B \to A$ injetiva. Como $g$ é bijetiva em $g[B]$, temos $|g[B]| = |B|$. Como $g \circ f$ é bijetiva em $g[f[A]]$, temos $|g[f[A]]| = |A|$. Temos $g[B] \subseteq A$, e como $f[A] \subseteq B$, temos $g[f[A]] \subseteq g[B] \subseteq A$. Logo, pelo \cref{lema.fund:CSB}, temos $|g[B]| = |A|$, de modo que $|A| = |B|$. \blackproof
+\end{proof}
+
+\begin{proof} \fonte[138]{fajardo2024conjuntos}
+    
+\end{proof}
+
+\begin{definition}
+    Dizemos que \emph{$B$ domina estritamente $A$}, e que \emph{a cardinalidade de $A$ é estritamente menor que a de $B$}, se $|A| \leq |B|$ e $|A| \neq |B|$. Isso é denotado por $|A| < |B|$.
+\end{definition}
+
+\begin{theorem}[Cantor]
+    $|A| < |\mathcal{P}(A)|$.
+\end{theorem}
+
+\begin{proof}
+    Defina $f : A \to \mathcal{P}(A)$ por $f(x) = \{x\}$ para todo $x \in A$. Como $f$ é injetiva, temos $|A| \leq |\mathcal{P}(A)|$. Seja $f : A \to \mathcal{P}(A)$ e defina
+        \[
+            B := \{x \in A : x \notin f(x)\}.
+        \]
+    Se $B \in \Img f$, então existe $b \in A$ tal que $f(b) = B$. Se $b \in B$, então $b \notin f(a) = B$, e se $b \notin B$, então $b \in f(a) = B$, uma contradição. Logo, $B \notin \Img f$.
+\end{proof}
+
+\begin{proof}
+    Provemos que $|A| \leq |\mathcal{P}(A)|$ e $|A| \neq |\mathcal{P}(A)|$.
+        \begin{claim}
+            $|A| \leq |\mathcal{P}(A)|$.
+        \end{claim}
+        \begin{midproof}
+            Defina $f : A \to \mathcal{P}(A)$ por $f(x) = \{x\}$ para todo $x \in A$. Como $f$ é injetiva, temos $|A| \leq |\mathcal{P}(A)|$. \whiteproof
+        \end{midproof}
+        \begin{claim}
+            $|A| \neq |\mathcal{P}(A)|$.
+        \end{claim}
+        \begin{midproof}
+            Suponha, por absurdo, que $|A| = |\mathcal{P}(A)|$. Então existe $f : A \to \mathcal{P}(A)$ bijetiva; em particular, sobrejetiva. Defina $B := \{x \in A : x \notin f(x)\}$. Como $f$ é sobrejetiva, existe $a \in A$ tal que $f(a) = B$. No entanto, temos $a \in B \Leftrightarrow a \notin B$, uma contradição. Logo, não existe $f : A \to \mathcal{P}(A)$ sobrejetiva. Logo, $|A| \neq |\mathcal{P}(A)|$. \whiteproof 
+        \end{midproof}
+    Logo, $|A| < |\mathcal{P}(A)|$. \blackproof
+\end{proof}

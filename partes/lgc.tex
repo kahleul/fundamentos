@@ -1,0 +1,555 @@
+%!TEX root = main.tex
+
+\chapter{Lógica Proposicional}
+
+Seguimos \cite{herculespaulovich}.
+
+\section{Sintaxe}
+
+\begin{definition}
+    \leavevmode
+    \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item O \emph{alfabeto proposicional} $\Sigma$ é uma coleção infinita enumerável de símbolos distintos separados nas seguintes categorias:
+                \begin{enumerate}[label=\roman*.]
+                    \item Variáveis proposicionais: $p_1, p_2, p_3 \ldots, p_i, \ldots$.
+                    \item Conectivos: $\neg$, $\rightarrow$.
+                    \item Parênteses: $($, $)$.
+            \end{enumerate}
+            O conjunto de todas as variáveis proposicionais é denotado por $\mathcal{V}$.
+            \item As \emph{fórmulas} sobre $\Sigma$ são definidas indutivamente pelas seguintes regras:
+                \begin{enumerate}[label=\roman*.]
+                    \item se $\mathbf{p}$ é uma variável proposicional, então $\mathbf{p}$ é uma fórmula;
+                    \item se $\mathbf{A}$ e $\mathbf{B}$ são fórmulas, então $(\neg \mathbf{A})$ e $(\mathbf{A} \rightarrow \mathbf{B})$ são fórmulas;
+                    \item todas as fórmulas são obtidas por um número finito de aplicações das regras acima. 
+            \end{enumerate}
+            O conjunto de todas as fórmulas é denotado por $\mathcal{F}$. As variáveis proposicionais também são chamadas de \emph{fórmulas atômicas}.
+        \item A \emph{linguagem proposicional} é o par $\mathcal{L} := (\Sigma, \mathcal{F})$.
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Um \emph{sistema de prova proposicional} é um par $(\mathrm{Ax}, \mathrm{R})$, onde $\mathrm{Ax}$ é um conjunto de esquemas de axiomas e $\mathrm{R}$ é um conjunto de regras de inferência.
+            \item A Lógica Proposicional é o sistema $\mathcal{L}_{P} := (\Lambda, \mathrm{MP})$, onde $\Lambda$ é o conjunto formado pelos esquemas de axiomas 
+                \begin{enumerate}[label=$\mathrm{Ax}_{\arabic*}$.]
+                    \item $(\mathbf{A} \rightarrow (\mathbf{B} \rightarrow \mathbf{A}))$
+                    \item $((\mathbf{A} \rightarrow (\mathbf{B} \rightarrow \mathbf{C})) \rightarrow ((\mathbf{A} \rightarrow \mathbf{B})\rightarrow(\mathbf{A} \rightarrow \mathbf{C})))$
+                    \item $(((\neg \mathbf{B}) \rightarrow (\neg \mathbf{A})) \rightarrow ( ((\neg \mathbf{B}) \rightarrow \mathbf{A}) \rightarrow \mathbf{B}))$
+                \end{enumerate}
+            e MP é a regra de inferência \emph{Modus Ponens}, a saber,
+                \[
+                    \mathrm{MP} := \{(\{\mathbf{A}, (\mathbf{A} \rightarrow \mathbf{B})\}, \mathbf{B} ) : \mathbf{A}, \mathbf{B} \in \mathcal{F}\}.
+                \]
+        \end{enumerate}
+\end{definition}
+
+\begin{definition} \label{defi.fund:demonstracao.teorema}
+    Seja $\mathbf{A} \in \mathcal{F}$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Uma \emph{demonstração} de $\mathbf{A}$ em $\mathcal{L}_P$ é uma sequência $(A_1, \ldots, A_n)$ tal que $A_n \equiv \mathbf{A}$ e, para cada $k \in [n]$, vale  pelo menos uma das seguintes afirmações.
+                \begin{enumerate}[label=\roman*.]
+                    \item $A_k \in \Lambda$.
+                    \item Existem índices $i,j < k$ tais que $A_k$ é obtida de $A_i$ e $A_j$ via $\mathrm{MP}$.
+                \end{enumerate}
+            Isso é denotado por $\vdash \mathbf{A}$. Dizemos, nesse caso, que $\mathbf{A}$ é um \emph{teorema}.
+        \end{enumerate}
+\end{definition}
+
+\begin{example}
+    $\vdash (\mathbf{A} \rightarrow \mathbf{A})$.
+\end{example}
+
+\begin{proof}
+    Pois tome:
+                \[
+                    \begin{array}{rll}
+                        1. & ((\mathbf{A} \rightarrow ((\mathbf{A} \rightarrow \mathbf{A}) \rightarrow \mathbf{A})) \rightarrow ((\mathbf{A} \rightarrow (\mathbf{A} \rightarrow \mathbf{A})) \rightarrow (\mathbf{A} \rightarrow \mathbf{A}) )) & \mathrm{Ax}_2 \\
+                        2. & (\mathbf{A} \rightarrow ((\mathbf{A} \rightarrow \mathbf{A}) \rightarrow \mathbf{A})) & \mathrm{Ax}_1 \\
+                        3. & ((\mathbf{A} \rightarrow (\mathbf{A} \rightarrow \mathbf{A})) \rightarrow (\mathbf{A} \rightarrow \mathbf{A}) ) & \text{MP}(1,2) \\
+                        4. & (\mathbf{A} \rightarrow (\mathbf{A} \rightarrow \mathbf{A})) & \mathrm{Ax}_1 \\
+                        5. & (\mathbf{A} \rightarrow \mathbf{A}) & \text{MP}(3,4)
+                    \end{array}
+                \]
+            Isso completa a prova. \blackproof
+\end{proof}
+
+\begin{definition} \label{defi.fund:deducao.consequenciasintatica}
+    Uma \emph{dedução} de $\mathbf{A} \in \mathcal{F}$ em $\mathcal{L}_P$ a partir de $\Gamma \subseteq \mathcal{F}$ é uma sequência $(A_1, \ldots, A_n)$ tal que $A_n \equiv \mathbf{A}$ e, para cada $k \in [n]$, vale pelo menos uma das seguintes afirmações.
+        \begin{enumerate}[label=\roman*.]
+            \item $A_k \in \Lambda$.
+            \item $A_k \in \Gamma$.
+            \item Existem índices $i,j < k$ tais que $A_k$ é obtida de $A_i$ e $A_j$ via $\mathrm{MP}$.
+        \end{enumerate}
+    Isso é denotado por $\Gamma \vdash \mathbf{A}$. Dizemos, nesse caso, que $\Gamma$ \emph{deduz} $\mathbf{A}$, ou ainda, que $\mathbf{A}$ é uma \emph{consequência sintática} de $\Gamma$.
+\end{definition}
+
+\begin{corollary}
+    $\vdash \mathbf{A}$ se, e somente se, $\emptyset \vdash \mathbf{A}$.
+\end{corollary}
+
+\begin{proof}
+    Segue imediatamente das \cref{defi.fund:demonstracao.teorema,defi.fund:deducao.consequenciasintatica}. \blackproof
+\end{proof}
+
+\begin{example}
+    $\{(\mathbf{A} \rightarrow \mathbf{B}), (\mathbf{B} \rightarrow \mathbf{C}) \} \vdash (\mathbf{A} \rightarrow \mathbf{C})$.
+\end{example}
+
+\begin{proof}
+    Pois tome:
+        \[
+            \begin{array}{rll}
+                1. & ((\mathbf{B} \rightarrow \mathbf{C}) \rightarrow (\mathbf{A} \rightarrow (\mathbf{B} \rightarrow \mathbf{C}))) & \mathrm{Ax}_1 \\
+                2. & (\mathbf{B} \rightarrow \mathbf{C}) & \text{Hip.} \\
+                3. & (\mathbf{A} \rightarrow (\mathbf{B} \rightarrow \mathbf{C})) & \text{MP}(1,2) \\
+                4. & ((\mathbf{A} \rightarrow (\mathbf{B} \rightarrow \mathbf{C})) \rightarrow ((\mathbf{A} \rightarrow \mathbf{B}) \rightarrow (\mathbf{A} \rightarrow \mathbf{C}))) & \mathrm{Ax}_2 \\
+                5. & ((\mathbf{A} \rightarrow \mathbf{B}) \rightarrow (\mathbf{A} \rightarrow \mathbf{C})) & \text{MP}(3,4) \\
+                6. & (\mathbf{A} \rightarrow \mathbf{B}) & \text{Hip.} \\
+                7. & (\mathbf{A} \rightarrow \mathbf{C}) & \text{MP}(5,6)
+            \end{array}
+        \]
+    Com isso, $\rightarrow$ é $\vdash$-transitivo. \blackproof
+\end{proof}
+
+\begin{example}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $\{ \mathbf{A}, (\mathbf{A} \rightarrow \mathbf{B}) \} \vdash \mathbf{B}$.
+            \item Se $\vdash \mathbf{A}$ e $\vdash (\mathbf{A} \rightarrow \mathbf{B})$, então $\vdash \mathbf{B}$.
+        \end{enumerate}
+\end{example}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Pois tome:
+                \[
+                    \begin{array}{rll}
+                        1. & \mathbf{A} & \text{Hip.} \\
+                        2. & (\mathbf{A} \rightarrow \mathbf{B}) & \text{Hip.} \\
+                        3. & \mathbf{B} & \text{MP}(1,2)
+                    \end{array}
+                \]
+            Isso completa a prova. \blackproof
+            \item Segue da \cref{defi.fund:demonstracao.teorema}: basta concatenar as demonstrações. \blackproof
+        \end{enumerate}
+\end{proof}
+
+\begin{lemma}
+    Se $\Gamma_1 \vdash \mathbf{A}$ e $\Gamma_1 \subseteq \Gamma_2$, então $\Gamma_2 \vdash \mathbf{A}$.
+\end{lemma}
+
+\begin{proof}
+    Seja $(A_1, \ldots, A_n)$ uma dedução de $\mathbf{A}$ a partir de $\Gamma_1$.
+    Pela \cref{defi.fund:deducao.consequenciasintatica}, temos que $A_n \equiv \mathbf{A}$ e que, para cada $k \in [n]$, vale que $A_k \in \Lambda$, $A_k \in \Gamma_1$ ou $A_k$ é obtida de fórmulas anteriores via MP.
+    Como, por hipótese, $\Gamma_1 \subseteq \Gamma_2$, sempre que $A_k \in \Gamma_1$, temos também que $A_k \in \Gamma_2$.
+    Logo, a exata mesma sequência $(A_1, \ldots, A_n)$ cumpre as condições para ser uma dedução de $\mathbf{A}$ a partir de $\Gamma_2$.
+    Com isso, $\Gamma_2 \vdash \mathbf{A}$. \blackproof
+\end{proof}
+
+\begin{theorem}[da Dedução] \label{teo.fund:deduçãoproposicional}
+    Sejam $\Gamma \subseteq \mathcal{F}$ e $\mathbf{A}, \mathbf{B} \in \mathcal{F}$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Se $\Gamma \cup \{\mathbf{A}\} \vdash \mathbf{B}$, então $\Gamma \vdash (\mathbf{A} \rightarrow \mathbf{B})$.
+            \item Se $\Gamma \vdash (\mathbf{A} \rightarrow \mathbf{B})$, então $\Gamma \cup \{\mathbf{A}\} \vdash \mathbf{B}$.
+        \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Façamos indução no número de fórmulas que ocorrem na dedução de $\mathbf{B}$ a partir de $\Gamma \cup \{\mathbf{A}\}$. Se $(A_1)$ é uma dedução de $\mathbf{B}$, então $A_1 \equiv \mathbf{B}$.
+                \begin{enumerate}[label=\roman*.]
+                    \item Se $\mathbf{B} \in \Lambda$, então $\Gamma \vdash \mathbf{B}$, e como $\Gamma \vdash (\mathbf{B} \rightarrow (\mathbf{A} \rightarrow \mathbf{B}))$, temos, via MP, que $\Gamma \vdash (\mathbf{A} \rightarrow \mathbf{B})$.
+                    \item Se $\mathbf{B} \in \Gamma$, então $\Gamma \vdash \mathbf{B}$, e como $\Gamma \vdash (\mathbf{B} \rightarrow (\mathbf{A} \rightarrow \mathbf{B}))$, temos, via MP, que $\Gamma \vdash (\mathbf{A} \rightarrow \mathbf{B})$.
+                    \item Se $\mathbf{B} \equiv \mathbf{A}$, então de $\Gamma \vdash (\mathbf{A} \rightarrow \mathbf{A})$ vem $\Gamma \vdash (\mathbf{A} \rightarrow \mathbf{B})$.
+                \end{enumerate}
+            Suponha, por hipótese de indução, que o resultado vale para toda fórmula que pode ser deduzida a partir de $\Gamma \cup \{\mathbf{A}\}$ por uma dedução com menos de $n$ fórmulas. Seja $(A_1, \ldots, A_n)$ uma dedução de $\mathbf{B}$ a partir de $\Gamma \cup \{\mathbf{A}\}$. Se $\mathbf{B} \in \Lambda$, $\mathbf{B} \in \Gamma$ ou $\mathbf{B} \equiv \mathbf{A}$, então podemos deduzir $(\mathbf{A} \rightarrow \mathbf{B})$ a partir de $\Gamma$ exatamente do mesmo modo que fizemos na base da indução. Suponha, então, que $\mathbf{B}$ é obtida de duas fórmulas de índices $<n$ via MP. Essas duas fórmulas têm as formas $\mathbf{C}$ e $(\mathbf{C} \rightarrow \mathbf{B})$, e como elas foram deduzidas de $\Gamma \cup \{\mathbf{A}\}$ por menos de $n$ fórmulas, temos que $\Gamma \vdash (\mathbf{A} \rightarrow \mathbf{C})$ e $\Gamma \vdash (\mathbf{A} \rightarrow (\mathbf{C} \rightarrow \mathbf{B}))$. Com isso, podemos deduzir $(\mathbf{A} \rightarrow \mathbf{B})$ a partir de $\Gamma$ do seguinte modo.
+                \[
+                    \begin{array}{rll}
+                        & \vdots & \vdots \\
+                        i. & \Gamma \vdash (\mathbf{A} \rightarrow \mathbf{C}) & \\
+                        & \vdots & \vdots \\
+                        j. & \Gamma \vdash (\mathbf{A} \rightarrow (\mathbf{C} \rightarrow \mathbf{B})) & \\[1ex]
+                        k. & \Gamma \vdash ((\mathbf{A} \rightarrow (\mathbf{C} \rightarrow \mathbf{B})) \rightarrow ((\mathbf{A} \rightarrow \mathbf{C}) \rightarrow (\mathbf{A} \rightarrow \mathbf{B}))) & \mathrm{Ax}_2 \\[1ex]
+                        l. & \Gamma \vdash ((\mathbf{A} \rightarrow \mathbf{C}) \rightarrow (\mathbf{A} \rightarrow \mathbf{B})) & \text{MP}(j, k) \\[1ex]
+                        m. & \Gamma \vdash (\mathbf{A} \rightarrow \mathbf{B}) & \text{MP}(i, l)
+                    \end{array}
+                \]
+            Assim, se $\Gamma \cup \{\mathbf{A}\} \vdash \mathbf{B}$, então $\Gamma \vdash (\mathbf{A} \rightarrow \mathbf{B})$. \blackproof
+            \item Basta uma dedução simples:
+                \[
+                    \begin{array}{rll}
+                        1. & \Gamma \cup \{\mathbf{A}\} \vdash (\mathbf{A} \rightarrow \mathbf{B}) & \text{Hip.}\\
+                        2. & \Gamma \cup \{\mathbf{A}\} \vdash \mathbf{A} & \text{Hip.} \\
+                        3. & \Gamma \cup \{\mathbf{A}\} \vdash \mathbf{B} & \text{MP}(1,2)
+                    \end{array}
+                \]
+            Assim, se $\Gamma \vdash (\mathbf{A} \rightarrow \mathbf{B})$, então $\Gamma \cup \{\mathbf{A}\} \vdash \mathbf{B}$. \blackproof
+        \end{enumerate}
+\end{proof}
+
+\begin{proposition} \label{prop.fund:propriedadesvdash}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $\vdash \mathbf{A} \leftrightarrow \neg \neg \mathbf{A}$.
+            \item $\vdash ((\neg \mathbf{B}) \rightarrow (\mathbf{B} \rightarrow \mathbf{A}))$.
+            \item $\vdash (\mathbf{A} \rightarrow ((\neg \mathbf{B}) \rightarrow (\neg(\mathbf{A} \rightarrow \mathbf{B}))))$
+            \item $\vdash (\mathbf{A} \rightarrow \mathbf{B}) \rightarrow ((\neg \mathbf{A} \rightarrow \mathbf{B}) \rightarrow \mathbf{B})$.
+        \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Provemos primeiramente que $\vdash \neg \neg A \rightarrow A$.
+            
+            Agora, provemos que $\vdash A \rightarrow \neg \neg A$.
+            \item 
+        \end{enumerate}
+\end{proof}
+
+\section{Semântica}
+
+\begin{definition}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Uma \emph{valoração proposicional} é uma função $\bar{v} : \mathcal{V} \to \{\mathfrak{t}, \mathfrak{f} \}$.
+            \item Uma \emph{valoração} é uma função $v: \mathcal{F} \to \{\mathfrak{t}, \mathfrak{f} \}$ tal que
+                \begin{enumerate}[label=\roman*.]
+                    \item $v \restriction_{\mathcal{V}} = \bar{v}$;
+                    \item $v[(\neg \mathbf{A})] = \mathfrak{f}$ se, e somente se, $v(\mathbf{A}) = \mathfrak{t}$;
+                    \item $v[(\mathbf{A} \rightarrow \mathbf{B})] = \mathfrak{f}$ se, e somente se, $v(\mathbf{A}) = \mathfrak{t}$ e $v(\mathbf{B}) = \mathfrak{f}$.
+                \end{enumerate}
+        \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    Uma fórmula $\mathbf{A}$ é \emph{válida}, ou \emph{tautológica}, se $v(\mathbf{A}) = \mathfrak{t}$ para toda valoração $v$. Isso é denotado por $\vDash \mathbf{A}$.
+\end{definition}
+
+\begin{lemma} \label{lem.fund:axregrasvalidos}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Os axiomas de $\mathcal{L}_P$ são válidos.
+            \item Se $\vDash \mathbf{A}$ e $\vDash (\mathbf{A} \rightarrow \mathbf{B})$, então $\vDash \mathbf{B}$.
+        \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Suponha, por absurdo, que $\not\vDash\mathbf{A} \rightarrow (\mathbf{B} \rightarrow \mathbf{A})$. Então existe uma valoração $v$ tal que $v(\mathbf{A}) = \mathfrak{t}$ e $v[(\mathbf{B} \rightarrow \mathbf{A})] = \mathfrak{f}$. Se $v[(\mathbf{B} \rightarrow \mathbf{A})] = \mathfrak{f}$, então $v(\mathbf{A}) = \mathfrak{f}$, uma contradição. Logo, $\vDash\mathbf{A} \rightarrow (\mathbf{B} \rightarrow \mathbf{A})$. A prova de que os outros (esquemas de) axiomas são válidos segue analogamente. \blackproof
+            \item Suponha, por absurdo, que $\not\vDash \mathbf{B}$. Então existe uma valoração $v$ tal que $v(\mathbf{B}) = \mathfrak{f}$. Para essa valoração, como $\vDash \mathbf{A}$, temos $v(\mathbf{A}) = \mathfrak{t}$, de modo que $v[(\mathbf{A} \rightarrow \mathbf{B})] = \mathfrak{f}$, o que contraria a hipótese. Logo, $\vDash \mathbf{B}$. \blackproof
+        \end{enumerate}
+\end{proof}
+
+
+\begin{theorem}[da Correção] \label{teo.fund:correçãoproposicional}
+    Se $\vdash \mathbf{A}$, então $\vDash \mathbf{A}$.
+\end{theorem}
+
+\begin{proof}
+    Façamos indução no número de fórmulas que ocorrem na dedução de $\mathbf{A}$. Se $(A_1)$ é a dedução de $\mathbf{A}$, então $A_1 \equiv \mathbf{A}$ e $\mathbf{A}$ é um axioma, e como todos os axiomas são válidos (\cref{lem.fund:axregrasvalidos}), temos $\vDash \mathbf{A}$. Suponha, por hipótese de indução, que o resultado vale para toda fórmula que pode ser deduzida por uma dedução com menos de $n$ fórmulas. Seja $(A_1, \ldots, A_n)$ uma dedução de $\mathbf{A}$. Se $\mathbf{A}$ é um axioma, então $\vDash \mathbf{A}$. Se $\mathbf{A}$ foi obtida de duas fórmulas de índices $<n$ via MP, então elas têm as formas $\mathbf{B}$ e $(\mathbf{B} \rightarrow \mathbf{A})$, e como elas foram deduzidas por menos de $n$ fórmulas, temos que $\vDash \mathbf{B}$ e $\vDash (\mathbf{B} \rightarrow \mathbf{A})$. Daí, como a regra MP conserva validade (\cref{lem.fund:axregrasvalidos}), temos que $\vDash \mathbf{A}$. \blackproof
+\end{proof}
+
+\begin{definition}
+    Dizemos que $\Gamma \subseteq \mathcal{F}$ é \emph{consistente} se não existe $\mathbf{A} \in \mathcal{F}$ tal que $\Gamma \vdash \mathbf{A}$ e $\Gamma \vdash (\neg \mathbf{A})$.
+\end{definition}
+
+\begin{theorem}
+    A Lógica Proposicional é consistente.
+\end{theorem}
+
+\begin{proof}
+    Se $\mathcal{L}_P$ fosse inconsistente, então existiria $\mathbf{A} \in \mathcal{F}$ tal que $\vdash \mathbf{A}$ e $\vdash \neg \mathbf{A}$. Daí, pelo \cref{teo.fund:correçãoproposicional}, teríamos $\vDash \mathbf{A}$ e $\vDash \neg \mathbf{A}$, uma contradição. \blackproof
+\end{proof}
+
+\begin{proposition} \label{prop.fund:gammaprovaAsse}
+    Sejam $\mathbf{A} \in \mathcal{F}$ e $\Gamma \subseteq \mathcal{F}$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $\Gamma \vdash \mathbf{A}$ se, e somente se, $\Gamma \cup \{\neg \mathbf{A}\}$ é inconsistente.
+            \item $\Gamma \vdash \neg \mathbf{A}$ se, e somente se, $\Gamma \cup \{\mathbf{A}\}$ é inconsistente.
+        \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Por um lado ($\Rightarrow$), temos $\Gamma \cup \{\neg \mathbf{A}\} \vdash \mathbf{A}$, e como $\Gamma \cup \{\neg \mathbf{A}\} \vdash (\neg \mathbf{A})$, temos que  $\Gamma \cup \{\neg \mathbf{A}\}$ é inconsistente. Por outro lado ($\Leftarrow$), da inconsistência de $\Gamma \cup \{\neg \mathbf{A}\}$ existe $\mathbf{B} \in \mathcal{F}$ tal que $\Gamma \cup \{\neg \mathbf{A}\} \vdash \mathbf{B}$ e $\Gamma \cup \{\neg \mathbf{A}\} \vdash (\neg \mathbf{B})$, de modo que, pelo \cref{teo.fund:deduçãoproposicional} da dedução, vem $\Gamma \vdash ((\neg \mathbf{A}) \rightarrow \mathbf{B})$ e $\Gamma \vdash ((\neg \mathbf{A}) \rightarrow (\neg \mathbf{B}))$. Logo:
+                \[
+                    \begin{array}{rll}
+                        1. & \Gamma \vdash ((\neg \mathbf{A}) \rightarrow (\neg \mathbf{B})) & \eqref{teo.fund:deduçãoproposicional} \\
+                        2. & \Gamma \vdash ((\neg \mathbf{A}) \rightarrow \mathbf{B}) & \eqref{teo.fund:deduçãoproposicional} \\
+                        3. & \Gamma \vdash ((( \neg \mathbf{A}) \rightarrow (\neg \mathbf{B})) \rightarrow ((( \neg \mathbf{A}) \rightarrow \mathbf{B}) \rightarrow \mathbf{A})) & \mathrm{Ax}_3 \\
+                        4. & \Gamma \vdash ((( \neg \mathbf{A}) \rightarrow \mathbf{B}) \rightarrow \mathbf{A}) & \text{MP}(1,3) \\
+                        5. & \Gamma \vdash \mathbf{A} & \text{MP}(2,4)
+                    \end{array}
+                \]
+            Isso completa a prova. \blackproof
+            \item Segue analogamente. \blackproof
+        \end{enumerate}
+\end{proof}
+
+\section{Completude}
+
+\begin{lemma}[Kalmár] \label{lem.fund:troca}
+    Sejam $\mathbf{A}(p_1, \ldots, p_n) \in \mathcal{F}$ e $v : \mathcal{F} \to \{\mathfrak{t}, \mathfrak{f} \}$ uma valoração. Definindo
+        \[
+            p'_i :\equiv
+                \begin{cases}
+                    p_i, & \text{se } v(p_i) = \mathfrak{t} \\
+                    (\neg p_i), & \text{se } v(p_i) = \mathfrak{f}
+                \end{cases}
+            \quad \text{ e } \quad
+            \mathbf{A}' :\equiv
+                \begin{cases}
+                    \mathbf{A}, & \text{se } v(\mathbf{A}) = \mathfrak{t} \\
+                    (\neg \mathbf{A}), & \text{se } v(\mathbf{A}) = \mathfrak{f}
+                \end{cases},
+        \]
+    temos $\{p'_1, \ldots, p'_n \} \vdash \mathbf{A}'$.
+\end{lemma}
+
+\begin{proof}
+    Façamos indução no número de conectivos que ocorrem em $\mathbf{A}$. Se não ocorrem conectivos em $\mathbf{A}$, então $\mathbf{A}$ é alguma variável $p$. Como $\{p \} \vdash p$ e $\{ \neg p\} \vdash \neg p$, o resultado segue. Suponha, por hipótese de indução, que o resultado vale para toda fórmula com menos de $n$ conectivos, e seja $\mathbf{A}$ uma fórmula na qual ocorrem $n$ conectivos. Defina $\Gamma := \{p'_1, \ldots, p'_n \}$. Temos dois casos a considerar.
+        \begin{enumerate}[label=\roman*.]
+            \item $\mathbf{A}$ tem a forma $(\neg \mathbf{B})$. Como em $\mathbf{B}$ ocorrem menos de $n$ conectivos, temos, pela hipótese de indução, $\Gamma \vdash \mathbf{B}'$.
+                \begin{itemize}
+                    \item Se $v(\mathbf{B}) = \mathfrak{t}$, então $v(\mathbf{A}) = \mathfrak{f}$, donde $\mathbf{B}' \equiv \mathbf{B}$ e $\mathbf{A}' \equiv (\neg \mathbf{A})$.
+                        \[
+                            \begin{array}{rll}
+                                1. & \Gamma \vdash \mathbf{B}' & \text{Hip. Ind.} \\
+                                2. & \Gamma \vdash \mathbf{B} & \mathbf{B}' \equiv \mathbf{B} \\
+                                3. & \Gamma \vdash (\mathbf{B} \rightarrow (\neg (\neg \mathbf{B})) ) & \eqref{prop.fund:propriedadesvdash} \\
+                                4. & \Gamma \vdash (\neg (\neg \mathbf{B})) & \text{MP}(2,3) \\
+                                5. & \Gamma \vdash (\neg \mathbf{A}) & \mathbf{A} \equiv (\neg \mathbf{B}) \\
+                                6. & \Gamma \vdash \mathbf{A}' & \mathbf{A}' \equiv (\neg \mathbf{A})
+                            \end{array}
+                        \]
+                    Logo $\{p'_1, \ldots, p'_n \} \vdash \mathbf{A}'$ se $\mathbf{A} \equiv (\neg \mathbf{B})$ e $v(\mathbf{B}) = \mathfrak{t}$.
+                    \item Se $v(\mathbf{B}) = \mathfrak{f}$, então $v(\mathbf{A}) = \mathfrak{t}$, donde $\mathbf{B}' \equiv \neg \mathbf{B}$ e $\mathbf{A}' \equiv \mathbf{A}$.
+                        \[
+                            \begin{array}{rll}
+                                1. & \Gamma \vdash \mathbf{B}' & \text{Hip. Ind.} \\
+                                2. & \Gamma \vdash (\neg \mathbf{B}) & \mathbf{B}' \equiv (\neg \mathbf{B}) \\
+                                3. & \Gamma \vdash \mathbf{A} & \mathbf{A} \equiv (\neg \mathbf{B}) \\
+                                4. & \Gamma \vdash \mathbf{A}' & \mathbf{A}' \equiv \mathbf{A}
+                            \end{array}
+                        \]
+                    Logo $\{p'_1, \ldots, p'_n \} \vdash \mathbf{A}'$ se $\mathbf{A} \equiv (\neg \mathbf{B})$ e $v(\mathbf{B}) = \mathfrak{f}$.
+                \end{itemize}
+            Logo $\{p'_1, \ldots, p'_n \} \vdash \mathbf{A}'$ se $\mathbf{A} \equiv (\neg \mathbf{B})$.
+            \item $\mathbf{A}$ tem a forma $(\mathbf{B} \rightarrow \mathbf{C})$. Como em $\mathbf{B}$ e $\mathbf{C}$ ocorrem menos de $n$ conectivos, temos, pela hipótese de indução, $\Gamma \vdash \mathbf{B}'$ e $\Gamma \vdash \mathbf{C}'$.
+                \begin{itemize}
+                    \item Se $v(\mathbf{B}) = \mathfrak{f}$, então $v(\mathbf{A}) = \mathfrak{t}$, donde $\mathbf{B}' \equiv \neg \mathbf{B}$ e $\mathbf{A}' \equiv \mathbf{A}$.
+                        \[
+                            \begin{array}{rll}
+                                1. & \Gamma \vdash \mathbf{B}' & \text{Hip. Ind.} \\
+                                2. & \Gamma \vdash (\neg \mathbf{B}) & \mathbf{B}' \equiv (\neg \mathbf{B}) \\
+                                3. & \Gamma \vdash ((\neg \mathbf{B}) \rightarrow (\mathbf{B} \rightarrow \mathbf{C})) & \eqref{prop.fund:propriedadesvdash} \\
+                                4. & \Gamma \vdash (\mathbf{B} \rightarrow \mathbf{C}) & \text{MP}(2,3) \\
+                                5. & \Gamma \vdash \mathbf{A} & \mathbf{A} \equiv (\mathbf{B} \to \mathbf{C}) \\
+                                6. & \Gamma \vdash \mathbf{A}' & \mathbf{A}' \equiv \mathbf{A}
+                            \end{array}
+                        \]
+                    Logo $\{p'_1, \ldots, p'_n \} \vdash \mathbf{A}'$ se $\mathbf{A} \equiv (\mathbf{B} \rightarrow \mathbf{C})$ e $v(\mathbf{B}) = \mathfrak{f}$.
+                    \item Se $v(\mathbf{B}) = \mathfrak{t}$ e $v(\mathbf{C}) = \mathfrak{t}$, então $v(\mathbf{A}) = \mathfrak{t}$, $\mathbf{B}' \equiv \mathbf{B}$ e $\mathbf{C}' \equiv \mathbf{C}$.
+                        \[
+                            \begin{array}{rll}
+                                1. & \Gamma \vdash \mathbf{C}' & \text{Hip. Ind.} \\
+                                2. & \Gamma \vdash \mathbf{C} & \mathbf{C}' \equiv \mathbf{C} \\
+                                3. & \Gamma \vdash (\mathbf{C} \rightarrow (\mathbf{B} \rightarrow \mathbf{C})) & \mathrm{Ax}_1 \\
+                                4. & \Gamma \vdash (\mathbf{B} \rightarrow \mathbf{C}) & \text{MP}(2,3) \\
+                                5. & \Gamma \vdash \mathbf{A} & \mathbf{A} \equiv \mathbf{(\mathbf{B} \rightarrow \mathbf{C})} \\
+                                6. & \Gamma \vdash \mathbf{A}' & \mathbf{A}' \equiv \mathbf{A}
+                            \end{array}
+                        \]
+                    Logo $\{p'_1, \ldots, p'_n \} \vdash \mathbf{A}'$ se $\mathbf{A} \equiv (\mathbf{B} \rightarrow \mathbf{C})$, $v(\mathbf{B}) = \mathfrak{t}$ e $v(\mathbf{C}) = \mathfrak{t}$.
+                    \item Se $v(\mathbf{B}) = \mathfrak{t}$ e $v(\mathbf{C}) = \mathfrak{f}$, então $v(\mathbf{A}) = \mathfrak{f}$, $\mathbf{B}' \equiv \mathbf{B}$ e $\mathbf{C}' \equiv (\neg \mathbf{C})$.
+                        \[
+                            \begin{array}{rll}
+                                1. & \Gamma \vdash \mathbf{B}' & \text{Hip. Ind.} \\
+                                2. & \Gamma \vdash \mathbf{B} & \mathbf{B}' \equiv \mathbf{B} \\
+                                3. & \Gamma \vdash \mathbf{C}' & \text{Hip. Ind.} \\
+                                4. & \Gamma \vdash (\neg \mathbf{C}) & \mathbf{C}' \equiv (\neg \mathbf{C}) \\
+                                5. & \Gamma \vdash (\mathbf{B} \rightarrow ((\neg \mathbf{C}) \rightarrow (\neg (\mathbf{B} \rightarrow \mathbf{C})))) & \eqref{prop.fund:propriedadesvdash} \\
+                                6. & \Gamma \vdash ((\neg \mathbf{C}) \rightarrow (\neg (\mathbf{B} \rightarrow \mathbf{C}))) & \text{MP}(2,5) \\
+                                7. & \Gamma \vdash (\neg (\mathbf{B} \rightarrow \mathbf{C})) & \text{MP}(4,6) \\
+                                8. & \Gamma \vdash (\neg \mathbf{A}) & \mathbf{A} \equiv \mathbf{(\mathbf{B} \rightarrow \mathbf{C})} \\
+                                9. & \Gamma \vdash \mathbf{A}' & \mathbf{A}' \equiv (\neg \mathbf{A})
+                            \end{array}
+                        \]
+                    Logo $\{p'_1, \ldots, p'_n \} \vdash \mathbf{A}'$ se $\mathbf{A} \equiv (\mathbf{B} \rightarrow \mathbf{C})$, $v(\mathbf{B}) = \mathfrak{t}$ e $v(\mathbf{C}) = \mathfrak{f}$.
+                \end{itemize}
+            Logo $\{p'_1, \ldots, p'_n \} \vdash \mathbf{A}'$ se $\mathbf{A} \equiv (\mathbf{B} \rightarrow \mathbf{C})$.
+        \end{enumerate}
+    Logo $\{p'_1, \ldots, p'_n \} \vdash \mathbf{A}'$ para qualquer $\mathbf{A} \in \mathcal{F}$. \blackproof
+\end{proof}
+
+\begin{theorem}[da Completude] \label{teo.fund:completudeproposicional}
+    Se $\vDash \mathbf{A}$, então $\vdash \mathbf{A}$.
+\end{theorem}
+
+\begin{proof}
+    Sejam $p_1, \ldots, p_n$ as variáveis proposicionais que ocorrem em $\mathbf{A}$. Pelo \cref{lem.fund:troca}, temos $\{p'_1, \ldots, p'_n \} \vdash \mathbf{A}'$ para toda valoração $v$, e como $\vDash \mathbf{A}$, temos $\mathbf{A}' \equiv \mathbf{A}$, de modo que $\{p'_1, \ldots, p'_n \} \vdash \mathbf{A}$. Agora, definindo
+        \[
+            v_1(p_i) :=
+                \begin{cases}
+                    v(p_i), & \text{se } i < n \\
+                    \mathfrak{t}, & \text{se } i = n
+                \end{cases}
+            \quad \text{ e } \quad
+            v_2(p_i) :=
+                \begin{cases}
+                    v(p_i), & \text{se } i < n \\
+                    \mathfrak{f}, & \text{se } i = n
+                \end{cases},
+        \]
+    cada $p'_i$, para $i<n$, fica bem definido. Como $v_2(p_n) = \mathfrak{f}$, vem $\{p'_1, \ldots, p'_{n-1}, (\neg p_n) \} \vdash \mathbf{A}$, de modo que, pelo \cref{teo.fund:deduçãoproposicional}, temos $\{p'_1, \ldots, p'_{n-1}\} \vdash ((\neg p_n) \rightarrow \mathbf{A})$. Analogamente, como $v_1(p_n) = \mathfrak{t}$, então $\{p'_1, \ldots, p'_{n-1}\} \vdash (p_n \rightarrow \mathbf{A})$. Assim:
+        \[
+            \begin{array}{rll}
+                1. & \{p'_1, \ldots, p'_{n-1}\} \vdash ((\neg p_n) \rightarrow \mathbf{A}) & p. \\
+                2. & \{p'_1, \ldots, p'_{n-1}\} \vdash (p_n \rightarrow \mathbf{A}) & p. \\
+                3. & \{p'_1, \ldots, p'_{n-1}\} \vdash (p_n \rightarrow \mathbf{A}) \rightarrow (((\neg p_n) \rightarrow \mathbf{A}) \rightarrow \mathbf{A}) & \eqref{prop.fund:propriedadesvdash} \\
+                4. & \{p'_1, \ldots, p'_{n-1}\} \vdash (((\neg p_n) \rightarrow \mathbf{A}) \rightarrow \mathbf{A}) & \text{MP}(2,3) \\
+                5. & \{p'_1, \ldots, p'_{n-1}\} \vdash \mathbf{A} & \text{MP}(1,4)
+            \end{array}
+        \]
+    Com isso, eliminamos $p_n$. Repetindo esse processo (um número finito de vezes), eliminamos $p_{n-1}, \ldots, p_1$, obtendo por fim $\vdash \mathbf{A}$.
+    \blackproof
+\end{proof}
+
+
+\begin{corollary}[Adequação]
+    $\vDash \mathbf{A}$ se, e somente se, $\vdash \mathbf{A}$.
+\end{corollary}
+
+\begin{proof}
+    Segue imediatamente dos \cref{teo.fund:correçãoproposicional,teo.fund:completudeproposicional}. \blackproof
+\end{proof}
+
+\begin{definition}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Um \emph{modelo} de $\mathbf{A}$ é uma valoração $v$ tal que $v(\mathbf{A}) = \mathfrak{t}$. Isso é denotado por $v \vDash \mathbf{A}$. Dizemos, nesse caso, que $v$ \emph{satisfaz} $\mathbf{A}$.
+            \item Um \emph{modelo} de $\Gamma$ é uma valoração $v$ tal que $v \vDash \mathbf{A}$ para todo $\mathbf{A} \in \Gamma$. Isso é denotado por $v \vDash \Gamma$. Dizemos, nesse caso, que $v$ \emph{satisfaz} $\Gamma$.
+        \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    Dizemos que $\mathbf{A}$ é uma \emph{consequência semântica} de $\Gamma$, ou ainda, que $\Gamma$ \emph{satisfaz} $\mathbf{A}$, se todo modelo de $\Gamma$ é também um modelo de $\mathbf{B}$. Isso é denotado por $\Gamma \vDash \mathbf{B}$.
+\end{definition}
+
+\begin{theorem}[da Correção Forte] \label{teo.fund:correçãoproposicionalforte}
+    Se $\Gamma \vdash \mathbf{A}$, então $\Gamma \vDash \mathbf{A}$.
+\end{theorem}
+
+\begin{proof}
+    O caso $\Gamma = \emptyset$ é simplesmente o \cref{teo.fund:correçãoproposicional} da correção. Suponha, então, que $\Gamma \neq \emptyset$. Se $\mathbf{C}_1, \ldots, \mathbf{C}_n$ são as fórmulas de $\Gamma$ que aparecem na dedução de $\mathbf{A}$, então $\{\mathbf{C}_1, \ldots, \mathbf{C}_n\} \vdash \mathbf{A}$, de modo que, por sucessivas aplicações do \cref{teo.fund:deduçãoproposicional} da dedução, temos $\vdash \mathbf{C}_1 \rightarrow \cdots \rightarrow \mathbf{C}_n \rightarrow \mathbf{A}$. Com isso, para toda valoração $v$ tal que $v \vDash \mathbf{C}_i$ para todo $i \in [n]$, temos $v \vDash \mathbf{A}$. Como $\{\mathbf{C}_1, \ldots, \mathbf{C}_n\} \subseteq \Gamma$, temos $v \vDash \mathbf{A}$ para toda valoração $v$ tal que $v \vDash \Gamma$, isto é, $\Gamma \vDash \mathbf{A}$. \blackproof
+\end{proof}
+
+\begin{corollary} \label{cor.fund:temmodeloehconsistente}
+    Se $\Gamma$ tem modelo, então $\Gamma$ é consistente.
+\end{corollary}
+
+\begin{proof}
+    Provemos a contrapositiva: se $\Gamma$ é inconsistente, então $\Gamma$ não tem modelo. Da inconsistência de $\Gamma$ existe $\mathbf{A} \in \mathcal{F}$ tal que $\Gamma \vdash \mathbf{A}$ e $\Gamma \vdash \neg \mathbf{A}$. Pelo \cref{teo.fund:correçãoproposicionalforte} da correção forte, vem $\Gamma \vDash \mathbf{A}$ e $\Gamma \vDash \neg \mathbf{A}$. Com isso, se $\Gamma$ tivesse um modelo, teríamos também $v \vDash \mathbf{A}$ e $v \vDash \neg \mathbf{A}$, uma contradição. \blackproof
+\end{proof}
+
+\begin{definition}
+    Dizemos que $\Gamma \subseteq \mathcal{F}$ é \emph{consistente maximal} se $\Gamma$ é consistente e $\Gamma \cup \{\mathbf{A}\}$ é inconsistente para toda $\mathbf{A} \in \mathcal{F} \setminus \Gamma$.
+\end{definition}
+
+\begin{corollary}
+    Sejam $\Gamma \subseteq \mathcal{F}$ consistente maximal e $\mathbf{A} \in \mathcal{F}$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Ou $\mathbf{A} \in \Gamma$, ou $\neg \mathbf{A} \in \Gamma$.
+            \item Se $\Gamma \vdash \mathbf{A}$, então $\mathbf{A} \in \Gamma$.
+        \end{enumerate}
+\end{corollary}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Suponha, por absurdo, que existe $\mathbf{A}$ tal que $\mathbf{A} \notin \Gamma$ e $\neg \mathbf{A} \notin \Gamma$. Como $\Gamma$ é consistente maximal, temos que $\Gamma \cup \{\mathbf{A}\}$ e $\Gamma \cup \{\neg \mathbf{A}\}$ são inconsistentes, donde $\Gamma \vdash \neg \mathbf{A}$ e $\Gamma \vdash \mathbf{A}$ pela \cref{prop.fund:gammaprovaAsse}, o que contraria a consistência de $\Gamma$. \blackproof
+            \item Suponha, por absurdo, que $\mathbf{A} \notin \Gamma$. Como $\Gamma$ é consistente maximal, temos que $\Gamma \cup \{\mathbf{A}\}$ é inconsistente, donde $\Gamma \vdash \neg \mathbf{A}$ pela \cref{prop.fund:gammaprovaAsse}, o que contraria a consitência de $\Gamma$ já que $\Gamma \vdash \mathbf{A}$. \blackproof
+        \end{enumerate}
+\end{proof}
+
+\begin{theorem}[Lindenbaum]
+    Todo conjunto consistente de fórmulas pode ser estendido a um conjunto consistente maximal.
+\end{theorem}
+
+\begin{proof}
+    Como o alfabeto de $\mathcal{L}_P$ é enumerável, o conjunto $\mathcal{F}$ das fórmulas também o é. Fixe, então, uma enumeração de $\mathcal{F}$, a saber, $(\mathbf{A}_i)_{i \in \omega}$. Definamos $(\Gamma_n)_{n \in \omega}$ recursivamente do seguinte modo: $\Gamma_0 := \Gamma$ e
+        \[
+            \Gamma_{n+1} := 
+                \begin{cases} 
+                    \Gamma_{n} \cup \{\mathbf{A}_n\}, & \text{se } \Gamma_{n} \cup \{\mathbf{A}_n\} \text{ é consistente} \\
+                    \Gamma_{n}, & \text{se } \Gamma_{n} \cup \{\mathbf{A}_n\} \text{ é inconsistente}
+                \end{cases}.
+        \]
+        \begin{claim}
+            $\Gamma_n$ é consistente para todo $n \in \omega$.
+        \end{claim}
+        \begin{midproof}
+            Façamos indução em $n$. Para $n=0$, temos $\Gamma_0$ consistente pois $\Gamma_0 := \Gamma$ e $\Gamma$ é consistente. Suponha, por hipótese de indução, que $\Gamma_n$ é consistente. Se $\Gamma_{n+1} = \Gamma_{n} \cup \{\mathbf{A}_n\}$, então $\Gamma_{n} \cup \{\mathbf{A}_n\}$ é consistente, de modo que $\Gamma_{n+1}$ é consistente. Se $\Gamma_{n+1} = \Gamma_n$, então $\Gamma_{n+1}$ é consistente pois $\Gamma_n$ é consistente. Isso completa o passo indutivo. \whiteproof
+        \end{midproof}
+    Considere agora $\ds \Gamma^* := \bigcup_{n \in \omega} \Gamma_n$. Claramente $\Gamma \subseteq \Gamma^*$.
+        \begin{claim}
+            $\Gamma^*$ é consistente.
+        \end{claim}
+        \begin{midproof}
+            Suponha, por absurdo, que $\Gamma^*$ é inconsistente. Então existe $\mathbf{A} \in \mathcal{F}$ tal que $\Gamma^* \vdash \mathbf{A}$ e $\Gamma^* \vdash \neg \mathbf{A}$. Sejam $\mathbf{C}_1, \ldots, \mathbf{C}_k \in \Gamma^*$ as fórmulas de $\Gamma^*$ que aparecem nas deduções de $\mathbf{A}$ e $\neg \mathbf{A}$; assim, $\{\mathbf{C}_1, \ldots, \mathbf{C}_k \} \vdash \mathbf{A}$ e $\{\mathbf{C}_1, \ldots, \mathbf{C}_k \} \vdash \neg\mathbf{A}$. Como, para todo $i \in [k]$, existem índices $n_i$ tais que $\mathbf{C}_i \in \Gamma_{n_i}$, definindo $N := \max{\{n_1, \ldots, n_k\}}$, temos $\{\mathbf{C}_1, \ldots, \mathbf{C}_k \} \subseteq \Gamma_{N}$. Com isso, $\Gamma_N \vdash \mathbf{A}$ e $\Gamma_N \vdash \neg \mathbf{A}$, o que contraria a consistência de $\Gamma_N$. Logo, $\Gamma^*$ é consistente. \whiteproof
+        \end{midproof}
+        \begin{claim}
+            $\Gamma^*$ é maximal.
+        \end{claim}
+        \begin{midproof}
+            Provemos que $\Gamma^* \cup \{\mathbf{A}\}$ é inconsistente para toda $\mathbf{A} \in \mathcal{F} \setminus \Gamma^*$. Como $\mathbf{A} \in \mathcal{F}$, existe $k \in \omega$ tal que $\mathbf{A} \equiv \mathbf{A}_k$. Se $\Gamma_k \cup \{\mathbf{A}_k \}$ fosse consistente, então seria $\Gamma_{k+1} = \Gamma_k \cup \{\mathbf{A}_k \}$, de modo que $\mathbf{A}_k \in \Gamma^*$ pois $\Gamma_{k+1} \subseteq \Gamma^*$, uma contradição. Com isso, $\Gamma_k \cup \{\mathbf{A}_k \}$ é inconsistente. Se $\Gamma^* \cup \{\mathbf{A}_k\}$ fosse consistente, então, como $\Gamma_{k} \cup \{\mathbf{A}_k \} \subseteq \Gamma^* \cup \{\mathbf{A}_k\}$, teríamos $\Gamma_{k} \cup \{\mathbf{A}_k \}$ consistente, uma contradição. Com isso, $\Gamma^* \cup \{\mathbf{A}_k\}$ é inconsistente, e como $\mathbf{A} \equiv \mathbf{A}_k$, temos que $\Gamma^*$ é consistente maximal. \whiteproof
+        \end{midproof}
+    Com isso, estendemos um conjunto consistente $\Gamma$ a um conjunto $\Gamma^*$ consistente maximal. \blackproof
+\end{proof}
+
+\begin{theorem} \label{teo.fund:consistentetemmodelo}
+    Se $\Gamma$ é consistente, então $\Gamma$ tem modelo.
+\end{theorem}
+
+\begin{proof}
+    Seja $\Gamma^*$ uma extensão consistente maximal de $\Gamma$. Provemos que a valoração $v$ definida por $\bar{v} \vDash p \Leftrightarrow p \in \Gamma^*$ para toda variável $p$ é um modelo de $\Gamma^*$. Para tanto, provemos que $v \vDash \mathbf{A} \Leftrightarrow \mathbf{A} \in \Gamma^*$ para toda $\mathbf{A} \in \mathcal{F}$. Façamos isso por indução no número de conectivos que ocorrem em $\mathbf{A}$. Se não ocorrem conectivos em $\mathbf{A}$, então $\mathbf{A}$ é uma variável $p$, de modo que $v \vDash p \Leftrightarrow p \in \Gamma^*$ pela definição de $v$. Suponha, por hipótese de indução, que o resultado vale para toda fórmula com menos de $n$ conectivos, e seja $\mathbf{A}$ uma fórmula na qual ocorrem $n$ conectivos. Temos dois casos a considerar.
+        \begin{enumerate}[label=\roman*.]
+            \item $\mathbf{A}$ tem a forma $(\neg \mathbf{B})$. Como em $\mathbf{B}$ ocorrem menos de $n$ conectivos, temos, pela hipótese de indução, $v \vDash \mathbf{B} \Leftrightarrow \mathbf{B} \in \Gamma^*$. Com isso, $v \vDash \mathbf{A} \Leftrightarrow v \vDash \neg \mathbf{B}$, e como $v \vDash \neg \mathbf{B} \Leftrightarrow \mathbf{B} \notin \Gamma^* \Leftrightarrow \neg\mathbf{B} \in \Gamma^*$ pois $\Gamma^*$ é consistente maximal, temos $v \vDash \mathbf{A} \Leftrightarrow \mathbf{A} \in \Gamma^*$.
+            \item $\mathbf{A}$ tem a forma $(\mathbf{B} \rightarrow \mathbf{C})$. Como em $\mathbf{B}$ e $\mathbf{C}$ ocorrem menos de $n$ conectivos, temos, pela hipótese de indução, $v \vDash \mathbf{B} \Leftrightarrow \mathbf{B} \in \Gamma^*$ e $v \vDash \mathbf{C} \Leftrightarrow \mathbf{C} \in \Gamma^*$. Temos $v \vDash \mathbf{A}$ se, e somente se, $v \not\vDash \mathbf{B}$ ou $v \vDash \mathbf{C}$.
+                \begin{itemize}
+                    \item $v \not\vDash \mathbf{B}$.
+                    \item $v \vDash \mathbf{C}$.
+                \end{itemize}
+        \end{enumerate}
+    Com isso, a extensão consistente maximal $\Gamma^*$ de $\Gamma$ tem um modelo, e como $\Gamma \subseteq \Gamma^*$, segue que $\Gamma$ tem um modelo. \blackproof
+\end{proof}
+
+\begin{theorem}[da Completude Forte] \label{teo.fund:completudeproposicionalforte}
+    Se $\Gamma \vDash \mathbf{A}$, então $\Gamma \vdash \mathbf{A}$.
+\end{theorem}
+
+\begin{proof}
+    Se $\Gamma \vDash \mathbf{A}$, então $\Gamma \cup \{\neg \mathbf{A}\}$ não tem modelo. Pelo \cref{teo.fund:consistentetemmodelo}, $\Gamma \cup \{\neg \mathbf{A}\}$ é inconsistente. Pela \cref{prop.fund:gammaprovaAsse}, $\Gamma \vdash \mathbf{A}$. \blackproof
+\end{proof}
+
+\begin{proposition}
+    Se $\Gamma \vDash \mathbf{A}$, então existe $\Gamma_0 \subseteq \Gamma$ finito tal que $\Gamma_0 \vDash \mathbf{A}$.
+\end{proposition}
+
+\begin{proof}
+    Se $\Gamma \vDash \mathbf{A}$, então, pelo \cref{teo.fund:completudeproposicionalforte} da completude forte, temos $\Gamma \vdash \mathbf{A}$. Sendo $\Gamma_0$ o conjunto das fórmulas de $\Gamma$ que aparecem na dedução de $\mathbf{A}$, temos $\Gamma_0 \vdash \mathbf{A}$. Daí, pelo \cref{teo.fund:correçãoproposicionalforte} da correção forte, temos $\Gamma_0 \vDash \mathbf{A}$. \blackproof
+\end{proof}
+
+\begin{theorem}[Compacidade]
+    $\Gamma$ tem modelo se, e somente se, todo subconjunto finito de $\Gamma$ tem modelo.
+\end{theorem}
+
+\begin{proof}
+    A ida ($\Rightarrow$) é imediata. Provemos a volta $(\Leftarrow)$. Suponha, por absurdo, que $\Gamma$ não tenha modelo. Então, pelo \cref{teo.fund:consistentetemmodelo}, $\Gamma$ é inconsistente, de modo que existe $\mathbf{A} \in \mathcal{F}$ tal que $\Gamma \vdash \mathbf{A}$ e $\Gamma \vdash \neg \mathbf{A}$. Sendo $\Gamma_0$ o conjunto das fórmulas de $\Gamma$ que aparecem nas deduções de $\mathbf{A}$ e $\neg \mathbf{A}$, temos $\Gamma_0 \vdash \mathbf{A}$ e $\Gamma_0 \vdash \neg \mathbf{A}$, de modo que $\Gamma_0$ é inconsistente. Daí, pelo \cref{cor.fund:temmodeloehconsistente}, $\Gamma_0$ não tem modelo, uma contradição, pois $\Gamma_0$ é finito e, por hipótese, todo subconjunto finito de $\Gamma$ tem modelo. \blackproof
+\end{proof}

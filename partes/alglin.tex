@@ -1,0 +1,744 @@
+%!TEX root = main.tex
+
+\chapter{Matrizes e Sistemas Lineares}
+
+\begin{definition}
+    Sejam $m,n \in \N$.
+        \leavevmode
+            \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+                \item Uma \emph{matriz de tamanho $m \times n$} é uma função $A : [m] \times [n] \to \mathbb{R}$.
+                \item Uma matriz $A : [m] \times [n] \to \mathbb{R}$ é denotada por 
+                    \begin{enumerate}[label=\roman*.]
+                        \item 
+                            \begin{itemize}
+                                \item $A = (a_{ij})_{m \times n}$, onde $a_{ij} := A(i,j)$, para quaisquer $i \in [m]$ e $j \in [n]$.
+                                \item $A = ([A]_{ij})_{m \times n}$, onde $[A]_{ij} := A(i,j)$, para quaisquer $i \in [m]$ e $j \in [n]$.
+                            \end{itemize}
+                         Dizemos que $a_{ij}$, ou $[A]_{ij}$, é a \emph{entrada} de posição $i, j$.
+                        \item uma tabela com $m$ linhas e $n$ colunas
+                            \[
+                                A =
+                                    \begin{bmatrix}
+                                        a_{11} & a_{12} & \cdots & a_{1n} \\
+                                        a_{21} & a_{22} & \cdots & a_{2n} \\
+                                        \vdots & \vdots & \ddots &  \vdots \\
+                                        a_{m1} & a_{m2} & \cdots & a_{mn}
+                                    \end{bmatrix}_{m \times n}.
+                            \]
+                    \end{enumerate}
+            \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    A \emph{adição de matrizes} é a operação
+        \[
+            + : \R^{[m] \times [n]} \times \R^{[m] \times [n]} \to \R^{[m] \times [n]}
+        \]
+    tal que, para quaisquer $A, B \in \R^{[m] \times [n]}$,
+        \[
+            [A+B]_{ij} := [A]_{ij} + [B]_{ij},
+        \]
+    para quaisquer $i \in [m]$ e $j \in [n]$.
+\end{definition}
+
+\begin{proposition}
+    Sejam $A,B,C \in \R^{[m] \times [n]}$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $A + (B + C) = (A + B) + C$.
+            \item $A+B=B+A$.
+            \item $A + 0 = A$.
+            \item $A + (-A) = 0$.
+        \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item
+            \item
+            \item
+            \item 
+        \end{enumerate}
+\end{proof}
+
+\begin{definition}
+    A \emph{multiplicação de uma matriz por um escalar} é a operação
+        \[
+            \cdot : \R \times \R^{[m] \times [n]} \to \R^{[m] \times [n]}
+        \]
+    tal que, para quaisquer $\lambda \in \R$ e $A \in \R^{[m] \times [n]}$,
+        \[
+            [\lambda \cdot A]_{ij} := \lambda \cdot [A]_{ij},
+        \]
+    para quaisquer $i \in [m]$ e $j \in [n]$.
+\end{definition}
+
+\begin{proposition}
+    Sejam $A,B \in \R^{[m] \times [n]}$ e $\lambda_1, \lambda_2 \in \R$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $\lambda_1 \cdot (\lambda_2 \cdot A) = (\lambda_1 \cdot \lambda_2) \cdot A$.
+            \item $(\lambda_1 + \lambda_2) \cdot A = \lambda_1 \cdot A + \lambda_2 \cdot A$.
+            \item $\lambda_1 \cdot (A + B) = \lambda_1 \cdot A + \lambda_1 \cdot B$.
+            \item $1 \cdot A = A$.
+        \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item
+            \item
+            \item
+            \item 
+        \end{enumerate}
+\end{proof}
+
+\begin{definition}
+    A \emph{multiplicação de matrizes} é a operação
+        \[
+            \cdot : \R^{[m] \times [n]} \times \R^{[n] \times [p]} \to \R^{[m] \times [p]}
+        \]
+    tal que, para quaisquer $A \in \R^{[m] \times [n]}$ e $B \in \R^{[n] \times [p]}$,
+        \[
+            [A \cdot B]_{ij} := \sum_{k=1}^{n} [A]_{ik} \cdot [B]_{kj},
+        \]
+    para quaisquer $i \in [m]$ e $j \in [p]$.
+\end{definition}
+
+\begin{proposition}
+    Sejam $A = (a_{ij})_{m \times n}$, $B = (b_{jk})_{n \times p}$ e $C = (c_{ik})_{m \times p}$. Se $C = A \cdot B$, então
+        \[
+            [C]_{ik} = \sum_{j=1}^{n} [A]_{ij} [B]_{jk},
+        \]
+    para quaisquer $i \in [m]$ e $k \in [p]$.
+\end{proposition}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\begin{proposition}
+    Sejam $A$, $B$ e $C$ matrizes de tamanhos compatíveis e $\lambda \in \R$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $A \cdot (B \cdot C) = (A \cdot B) \cdot C$.
+            \item $A \cdot \mathrm{I} = \mathrm{I} \cdot A = A$.
+            \item 
+                \begin{enumerate}[label=\roman*.]
+                    \item $A \cdot (B+C) = A \cdot B + A \cdot C$
+                    \item $(A+B) \cdot C = A \cdot C + B \cdot C$
+                \end{enumerate}
+            \item $(\lambda \cdot A) \cdot B = \lambda \cdot (A \cdot B) = A \cdot (\lambda \cdot B)$.
+        \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item
+            \item
+            \item
+            \item
+        \end{enumerate}
+\end{proof}
+
+\begin{definition}
+    Seja $A \in \R^{[m] \times [n]}$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Dizemos que $A$ é \emph{invertível à esquerda} se existe $B \in \R^{[n] \times [m]}$ tal que $BA=\mathrm{I}_n$. Dizemos, nesse caso, que $B$ é uma \emph{inversa à esquerda} de $A$.
+            \item Dizemos que $A$ é \emph{invertível à direita} se existe $B \in \R^{[n] \times [m]}$ tal que $AB = \mathrm{I}_m$. Dizemos, nesse caso, que $B$ é uma \emph{inversa à direita} de $A$.
+            \item Dizemos que $A$ é \emph{invertível}, ou \emph{não singular}, se é invertível à esquerda e à direita.
+            \item Dizemos que $A$ é \emph{singular} se não é invertível. 
+        \end{enumerate}
+\end{definition}
+
+\begin{proposition}
+    A matriz inversa de uma matriz invertível é única.
+\end{proposition}
+
+\begin{proof} 
+    Seja $A \in \R^{[m] \times [n]}$ invertível. Então, por definição, existem $B_1, B_2 \in \R^{[n] \times [m]}$ tais que $B_1 A = \mathrm{I}_n$ e $A B_2 = \mathrm{I}_{m}$. Com isso,
+        \[
+            B_1 = B_1 \mathrm{I}_{m} = B_1 (A B_2) = (B_1 A) B_2 = \mathrm{I}_{n} B_2 = B_2,
+        \]
+    isto é, $B_1 = B_2$. \blackproof
+\end{proof}
+
+\section{Operações e Matrizes Elementares}
+
+Dada uma matriz, podemos 
+    \begin{itemize}
+        \item trocar a posição de duas de suas linhas;
+        \item multiplicar uma de suas linhas por um escalar; e
+        \item somar a uma de suas linhas uma outra linha que foi multiplicada por um escalar.
+    \end{itemize}
+Estas são as chamadas \emph{operações elementares}. Elas serão formalizadas nas definições a seguir e serão úteis no nosso estudo dos sistemas de equações lineares.
+
+\begin{definition}
+    Seja $A \in \R^{[m] \times [n]}$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Seja $i \in [m]$. A \emph{$i$-ésima linha} de $A$ é a matriz $L_i(A) \in \R^{[1] \times [n]}$ definida por $[L_i(A)]_{1j} := a_{ij}$ para todo $j \in [n]$. Isso é denotado por
+                \[
+                    L_i (A):=
+                        \begin{bmatrix}
+                            a_{i1} & a_{i2} & \cdots & a_{in}
+                        \end{bmatrix}.
+                \]
+            \item Seja $j \in [n]$. A \emph{$j$-ésima coluna} de $A$ é a matriz $C_j(A) \in \R^{[m] \times [1]}$ definida por $[C_j(A)]_{i1} := a_{ij}$ para todo $i \in [m]$. Isso é denotado por
+                \[
+                    C_j(A) :=
+                        \begin{bmatrix}
+                            a_{1j} \\
+                            a_{2j} \\
+                            \vdots \\
+                            a_{mj} \\
+                        \end{bmatrix}.
+                \]
+        \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    Sejam $A \in \R^{[m] \times [n]}$ e $p, q \in [m]$, com $p \neq q$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Definimos $A_{L_p \leftrightarrow L_q} \in \R^{[m] \times [n]}$ por
+                \[
+                    L_i \left( A_{L_p \leftrightarrow L_q} \right) :=
+                        \begin{cases}
+                            L_q (A) & \text{se } i = p \\
+                            L_p (A) & \text{se } i = q \\
+                            L_i (A) & \text{se } i \neq p, q
+                        \end{cases},
+                \]
+            isto é,
+                \[
+                    [A_{L_p \leftrightarrow L_q}]_{ij} :=
+                        \begin{cases}
+                            [A]_{qj} & \text{se } i=p \\
+                            [A]_{pj} & \text{se } i=q \\
+                            [A]_{ij} & \text{se } i \neq p, q
+                        \end{cases}.
+                \]
+            \item Seja $\lambda \in \R_{\neq 0}$. Definimos $A_{L_p \leftarrow \lambda L_p} \in \R^{[m] \times [n]}$ por
+                \[
+                    L_i \left( A_{L_p \leftarrow \lambda L_p} \right) := 
+                        \begin{cases}
+                            \lambda \cdot L_p (A), & \text{se } i = p \\
+                            L_i (A), & \text{se } i \neq p
+                        \end{cases}.
+                \]
+            isto é,
+                \[
+                    [A_{L_p \leftarrow \lambda L_p}]_{ij} :=
+                        \begin{cases}
+                            \lambda \cdot [A]_{pj} & \text{se } i=p \\
+                            [A]_{ij} & \text{se } i \neq p
+                        \end{cases}.
+                \]
+            \item Seja $\lambda \in \R_{\neq 0}$. Definimos $A_{L_p \leftarrow L_p + \lambda L_q} \in \R^{[m] \times [n]}$ por
+                \[
+                    L_i \left( A_{L_p \leftarrow L_p + \lambda L_q} \right) := 
+                        \begin{cases}
+                            L_p (A) + \lambda \cdot L_q (A), & \text{se } i = p \\
+                            L_i (A), & \text{se } i \neq p
+                        \end{cases}.
+                \]
+            isto é,
+                \[
+                    [A_{L_p \leftarrow L_p + \lambda L_q}]_{ij} :=
+                        \begin{cases}
+                            [A]_{pj} + \lambda \cdot [A]_{qj} & \text{se } i=p \\
+                            [A]_{ij} & \text{se } i \neq p
+                        \end{cases}.
+                \]
+        \end{enumerate}
+\end{definition}
+
+Intuitivamente, uma matriz elementar é uma matriz que foi obtida da matriz identidade pela aplicação de exatamente uma operação elementar.
+
+\begin{definition}
+    Uma matriz $E \in \R^{[n] \times [n]}$ é dita \emph{elementar} se existem $p, q \in [n]$, com $p \neq q$, tais que, exclusivamente,
+        \begin{enumerate}[label=\roman*.]
+            \item ou $E = \mathrm{I}_{L_p \leftrightarrow L_q}$,
+            \item ou $E =  \mathrm{I}_{L_p \leftarrow \lambda L_p}$, para algum $\lambda \in \R_{\neq 0}$,
+            \item ou $E =  \mathrm{I}_{L_p \leftarrow L_p + \lambda L_q}$, para algum $\lambda \in \R_{\neq 0}$.
+        \end{enumerate}
+\end{definition}
+
+\begin{proposition}
+    As matrizes elementares são invertíveis.
+\end{proposition}
+
+\begin{proof}
+    Exibimos, explicitamente, as inversas.
+        \begin{itemize}
+            \item A inversa de $\mathrm{I}_{L_p \leftrightarrow L_q}$ é ela mesma, isto é, $\mathrm{I}_{L_p \leftrightarrow L_q} \cdot \mathrm{I}_{L_p \leftrightarrow L_q} = \mathrm{I}$.
+            \item A inversa de $\mathrm{I}_{L_p \leftarrow \lambda L_p}$ é $\mathrm{I}_{L_p \leftarrow \frac{1}{\lambda} L_p}$, isto é,
+                \[
+                    \mathrm{I}_{L_p \leftarrow \lambda L_p} \cdot \mathrm{I}_{L_p \leftarrow \frac{1}{\lambda} L_p} = \mathrm{I}_{L_p \leftarrow \frac{1}{\lambda} L_p} \cdot \mathrm{I}_{L_p \leftarrow \lambda L_p} = \mathrm{I}.
+                \]
+            \item A inversa de $\mathrm{I}_{L_p \leftarrow L_p + \lambda L_q}$ é $\mathrm{I}_{L_p \leftarrow L_p -\lambda L_q}$, isto é,
+                \[
+                    \mathrm{I}_{L_p \leftarrow L_p + \lambda L_q} \cdot \mathrm{I}_{L_p \leftarrow L_p - \lambda L_q} = \mathrm{I}_{L_p \leftarrow L_p - \lambda L_q} \cdot \mathrm{I}_{L_p \leftarrow L_p + \lambda L_q} = \mathrm{I}.
+                \]
+        \end{itemize}
+    Logo, as matrizes elementares são invertíveis. \blackproof
+\end{proof}
+
+Na proposição a seguir, mostramos que fazer uma operação elementar numa matriz $A$ equivale à multiplicar a matriz $A$ por uma matriz elementar pela esquerda.
+
+\begin{proposition}
+    Sejam $A \in \R^{[m] \times [n]}$ e $p, q \in [m]$, com $p \neq q$, e $\lambda \in \R$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Temos $\ds A_{L_p \leftrightarrow L_q} = \mathrm{I}_{L_p \leftrightarrow L_q} \cdot A$.
+            \item Temos $\ds A_{L_p \leftarrow \lambda L_p} = \mathrm{I}_{L_p \leftarrow \lambda L_p} \cdot A$.
+            \item Temos $\ds A_{L_p \leftarrow L_p + \lambda L_q} = \mathrm{I}_{L_p \leftarrow L_p + \lambda L_q} \cdot A$.
+        \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item
+            \item
+            \item
+        \end{enumerate}
+\end{proof}
+
+\begin{definition}
+    Sejam $A, B \in \R^{[m] \times [n]}$. Dizemos que $A$ e $B$ são \emph{equivalentes por linhas} se existe uma sequência finita de matrizes elementares $E_1, \ldots, E_k \in \R^{[m] \times [m]}$ tais que 
+        \[
+            E_k \cdot E_{k-1} \cdot \ldots \cdot E_2 \cdot E_1 \cdot A = B.
+        \]
+    Isso é denotado por $A \sim B$.
+\end{definition}
+
+\begin{proposition}
+    A equivalência por linhas é uma relação de equivalência.
+\end{proposition}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\section{Eliminação Gaussiana e Decomposição LU}
+
+Intuitivamente, uma matriz é dita \emph{escalonada} se o primeiro elemento não nulo de cada linha não nula está à esquerda do primeiro elemento não nulo de cada uma das linhas não nulas seguintes e se as linhas nulas estão abaixo das demais. Em uma matriz escalonada, o primeiro elemento não nulo de cada linha não nula é chamado de \emph{pivô}, enquanto o número de linhas não nulas é chamado de \emph{posto}.
+
+\begin{definition}
+    Uma matriz $A \in \R^{[m] \times [n]}$ é dita \emph{escalonada} se existem $r \in [m]_0$ e $b : [r] \to [n]$ estritamente crescente tais que:
+        \begin{enumerate}[label=\roman*.]
+            \item $a_{ib_i} \neq 0$ para todo $i \in [r]$;
+            \item $a_{ij} = 0$ para quaisquer $i \in [r]$ e $j \in [n]$ tais que $j < b_i$; e
+            \item $a_{ij} = 0$ para quaisquer $i \in [m] \setminus [r]$ e $j \in [n]$.
+        \end{enumerate}
+    %Dizemos que $A$ é uma matriz \emph{escalonada} se existe uma sequência de índices $1 \leq b_1 < b_2 < \ldots < b_r \leq n$ tal que $a_{ib_i} \neq 0$ para todo $i \in [r]$ e $a_{ij} = 0$ para todo $1 \leq j < b_i$. Os termos $a_{ib_i}$ são chamados de \emph{pivôs}, enquanto o número de pivôs, $r$, é chamado de \emph{posto}.
+\end{definition}
+
+\begin{theorem}
+    Toda matriz é equivalente por linhas a uma matriz escalonada.
+\end{theorem}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+Intuitivamente, uma matriz escalonada é dita \emph{reduzida} se todo pivô é unitário e se todos os outros elementos da coluna de um pivô são iguais a 0.
+
+\begin{definition}
+    Uma matriz $A \in \R^{[m] \times [n]}$ é dita \emph{escalonada reduzida} se existem $r \in [m]_0 $ e $b : [r] \to [n]$ estritamente crescente tais que:
+        \begin{enumerate}[label=\roman*.]
+            \item $a_{ib_i} = 1$ para todo $i \in [r]$;
+            \item $a_{k b_i} = 0$ para quaisquer $i \in [r]$ e $k \in [m] \setminus \{i\}$;
+            \item $a_{ij} = 0$ para quaisquer $i \in [r]$ e $j \in [n]$ tais que $j < b_i$; e
+            \item $a_{ij} = 0$ para quaisquer $i \in [m] \setminus [r]$ e $j \in [n]$.
+        \end{enumerate}
+\end{definition}
+
+\begin{theorem}
+    Toda matriz é equivalente por linhas a uma única matriz escalonada reduzida.
+\end{theorem}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\begin{definition}
+    Uma matriz $P \in \R^{[m] \times [m]}$ é dita uma \emph{matriz de permutação} se $P = \mathrm{I}_m$ ou se existem $k \in \N$ e matrizes elementares $E_1, \ldots, E_k \in \R^{[m] \times [m]}$ da forma $\mathrm{I}_{L_p \leftrightarrow L_q}$ tais que
+        \[
+            P = E_k \cdot E_{k-1} \cdot \ldots \cdot E_2 \cdot E_1.
+        \]
+\end{definition}
+
+\begin{definition}
+    Uma matriz $A \in \R^{[m] \times [n]}$ é dita
+        \begin{enumerate}[label=\roman*.]
+            \item \emph{triangular superior} se $a_{ij} = 0$ para quaisquer $i \in [m]$ e $j \in [n]$ com $i > j$.
+            \item \emph{triangular inferior} se $a_{ij} = 0$ para quaisquer $i \in [m]$ e $j \in [n]$ com $i < j$.
+            \item \emph{triangular inferior unitária} se é triangular inferior e $a_{ii} = 1$ para todo $i \in [\min\{m, n\}]$.
+        \end{enumerate}
+\end{definition}
+
+\begin{theorem}
+    Seja $A \in \R^{[m] \times [n]}$. Existem uma matriz de permutação $P \in \R^{[m] \times [m]}$, uma matriz triangular inferior unitária $L \in \R^{[m] \times [m]}$ e uma matriz triangular superior $U \in \R^{[m] \times [n]}$ tais que
+        \[
+            P \cdot A = L \cdot U.
+        \]
+\end{theorem}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\section{Sistemas Lineares}
+
+Sejam $a_1, a_2, \ldots , a_n \in \R$ e $b \in \R$. Existem $x_1, x_2, \ldots, x_n \in \R$ tais que
+    \[
+        a_1 x_1 + a_2 x_2 + \cdots + a_n x_n = b \text{?}
+    \]
+Toda equação desse tipo é chamada de \emph{equação linear} nas \emph{incógnitas} $x_1, x_2, \ldots, x_n$ com \emph{coeficientes} $a_1, a_2, \ldots, a_n$ e \emph{termo independente} $b$. \emph{Resolver} uma equação linear consiste em caracterizar explicitamente o conjunto
+    \[
+        \{ (x_1, \ldots, x_n) \in \R^n : a_1 x_1 + a_2 x_2 + \cdots + a_n x_n = b \}.
+    \]
+Como formalizar essas ideias? Fazemos isso usando matrizes.
+
+
+\begin{definition}
+    Seja $n \in \N$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Uma \emph{equação linear} é um par $(a,b)$, onde $a \in \R^{[1] \times [n]}$ e $b \in \R^{[1] \times [1]}$.
+            \item Dizemos que $x \in \R^{[n] \times [1]}$ é uma \emph{solução} de uma equação linear $(a,b) \in \R^{[1] \times [n]} \times \R^{[1] \times [1]}$ se $ax=b$.
+            \item O conjunto de todas as soluções de uma equação linear $(a,b) \in \R^{[1] \times [n]} \times \R^{[1] \times [1]}$ é denotado por $S(a,b)$, isto é,
+                \[
+                    S(a,b) := \{x \in \R^{[n] \times [1]} : ax=b\}.
+                \]
+        \end{enumerate}
+\end{definition}
+
+Intuitivamente, um \emph{sistema de equações lineares} é um conjunto finito de equações lineares. Com $m$ equações e $n$ incógnitas, a representação canônica é
+    \[
+        \left\{
+            \begin{matrix}
+                a_{11} x_1 + a_{12} x_2 + \cdots + a_{1n} x_n = b_1 \\
+                a_{21} x_1 + a_{22} x_2 + \cdots + a_{2n} x_n = b_2 \\
+                \vdots \\
+                a_{m1} x_1 + a_{m2} x_2 + \cdots + a_{mn} x_n = b_m
+            \end{matrix}
+        \right. .
+    \]
+
+\emph{Resolver} um sistema de equações lineares consiste em caracterizar explicitamente o conjunto
+    \[
+        \bigcap_{i=1}^{m} \{ (x_1, \ldots, x_n) \in \R^n : a_{i1} x_1 + \cdots + a_{in} x_n = b_i \}.
+    \]
+Como formalizar essas ideias? Fazemos isso usando matrizes.
+
+\begin{definition}
+    Sejam $m,n \in \N$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Um \emph{sistema de equações lineares} é um par $(A,b)$, onde $A \in \R^{[m] \times [n]}$ e $b \in \R^{[m] \times [1]}$.
+            \item Dizemos que $x \in \R^{[n] \times [1]}$ é uma \emph{solução} de um sistema de equações lineares $(A,b) \in \R^{[m] \times [n]} \times \R^{[m] \times [1]}$ se $Ax=b$.
+            \item O conjunto de todas as soluções de um sistema de equações lineares $(A,b) \in \R^{[m] \times [n]} \times \R^{[m] \times [1]}$ é denotado por $S(A,b)$, isto é,
+                \[
+                    S(A,b) := \{x \in \R^{[n] \times [1]} : Ax=b\}.
+                \]
+        \end{enumerate}
+\end{definition}
+
+Por simplicidade, vamos nos referir a um sistema de equações lineares como um \emph{sistema linear}, ou ainda, como um \emph{sistema}.
+
+\begin{proposition}
+    Seja $(A,b) \in \R^{[m] \times [n]} \times \R^{[m] \times [1]}$ um sistema linear. Então
+        \[
+            S(A,b) = \bigcap_{i \in [m]} S(L_i(A),L_i(b)).
+        \]
+\end{proposition}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\begin{definition}
+    Seja $(A,b) \in \R^{[m] \times [n]} \times \R^{[m] \times [1]}$ um sistema linear.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Dizemos que $A$ é a \emph{matriz de coeficientes} do sistema $(A,b)$.
+            \item Dizemos que $[A|b] \in \R^{[m] \times [n+1]}$, definida por
+                \[
+                    [A|b]_{ij} :=
+                        \begin{cases}
+                            [A]_{ij} & \text{se } i \in [m] \text{ e } j \in [n] \\
+                            [b]_{i1} & \text{se } i \in [m] \text{ e } j = n+1
+                        \end{cases},
+                \]
+            isto é,
+                \[
+                    [A | b] :=
+                        \begin{bmatrix}
+                            a_{11} & a_{12} & \cdots & a_{1n} & b_{11}\\
+                            a_{21} & a_{22} & \cdots & a_{2n} & b_{21} \\
+                            \vdots & \vdots & \ddots &  \vdots & \vdots \\
+                            a_{m1} & a_{m2} & \cdots & a_{mn} & b_{m1}
+                        \end{bmatrix}_{m \times (n+1)},
+                \]
+            é a \emph{matriz aumentada} do sistema $(A,b)$.
+        \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    Seja $(A,b)$ um sistema linear.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Dizemos que $(A,b)$ é \emph{possível} se $S(A,b) \neq \emptyset$.
+            \item Dizemos que $(A,b)$ é \emph{impossível} se $S(A,b) = \emptyset$.
+        \end{enumerate}
+\end{definition}
+
+\begin{theorem}
+    Seja $(A,b)$ um sistema linear. Se $|S(A,b)| \geq 2$, então $|S(A,b)| = |\R|$.
+\end{theorem}
+
+\begin{proof}
+    Como $|S(A,b)| \geq 2$, sejam $x_1, x_2 \in S(A,b)$, com $x_1 \neq x_2$. Defina $f : \R \to \R^{[n]\times[1]}$ por $f(\lambda) := \lambda x_1 + (1-\lambda)x_2$ para todo $\lambda \in \R$. Então, para todo $\lambda \in \R$, temos
+        \[
+            A f(\lambda) = A [\lambda x_1 + (1 - \lambda)x_2] = b,
+        \]
+    de modo que $f(\lambda) \in S(A,b)$. Com isso, $\Im f \subseteq S(A,b)$. Agora, para quaisquer $\lambda_1, \lambda_2 \in \R$, se $f(\lambda_1) = f(\lambda_2)$, então $(\lambda_1 - \lambda_2)(x_1 - x_2) = 0$, e como $x_1 \neq x_2$, temos $\lambda_1 = \lambda_2$. Logo, $f$ é injetiva, de modo que $|\R| \leq |S(A,b)|$. Agora, como $S(A,b) \subseteq \R^{[n] \times [1]}$ e $|\R^{[n]\times[1]}| = |\R|$, temos $|S(A,b)| \leq |\R|$. Logo, pelo teorema de Cantor-Schroeder-Berstein, temos $|S(A,b)| = |\R|$.
+\end{proof}
+
+\begin{definition}
+    Seja $(A,b)$ um sistema linear possível.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Dizemos que $(A,b)$ é \emph{determinado} se $|S(A,b)| = 1$.
+            \item Dizemos que $(A,b)$ é \emph{indeterminado} se $|S(A,b)| \geq 2$.
+        \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    Dois sistemas lineares $(A,b) \in \R^{[m] \times [n]} \times \R^{[m] \times [1]}$ e $(C,d) \in \R^{[p] \times [n]} \times \R^{[p] \times [1]}$ são ditos \emph{equivalentes} se $S(A,b) = S(C,d)$.
+\end{definition}
+
+\begin{proposition}
+    Sejam $(A,b),(C,d) \in \R^{[m]\times[n]}\times\R^{[m]\times[1]}$ sistemas lineares.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Se as matrizes aumentadas $[A|b]$ e $[C|d]$ são equivalentes por linhas, então os sistemas $(A,b)$ e $(C,d)$ são equivalentes.
+            \item Se $(A,b)$ e $(C,d)$ são possíveis, então $(A,b)$ e $(C,d)$ são equivalentes se, e somente se, as matrizes aumentadas $[A|b]$ e $[C|d]$ são equivalentes por linhas.
+        \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    Reginaldo, 32.
+\end{proof}
+
+\begin{definition}
+    Um sistema linear $(A,b)$ é \emph{homogêneo} se $b=0$.
+\end{definition}
+
+\begin{proposition}
+    Todo sistema linear homogêneo $(A,0)$ é possível.
+\end{proposition}
+
+\begin{proof}
+    Basta ver que $x = 0$ é uma solução, dita \emph{trivial}. \blackproof
+\end{proof}
+
+\begin{theorem} \label{teo.alglin:sislinhom}
+    Seja $(A,0) \in \R^{[m] \times [n]} \times \R^{[m] \times [1]}$ um sistema linear homogêneo.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Se $m < n$, então $(A,0)$ tem uma solução não trivial, isto é, existe $x \in \R^{[n] \times [1]} \setminus \{ 0\}$ tal que $Ax=0$.
+            \item Se $m < n$, então $(A,0)$ tem infinitas soluções.
+        \end{enumerate}
+    %Todo sistema linear homogêneo em que o número de incógnitas é maior que o número de equações possui uma solução não trivial (e, portanto, possui infinitas soluções).
+\end{theorem}
+
+\begin{proof}
+    Elon, 27. \blackproof
+\end{proof}
+
+\chapter{Espaços Vetoriais}
+
+\section{Espaços e Subespaços Vetoriais}
+
+\begin{definition}
+    Um \emph{espaço vetorial real} é uma tripla $(V,+,\cdot)$, onde $+ : V \times V \to V$ e $\cdot : \R \times V \to V$ são operações tais que
+        \begin{itemize}
+            \item A1: $u + (v + w) = (u + v) + w$ para quaisquer $u,v,w \in V$;
+            \item A2: $u + v = v + u$ para quaisquer $u,v \in V$;
+            \item A3: existe $0_V \in V$ tal que $u + 0_V = u$ para todo $u \in V$;
+            \item A4: para cada $u \in V$ existe $v \in V$ tal que $u+v=0_V$;
+            \item M1: $\lambda_1 \cdot (\lambda_2 \cdot u) = (\lambda_1 \cdot \lambda_2) \cdot u$ para quaisquer $u \in V$ e $\lambda_1,\lambda_2 \in \R$;
+            \item M2: $(\lambda_1 + \lambda_2) \cdot u = \lambda_1 \cdot u + \lambda_2 \cdot u$ para quaisquer $u \in V$ e $\lambda_1,\lambda_2 \in \R$;
+            \item M3: $\lambda_1 \cdot (u + v) = \lambda_1 \cdot u + \lambda_1 \cdot v$ para quaisquer $u,v \in V$ e $\lambda_1 \in \R$;
+            \item M4: $1 \cdot u = u$ para todo $u \in V$.
+        \end{itemize}
+    Os elementos de $V$ são chamados de \emph{vetores}.
+\end{definition}
+
+\begin{remark}
+    Quando não houver perigo de confunsão, podemos nos referir ao espaço vetorial $(V, +, \cdot)$ simplesmente como o conjunto $V$.
+\end{remark}
+
+\begin{example}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item O espaço $\R^n$, com soma e produto por escalar usuais, é um espaço vetorial real.
+            \item Seja $X \subseteq \R$. O conjunto $\R^X$, com soma e produto por escalar usuais, é um espaço vetorial real.
+            \item O conjunto $\R_{>0}$, com as operações $x\oplus y:=x \cdot y$ e $\alpha \odot x := x^{\alpha}$, é um espaço vetorial real.
+        \end{enumerate}
+\end{example}
+
+\begin{proposition} \label{prop.alglin:manobras_algebricas}
+    Seja $(V, +, \cdot)$ um espaço vetorial.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item (Unicidade)
+                \begin{enumerate}[label=\roman*.]
+                    \item O elemento neutro $0_V$ de $+$ é único.
+                    \item O oposto aditivo de cada elemento de $V$ é único.
+                \end{enumerate}
+            \item (Integridade) Para quaisquer $u \in V$ e $\lambda \in \R$, temos
+                \begin{enumerate}[label=\roman*.]
+                    \item $\lambda \cdot 0_V = 0_V$;
+                    \item $0 \cdot u = 0_V$;
+                    \item se $\lambda \cdot u = 0_V$, então $\lambda = 0$ ou $u = 0_V$.
+                \end{enumerate}
+            \item (Sinais) Para quaisquer $u \in V$ e $\lambda \in \R$, temos
+                \begin{enumerate}[label=\roman*.]
+                    \item $(-1) \cdot u = -u$;
+                    \item $-(-u) = u$;
+                    \item $(- \lambda) \cdot u = \lambda (-u) = -(\lambda \cdot u)$.
+                \end{enumerate}
+            \item (Lei do Corte) Para quaisquer $u,v,w \in V$ e $\lambda, \lambda_1, \lambda_2 \in \R$, temos
+                \begin{enumerate}[label=\roman*.]
+                    \item $u + w = v + w \Rightarrow u = v$;
+                    \item $\lambda \neq 0 \land \lambda \cdot u = \lambda \cdot v \Rightarrow u = v$; 
+                    \item $u \neq 0_V \land \lambda_1 u = \lambda_2 u \Rightarrow \lambda_1 = \lambda_2$.
+                \end{enumerate}
+            \item Se $V \neq \{0 \}$, então $V$ é infinito.
+        \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+\end{proof}
+
+\begin{definition}
+    Sejam $(V, +_V, \cdot_V)$ um espaço vetorial real e $W \subseteq V$. Dizemos que $W$ é um \emph{subespaço vetorial} de $V$ se $(W, +_V \restriction_{W \times W}, \cdot_V \restriction_{\R \times W})$ é um espaço vetorial.
+\end{definition}
+
+\begin{proposition} 
+    Sejam $(V, +_V, \cdot_V)$ um espaço vetorial real e $W \subseteq V$. As seguintes afirmações são equivalentes. 
+        \begin{enumerate}[label=\roman*.]
+            \item $(W, +_V \restriction_{W \times W}, \cdot_V \restriction_{\R \times W})$ é um espaço vetorial.
+            \item $0_V \in W$ e, para quaisquer $u, v \in W$ e $\lambda \in \R$, $u +_V v \in W$ e $\lambda \cdot_V u \in W$.
+        \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\begin{example}
+    Todo espaço vetorial $V$ tem pelo menos dois subespaços vetoriais, dito \emph{triviais}: $\{0_V\}$ e o próprio $V$.
+\end{example}
+
+\section{Combinações Lineares e Geradores}
+
+\begin{definition}
+    Seja $(V, +, \cdot)$ um espaço vetorial. Dizemos que $u \in V$ é uma \emph{combinação linear} de $u_1, u_2 , \ldots, u_n \in V$ se existem $\lambda_1, \lambda_2, \ldots, \lambda_n \in \R$ tais que $\ds u = \sum_{i=1}^{n} \lambda_i u_i$.
+\end{definition}
+
+\section{Dependência e Independência Linear}
+
+\begin{definition}
+    Seja $(V, +, \cdot)$ um espaço vetorial.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Dizemos que $u_1, u_2, \ldots, u_n \in V$ são \emph{linearmente independentes} (L.I.) se a única solução da equação $\lambda_1 u_1 + \cdots + \lambda_n u_n = 0$ é $\lambda_i = 0$ para todo $i \in [n]$. Caso contrário, isto é, se existe uma solução tal que $\lambda_i \neq 0$ para algum $i \in [n]$, dizemos que $u_1, u_2, \ldots, u_n \in V$ são \emph{linearmente dependentes} (L.D.).
+            \item Seja $S \subseteq V$ finito.\footnote{Se $S$ é finito, então $S = V$ somente se $V = \{ 0\}$.}
+                \begin{enumerate}[label=\roman*.]
+                    \item Dizemos que $S$ é L.I. se os vetores de $S$ são L.I..
+                    \item Dizemos que $S$ é L.D. se os vetores de $S$ são L.D..
+                \end{enumerate}
+            \item Seja $S \subseteq V$ infinito.
+                \begin{enumerate}[label=\roman*.]
+                    \item Dizemos que $S$ é L.I. se todo subconjunto finito de $S$ é L.I..
+                    \item Dizemos que $S$ é L.D. se pelo menos um subconjunto finito de $S$ é L.D..
+                \end{enumerate}
+        \end{enumerate}
+\end{definition}
+
+\section{Base e Dimensão}
+
+\begin{lemma} \label{lema.alglin:steinitz}
+    Seja $(V,+,\cdot)$ um espaço vetorial. Seja $S \subseteq V$ finito e L.I.. Para todo $T \subseteq [S]$, se $|T| = |S|+1$, então $T$ é L.D..
+\end{lemma}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\begin{definition}
+    Seja $(V, +, \cdot)$ um espaço vetorial. Dizemos que $\mathcal{B} \subsetneq V$ é uma \emph{base} de $V$ se $\mathcal{B}$ é L.I. e $[\mathcal{B}] = V$.
+\end{definition}
+
+\begin{theorem}[Completamento]
+     Todo espaço vetorial finitamente gerado possui uma base. 
+\end{theorem}
+
+\begin{theorem}[Invariância] \label{teo.alglin:invariancia}
+    Seja $(V, +, \cdot)$ um espaço vetorial finitamente gerado. Se $\mathcal{B}_1$ e $\mathcal{B}_2$ são bases de $V$, então $|\mathcal{B}_1| = |\mathcal{B}_2|$.
+\end{theorem}
+
+\begin{definition}
+    A \emph{dimensão} de um espaço vetorial finitamente gerado $(V, +, \cdot)$ é o número de vetores de qualquer uma de suas bases. Mais especificamente, se $\mathcal{B}$ é uma base de $V$, a dimensão de $V$ é definida como $\dim V := |\mathcal{B}|$.
+\end{definition}
+
+\section{Produto Interno}
+
+\chapter{Transformações Lineares}
+
+\begin{definition}
+    Sejam $(V, +_V, \cdot_V)$ e $(W, +_W, \cdot_W)$ espaços vetoriais.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Uma \emph{transformação linear} é uma função $T : V \to W$ tal que $T(u +_V v) = T(u) +_W T(v)$ e $T(\lambda \cdot_V u) = \lambda \cdot_W T(u)$ para quaisquer $u, v \in V$ e $\lambda \in \R$.
+            \item Um \emph{operador linear} é uma transformação linear $T : V \to V$.
+        \end{enumerate}
+\end{definition}
+
+\begin{example}
+    Sejam $(V, +, \cdot)$ e $(W, +, \cdot)$ espaços vetoriais.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item A função $0 : V \to W$ definida por $0(v) = 0_W$ para todo $v \in V$ é uma transformação linear, chamada de \emph{transformação nula}.
+            \item A função $I_V : V \to V$ definida por $I_V(v) = v$ para todo $v \in V$ é um operador linear, chamada de \emph{transformação identidade}. 
+        \end{enumerate}
+\end{example}
+
+\begin{definition}
+    Sejam $(V, +_V, \cdot_V)$ e $(W, +_W, \cdot_W)$ espaços vetoriais. O conjunto de todas as transformações lineares de $V$ em $W$ é denotado por $\mathcal{L}(V,W)$, isto é,
+        \[
+            \mathcal{L}(V,W) := \{T \in W^V : T \text{ é transformação linear} \}.
+        \]
+\end{definition}
+
+\begin{proposition}
+    Sejam $(V, +_V, \cdot_V)$ e $(W, +_W, \cdot_W)$ espaços vetoriais e $T : V \to W$ uma transformação linear.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $T(0_V) = 0_W$.
+        \end{enumerate}
+\end{proposition}
+
+\begin{definition}
+    Seja $T : V \to W$ uma transformação linear.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item O \emph{núcleo} de $T$ é definido como
+                \[
+                    \ker{T} := \{ v \in V : T(v) = 0_W \}.
+                \]
+            \item A \emph{imagem} de $T$ é definida como
+                \[
+                    \Im{T} := \{ w \in W : \exists v(v \in V \land T(v) = w) \}.
+                \]
+        \end{enumerate}
+\end{definition}
+
+\begin{theorem}
+    Seja $T : V \to W$ uma transformação linear.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $\ker{T}$ é um subespaço vetorial de $V$.
+            \item $\Im{T}$ é um subespaço vetorial de $W$.
+        \end{enumerate}
+\end{theorem}

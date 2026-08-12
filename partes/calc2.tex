@@ -1,0 +1,101 @@
+%!TEX root = main.tex
+
+\chapter{Limites e Continuidade}
+
+\section{Topologia do Espaço Euclidiano}
+
+\begin{definition}
+    Sejam $a \in \R^n$ e $r \in \R_{>0}$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item A \emph{bola aberta de centro $a$ e raio $r$} é definida como
+                \[
+                    B_r(a) := \{x \in \R^n : \|x-a\| < r\}.
+                \]
+            \item A \emph{bola aberta furada de centro $a$ e raio $r$} é definida como
+                \[
+                    B^*_r(a) := \{x \in \R^n : 0 < \|x-a\| < r\}.
+                \]
+        \end{enumerate}
+\end{definition}
+
+\begin{corollary}
+    Sejam $a \in \R$ e $r \in \R_{>0}$. Então $B^*_r(a) = B_r(a) \setminus \{a\}$.
+\end{corollary}
+
+\begin{proof}
+\end{proof}
+
+\begin{definition}
+    Sejam $a \in \R^n$ e $A \subseteq \R^n$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Dizemos que $a$ é um \emph{ponto interior} de $A$ se existe $r \in \R_{>0}$ tal que $B_r(a) \subseteq A$.
+            \item O \emph{interior} de $A$ é definido como o conjunto de todos os pontos interiores de $A$, isto é,
+                \[
+                    \op{int}{A} := \{ x \in A : \exists r (r \in \R_{>0} \land B_r(x) \subseteq A ) \}.
+                \]
+        \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    Seja $A \in \mathcal{P}(\R^n)_{\neq \emptyset}$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Dizemos que $A$ é \emph{aberto} se $\op{int}{A} = A$. Em particular, $\emptyset$ é aberto.
+            \item Dizemos que $A$ é \emph{fechado} se $A^C$ é aberto.
+        \end{enumerate}
+\end{definition}
+
+\begin{corollary}
+    Toda bola aberta é aberta.
+\end{corollary}
+
+\begin{proof}
+    Ver \cite{guidorizzi2}, página 113. \blackproof
+\end{proof}
+
+\begin{theorem}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Toda união de abertos do $\R^n$ é aberta.
+            \item Toda interseção finita de abertos do $\R^n$ é aberta.
+        \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\end{proof}
+
+\begin{definition}
+    Sejam $a \in \R^n$ e $A \subseteq \R^n$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Dizemos que $a$ é um \emph{ponto de acumulação} de $A$ se
+                \[
+                    B^*_r(a) \cap A \neq \emptyset
+                \]
+            para todo $r \in \R_{>0}$.
+            \item O conjunto de todos os pontos de acumulação de $A$ é denotado por $A'$, isto é,
+                \[
+                    A' := \{x \in \R^n : \forall r (r \in \R_{>0} \rightarrow B^*_r(x) \cap A \neq \emptyset) \}.
+                \]
+        \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    Sejam $a \in \R^n$ e $A \subseteq \R^n$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Dizemos que $a$ é um \emph{ponto exterior} de $A$ se existe $r \in \R_{>0}$ tal que $B_r(a) \cap A = \emptyset$.
+            \item O \emph{exterior} de $A$, é definido como o conjunto de todos os pontos exteriores de $A$, isto é,
+                \[
+                    \op{ext}{A} := \{ x \in \R^n : \exists r (r \in \R_{>0} \land B_r(x) \cap A = \emptyset ) \}.
+                \]
+        \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    Sejam $a \in \R^n$ e $A \subseteq \R^n$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Dizemos que $a$ é um \emph{ponto da fronteira} de $A$ se $a \notin \op{int}{A}$ e $a \notin \op{ext}{A}$.
+            \item O conjunto de todos os pontos da fronteira de $A$ é denotado por $\partial A$, isto é,
+                \[
+                    \partial A := \{ x \in \R^n : x \notin \op{int}{A} \land x \notin \op{ext}{A} \}.
+                \]
+        \end{enumerate}
+\end{definition}
