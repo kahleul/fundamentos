@@ -553,3 +553,215 @@ Seguimos \cite{herculespaulovich}.
 \begin{proof}
     A ida ($\Rightarrow$) é imediata. Provemos a volta $(\Leftarrow)$. Suponha, por absurdo, que $\Gamma$ não tenha modelo. Então, pelo \cref{teo.fund:consistentetemmodelo}, $\Gamma$ é inconsistente, de modo que existe $\mathbf{A} \in \mathcal{F}$ tal que $\Gamma \vdash \mathbf{A}$ e $\Gamma \vdash \neg \mathbf{A}$. Sendo $\Gamma_0$ o conjunto das fórmulas de $\Gamma$ que aparecem nas deduções de $\mathbf{A}$ e $\neg \mathbf{A}$, temos $\Gamma_0 \vdash \mathbf{A}$ e $\Gamma_0 \vdash \neg \mathbf{A}$, de modo que $\Gamma_0$ é inconsistente. Daí, pelo \cref{cor.fund:temmodeloehconsistente}, $\Gamma_0$ não tem modelo, uma contradição, pois $\Gamma_0$ é finito e, por hipótese, todo subconjunto finito de $\Gamma$ tem modelo. \blackproof
 \end{proof}
+
+
+\chapter{Teorias de Primeira Ordem}
+
+Seguimos \cite{shoenfield1967}.
+
+\section{Sintaxe}
+
+\begin{definition}[Linguagens de Primeira Ordem]
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Um \emph{alfabeto} é uma coleção infinita de símbolos distintos separados nas seguintes categorias:
+                \begin{enumerate}[label=\roman*.]
+                    \item Variáveis: $x, y, z, w, x', y', z', w', x'' \ldots$.
+                    \item Conectivos: $\lor$, $\neg$.
+                    \item Quantificador existencial: $\exists$.
+                    \item Para todo $n$, uma coleção, possivelmente vazia, de símbolos de função $n$-ários. Os símbolos de função $0$-ários são chamados de \emph{constantes}.
+                    \item Para todo $n$, uma coleção, possivelmente vazia, de símbolos de predicado $n$-ários.
+                    \item Símbolo de predicado binário de igualdade $=$.
+                \end{enumerate}
+            Símbolos de função e de predicado distintos de $=$ são chamados de símbolos \emph{não lógicos}. Os demais são chamados de símbolos lógicos. Usamos $\mathbf{u}$ e $\mathbf{v}$ para denotar variáveis sintáticas que variam entre expressões, $\mathbf{x}$, $\mathbf{y}$, $\mathbf{z}$ e $\mathbf{w}$ para denotar variáveis sintáticas que variam entre variáveis, $\mathbf{f}$ e $\mathbf{g}$ para denotar variáveis sintáticas que variam entre símbolos de funções, $\mathbf{p}$ e $\mathbf{q}$ para denotar variáveis sintáticas que variam entre símbolos de predicado e $\mathbf{e}$ para denotar uma variável sintática que varia entre constantes.
+            \item Os \emph{termos} de um alfabeto são definidos do seguinte modo:
+                \begin{enumerate}[label=\roman*.]
+                    \item toda variável é um termo;
+                    \item se $\mathbf{u}_1, \ldots, \mathbf{u}_n$ são termos e $\mathbf{f}$ é $n$-ário, então $\mathbf{f} \mathbf{u}_1 \ldots \mathbf{u}_n$ é um termo.
+                \end{enumerate}
+            Note que constantes também são termos. Usamos $\mathbf{a}$, $\mathbf{b}$, $\mathbf{c}$ e $\mathbf{d}$ para denotar variáveis sintáticas que variam entre termos.
+            \item As \emph{fórmulas} de um alfabeto são definidas do seguinte modo:
+                \begin{enumerate}[label=\roman*.]
+                    \item se $\mathbf{u}_1, \ldots, \mathbf{u}_n$ são termos e $\mathbf{p}$ é $n$-ário, então $\mathbf{p} \mathbf{u}_1 \ldots \mathbf{u}_n$ é uma fórmula;
+                    \item se $\mathbf{u}$ é uma fórmula, então $\neg \mathbf{u}$ é uma fórmula;
+                    \item se $\mathbf{u}$ e $\mathbf{v}$ são fórmulas, então $\lor \mathbf{u} \mathbf{v}$ é uma fórmula;
+                    \item se $\mathbf{u}$ é uma fórmula, então $\exists \mathbf{x} \mathbf{u}$ é uma fórmula.
+                \end{enumerate}
+            As fórmulas do tipo i. são chamadas de \emph{atômicas}. Usamos $\mathbf{A}$, $\mathbf{B}$, $\mathbf{C}$ e $\mathbf{D}$ para denotar variáveis sintáticas que variam entre fórmulas.
+            \item Uma \emph{linguagem de primeira ordem} $\mathcal{L}$ consiste num alfabeto como descrito no item (a) e termos ($\mathcal{L}$-termos) e fórmulas ($\mathcal{L}$-fórmulas) como descritos nos itens (b) e (c). Uma linguagem de primeira ordem fica então completamente determinada pelos seus símbolos não lógicos.
+        \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    Um \emph{designador} é uma expressão que é um termo ou uma fórmula.
+\end{definition}
+
+\begin{proposition}
+    Todo designador tem a forma $\mathbf{u} \mathbf{v}_1 \ldots \mathbf{v}_n$, onde $\mathbf{u}$ é um símbolo do alfabeto, $\mathbf{v}_1, \ldots, \mathbf{v}_n$ são designadores e $n$ é um natural determinado por $\mathbf{u}$ (chamado de \emph{índice}).
+\end{proposition}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\begin{remark}
+    O índice de $\mathbf{x}$ é $0$, o índice de $\neg$ é $1$, o índice de $\lor$ é $2$ e o índice de $\exists$ é $2$. Por fim, os índices de $\mathbf{f}$ e $\mathbf{p}$, $n$-ários, são ambos $n$. Em particular, constantes tem índice $0$ e $=$ tem índice 2.
+\end{remark}
+
+\begin{definition}
+    Duas expressões são \emph{compatíveis} se uma delas puder ser obtida adicionando alguma expressão (possivelmente a expressão vazia) ao final da outra.
+\end{definition}
+
+\begin{proposition}
+    Sejam $\mathbf{u}$, $\mathbf{u}'$, $\mathbf{v}$ e $\mathbf{v}'$ expressões.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Se \( \mathbf{u} \mathbf{v} \) e \( \mathbf{u}'\mathbf{v}' \) são compatíveis, então \( \mathbf{u} \) e \( \mathbf{u}' \) são compatíveis; 
+            \item se \( \mathbf{u} \mathbf{v} \) e \( \mathbf{u} \mathbf{v}' \) são compatíveis, então \( \mathbf{v} \) e \( \mathbf{v}' \) são compatíveis.
+        \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item \blackproof
+            \item \blackproof
+        \end{enumerate}
+\end{proof}
+
+\begin{lemma}
+    Se $\mathbf{u}_1, \ldots, \mathbf{u}_n$ e $\mathbf{u}'_1, \ldots, \mathbf{u}'_n$ são designadores, e $\mathbf{u}_1 \ldots \mathbf{u}_n$ e $\mathbf{u}'_1 \ldots \mathbf{u}'_n$ são compatíveis, então $\mathbf{u}'_i$ é $\mathbf{u}_i$, para $i = 1, \ldots, n$.
+\end{lemma}
+
+\begin{proof}
+    Por indução no comprimento de \( \mathbf{u}_1 \ldots \mathbf{u}_n \). Escreva \( \mathbf{u}_1 \) como \( \mathbf{v} \mathbf{v}_1 \ldots \mathbf{v}_k \), onde \( \mathbf{v} \) é um símbolo de índice \( k \) e \( \mathbf{v}_1, \ldots, \mathbf{v}_k \) são designadores. Como \( \mathbf{u}_1' \) começa com \( \mathbf{v} \), ele tem a forma \( \mathbf{v} \mathbf{v}_1' \ldots \mathbf{v}_k' \), onde \( \mathbf{v}_1', \ldots, \mathbf{v}_k' \) são designadores. Com isso, temos que \( \mathbf{u}_1 \) é compatível com \( \mathbf{u}_1' \), donde \( \mathbf{v}_1 \ldots \mathbf{v}_k \) é compatível com \( \mathbf{v}_1' \ldots \mathbf{v}_k' \). Daí, pela hipótese de indução, \( \mathbf{v}_i \) é \(\mathbf{v}_i' \) para \( i = 1, \ldots, k \), donde \( \mathbf{u}_1 \) é \( \mathbf{u}_1' \). Com isso, temos que \( \mathbf{u}_2 \ldots \mathbf{u}_n \) é compatível com \( \mathbf{u}_2' \ldots \mathbf{u}_n' \); assim, pela hipótese de indução, \( \mathbf{u}_i \) é \( \mathbf{u}_i' \) para \( i = 2, \ldots, n \).
+\end{proof}
+
+\begin{theorem}[Formação]
+    Todo designador pode ser escrito de maneira única na forma $\mathbf{u} \mathbf{v}_1 \ldots \mathbf{v}_n$, onde $\mathbf{u}$ é um símbolo de índice $n$ e $\mathbf{v}_1, \ldots, \mathbf{v}_n$ são designadores.
+\end{theorem}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\begin{lemma}
+    Toda ocorrência de um símbolo em um designador $\mathbf{u}$ começa uma ocorrência de um designador em $\mathbf{u}$.
+\end{lemma}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\begin{theorem}[Ocorrência]
+    Seja $\mathbf{u}$ um símbolo de índice $n$ e $\mathbf{v}_1, \ldots, \mathbf{v}_n$ designadores. Então toda ocorrência de um designador $\mathbf{v}$ em $\mathbf{u} \mathbf{v}_1 \ldots \mathbf{v}_n$ ou é toda a $\mathbf{u} \mathbf{v}_1 \ldots \mathbf{v}_n$ ou é parte de algum $\mathbf{v}_i$. 
+\end{theorem}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\begin{definition}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Dizemos que \emph{uma ocorrência de $\mathbf{x}$ é ligada em $\mathbf{A}$} se ocorre em uma subfórmula de $\mathbf{A}$ da forma $\exists \mathbf{x} \mathbf{B}$. Dizemos que \emph{$\mathbf{x}$ é ligada em $\mathbf{A}$} se alguma ocorrência de $\mathbf{x}$ em $\mathbf{A}$ é ligada.
+            \item Dizemos que \emph{uma ocorrência de $\mathbf{x}$ é livre em $\mathbf{A}$} se não ocorre em uma subfórmula de $\mathbf{A}$ da forma $\exists \mathbf{x} \mathbf{B}$. Dizemos que \emph{$\mathbf{x}$ é livre em $\mathbf{A}$} se alguma ocorrência de $\mathbf{x}$ em $\mathbf{A}$ é livre.
+        \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Denotamos por $\mathbf{b}_{\mathbf{x}}[\mathbf{a}]$ a expressão obtida pela substituição sintática de cada ocorrência de $\mathbf{x}$ em $\mathbf{b}$ por $\mathbf{a}$.
+            \item Denotamos por $\mathbf{A}_{\mathbf{x}}[\mathbf{a}]$ a expressão obtida pela substituição sintática de cada ocorrência livre de $\mathbf{x}$ em $\mathbf{A}$ por $\mathbf{a}$.
+        \end{enumerate}
+\end{definition}
+
+\begin{proposition}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $\mathbf{b}_{\mathbf{x}}[\mathbf{a}]$ é um termo.
+            \item $\mathbf{A}_{\mathbf{x}}[\mathbf{a}]$ é uma fórmula.
+        \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item \blackproof
+            \item \blackproof
+        \end{enumerate}
+\end{proof}
+
+\begin{definition}
+    Dizemos que \emph{$\mathbf{x}$ é substituível por $\mathbf{a}$ em $\mathbf{A}$} se para toda $\mathbf{y}$ que ocorre em $\mathbf{a}$, nenhuma subfórmula de $\mathbf{A}$ da forma $\exists \mathbf{y} \mathbf{B}$ tem uma ocorrência de $\mathbf{x}$ livre em $\mathbf{A}$.
+\end{definition}
+
+\begin{remark}
+    A partir de agora, sempre que $\mathbf{A}_{\mathbf{x}}[\mathbf{a}]$ aparecer, $\mathbf{x}$ é substituível por $\mathbf{a}$ em $\mathbf{A}$.
+\end{remark}
+
+\begin{definition}
+    Sejam $\mathbf{x}_1, \ldots, \mathbf{x}_n$ distintas.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Denotamos por $\mathbf{b}_{\mathbf{x}_1, \ldots, \mathbf{x}_n}[\mathbf{a}_1, \ldots, \mathbf{a}_n]$ a expressão obtida pela substituição simultânea de cada ocorrência de $\mathbf{x}_i$ em $\mathbf{b}$ por $\mathbf{a}_i$.
+            \item Denotamos por $\mathbf{A}_{\mathbf{x}_1, \ldots, \mathbf{x}_n}[\mathbf{a}_1, \ldots, \mathbf{a}_n]$ a expressão obtida pela substituição simultânea de cada ocorrência livre de $\mathbf{x}_i$ em $\mathbf{A}$ por $\mathbf{a}_i$.
+        \end{enumerate}
+\end{definition}
+
+\begin{remark}
+    A partir de agora, sempre que $\mathbf{A}_{\mathbf{x}_1, \ldots, \mathbf{x}_n}[\mathbf{a}_1, \ldots, \mathbf{a}_n]$ aparecer, $\mathbf{x}_i$ é substituível por $\mathbf{a}_i$ em $\mathbf{A}$.
+\end{remark}
+
+\begin{remark}
+    A partir de agora, consideramos definidas as convenções usuais de notação, parênteses, abreviações, etc. Especificamente, seguimos as convenções da seção 2.4 de \cite{shoenfield1967}.
+\end{remark}
+
+\subsection{Provas}
+
+\begin{definition}
+    Seja $\mathcal{L}$ uma linguagem de primeira ordem.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item (Axiomas Lógicos)
+                \begin{enumerate}[label=\roman*.]
+                    \item Um \emph{axioma proposicional} é uma fórmula da forma $\neg \mathbf{A} \lor \mathbf{A}$.
+                    \item Um \emph{axioma de substituição} é uma fórmula da forma $\mathbf{A}_{\mathbf{x}}[\mathbf{a}] \rightarrow \exists \mathbf{x} \mathbf{A}$.
+                    \item Um \emph{axioma de identidade} é uma fórmula da forma $\mathbf{x} = \mathbf{x}$.
+                    \item Um \emph{axioma de igualdade} é uma fórmula da forma
+                        \[
+                            \mathbf{x}_1 = \mathbf{y}_1 \rightarrow \cdots \rightarrow \mathbf{x}_n = \mathbf{y}_n \rightarrow \mathbf{f} \mathbf{x}_1 \ldots \mathbf{x}_n = \mathbf{f} \mathbf{y}_1 \ldots \mathbf{y}_n
+                        \]
+                    ou da forma
+                        \[
+                            \mathbf{x}_1 = \mathbf{y}_1 \rightarrow \cdots \rightarrow \mathbf{x}_n = \mathbf{y}_n \rightarrow \mathbf{p} \mathbf{x}_1 \ldots \mathbf{x}_n \rightarrow \mathbf{p} \mathbf{y}_1 \ldots \mathbf{y}_n.
+                        \]
+                \end{enumerate}
+            \item (Regras Lógicas de Inferência)
+                \begin{enumerate}[label=\roman*.]
+                    \item (Expansão) É possível inferir $\mathbf{B} \lor \mathbf{A}$ de $\mathbf{A}$.
+                    \item (Contração) É possível inferir $\mathbf{A}$ de $\mathbf{A} \lor \mathbf{A}$.
+                    \item (Associatividade) É possível inferir $(\mathbf{A} \lor \mathbf{B}) \lor \mathbf{C}$ de $\mathbf{A} \lor (\mathbf{B} \lor \mathbf{C})$.
+                    \item (Corte) É possível inferir $\mathbf{B} \lor \mathbf{C}$ de $\mathbf{A} \lor \mathbf{B}$ e $\neg \mathbf{A} \lor \mathbf{C}$.
+                    \item (Introdução do $\exists$) Se $\mathbf{x}$ não é livre em $\mathbf{B}$, então é possível inferir $\exists \mathbf{x} \mathbf{A} \rightarrow \mathbf{B}$ de $\mathbf{A} \to \mathbf{B}$.
+                \end{enumerate}
+        \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    Uma \emph{teoria de primeira ordem} é um sistema formal $T$ com as seguintes propriedades.
+        \begin{enumerate}[label=\roman*.]
+            \item A linguagem de $T$ é uma linguagem de primeira ordem.
+            \item Os axiomas de $T$ são os axiomas lógicos e uma coleção de fórmulas, chamdas de \emph{axiomas não lógicos}.
+            \item As regras de infererência de $T$ são somente as regras lógicas de inferência.
+        \end{enumerate}
+    Uma teoria de primeira ordem fica bem especificada quando os símbolos não lógicos e os axiomas não lógicos são especificados.
+\end{definition}
+
+\begin{definition}
+    Seja $T$ uma teoria de primeira ordem. Uma \emph{prova formal} de $\mathbf{A}$ em $T$ é uma sequência finita $(\mathbf{A}_1, \ldots, \mathbf{A}_n)$ tal que $\mathbf{A}_n$ é $\mathbf{A}$ e, para todo $k \leq n$,
+        \begin{enumerate}[label=\roman*.]
+            \item $\mathbf{A}_k$ é um axioma lógico;
+            \item $\mathbf{A}_k$ é um axioma não lógico; ou
+            \item $\mathbf{A}_k$ foi obtida por uma regra de inferência cujas hipóteses estão entre $\mathbf{A}_1, \ldots, \mathbf{A}_{k-1}$.
+        \end{enumerate}
+    Dizemos, nesse caso, que $\mathbf{A}$ é um \emph{teorema}\footnote{Na verdade, \cite{shoenfield1967} define \emph{teorema} num contexto muito mais geral, o de sistemas formais, e então prova que uma fórmula é um teorema se, e somente se, tem prova.} de $T$. Isso é denotado por $T \vdash \mathbf{A}$ ou $\vdash_T \mathbf{A}$.
+\end{definition}
