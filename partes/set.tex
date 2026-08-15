@@ -62,7 +62,7 @@ Se $x_1 \neq x_2$, então ou existe $z \in x_1$ tal que $z \notin x_2$, ou exist
 \end{proof}
 
 \begin{remark}
-    O \cref{ax:2} do vazio, junto com a \cref{prop.set:extensaounico1}, nos permite estabelecer que existe um único conjunto vazio:
+    O axioma do vazio, junto com a \cref{prop.set:extensaounico1}, nos permite estabelecer que existe um único conjunto vazio:
         \[
             \exists x (\forall y  (y \notin x) \land \forall z(\forall y ( y \notin z ) \rightarrow (z=x) )).
         \]
@@ -92,7 +92,7 @@ Se $x_1 \neq x_2$, então ou existe $z \in x_1$ tal que $z \notin x_2$, ou exist
 \end{axiom}
 
 \begin{proposition} \label{prop.set:extensaounico2}
-    O conjunto $z$ do \cref{ax:3} do par é único. Ele é denotado por $\{x,y\}$.
+    O conjunto $z$ do axioma do par é único. Ele é denotado por $\{x,y\}$.
 \end{proposition}
 
 \begin{proof}
@@ -127,7 +127,7 @@ Se $x_1 \neq x_2$, então ou existe $z \in x_1$ tal que $z \notin x_2$, ou exist
 \end{axiom}
 
 \begin{proposition} \label{prop.set:extensaounico3}
-    O conjunto $y$ do \cref{ax:4} da união é único. Ele é denotado por $\bigcup x $.
+    O conjunto $y$ do axioma da união é único. Ele é denotado por $\bigcup x $.
 \end{proposition}
 
 \begin{proof}
@@ -166,7 +166,7 @@ Se $x_1 \neq x_2$, então ou existe $z \in x_1$ tal que $z \notin x_2$, ou exist
 \end{axiom}
 
 \begin{proposition} \label{prop.set:extensaounico4}
-    O conjunto $y$ do \cref{ax:5} das partes é único. Ele é denotado por $\mathcal{P}(x)$.
+    O conjunto $y$ do axioma das partes é único. Ele é denotado por $\mathcal{P}(x)$.
 \end{proposition}
 
 \begin{proof}
@@ -190,7 +190,7 @@ Se $x_1 \neq x_2$, então ou existe $z \in x_1$ tal que $z \notin x_2$, ou exist
 \end{remark}
 
 \begin{proposition}
-    O conjunto $z$ do \cref{ax:6} da separação é único. Ele é denotado por $\{x \in y : P(x) \}$.
+    O conjunto $z$ do axioma da separação é único. Ele é denotado por $\{x \in y : P(x) \}$.
 \end{proposition}
 
 \begin{proof}
@@ -350,6 +350,843 @@ Apresentamos a seguir algumas propriedades algébricas de algumas operações co
             \item $\forall A (\bigcup \mathcal{P}{(A)} = A)$.
         \end{enumerate}
 \end{proposition}
+
+\section{Relações e Funções}
+
+\subsection{Produto Cartesiano}
+
+\begin{definition}[Par ordenado]
+    Sejam $a$ e $b$ conjuntos. O \emph{par ordenado} $(a,b)$ é definido como o conjunto $\{ \{ a \}, \{a,b \} \}$, isto é,
+        \[
+            (a,b) := \{ \{ a \}, \{a,b \} \}.
+        \]
+\end{definition}
+
+\begin{proposition}
+    Dois pares ordenados $(a,b)$ e $(c,d)$ são iguais se, e somente se, $a = c$ e $b=d$.
+        \[
+            \forall a \forall b \forall c \forall d ( ((a,b) = (c,d)) \leftrightarrow ((a=c) \land (b=d)))
+        \]
+\end{proposition}
+
+\begin{proof}
+    Ver \cite{fajardo2024conjuntos}, teorema 4.2, página 95. Ver \cite{jechhrbacek1999}, teorema 1.2, página 18. \blackproof
+\end{proof}
+
+\begin{theorem} \label{teo.set:prodcart}
+    Para quaisquer conjuntos $A$ e $B$, existe um conjunto com todos os pares ordenados $(a,b)$ tais que $a \in A$ e $b \in B$.
+        \[
+            \forall A \forall B \exists C \forall x (x \in C \leftrightarrow \exists a \exists b (a \in A \land b \in B \land x = (a,b))) 
+        \]
+    Ademais, esse conjunto é único, sendo denotado por $A \times B$.
+\end{theorem}
+
+\begin{proof}
+    Defina
+        \[
+            C := \{x \in \mathcal{P}{(\mathcal{P}{(A \cup B)})} : \exists a \exists b (a \in A \land b \in B \land x = (a,b)) \}.
+        \]
+    Afirmamos que $C$ funciona. \blackproof
+\end{proof}
+
+\begin{definition}
+    O \emph{produto cartesiano} dos conjuntos $A$ e $B$ é definido como $A \times B$.
+\end{definition}
+
+\begin{proposition}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Para quaisquer $A$ e $B$, temos $A \times B = \emptyset$ se, e somente se, $A = \emptyset$ ou $B = \emptyset$.
+            \item Para quaisquer $A$, $B$ e $C$,
+                \begin{enumerate}[label=\roman*.]
+                    \item $(A \cup B) \times C = A \times C \cup B \times C$.
+                    \item $A \times (B \cup C) = A \times B \cup A \times C$.
+                \end{enumerate}
+            \item Para quaisquer $A$, $B$ e $C$,
+                \begin{enumerate}[label=\roman*.]
+                    \item $(A \cap B) \times C = A \times C \cap B \times C$.
+                    \item $A \times (B \cap C) = A \times B \cap A \times C$.
+                \end{enumerate}
+            \item Para quaisquer $A$, $B$ e $C$,
+                \begin{enumerate}[label=\roman*.]
+                    \item $(A \setminus B) \times C = A \times C \setminus B \times C$.
+                    \item $A \times (B \setminus C) = A \times B \setminus A \times C$.
+                \end{enumerate}
+        \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\subsection{Relações}
+
+\begin{definition}
+    Uma \emph{relação binária}, ou, simplesmente, uma \emph{relação}, é um conjunto de pares ordenados.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Dizemos que $R$ é uma relação de $A$ em $B$ se $R \subseteq A \times B$. Dizemos que $R$ é uma relação em $A$ se $R \subseteq A \times A$. Denotamos $(a,b) \in R$ por $aRb$.
+        \end{enumerate}
+\end{definition}
+
+\begin{theorem}
+    $R$ é uma relação se, e somente se, existem $A$ e $B$ tais que $R \subseteq A \times B$.
+\end{theorem}
+
+\begin{proof}
+    \leavevmode
+        \begin{itemize}[align=left]
+            \item[($\Rightarrow$)] Seja $R$ uma relação. Defina
+                \begin{align*}
+                    A &:= \left\{ a \in \bigcup \bigcup R : \exists b \left(b \in \bigcup \bigcup R \land aRb \right) \right\} \\
+                    B &:= \left\{ b \in \bigcup \bigcup R : \exists a \left(a \in \bigcup \bigcup R \land aRb \right) \right\}
+                \end{align*}
+            Seja $x \in R$. Então existem $a$ e $b$ tais que $x = (a,b)$. Se $\{ \{a \}, \{a,b \} \} \in R$, então $\{ \{a \}, \{a,b \} \} \subseteq \bigcup R$, donde $\{a,b \} \in \bigcup R$, donde $\{ a,b \} \subseteq \bigcup \bigcup R$, donde $a,b \in \bigcup \bigcup R$. Como $aRb$, pelas definições de $A$ e $B$, temos $a \in A$ e $b \in B$. Como $x = (a,b)$ e $a \in A$ e $b \in B$, pelo \cref{teo.set:prodcart} temos $x \in A \times B$, donde, por fim, segue que $R \subseteq A \times B$.
+            \item[($\Leftarrow$)] Os elementos de $A \times B$ são pares ordenados; logo, qualquer subconjunto de $A \times B$ terá pares ordenados como elementos.
+        \end{itemize}
+    \blackproof
+\end{proof}
+
+\begin{definition}
+    Seja $R$ uma relação.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item O \emph{domínio} de $R$ é definido como
+                \[
+                    \Dom R := \left\{ a \in \bigcup \bigcup R : \exists b ((a,b) \in R) \right\}.
+                \]
+            \item A \emph{imagem} de $R$ é definida como
+                \[
+                    \Img R := \left\{ b \in \bigcup \bigcup R : \exists a ((a,b) \in R) \right\}.
+                \]
+            \item A \emph{relação inversa} de $R$ é definida como
+                \[
+                    R^{-1} := \{ (b,a) \in \Img R \times \Dom R : (a,b) \in R \}.
+                \]
+            \item A \emph{imagem de um conjunto $X$ por $R$} é definida como
+                \[
+                    R[X] := \{ b \in \bigcup \bigcup R : \exists a (a \in X \land (a,b) \in R) \}.
+                \]
+            \item A \emph{imagem inversa de um conjunto $Y$ por $R$} é definida como
+                \[
+                    R^{-1}[Y] := \left\{ a \in \bigcup \bigcup R : \exists b (b \in Y \land (a,b) \in R) \right\}
+                \]
+            Equivalentemente, $R^{-1}[Y]$ é a imagem de $Y$ pela relação $R^{-1}$. 
+            \item A \emph{restrição de $R$ a $X$} é definida como
+                \[
+                    R \restriction_X := \{ (a,b) \in R : a \in X \}.
+                \]
+            \item A \emph{composição de $R$ e $S$} é definida como 
+                \[
+                    S \circ R := \{ (a,c) \in \Dom R \times \Img S : \exists b (b \in \Img R \cap \Dom S \land (aRb \land bSc)) \}.
+                \]
+        \end{enumerate}
+\end{definition}
+
+\begin{proposition} \label{prop.set:domeimdeRAB}
+    Sejam $R$ e $S$ relações e $A$, $B$, $C$ e $D$ tais que $R \subseteq A \times B$ e $S \subseteq C \times D$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $\Dom R = R^{-1}[B] = \{x \in A : \exists y (y \in B \land xRy)\}$.
+            \item $\Img R = R[A] = \{ y \in B : \exists x (x \in A \land xRy)\}$.
+            \item $S \circ R \subseteq A \times D$.
+        \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Se $x \in \Dom R$, então existe $y \in \Img R$ tal que $(x,y) \in R$. Como $R \subseteq A \times B$, temos $(x,y) \in A \times B$, donde $x \in A$ e $y \in B$. Assim, $x \in A$ e existe $y \in B$ tal que $xRy$, o que prova a inclusão $\subseteq$. Reciprocamente, se $x \in A$ e existe $y \in B$ tal que $(x,y) \in R$, então $x \in \Dom R$, o que prova a inclusão $\supseteq$. \blackproof
+            \item Se $y \in \Img R$, então existe $x \in \Dom R$ tal que $(x,y) \in R$. Como $R \subseteq A \times B$, temos $(x,y) \in A \times B$, donde $x \in A$ e $y \in B$. Assim, $y \in B$ e existe $x \in A$ tal que $xRy$, o que prova a inclusão $\subseteq$. Reciprocamente, se $y \in B$ e existe $x \in A$ tal que $(x,y) \in R$, então $y \in \Img R$, o que prova a inclusão $\supseteq$. \blackproof
+            \item Se $(x,z) \in S \circ R$, então $x \in \Dom R$ e $z \in \Img S$. Como $\Dom R \subseteq A$ (primeiro item) e $\Img S \subseteq D$ (segundo item), temos $x \in A$ e $z \in D$, de modo que $(x,z) \in A \times D$. Com isso, $S \circ R \subseteq A \times D$. \blackproof
+        \end{enumerate}
+\end{proof}
+
+\begin{proposition} \label{prop.set:relacoes}
+    Sejam $R$, $S$ e $T$ relações.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item 
+                \begin{enumerate}[label=\roman*.]
+                    \item $(R^{-1})^{-1} = R$.
+                    \item $\Dom R^{-1} = \Img R$.
+                    \item $\Img R^{-1} = \Dom R$.
+                    \item $\id_{\Dom R} \subseteq R^{-1} \circ R$.
+                    \item $\id_{\Img R} \subseteq R \circ R^{-1}$.
+                \end{enumerate}
+            \item 
+                \begin{enumerate}[label=\roman*.]
+                    \item Se $a \notin \Dom R$, então $R[\{a\}] = \emptyset$.
+                    \item Se $b \notin \Img R$, então $R^{-1}[\{b\}] = \emptyset$.
+                \end{enumerate}
+            \item Para quaisquer $X$ e $Y$,
+                \begin{enumerate}[label=\roman*.]
+                    \item $R[X \cup Y] = R[X] \cup R[Y]$ e $R^{-1}[X \cup Y] = R^{-1}[X] \cup R^{-1}[Y]$.
+                    \item $R[X \cap Y] \subseteq R[X] \cap R[Y]$ e $R^{-1}[X \cap Y] \subseteq R^{-1}[X] \cap R^{-1}[Y]$.
+                    \item $R[X \setminus Y] \supseteq R[X] \setminus R[Y]$ e $R^{-1}[X \setminus Y] \supseteq R^{-1}[X] \setminus R^{-1}[Y]$.
+                \end{enumerate}
+            \item $T \circ (S \circ R) = (T \circ S) \circ R$.
+            \item $(S \circ R)^{-1} = R^{-1} \circ S^{-1}$.
+            \item Se $\Img R \subseteq \Dom S$, então $\Dom \, (S \circ R) = \Dom R$.
+            \item Se $\Dom S \subseteq \Img R$, então $\Img \, (S \circ R) = \Img S$.
+        \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item 
+                \begin{enumerate}[label=\roman*.]
+                    \item Temos $(a,b) \in R$ se, e somente se, $(b,a) \in R^{-1}$, o que é equivalente a $(a,b) \in (R^{-1})^{-1}$. Logo, $R = (R^{-1})^{-1}$.
+                    \item 
+                    \item 
+                    \item 
+                    \item 
+                \end{enumerate}
+            \item 
+                \begin{enumerate}[label=\roman*.]
+                    \item 
+                    \item 
+                \end{enumerate}
+            \item 
+                \begin{enumerate}[label=\roman*.]
+                    \item 
+                    \item 
+                    \item 
+                \end{enumerate}
+            \item Por um lado ($\subseteq$), se $(a,d) \in T \circ (S \circ R)$, então $a \in \Dom \, (S \circ R)$, $d \in \Img T$ e existe $c \in \Img \, (S \circ R) \cap \Dom T$ tal que $(a,c) \in S \circ R$ e $(c,d) \in T$. De $(a,c) \in S \circ R$ segue que $a \in \Dom R$, $c \in \Img S$ e existe $b \in \Img R \cap \Dom S$ tal que $(a,b) \in R$ e $(b,c) \in S$. Como $b \in \Dom S$, $d \in \Img T$ e existe $c \in \Dom T \cap \Img S$ tal que $(b,c) \in S$ e $(c,d) \in T$, temos que $(b,d) \in T \circ S$. Com isso, $b \in \Dom \, (T \circ S)$ e $d \in \Img \, (T \circ S)$. Como $a \in \Dom R$, $d \in \Img \, (T \circ S)$ e existe $b \in \Dom \, (T \circ S) \cap \Img R$ tal que $(a,b) \in R$ e $(b,d) \in T \circ S$, temos que $(a,d) \in (T \circ S) \circ R$. Com isso, $T \circ (S \circ R) \subseteq (T \circ S) \circ R$. A prova de que $(T \circ S) \circ R \subseteq T \circ (S \circ R)$ é completamente análoga. Logo, $T \circ (S \circ R) = (T \circ S) \circ R$. \blackproof
+            \item Por um lado ($\subseteq$), se $(c,a) \in (S \circ R)^{-1}$, então $(a,c) \in S \circ R$, $a \in \Dom R$, $c \in \Img S$ e existe $b \in \Img R \cap \Dom S$ tal que $(a,b) \in R$ e $(b,c) \in S$ isto é, $(c,b) \in S^{-1}$, $(b,a) \in R^{-1}$, com $c \in \Dom S^{-1}$, $a \in \Img R^{-1}$ e $b \in \Img S^{-1} \cap \Dom R^{-1}$. Com isso, $(c,a) \in R^{-1} \circ S^{-1}$, de modo que $(S \circ R)^{-1} \subseteq R^{-1} \circ S^{-1}$. Por outro lado ($\supseteq$), a prova de que $R^{-1} \circ S^{-1} \subseteq (S \circ R)^{-1}$ é completamente análoga. Logo, $(S \circ R)^{-1} = R^{-1} \circ S^{-1}$. \blackproof
+            \item Se $a \in \Dom R$, então existe $b \in \Img R$ tal que $(a,b) \in R$. Se $\Img R \subseteq \Dom S$, então $b \in \Dom S$, de modo que existe $c \in \Img S$ tal que $(b,c) \in S$. Assim, $(a,c) \in S \circ R$, de modo que $a \in \Dom \, (S \circ R)$. Com isso, $\Dom R \subseteq \Dom \, (S \circ R)$. Agora, se $a \in \Dom \, (S \circ R)$, então existe $c \in \Img \, (S \circ R)$ tal que $(a,c) \in S \circ R$, donde $a \in \Dom R$ e $\Dom \, (S \circ R) \subseteq \Dom R$. Com isso, $\Dom R = \Dom \, (S \circ R)$. \blackproof
+            \item Se $c \in \Img S$, então existe $b \in \Dom S$ tal que $(b,c) \in S$. Se $\Dom S \subseteq \Img R$, então $b \in \Img R$, de modo que existe $a \in \Dom R$ tal que $(a,b) \in R$. Assim, $(a,c) \in S \circ R$, de modo que $c \in \Img \, (S \circ R)$. Com isso, $\Img S \subseteq \Img \, (S \circ R)$. Agora, se $c \in \Img \, (S \circ R)$, então existe $a \in \Dom \, (S \circ R)$ tal que $(a,c) \in S \circ R$, donde $c \in \Img S$ e $\Img \, (S \circ R) \subseteq \Img S$. Com isso, $\Img S = \Img \, (S \circ R)$. \blackproof
+        \end{enumerate}
+\end{proof}
+
+%\begin{proposition}
+%    Seja $R$ uma relação. A imagem inversa de $X$ por $R$ é igual à imagem de $X$ por $R^{-1}$.
+%\end{proposition}
+
+\begin{definition}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item A \emph{relação de identidade} em um conjunto $A$ é definida como
+                \[
+                    \id_{A} := \{(a,b) \in A \times A : a = b\}.
+                \]
+            \item A \emph{relação de pertencimento} em um conjunto $A$ é definida como
+                \[
+                    \in_{A} := \{(a,b) \in A \times A : a \in b\}.
+                \]
+            \item A \emph{relação de subconjunto} em um conjunto $A$ é definida como
+                \[
+                    \subseteq_{A} := \{(a,b) \in A \times A : a \subseteq b\}.
+                \]
+            \item A \emph{relação de subconjunto próprio} em um conjunto $A$ é definida como
+                \[
+                    \subsetneq_{A} := \{(a,b) \in A \times A : a \subsetneq b\}.
+                \]
+        \end{enumerate}
+\end{definition}
+
+\subsection{Funções}
+
+\begin{definition}[Função] \label{defi.set:função}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Uma relação $f$ é uma \emph{função} se
+                \[
+                    \forall a \forall b \forall c ((a,b) \in f \land (a,c) \in f \rightarrow b=c).
+                \]
+            A \emph{imagem} de $a \in \Dom f$ por $f$ é denotada por $f(a)$.
+            \item Uma \emph{função parcial de $A$ em $B$} é uma função $f$ tal que $\Dom f \subseteq A$ e $\Img f \subseteq B$.
+            \item Uma \emph{função total de $A$ em $B$} é uma função $f$ tal que $\Dom f = A$ e $\Img f \subseteq B$. Isso é denotado por $f : A \to B$.
+            \item O conjunto de todas as funções totais de $A$ em $B$ é denotado por $B^{A}$, isto é,
+                \begin{align*}
+                    B^{A} := \{f \in \mathcal{P}{(A \times B)} : & \forall a \forall b \forall c ((a,b) \in f \land (a,c) \in f \rightarrow b=c) \\ 
+                    & \land \forall x(x \in A \rightarrow \exists y((x,y) \in f)) \}.
+                \end{align*}
+        \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    A \emph{função identidade} de um conjunto $A$ é a função $\id_A : A \to A$ definida por $\id_A{(x)} = x$ para todo $x \in A$.
+\end{definition}
+
+\begin{proposition}
+    Seja $f: A \to B$. Então $\id_B \circ f = B$ e $f \circ \id_A = A$.
+\end{proposition}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\begin{proposition}
+    Sejam $f$ e $g$ funções.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $f \restriction_X$ é uma função, com $\Dom f \restriction_X =  \Dom f \cap X$.
+            \item $g \circ f$ é uma função, com $\Dom \, (g \circ f) = \Dom f \cap f^{-1}[\Dom g]$.
+        \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Por definição, $f\restriction_X = \{ (a,b) \in f : a \in X \}$, isto é, $f$ é um conjunto de pares ordenados e, portanto, uma relação. Se $(a,b) \in f\restriction_X$ e $(a,c) \in f\restriction_X$, então, pela definição de $f\restriction_X$, $(a,b) \in f$, $(a,c) \in f$ e $a \in X$; como $f$ é função, $b=c$, de modo que $f\restriction_X$ é também uma função. Provemos, por fim, que $\Dom f\restriction_X =  \Dom f \cap X$.
+                \begin{itemize}
+                    \item[($\subseteq$)] Se $a \in \Dom f\restriction_X$, então existe $b \in \Img f\restriction_X$ tal que $(a,b) \in f\restriction_X$; pela definição de $f\restriction_X$, vem $(a,b) \in f$ e $a \in X$, e de $(a,b) \in f$ vem $a \in \Dom f$. Com isso, $a \in \Dom f \cap X$, de modo que $\Dom f\restriction_X \subseteq \Dom f \cap X$.
+                    \item[($\supseteq$)] Se $a \in \Dom f \cap X$, então de $a \in \Dom f$ segue que existe $b \in \Img f$ tal que $(a,b) \in f$, e como $a \in X$, vem $(a,b) \in f\restriction_X$, de modo que $\Dom f \cap X \subseteq \Dom f\restriction_X$. 
+                \end{itemize}
+            Logo, $\Dom f\restriction_X = \Dom f \cap X$. Em particular, temos $f\restriction_X = f \restriction_{\Dom f \cap X}$. \blackproof
+            \item Se $(a,x) \in g \circ f$ e $(a,y) \in g \circ f$, então existe $b \in \Img f \cap \Dom g$ tal que $(a,b) \in f$ e $(b,x) \in g$ e existe $c \in \Img f \cap \Dom g$ tal que $(a, c) \in f$ e $(c,y) \in g$. Como $f$ é função, vem $b=c$; daí, vem $(b,x) \in g$ e $(b,y) \in g$, e como $g$ é função, vem $x=y$.
+                \begin{itemize}
+                    \item[($\subseteq$)] Se $a \in \Dom \, (g \circ f)$, então existe $c \in \Img \, (g \circ f)$ tal que $(a,c) \in g \circ f$, e então existe $b \in \Img f \cap \Dom g$ tal que $(a,b) \in f$ e $(b,c) \in g$. De $(a,b) \in f$ segue que $a \in \Dom f$, e de $b \in \Dom g$ com $(a,b) \in f$ segue que $a \in f^{-1}[\Dom g]$. Com isso, $a \in \Dom f \cap f^{-1}[\Dom g]$, de modo que $\Dom \, (g \circ f) \subseteq \Dom f \cap f^{-1}[\Dom g]$.
+                    \item[($\supseteq$)] Se $a \in \Dom f \cap f^{-1}[\Dom g]$, então de $a \in \Dom f$ segue que existe $b \in \Img f$ tal que $(a,b) \in f$, e de $a \in f^{-1}[\Dom g]$ segue que existe $b' \in \Dom g$ tal que $(a,b') \in f$. Como $f$ é função, temos $b = b'$, de modo que $b \in \Dom g$ e existe $c \in \Img g$ tal que $(b,c) \in g$, de modo que $(a,c) \in g \circ f$. Com isso, $a \in \Dom \, (g \circ f)$, de modo que $\Dom f \cap f^{-1}[\Dom g] \subseteq \Dom \, (g \circ f)$.  
+                \end{itemize}
+            Logo, $\Dom \, (g \circ f) = \Dom f \cap f^{-1}[\Dom g]$. \blackproof
+        \end{enumerate}
+\end{proof}
+
+\begin{definition}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Duas funções $f$ e $g$ são \emph{compatíveis} se $f(x) = g(x)$ para todo $x \in \Dom f \cap \Dom g$.
+            \item Um \emph{sistema de funções compatíveis} é um conjunto $F$ de funções duas a duas compatíveis.
+        \end{enumerate}
+\end{definition}
+
+\begin{proposition} \fonte[26]{jechhrbacek1999}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Sejam $f$ e $g$ funções. As seguintes afirmações são equivalentes.
+                \begin{enumerate}[label=\roman*.]
+                    \item $f$ e $g$ são compatíveis.
+                    \item $f \cup g$ é uma função.
+                    \item $f \restriction_{\Dom f {\cap} \Dom g} = g \restriction_{\Dom f \cap \Dom g}$. 
+                \end{enumerate}
+            \item Se $F$ é um sistema de funções compatíveis, então $\bigcup F$ é uma função e
+                \[
+                    \Dom  \left( \bigcup F \right) = \bigcup \{\Dom f : f \in F \}.
+                \]
+        \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item 
+            \item Observe inicialmente que
+                \[
+                    \{\Dom f : f \in F \} = \left\{z \in \mathcal{P}\left( \bigcup \bigcup \bigcup F \right) : \exists f (f \in F \land z = \Dom f) \right\}.
+                \]
+        \end{enumerate}
+\end{proof}
+
+\subsection{Funções Injetivas}
+
+\begin{definition}
+    Uma função $f$ é \emph{injetiva} se
+        \[
+            \forall x \forall y (x,y \in \Dom f \rightarrow (x \neq y \rightarrow f(x) \neq f(y))).
+        \]
+\end{definition}
+
+\begin{proposition} \label{prop.set:feginj}
+    Sejam $f$ e $g$ funções.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Se $f$ e $g$ são injetivas, então $g \circ f$ é injetiva.
+            \item Se $g \circ f$ é injetiva e $\Img f \subseteq \Dom g$, então $f$ é injetiva.
+        \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Sejam $x,y \in \Dom \, (g \circ f)$. Se $g(f(x)) = g(f(y))$, então, pela injetividade de $g$, temos $f(x) = f(y)$. Se $f(x) = f(y)$, então, pela injetividade de $f$, temos $x = y$. Logo, $g \circ f$ é injetiva. \blackproof
+            \item Sejam $x,y \in \Dom f$. Se $f(x) = f(y)$, então, como $\Img f \subseteq \Dom g$, temos $g (f(x)) = g(f(y))$. Daí, como $\Dom f = \Dom \, (g \circ f)$ (\cref{prop.set:relacoes}) e $g \circ f$ é injetiva, temos $x=y$. Logo, $f$ é injetiva. \blackproof
+        \end{enumerate}
+\end{proof}
+
+\begin{theorem} \label{teo.set:inj}
+    Seja $f$ uma função.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Se a relação $f^{-1}$ é uma função, então $f^{-1}$ é injetiva.
+            \item A relação $f^{-1}$ é uma função se, e somente se,
+                \begin{enumerate}[label=\roman*.]
+                    \item $f$ é injetiva.
+                    \item $f^{-1} \circ f = \id_{\Dom f}$.
+                \end{enumerate}
+        \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Se $(y,x) \in f^{-1}$ e $(z,x) \in f^{-1}$, então $(x,y) \in f$ e $(x,z) \in f$, e como $f$ é função, temos $y=z$. Logo, $f^{-1}$ é uma função injetiva. \blackproof
+            \item A equivalência mais importante é com $f$ ser injetiva.
+                \begin{enumerate}[label=\roman*.]
+                    \item Por um lado ($\Rightarrow$), sejam $(y,x) \in f$ e $(z,x) \in f$. Então, $(x,y) \in f^{-1}$ e $(x,z) \in f^{-1}$. Como $f^{-1}$ é uma função, temos $y=z$. Logo, $f$ é injetiva. Por outro lado ($\Leftarrow$), sejam $(x,y) \in f^{-1}$ e $(x,z) \in f^{-1}$. Então, $(y,x) \in f$ e $(z,x) \in f$. Como $f$ é injetiva, temos $y=z$. Logo, $f^{-1}$ é uma função.
+                \end{enumerate}
+            Provemos que $f$ é injetiva se, e somente se, $f^{-1} \circ f = \id_{\Dom f}$.
+                \begin{enumerate}[label=\roman*., resume]
+                    \item Por um lado ($\Rightarrow$), se $(x,z) \in f^{-1} \circ f$, então existe $y \in \Img f \cap \Dom f^{-1}$ tal que $(x,y) \in f$ e $(y,z) \in f^{-1}$. Com isso, $(z,y) \in f$, e como $f$ é injetiva, temos $z=x$, de modo que $(x,x) \in \id_{\Dom f}$, isto é, $f^{-1} \circ f \subseteq \id_{\Dom f}$. Agora, se $(x,x) \in \id_{\Dom f}$, então existe $y \in \Img f$ tal que $(x, y) \in f$, isto é, $(y,x) \in f^{-1}$. Com isso, $(x,x) \in f^{-1} \circ f$, e então $\id_{\Dom f} \subseteq f^{-1} \circ f$. Logo, $f^{-1} \circ f = \id_{\Dom f}$. Por outro lado ($\Leftarrow$), sendo $(x,y) \in f$ e $(z,y) \in f$, temos $(y,x) \in f^{-1}$, de modo que $(z,x) \in f^{-1} \circ f$, e como $f^{-1} \circ f = \id_{\Dom f}$, temos $x=z$. Logo, $f$ é injetiva.
+                \end{enumerate}
+            Com isso, todas as equivalências foram provadas. \blackproof
+        \end{enumerate}
+\end{proof}
+
+\subsection{Funções Sobrejetivas}
+
+\begin{definition}
+    Uma função $f : A \to B$ é \emph{sobrejetiva em $B$} se $\Img f = B$.
+\end{definition}
+
+\begin{proposition}
+    Uma função $f: A \to B$ é sobrejetiva em $B$ se, e somente se, para todo $y \in B$ existe $x \in A$ tal que $(x,y) \in f$.
+\end{proposition}
+
+\begin{proof}
+    Segue da \cref{prop.set:domeimdeRAB}. \blackproof    
+\end{proof}
+
+\begin{lemma} \label{lem.set:fegsob}
+    Sejam $f: A \to B$ e $g: C \to D$ funções.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $\Dom \, (g \circ f) = \{ x \in A : f(x) \in C\}$.
+            \item $\Dom \, (g \circ f) = A$ se, e somente se, $f(A) \subseteq C$.
+        \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Pela \cref{prop.set:domeimdeRAB}, temos
+                \[
+                    \Dom \, (g \circ f) = \{ x \in A : \exists y(y \in D \land (x,y \in g \circ f))\}.
+                \]
+                \begin{itemize}
+                    \item[($\subseteq$)] Se $x \in \Dom \, (g \circ f)$, então existe $y \in D$ tal que $(x,y) \in g \circ f$. Logo, existe $z \in \Img f \cap \Dom g \subseteq B \cap C$ tal que $(x,z) \in f$ e $(z,y) \in g$, isto é, $z = f(x)$ e $y = g(z)$. Com isso, temos $x \in A$ e $f(x) \in C$, de modo que $x \in \{ x \in A : f(x) \in C\}$, isto é, $\Dom \, (g \circ f) \subseteq \{ x \in A : f(x) \in C\}$.
+                    \item[($\supseteq$)] Se $x \in \{ x \in A : f(x) \in C\}$, então $x \in A$ e $f(x) \in C$, isto é, existe (um único) $z \in C$ tal que $(x,z) \in f$. Como $z \in C$, existe $y \in \Img g \subseteq D$ tal que $(z,y) \in g$. Com isso, $x \in A$ e existe $y \in D$ tal que $(x,y) \in g \circ f$, de modo que $x \in \Dom \, (g \circ f)$, isto é, $\{ x \in A : f(x) \in C\} \subseteq \Dom{(g \circ f)}$.  
+                \end{itemize}
+            Logo, $\Dom \, (g \circ f) = \{ x \in A : f(x) \in C\}$. \blackproof
+            \item A volta ($\Leftarrow$) já foi provada (\cref{prop.set:relacoes}). Por outro lado ($\Rightarrow$), se $y \in f(A)$, então existe $x \in A$ tal que $y = f(x)$, e como $A = \Dom \, (g \circ f)$, temos $f(x) \in C$, isto é, $y \in C$. Logo, $f(A) \subseteq C$. \blackproof
+        \end{enumerate}
+\end{proof}
+
+\begin{proposition} \label{prop.set:fegsob}
+    Sejam $f : A \to B$ e $g : C \to D$ funções.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Se $f$ e $g$ são sobrejetivas e $B=C$, então $g \circ f$ é sobrejetiva.
+            \item Se $g \circ f$ é sobrejetiva e $f(A) \subseteq C$, então $g$ é sobrejetiva.
+        \end{enumerate} 
+\end{proposition}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Se $B=C$, então $\Dom \, (g \circ f) = A$ pelo \cref{lem.set:fegsob}. Se $g$ é sobrejetiva, então para todo $z \in D$ existe $y \in C = B$ tal que $(y,z) \in g$. Se $f$ é sobrejetiva, então para esse $y \in B$ existe $x \in A$ tal que $(x,y) \in f$. Com isso, para todo $z \in D$ existe $x \in A$ tal que $(x,z) \in g \circ f$, o que prova a sobrejetividade de $g \circ f$. \blackproof
+            \item Se $f(A) \subseteq C$, então $\Dom \, (g \circ f) = A$ pelo \cref{lem.set:fegsob}. Se $g \circ f$ é sobrejetiva, então para todo $z \in D$ existe $x \in A$ tal que $(x,z) \in g \circ f$. Com isso, existe $y \in f(A) \cap C = C$ tal que $(x,y) \in f$ e $(y,z) \in g$. o que prova a sobrejetividade de $g$. \blackproof
+        \end{enumerate}
+\end{proof}
+
+\begin{lemma} \label{lema.set:fbolafmenos1}
+    Para qualquer função $f$, tem-se $f \circ f^{-1} = \id_{\Img f}$.
+\end{lemma}
+
+\begin{proof}
+    Por um lado ($\subseteq$), $(y,z) \in f \circ f^{-1}$, então existe $x \in \Dom f \cap \Img f^{-1}$ tal que $(y,x) \in f^{-1}$ e $(x,z) \in f$. Daí, $(x,y) \in f$, e como $f$ é uma função, temos $y=z$. Logo $f \circ f^{-1} \subseteq \id_{\Img f}$. Por outro lado ($\supseteq$), se $(y,y) \in \id_{\Img f}$, então existe $x \in \Dom f$ tal que $(x,y) \in f$. Logo $(y,x) \in f^{-1}$, de modo que $(y, y) \in f \circ f^{-1}$, isto é, $f \circ f^{-1} \supseteq \id_{\Img f}$. Logo, vem $f \circ f^{-1} = \id_{\Img f}$. \blackproof
+\end{proof}
+
+\begin{theorem} \label{teo.set:sob}
+    Uma função $f : A \to B$ é sobrejetiva em $B$ se, e somente se, $f \circ f^{-1} = \id_B$.
+\end{theorem}
+
+\begin{proof}
+    \leavevmode
+        \begin{itemize}[align=left]
+            \item[($\Rightarrow$)] Se $f$ é sobrejetiva em $B$, então $\Img f = B$, de modo que, pelo \cref{lema.set:fbolafmenos1}, $f \circ f^{-1} = \id_B$.
+            \item[($\Leftarrow$)] Se $f \circ f^{-1} = \id_B$, então $f$ é sobrejetiva em $B$ porque, como também $f \circ f^{-1} = \id_{\Img f}$ (\cref{lema.set:fbolafmenos1}), temos $\Img f = B$.
+        \end{itemize}
+     \blackproof
+\end{proof}
+
+\subsection{Funções Bijetivas}
+
+\begin{definition}
+    Uma função $f: A \to B$ é \emph{bijetiva em relação a $B$} se é injetiva e sobrejetiva em $B$.
+\end{definition}
+
+\begin{proposition} \label{prop.set:defbij}
+    Uma função $f: A \to B$ é bijetiva em $B$ se, e somente se, para todo $y \in B$ existe um único $x \in A$ tal que $(x,y) \in f$.
+\end{proposition}
+
+\begin{proof}
+    Segue imediatamente da definição. \blackproof
+\end{proof}
+
+\begin{proposition}
+    Se $f : A \to B$ e $g : B \to C$ são funções bijetivas, então a função $g \circ f : A \to C$ é uma função bijetiva.
+\end{proposition}
+
+\begin{proof}
+    Segue como corolário imediato das \cref{prop.set:feginj,prop.set:fegsob}. \blackproof
+\end{proof}
+
+\begin{theorem} \label{teo.set:bij1}
+    Seja $f : A \to B$ uma função.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Se a relação $f^{-1}$ é uma função de $B$ em $A$, então $f^{-1}$ é bijetiva em $A$.
+            \item A relação $f^{-1}$ é uma função de $B$ em $A$ se, e somente se,
+                \begin{enumerate}[label=\roman*.]
+                    \item $f$ é bijetiva em $B$.
+                    \item $f^{-1} \circ f = \id_{A}$ e $f \circ f^{-1} = \id_{B}$.
+                \end{enumerate}
+        \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Como $f$ é função, para todo $x \in A$ existe um único $y \in B$ tal que $(x,y) \in f$, isto é, $(y,x) \in f^{-1}$. Logo, pela \cref{prop.set:defbij}, $f^{-1}$ é bijetiva em $A$. \blackproof
+            \item A equivalência que mais importa é com $f$ ser bijetiva em $B$.
+                \begin{enumerate}[label=\roman*.]
+                    \item Por um lado ($\Rightarrow$), se $f^{-1} \subseteq B \times A$ é uma função com $\Dom f^{-1} = B$, então para todo $y \in B$ existe um único $x \in A$ tal que $(y,x) \in f^{-1}$, isto é, $(x,y) \in f$. Logo, pela \cref{prop.set:defbij}, $f$ é bijetiva. Por outro lado ($\Leftarrow$), se $f$ é bijetiva, então, pela \cref{prop.set:defbij}, para todo $y \in B$ existe um único $x \in A$ tal que $(x,y) \in f$, isto é, $(y,x) \in f^{-1}$. Daí, pela definição de função, $f^{-1}$ é uma função de $B$ em $A$. \blackproof
+                \end{enumerate}
+            Provemos que $f$ é bijetiva em $B$ se, e somente se, $f^{-1} \circ f = \id_A$ e $f \circ f^{-1} = \id_{B}$.
+                \begin{enumerate}[label=\roman*., resume]
+                    \item Por um lado ($\Rightarrow$), se $f$ é bijetiva em $B$, então $f$ é injetiva e sobrejetiva em $B$, de modo que, pelos \cref{teo.set:inj,teo.set:sob}, temos $f^{-1} \circ f = \id_A$ e $f \circ f^{-1} = \id_B$, respectivamente. Agora, se $f^{-1} \circ f = \id_A$ e $f \circ f^{-1} = \id_B$, então pelos mesmos teoremas $f$ é injetiva e sobrejetiva em $B$, isto é, $f$ é bijetiva em $B$. \blackproof
+                \end{enumerate}
+            Com isso, todas as equivalências foram provadas. \blackproof
+        \end{enumerate}
+\end{proof}
+
+\subsection{Funções Inversas}
+
+\begin{definition}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Uma função $f$ é \emph{invertível à esquerda} se existe uma função $g$ tal que $g \circ f = \id_{\Dom f}$. Dizemos, nesse caso, que $g$ é uma \emph{inversa à esquerda} de $f$.
+            \item Uma função $f : A \to B$ é \emph{invertível à esquerda} se existe uma função $g : B \to A$ tal que $g \circ f = \id_A$. Dizemos, nesse caso, que $g$ é uma \emph{inversa à esquerda} de $f$.
+        \end{enumerate}
+\end{definition}
+
+\begin{theorem} \label{teo.set:invesquerda}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Uma função $f$ é invertível à esquerda se, e somente se, $f$ é injetiva.
+            \item Uma função $f : A \to B$ é invertível à esquerda se, e somente se, $f$ é injetiva.
+        \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Por um lado ($\Rightarrow$), se $f$ é injetiva, então, pelo \cref{teo.set:inj}, $f^{-1}$ é função e $f^{-1} \circ f = \id_{\Dom f}$. Logo, $f$ é invertível à esquerda. Por outro lado ($\Leftarrow$), sejam $(x,y) \in f$ e $(z,y) \in f$. Como $f$ é invertível à esquerda, existe uma função $g$ tal que $g \circ f = \id_{\Dom f}$. Como $(x,x) \in g \circ f$, existe $w \in \Img f \cap \Dom g$ tal que $(x,w) \in f$ e $(w,x) \in g$. Como $f$ é função, temos $w=y$, de modo que $(y,x) \in g$. Analogamente, temos $(y,z) \in g$, e como $g$ é função, temos $x=z$. Logo, $f$ é injetiva. \blackproof
+            \item 
+        \end{enumerate}
+\end{proof}
+
+\begin{definition}
+    Uma função $f:A \to B$ é \emph{invertível à direita} se existe uma função $g : B \to A$ tal que $f \circ g = \id_{B}$. Dizemos, nesse caso, que $g$ é uma \emph{inversa à direita} de $f$.
+\end{definition}
+
+\begin{theorem} \label{teo.set:invdireita}
+    Uma função $f:A \to B$ é invertível à direita se, e somente se, $f$ é sobrejetiva em $B$.
+\end{theorem}
+
+\begin{remark}
+    A prova da volta ($\Leftarrow$) deste teorema depende do axioma da escolha. Mais precisamente, de um enunciado equivalente ao axioma da escolha: para toda relação $R$ existe uma função $f \subseteq R$ tal que $\Dom f = \Dom R$. Ainda assim, enunciamos este resultado aqui por uma questão de organização didática.  
+\end{remark}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\begin{definition}
+    Uma função $f: A \to B$ é \emph{invertível} se existe uma função $g : B \to A$ tal que $g \circ f = \id_A$ e $f \circ g = \id_B$. Dizemos, nesse caso, que $g$ é a \emph{inversa} de $f$.
+\end{definition}
+
+\begin{lemma} \label{lema.set:invesqdiriguais}
+    As inversas laterais de uma função invertível à esquerda e à direita coincidem.
+\end{lemma}
+
+\begin{proof}
+    Seja $f : A \to B$ invertível à esquerda e à direita. Sejam $g_1 : B \to A$ a inversa à esquerda de $f$ e $g_2 : B \to A$ a inversa à direta de $f$. Temos
+        \[
+            g_1 = g_1 \circ \id_B = g_1 \circ (f \circ g_2) = (g_1 \circ f) \circ g_2 = \id_A \circ g_2 = g_2.    
+        \]
+    Logo, as inversas à esquerda e à direita de $f$ são iguais. \blackproof
+\end{proof}
+
+\begin{proposition}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Uma função invertível tem uma única inversa.\footnote{Note que é esta proposição que nos permite dizer ``a função inversa'' em vez de ``uma função inversa''. }
+            \item Uma função é invertível se, e somente se, é invertível à esquerda e à direita.
+        \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Seja $f : A \to B$ invertível. Sejam $g_1, g_2 : B \to A$ inversas de $f$. Provemos que $g_1 = g_2$. De fato,
+                \[
+                    g_1 = g_1 \circ \id_B = g_1 \circ (f \circ g_2) = (g_1 \circ f) \circ g_2 = \id_A \circ g_2 = g_2.    
+                \]
+            Logo, a função inversa da função $f : A \to B$, quando existe, é única. \blackproof
+            \item A ida ($\Rightarrow$) segue imediatamente das definições. A volta ($\Leftarrow$) também, considerando o \cref{lema.set:invesqdiriguais}. \blackproof 
+        \end{enumerate}
+\end{proof}
+
+\begin{theorem} \label{teo.set:bij2}
+    Seja $f: A \to B$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $f$ é invertível se, e somente se, $f$ é bijetiva.
+            \item Se $f$ é invertível, então a função inversa de $f$ é a relação inversa $f^{-1}$.
+        \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Por um lado ($\Rightarrow$), se $f$ é invertível, então existe $g: B \to A$ tal que $g \circ f = \id_A$ e $f \circ g = \id_B$. Logo, $f$ é invertível à esquerda e à direita, isto é, $f$ é injetiva (\cref{teo.set:invesquerda}) e sobrejetiva em $B$ (\cref{teo.set:invdireita}), isto é, $f$ é bijetiva em $B$. Por outro lado ($\Leftarrow$), se $f$ é bijetiva em $B$, então, pelo \cref{teo.set:bij1}, sua relação inversa $f^{-1} \subseteq B \times A$ é uma função de $B$ em $A$ e, mais ainda, satisfaz $f^{-1} \circ f = \id_{A}$ e $f \circ f^{-1} = \id_{B}$. Logo, $f$ é invertível. \blackproof   
+            \item Segue imediatamente do primeiro item. \blackproof
+        \end{enumerate}
+\end{proof}
+
+\subsection{Relações de Ordem}
+
+\begin{definition}
+    Seja $R$ uma relação em $X$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Dizemos que $R$ é \emph{reflexiva} se
+                \[
+                    \forall x (x \in X \rightarrow (x,x) \in R).
+                \]
+            \item Dizemos que $R$ é \emph{irreflexiva} se
+                \[
+                    \forall x (x \in X \rightarrow (x,x) \notin R).
+                \]
+            \item Dizemos que $R$ é \emph{simétrica} se
+                \[
+                    \forall x \forall y (x,y \in X \rightarrow ((x,y) \in R \rightarrow (y,x) \in R)).
+                \]
+            \item Dizemos que $R$ é \emph{antissimétrica} se
+                \[
+                    \forall x \forall y (x,y \in X \rightarrow ((x,y) \in R \land (y,x) \in R \rightarrow x=y)).
+                \]
+            \item Dizemos que $R$ é \emph{assimétrica} se
+                \[
+                    \forall x \forall y (x,y \in X \rightarrow ( (x,y) \in R \rightarrow (y,x) \notin R)).
+                \]
+            \item Dizemos que $R$ é \emph{transitiva} se
+                \[
+                    \forall x \forall y \forall z (x,y,z \in X \rightarrow ((x,y) \in R \land (y,z) \in R \rightarrow (x,z) \in R)).
+                \]
+        \end{enumerate}
+\end{definition}
+
+\begin{definition}[Ordem Parcial] \label{defi.set:ordemparcial}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Uma \emph{relação de ordem parcial} em $X$ é uma relação ${\leq} \subseteq X \times X$ que tem as seguintes propriedades.
+                \begin{enumerate}[label=\roman*.]
+                    \item Reflexividade: $\forall x(x \in X \rightarrow (x,x) \in \leq)$.
+                    \item Antissimetria: $\forall x \forall y (x,y \in X \rightarrow (x \leq y \land y \leq x \rightarrow x=y))$.
+                    \item Transitividade: $\forall x \forall y \forall z (x,y,z \in X \rightarrow (x \leq y \land y \leq z \rightarrow x \leq z))$. 
+                \end{enumerate}
+            Dizemos que $X$ é o \emph{domínio} de $\leq$.
+            \item Um \emph{conjunto parcialmente ordenado} é um par $(X, \leq)$, onde ${\leq} \subseteq X \times X$ é uma relação de ordem parcial.
+        \end{enumerate}
+\end{definition}
+
+\begin{example}
+    Para todo $X$, a relação $\subseteq_X$ é uma ordem parcial em $X$.
+\end{example}
+
+\begin{definition}[Ordem Estrita] \label{defi.set:ordemestrita}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Uma \emph{relação de ordem estrita} em $X$ é uma relação ${<} \subseteq X \times X$ que tem as seguintes propriedades.
+                \begin{enumerate}[label=\roman*.]
+                    \item Assimetria: $\forall x \forall y (x,y \in X \rightarrow ((x,y) \in < \rightarrow (y,x) \notin <))$.
+                    \item Transitividade: $\forall x \forall y \forall z (x,y,z \in X \rightarrow ( (x, y) \in < \land (y, z) \in < \rightarrow (x,z) \in <))$. 
+                \end{enumerate}
+            Dizemos que $X$ é o \emph{domínio} de $<$.
+            \item Um \emph{conjunto estritamente ordenado} é um par $(X, <)$, onde ${<} \subseteq X \times X$ é uma relação de ordem estrita.
+        \end{enumerate}
+\end{definition}
+
+\begin{example}
+    Para todo $X$, a relação $\subsetneq_X$ é uma ordem estrita em $X$.
+\end{example}
+
+\begin{proposition} \label{prop.set:parcial_e_estrita}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Seja $\leq$ uma ordem parcial em $X$. A relação
+                \[
+                    {<} := \{(x,y) \in X \times X : x \leq y \land x \neq y \}
+                \]
+            é uma ordem estrita em $X$.
+            \item Seja $<$ uma ordem estrita em $X$. A relação
+                \[
+                    {\leq} := \{(x,y) \in X \times X : x<y \lor x=y \}
+                \]
+            é uma ordem parcial em $X$.
+        \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item 
+        \end{enumerate}
+\end{proof}
+
+\begin{definition}
+    Sejam $(X, \leq)$ parcialmente ordenado e $S \in \mathcal{P}(X)_{\neq \emptyset}$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Dizemos que $M \in X$ é
+                \begin{enumerate}[label=\roman*.]
+                    \item uma \emph{cota superior} de $S$ se
+                        \[
+                            \forall x (x \in S \rightarrow x \leq M).
+                        \]
+                    Dizemos, nesse caso, que $S$ é \emph{limitado superiormente} em $X$.
+                    \item o \emph{elemento máximo} de $S$ se
+                        \[
+                            \forall x (x \in S \rightarrow x \leq M) \land M \in S,
+                        \]
+                    isto é, se $M$ é uma cota superior de $S$ e $M \in S$. Isso é denotado por $\max{S} := M$.
+                    \item o \emph{supremo} de $S$ se
+                        \[
+                            \forall x (x \in S \rightarrow x \leq M) \land \forall y (y \in X \land \forall x (x \in S \rightarrow x \leq y) \rightarrow M \leq y),
+                        \]
+                    isto é, se $M$ é a menor cota superior de $S$. Isso é denotado por $\sup{S} := M$.
+                \end{enumerate}
+            \item Dizemos que $m \in X$ é
+                \begin{enumerate}[label=\roman*.]
+                    \item uma \emph{cota inferior} de $S$ se
+                        \[
+                            \forall x (x \in S \rightarrow m \leq x).
+                        \]
+                    Dizemos, nesse caso, que $S$ é \emph{limitado inferiormente} em $X$.
+                    \item o \emph{elemento mínimo} de $S$ se
+                        \[
+                            \forall x (x \in S \rightarrow m \leq x) \land m \in S,
+                        \]
+                    isto é, se $m$ é uma cota inferior de $S$ e $m \in S$. Isso é denotado por $\min{S} := m$.
+                    \item o \emph{ínfimo} de $S$ se
+                        \[
+                            \forall x (x \in S \rightarrow m \leq x) \land \forall y (y \in X \land \forall x (x \in S \rightarrow y \leq x) \rightarrow y \leq m),
+                        \]
+                    isto é, se $m$ é a maior cota inferior de $S$. Isso é denotado por $\inf{S} := m$.
+                \end{enumerate}
+        \end{enumerate}
+\end{definition}
+
+\begin{remark}
+    É fácil ver que o máximo de $S$, quando existe, é único. De fato, se $x, y \in S$ são máximos de $S$, então $x \leq y$ e $y \leq x$, de modo que $x = y$. Essa unicidade também vale para o supremo, o mínimo e o ínfimo de $S$, quando existem. Isso justifica o uso do artigo ``o'' (em \emph{o} máximo, em vez de \emph{um} máximo, por exemplo) e nos permite denotar esses elementos por $\max S$, $\sup S$, $\min S$ e $\inf S$, respectivamente.
+\end{remark}
+
+\begin{definition}
+    Seja $(X, \leq)$ parcialmente ordenado.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Dizemos que $x,y \in X$ são \emph{comparáveis} se $x \leq y$ ou $y \leq x$.
+            \item Dizemos que $\leq$ é uma relação de ordem \emph{total}\footnote{O termo \emph{ordem linear} também costuma ser usado. Dizemos, nesse caso, que o par $(X,\leq)$ é um \emph{conjunto linearmente ordenado}.}, e que o par $(X,\leq)$ é um \emph{conjunto totalmente ordenado}, se quaisquer dois elementos de $X$ são comparáveis, isto é, se
+                \[
+                    \forall x \forall y (x,y \in X \rightarrow (x \leq y \lor y \leq x)).
+                \]
+        \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    Seja $(X, \leq)$ parcialmente ordenado.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Dizemos que $\leq$ é uma \emph{boa ordem} em $X$, e que o par $(X,\leq)$ é um \emph{conjunto bem-ordenado}, se todo subconjunto não vazio de $X$ possui um elemento mínimo.
+            \item Dizemos que $\leq$ é um \emph{reticulado} se para quaisquer $x,y \in X$, o conjunto $\{ x,y \}$ possui supremo e ínfimo.
+            \item Dizemos que $\leq$ é uma \emph{árvore} se, para todo $x \in X$, o conjunto $S = \{ y \in X : y \leq x\}$ é tal que $(S, \leq \cap \ S^2)$ é um conjunto bem-ordenado.
+        \end{enumerate}
+\end{definition}
+
+\begin{proposition}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Toda boa ordem é uma ordem total.
+            \item Toda boa ordem é uma árvore.
+            \item Toda ordem total é um reticulado.
+        \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Sejam $x, y \in X$. Como $\leq$ é uma boa ordem, todo subconjunto não vazio de $X$ possui elemento mínimo. Assim, o conjunto $\{x,y\} \subseteq X$ possui um elemento mínimo. Se $\min\{x,y\} = x$, então $x \leq y$. Se $\min\{x,y\} = y$, então $y \leq x$. Em qualquer caso, vale $x \leq y$ ou $y \leq x$, de modo que a ordem $\leq$ é total. \blackproof
+            \item Pela definição de árvore, precisamos mostrar que, para todo $x \in X$, o conjunto $S = \{ y \in X : y \leq x\}$ é bem-ordenado pela ordem induzida. Seja $A \subseteq S$ um subconjunto não vazio. Como $S \subseteq X$, temos que $A \subseteq X$. Como $X$ é bem-ordenado, $A$ possui um elemento mínimo. Com isso, todo subconjunto não vazio de $S$ possui um elemento mínimo, isto é, $S$ é bem-ordenado. \blackproof
+            \item Sejam $x, y \in X$. Como a ordem $\leq$ é total, temos $x \leq y$ ou $y \leq x$. Suponha, sem perda de generalidade, que $x \leq y$. Como $x \leq x$ e $x \leq y$, temos que $x$ é uma cota inferior de $\{x,y\}$. Se $z$ uma cota inferior qualquer de $\{x,y\}$, então, em particular, $z \leq x$. Logo, $x$ é a maior das cotas inferiores, isto é, $x = \inf\{x,y\}$. Como $y \geq x$ e $y \geq y$, temos que $y$ é uma cota superior de $\{x,y\}$. Se $w$ uma cota superior qualquer de $\{x,y \}$, então, em particular, $w \geq y$. Logo, $y$ é a menor das cotas superiores, isto é, $y = \sup\{x,y\}$. Portanto, $\{x,y\}$ possui supremo e ínfimo. \blackproof
+        \end{enumerate}
+\end{proof}
+
+\begin{proposition}
+    Se $(X,\leq)$ é parcialmente ordenado e $Y \subseteq X$, então $(Y, \leq \cap \ Y^2)$ é parcialmente ordenado.
+\end{proposition}
+
+\begin{proof}
+    Defina $\leq_Y \ := \ \leq \cap \ Y^2$.
+        \begin{enumerate}[label=\roman*.]
+            \item (Reflexividade) Dado $y \in Y$, como $Y \subseteq X$, temos $y \in X$, donde $y \leq y$. Como $y \in Y$, vem $(y,y) \in \leq_Y$.
+            \item (Antissimetria) Sejam $x, y \in Y$ tais que $(x,y) \in \leq_Y$ e $(y,x) \in \leq_Y$. Então $x \leq y$ e $y \leq x$. Pela antissimetria de $\leq$, vem $x=y$.
+            \item (Transitividade) Sejam $x, y, z \in Y$ tais que $(x,y) \in \leq_Y$ e $(y,z) \in \leq_Y$. Então $x \leq y$ e $y \leq z$. Pela transitividade de $\leq$, vem $x \leq z$. Como $x, z \in Y$, vem $(x,z) \in \leq_Y$.
+        \end{enumerate}
+    Com isso, $\leq_Y \ := \ \leq \cap \ Y^2$ é uma ordem. \blackproof
+\end{proof}
+
+\begin{definition}
+    Sejam $(X,\leq)$ parcialmente ordenado e $Y \subseteq X$. 
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Dizemos que $\leq_Y \ := \ \leq \cap \ Y^2$ é uma \emph{subordem} de $\leq$.
+            \item Dizemos que $(Y, \leq_Y)$ é um \emph{subconjunto parcialmente ordenado} de $(X, \leq)$. Isso é denotado por $(Y, \leq)$.
+        \end{enumerate}
+\end{definition}
+
+\begin{proposition}
+    Sejam $(X,\leq)$ parcialmente ordenado e $Y \subseteq X$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Se $\leq$ é uma ordem total, então $\leq_Y$ é uma ordem total.
+            \item Se $\leq$ é uma boa ordem, então $\leq_Y$ é uma boa ordem.
+            \item Se $\leq$ é uma árvore, então $\leq_Y$ é uma árvore.
+        \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Sejam $x, y \in Y$. Como $Y \subseteq X$, temos $x, y \in X$, e como $\leq$ é total em $X$, temos $x \leq y$ ou $y \leq x$, de modo que $x \leq_Y y$ ou $y \leq_Y x$. \blackproof
+            \item Seja $A \in \mathcal{P}(Y)_{\neq \emptyset}$. Como $Y \subseteq X$, temos $A \subseteq X$, e como $\leq$ é uma boa ordem em $X$, existe $\min{A} \in A$. Como para todo $z \in A \subseteq Y$ temos $\min{A} \leq z$, segue que $\min{A}$ é o mínimo de $A$ com relação a $\leq_Y$. \blackproof
+            \item Sendo $x \in Y$ e $S := \{y \in Y : y \leq_Y x \}$, provemos que $(S, \leq_Y \cap \ S^2)$ é bem ordenado. Pondo $T := \{y \in X : y \leq x \}$, temos $S = T \cap Y$, e como $x \in X$ e $\leq$ é uma árvore, temos que $(T, \leq \cap \ T^2)$ é bem ordenado. Como $S \subseteq T$, temos que $(S, (\leq \cap \ T^2) \cap S^2 )$ é também uma boa ordem. Observando que
+                \begin{align*}
+                    \leq_Y \cap \ S^2 &= (\leq \cap \ Y^2) \cap (T \cap Y)^2 \\
+                    &= \leq \cap \ Y^2 \cap T^2 \\
+                    &= (\leq \cap \ T^2) \cap (T^2 \cap Y^2) \\
+                    &= (\leq \cap \ T^2) \cap S^2, 
+                \end{align*}
+            segue que $(S, \leq_Y \cap \ S^2)$ é bem ordenado. \blackproof
+        \end{enumerate}
+\end{proof}
+
+\begin{definition}
+    Dois conjuntos parcialmente ordenados $(X_1, \leq_1)$ e $(X_2, \leq_2)$ são \emph{ordem-isomorfos} se existe uma bijeção $f:X_1 \to X_2$ tal que 
+        \[
+          \forall x \forall y (x,y \in X_1 \rightarrow (x \leq_1 y \leftrightarrow f(x) \leq_2 f(y))).  
+        \]
+    Dizemos, nesse caso, que $f$ é um \emph{isomorfismo de ordens parciais}.
+\end{definition}
+
+\begin{theorem}
+    Se $(X, \leq)$ é um conjunto ordenado, então existe um conjunto ordenado $(Y, \preceq)$ ordem-isomorfo a $(X,\leq)$ tal que 
+        \[
+            \preceq \, \, = \{ (x,y) \in Y \times Y : x \subseteq y \}.
+        \]
+\end{theorem}
+
+\begin{proof}
+    Definindo $f : X \to \mathcal{P}{(X)}$ por $f(x) := \{y \in X : y \leq x \}$, temos que $f$ é bijetiva em relação a $Y := \Img{(f)}$. De fato, se $f(x) = f(y)$, então $x \in f(y)$ e $y \in f(x)$ já que $x \in f(x)$ e $y \in f(y)$; daí, pela definição de $f$, vem $x \leq y$ e $y \leq x$, de modo que $x = y$ e $f$ é injetiva. Provemos então que $x \leq y$ se, e somente se, $f(x) \subseteq f(y)$, para quaisquer $x,y \in X$. Se $z \in f(x)$, então $z \leq x$, e se $x \leq y$, então $z \leq y$, de modo que $z \in f(y)$ e $f(x) \subseteq f(y)$. Agora, se $x \in f(x) \subseteq f(y)$, então $x \in f(y)$, donde $x \leq y$. Com isso, $(X, \leq)$ é ordem-isomorfo a $(Y, \subseteq)$, como havíamos afirmado. \blackproof
+\end{proof}
 
 \section{O Axioma do Infinito e os Números Naturais}
 
@@ -598,7 +1435,7 @@ Apresentamos a seguir algumas propriedades algébricas de algumas operações co
     Defina $f : N \to N$ por $f(m) = m$ para todo $m \in N$, e $g : N \times N \times N \to N$ por $g(m,x,n) = s(x)$ para quaisquer $m,x,n \in N$. Pelo \cref{lema.set:recpar2}, existe uma única função $+_N : N \times N \to N$ tal que $+_N(m,a) = f(m) = m$ para todo $m \in N$, e $+_N(m,s(n)) = g(m,+_N(m,n),n) = s(+_N(m,n))$ para quaisquer $m,n \in N$. \blackproof
 \end{proof}
 
-\begin{lemma} \label{lema.fund:comutatividade_soma_naturais}
+\begin{lemma} \label{lema.set:comutatividade_soma_naturais}
     Seja $(N,s,a)$ um sistema de Peano.
         \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
             \item $+_N(a,n)=n$, para todo $n \in N$.
@@ -643,11 +1480,11 @@ Apresentamos a seguir algumas propriedades algébricas de algumas operações co
                 \[
                     A := \{n \in N : m +_N n = n +_N m\}.
                 \]
-            Pelo \cref{lema.fund:comutatividade_soma_naturais}, temos $a +_N m = m$, e como $m +_N a = m$, temos $m +_N a = a +_N m$, de modo que $a \in A$. Agora, supondo que $n \in A$, provemos que $s(n) \in A$. Se $n \in A$, então, pela hipótese de indução, temos $m +_N n = n +_N m$, de modo que
+            Pelo \cref{lema.set:comutatividade_soma_naturais}, temos $a +_N m = m$, e como $m +_N a = m$, temos $m +_N a = a +_N m$, de modo que $a \in A$. Agora, supondo que $n \in A$, provemos que $s(n) \in A$. Se $n \in A$, então, pela hipótese de indução, temos $m +_N n = n +_N m$, de modo que
                 \[
                     m +_N s(n) = s(m +_N n) = s(n +_N m) = n +_N s(m);
                 \]
-            como, pelo \cref{lema.fund:comutatividade_soma_naturais}, $n +_N s(m) = s(n) +_N m$, temos $m +_N s(n) = s(n) +_N m$, de modo que $s(n) \in A$. Logo, pelo princípio de indução, temos $A = N$. Logo, a adição $+_N$ é comutativa. \blackproof
+            como, pelo \cref{lema.set:comutatividade_soma_naturais}, $n +_N s(m) = s(n) +_N m$, temos $m +_N s(n) = s(n) +_N m$, de modo que $s(n) \in A$. Logo, pelo princípio de indução, temos $A = N$. Logo, a adição $+_N$ é comutativa. \blackproof
             \item Fixe $m,n \in N$ e defina
                 \[
                     A := \{p \in N : m +_N (n +_N p) = (m +_N n) +_N p\}.    
@@ -720,7 +1557,7 @@ Apresentamos a seguir algumas propriedades algébricas de algumas operações co
     Defina $f : N \to N$ por $f(m) = a$ para todo $m \in N$, e $g : N \times N \times N \to N$ por $g(m,x,n) = +_N(x,m)$ para quaisquer $m,x,n \in N$. Pelo \cref{lema.set:recpar2}, existe uma única função $\cdot_N : N \times N \to N$ tal que $\cdot_N(m,a) = f(m) = a$ para todo $m \in N$, e $\cdot_N(m,s(n)) = g(m,\cdot_N(m,n),n) = +_N(\cdot_N(m,n),m)$ para quaisquer $m,n \in N$. \blackproof
 \end{proof}
 
-\begin{lemma} \label{lema.fund:comutatividade_produto_naturais}
+\begin{lemma} \label{lema.set:comutatividade_produto_naturais}
     Seja $(N,s,a)$ um sistema de Peano.
         \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
             \item $\cdot_N (a, n) = a$, para todo $n \in N$.
@@ -796,11 +1633,11 @@ Apresentamos a seguir algumas propriedades algébricas de algumas operações co
                 \[
                     A := \{n \in N : m \cdot_N n = n \cdot_N m \}.
                 \]
-            Pelo \cref{lema.fund:comutatividade_produto_naturais}, temos $a \cdot_N m = a$, e como $m \cdot_N a = a$, temos $m \cdot_N a = a \cdot_N m$, de modo que $a \in A$. Agora, supondo que $n \in A$, provemos que $s(n) \in A$. Se $n \in A$, então, pela hipótese de indução, temos $m \cdot_N n = n \cdot_N m$, de modo que
+            Pelo \cref{lema.set:comutatividade_produto_naturais}, temos $a \cdot_N m = a$, e como $m \cdot_N a = a$, temos $m \cdot_N a = a \cdot_N m$, de modo que $a \in A$. Agora, supondo que $n \in A$, provemos que $s(n) \in A$. Se $n \in A$, então, pela hipótese de indução, temos $m \cdot_N n = n \cdot_N m$, de modo que
                 \[
                     m \cdot_N s(n) = (m \cdot_N n) +_N m = (n \cdot_N m) +_N m;
                 \]
-            como, pelo \cref{lema.fund:comutatividade_produto_naturais}, $(n \cdot_N m) +_N m = s(n) \cdot_N m$, temos $m \cdot_N s(n) = s(n) \cdot_N m$, de modo que $s(n) \in A$. Logo, pelo princípio de indução, temos $A = N$. Logo, a multiplicação $\cdot_N$ é comutativa. \blackproof
+            como, pelo \cref{lema.set:comutatividade_produto_naturais}, $(n \cdot_N m) +_N m = s(n) \cdot_N m$, temos $m \cdot_N s(n) = s(n) \cdot_N m$, de modo que $s(n) \in A$. Logo, pelo princípio de indução, temos $A = N$. Logo, a multiplicação $\cdot_N$ é comutativa. \blackproof
             \item Fixe $m,n \in N$ e defina
                 \[
                     A := \{p \in N : m \cdot_N (n \cdot_N p) = (m \cdot_N n) \cdot_N p\}.
@@ -989,7 +1826,7 @@ Apresentamos a seguir algumas propriedades algébricas de algumas operações co
         \end{enumerate}
 \end{proof}
 
-\begin{theorem} \label{teo.fund:tricotomia_naturais}
+\begin{theorem} \label{teo.set:tricotomia_naturais}
     Sejam $(N,s,a)$ um sistema de Peano e $m,n \in N$.
         \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
             \item Para quaisquer $m,n\in N$, $m \leq_N n$ ou $n \leq_N m$.
@@ -1061,7 +1898,7 @@ Apresentamos a seguir algumas propriedades algébricas de algumas operações co
         \end{enumerate}
 \end{proof}
 
-\begin{theorem} \label{teo.fund:inducao_e_boaordem}
+\begin{theorem} \label{teo.set:inducao_e_boaordem}
     Seja $(N,s,a)$ um sistema de Peano.
         \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
             \item Seja $A \subseteq N$ tal que, para todo $n \in N$, se $m \in A$ para todo $m \in N$ tal que $m <_N n$, então $n \in A$. Então, $A = N$.
@@ -1128,7 +1965,7 @@ Apresentamos a seguir algumas propriedades algébricas de algumas operações co
         \end{enumerate}
 \end{proof}
 
-\begin{theorem} \label{teo.fund:isomorfismo_sistemas_peano_soma_produto_ordem}
+\begin{theorem} \label{teo.set:isomorfismo_sistemas_peano_soma_produto_ordem}
     Sejam $(N,s,a)$ e $(M,t,b)$ sistemas de Peano. Existe uma única bijeção $\varphi : N \to M$ tal que, para quaisquer $m,n \in N$,
         \begin{enumerate}[label=\roman*.]
             \item $\varphi(m +_N n) = \varphi(m) +_M \varphi(n)$.
@@ -1220,7 +2057,7 @@ Apresentamos a seguir algumas propriedades algébricas de algumas operações co
         \]
 \end{axiom}
 
-\begin{proposition} \label{prop.fund:omega}
+\begin{proposition} \label{prop.set:omega}
     \leavevmode
         \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
             \item Para todo $I$ indutivo,
@@ -1249,7 +2086,7 @@ Apresentamos a seguir algumas propriedades algébricas de algumas operações co
 \end{proof}
 
 \begin{remark}
-    A \cref{prop.fund:omega} nos diz que $\omega(I)$ é a interseção da família de todos os conjuntos indutivos e que o parâmtro $I$ pode ser suprimido. A seguinte definição só é possível devido a esse teorema.
+    A \cref{prop.set:omega} nos diz que $\omega(I)$ é a interseção da família de todos os conjuntos indutivos e que o parâmtro $I$ pode ser suprimido. A seguinte definição só é possível devido a esse teorema.
 \end{remark}
 
 \begin{definition}
@@ -1258,7 +2095,7 @@ Apresentamos a seguir algumas propriedades algébricas de algumas operações co
 
 \subsubsection{A Existência de um Sistema de Peano}
 
-\begin{theorem} \label{teo.fund:omega_indução}
+\begin{theorem} \label{teo.set:omega_indução}
     Seja $A \subseteq \omega$ indutivo. Então $A = \omega$.
 \end{theorem}
 
@@ -1294,7 +2131,7 @@ Apresentamos a seguir algumas propriedades algébricas de algumas operações co
     Por indução. Defina $A := \{n \in \omega : n \text{ é transitivo} \}$. Como $\emptyset$ é trivialmente transitivo (por vacuidade), temos $\emptyset \in A$. Agora, supondo que $n \in A$, provemos que $n^+ \in A$. Se $n \in A$, então, pela hipótese de indução, temos $x \subseteq n$ para todo $x \in n$. Seja $x \in n^+$. Então $x \in n$ ou $x=n$. Se $x \in n$, então, pela hipótese de indução, temos $x \subseteq n$, e como $n \subseteq n^+$, temos $x \subseteq n^+$. Se $x = n$, então, como $n \subseteq n^+$, temos $x \subseteq n^+$. Logo, $n^+ \in A$. Logo, pelo princípio de indução, $A = \omega$. \blackproof
 \end{proof}
 
-\begin{corollary} \label{lema.fund:omega_irreflexivo}
+\begin{corollary} \label{lema.set:omega_irreflexivo}
     $n \notin n$ para todo $n \in \omega$.
 \end{corollary}
 
@@ -1315,7 +2152,7 @@ Apresentamos a seguir algumas propriedades algébricas de algumas operações co
             $s$ é injetiva.
         \end{claim}
         \begin{midproof}
-            Sejam $x,y \in \omega$ tais que $s(x)=s(y)$. Então $x^+ = y^+$. Como $x \in x^+$, temos $x \in y^+$, de modo que $x \in y$ ou $x=y$. Analogamente, como $y \in y^+$, temos $y \in x^+$, de modo que $y \in x$ ou $y=x$. Se fosse $x \neq y$, teríamos $x \in y$ e $y \in x$, e como $y$ é transitivo, teríamos $x \subseteq y$, de modo que $y \in y$, o que contradiz o \cref{lema.fund:omega_irreflexivo}. Logo, $x=y$. Logo, $s$ é injetiva. \whiteproof
+            Sejam $x,y \in \omega$ tais que $s(x)=s(y)$. Então $x^+ = y^+$. Como $x \in x^+$, temos $x \in y^+$, de modo que $x \in y$ ou $x=y$. Analogamente, como $y \in y^+$, temos $y \in x^+$, de modo que $y \in x$ ou $y=x$. Se fosse $x \neq y$, teríamos $x \in y$ e $y \in x$, e como $y$ é transitivo, teríamos $x \subseteq y$, de modo que $y \in y$, o que contradiz o \cref{lema.set:omega_irreflexivo}. Logo, $x=y$. Logo, $s$ é injetiva. \whiteproof
         \end{midproof}
         \begin{claim}
             $\emptyset \in \omega \setminus s(\omega)$.
@@ -1327,14 +2164,14 @@ Apresentamos a seguir algumas propriedades algébricas de algumas operações co
             Para todo $A \subseteq \omega$, se $\emptyset \in A$ e $x^+ \in A$ para todo $x \in A$, então $A = \omega$.
         \end{claim}
         \begin{midproof}
-            Segue do \cref{teo.fund:omega_indução}. \whiteproof
+            Segue do \cref{teo.set:omega_indução}. \whiteproof
         \end{midproof}
     Logo, $(\omega, x \mapsto x^+, \emptyset)$ é um sistema de Peano. \blackproof
 \end{proof}
 
 \subsection*{Algumas Propriedades}
 
-\begin{theorem}
+\begin{theorem} \label{cor.set:bigcupomega}
     \leavevmode
         \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
             \item $\omega$ é transitivo.
@@ -1378,7 +2215,7 @@ Apresentamos a seguir algumas propriedades algébricas de algumas operações co
 
 \subsection{Os Teoremas da Recursão}
 
-\begin{theorem}[da recursão finita] \label{teo.fund:recfin}
+\begin{theorem}[da recursão finita] \label{teo.set:recfin}
     Sejam $A \neq \emptyset$, $a \in A$ e $f:A \to A$. Existe uma única função $\varphi : \omega \to A$ tal que
         \begin{itemize}
             \item $\varphi(0) = a$;
@@ -1390,7 +2227,7 @@ Apresentamos a seguir algumas propriedades algébricas de algumas operações co
     Segue como corolário dos \cref{teo.set:recursao_peano,teo.set:existe_peano}. \blackproof
 \end{proof}
 
-\begin{theorem}[da recursão com parâmetro] \label{teo.fund:recpar}
+\begin{theorem}[da recursão com parâmetro] \label{teo.set:recpar}
     Sejam $a \in A$ e $f : A \times \omega \to A$. Existe uma única função $\varphi : \omega \to A$ tal que
         \begin{itemize}
             \item $\varphi(0) = a$;
@@ -1414,8 +2251,8 @@ Apresentamos a seguir algumas propriedades algébricas de algumas operações co
 \end{theorem}
 
 \begin{proof}
-    Defina $h : X^{< \omega} \to X^{< \omega}$ por $h(g) := g \cup \{(\Dom{(g)}, f(g)) \}$. Pelo \cref{teo.fund:recfin}, existe uma única função $\psi : \omega \to X^{< \omega}$ tal que $\psi(0) = \emptyset$ e $\psi(n^+) = h(\psi(n))$.
-        \begin{claim} \label{fund:reccom.claim.dompsin}
+    Defina $h : X^{< \omega} \to X^{< \omega}$ por $h(g) := g \cup \{(\Dom{(g)}, f(g)) \}$. Pelo \cref{teo.set:recfin}, existe uma única função $\psi : \omega \to X^{< \omega}$ tal que $\psi(0) = \emptyset$ e $\psi(n^+) = h(\psi(n))$.
+        \begin{claim} \label{set:reccom.claim.dompsin}
             $\psi(n) \in X^n$ para todo $n \in \omega$.
         \end{claim}
         \begin{midproof}
@@ -1429,7 +2266,7 @@ Apresentamos a seguir algumas propriedades algébricas de algumas operações co
                 \]
             e como $\Dom{(\psi(n))} = n$, vem $\Dom{(\psi(n^+))} = n \cup \{ n \} = n^+$. Isso completa o passo indutivo. Como $\Dom{(\psi(n))} = n$ e $\Img{\psi(n)} \subseteq X$, vem $\psi(n) : n \to X$, isto é, $\psi(n) \in X^n$, para todo $n \in \omega$. \whiteproof
         \end{midproof}
-        \begin{claim} \label{fund:reccom.claim.restricao}
+        \begin{claim} \label{set:reccom.claim.restricao}
             Para quaisquer $m,n \in \omega$, se $m \subseteq n$, então $\psi(n) \restriction_m = \psi(m)$.
         \end{claim}
         \begin{midproof}
@@ -1441,7 +2278,7 @@ Apresentamos a seguir algumas propriedades algébricas de algumas operações co
             Com isso, vem $\psi(n^+) \restriction_m = \psi(m)$ para todo $m \subseteq n^+$. Isso completa o passo indutivo. \whiteproof
         \end{midproof}
     Agora, defina $\varphi := \bigcup \Img{(\psi)}$. Essa é a função procurada. Provemos isso.
-        \begin{claim} \label{fund:reccom.claim.varphifuncao}
+        \begin{claim} \label{set:reccom.claim.varphifuncao}
             $\varphi$ é uma função de $\omega$ em $X$.
         \end{claim}
         \begin{midproof}
@@ -1453,13 +2290,13 @@ Apresentamos a seguir algumas propriedades algébricas de algumas operações co
                 \[
                     \Dom{(\varphi)} = \Dom{\left( \bigcup_{n \in \omega} \psi(n) \right)} = \bigcup_{n \in \omega} \Dom{(\psi(n))} = \bigcup_{n \in \omega} n = \bigcup \omega = \omega,
                 \]
-            pois $\Dom{(\psi(n))} = n$ para todo $n \in \omega$ (\cref{fund:reccom.claim.dompsin}) e $\bigcup \omega = \omega$ (\cref{cor.set:bigcupomega}). Por fim, verifiquemos que $\Img{(\varphi)} \subseteq X$. Para isso, basta ver que
+            pois $\Dom{(\psi(n))} = n$ para todo $n \in \omega$ (\cref{set:reccom.claim.dompsin}) e $\bigcup \omega = \omega$ (\cref{cor.set:bigcupomega}). Por fim, verifiquemos que $\Img{(\varphi)} \subseteq X$. Para isso, basta ver que
                 \[
                     \Img{(\varphi)} = \Img{\left(\bigcup_{n \in \omega} \psi(n) \right)} = \bigcup_{n \in \omega} \Img{(\psi(n))} \subseteq X,
                 \]
             pois $\Img{(\psi(n))} \subseteq X$ para todo $n \in \omega$. Com isso, $\varphi : \omega \to X$. \whiteproof
         \end{midproof}
-        \begin{claim} \label{fund:reccom.claim.propriedaderecursiva}
+        \begin{claim} \label{set:reccom.claim.propriedaderecursiva}
             $\varphi(n) = f(\varphi \restriction_n)$ para todo $n \in \omega$.
         \end{claim}
         \begin{midproof}
@@ -1467,7 +2304,7 @@ Apresentamos a seguir algumas propriedades algébricas de algumas operações co
                 \[
                     \psi(n^+) = \psi(n) \cup \{ (n, f(\psi(n)))\},
                 \]
-            e como $\varphi = \bigcup \Img{(\psi)}$, temos $\psi(n^+) \subseteq \varphi$, de modo que $(n, f(\psi(n))) \in \varphi$; como $\varphi : \omega \to X$ é uma função (\cref{fund:reccom.claim.varphifuncao}), vem  $\varphi(n) = f(\psi(n))$. Para finalizarmos, vejamos que $\psi(n) = \varphi \restriction_n$. Por um lado ($\subseteq$), se $(k,x) \in \psi(n)$, então, como $\psi(n) \in \Img{(\psi)}$, temos $(k,x) \in \bigcup \Im{(\psi)} = \varphi$. Com isso, como $k \in n$ pois $\Dom{(\psi(n))} = n$ (\cref{fund:reccom.claim.dompsin}), vem $(k,x) \in \varphi \restriction_n$. Por outro lado ($\supseteq$), se $(k,x) \in \varphi \restriction_n$, então $(k,x) \in \varphi$ com $k \in n$ e existe $m \in \omega$ tal que $(k,x) \in \psi(m)$. Se $n \subseteq m$, então $\psi(m) \restriction_n = \psi(n)$ (\cref{fund:reccom.claim.restricao}), e como $k \in n$, temos $(k,x) \in \psi(m) \restriction_n$, de modo que $(k,x) \in \psi(n)$. Se $m \subseteq n$, então $\psi(m) = \psi(n) \restriction_m$, e como $k \in m$, temos $(k,x) \in \psi(n) \restriction_m$, isto é, $(k,x) \in \psi(n)$. Com isso, temos $\psi(n) = \varphi \restriction_n$ para todo $n \in \omega$, de modo que, por fim, como $\varphi(n) = f(\psi(n))$, temos $\varphi(n) = f(\varphi \restriction_n)$ para todo $n \in \omega$. \whiteproof
+            e como $\varphi = \bigcup \Img{(\psi)}$, temos $\psi(n^+) \subseteq \varphi$, de modo que $(n, f(\psi(n))) \in \varphi$; como $\varphi : \omega \to X$ é uma função (\cref{set:reccom.claim.varphifuncao}), vem  $\varphi(n) = f(\psi(n))$. Para finalizarmos, vejamos que $\psi(n) = \varphi \restriction_n$. Por um lado ($\subseteq$), se $(k,x) \in \psi(n)$, então, como $\psi(n) \in \Img{(\psi)}$, temos $(k,x) \in \bigcup \Im{(\psi)} = \varphi$. Com isso, como $k \in n$ pois $\Dom{(\psi(n))} = n$ (\cref{set:reccom.claim.dompsin}), vem $(k,x) \in \varphi \restriction_n$. Por outro lado ($\supseteq$), se $(k,x) \in \varphi \restriction_n$, então $(k,x) \in \varphi$ com $k \in n$ e existe $m \in \omega$ tal que $(k,x) \in \psi(m)$. Se $n \subseteq m$, então $\psi(m) \restriction_n = \psi(n)$ (\cref{set:reccom.claim.restricao}), e como $k \in n$, temos $(k,x) \in \psi(m) \restriction_n$, de modo que $(k,x) \in \psi(n)$. Se $m \subseteq n$, então $\psi(m) = \psi(n) \restriction_m$, e como $k \in m$, temos $(k,x) \in \psi(n) \restriction_m$, isto é, $(k,x) \in \psi(n)$. Com isso, temos $\psi(n) = \varphi \restriction_n$ para todo $n \in \omega$, de modo que, por fim, como $\varphi(n) = f(\psi(n))$, temos $\varphi(n) = f(\varphi \restriction_n)$ para todo $n \in \omega$. \whiteproof
         \end{midproof}
     Com isso, fica provada a existência de uma função $\varphi: \omega \to X$ que tem as propriedades do enunciado. Provemos, por fim, sua unicidade.
         \begin{claim}
@@ -1493,7 +2330,7 @@ Apresentamos a seguir algumas propriedades algébricas de algumas operações co
 
 \subsection{Produto Cartesiano Generalizado}
 
-\begin{definition} \label{defi.fund:produtocartesianogeneralizado}
+\begin{definition} \label{defi.set:produtocartesianogeneralizado}
     O produto cartesiano de uma função $f$ é definido como
         \[
             \prod f := \left\{ \varphi \in \left(\bigcup \Im f \right)^{\Dom f} : \forall x (x \in \Dom f \rightarrow \varphi(x) \in f(x)) \right\}.
@@ -1583,7 +2420,7 @@ Apresentamos a seguir algumas propriedades algébricas de algumas operações co
     \leavevmode
         \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
             \item $\id_A$ é uma injeção de $A$ em $A$. \blackproof
-            \item Segue do \cref{teo.fund:CSB}. \blackproof
+            \item Segue do \cref{teo.set:CSB}. \blackproof
             \item Se $f$ é uma injeção de $A$ em $B$ e $g$ é uma injeção de $B$ em $C$, então $g \circ f$ é uma injeção de $A$ em $C$. \blackproof
         \end{enumerate}
 \end{proof}
@@ -1604,7 +2441,7 @@ Apresentamos a seguir algumas propriedades algébricas de algumas operações co
         \end{enumerate}
 \end{proof}
 
-\begin{lemma} \label{lema.fund:CSB}
+\begin{lemma} \label{lema.set:CSB}
     \leavevmode
         \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
             \item \fonte[157]{hercules}
@@ -1619,7 +2456,7 @@ Apresentamos a seguir algumas propriedades algébricas de algumas operações co
 \begin{proof}
     \leavevmode
         \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
-            \item Como $|A| \leq |B|$, existe $f : A \to B$ injetiva. Defina $F : \mathcal{P}(A) \to \mathcal{P}(A)$ por $F(S) := f[S]$ para todo $S \in \mathcal{P}(A)$. Pelo \cref{teo.fund:recursao_peano}, defina recursivamente $X : \N \to \mathcal{P}(A)$ por $X_0 = A \setminus B$ e $X_{n+1} = F(X_n) = f[X_n]$ para todo $n \in \N$, e seja
+            \item Como $|A| \leq |B|$, existe $f : A \to B$ injetiva. Defina $F : \mathcal{P}(A) \to \mathcal{P}(A)$ por $F(S) := f[S]$ para todo $S \in \mathcal{P}(A)$. Pelo \cref{teo.set:recursao_peano}, defina recursivamente $X : \N \to \mathcal{P}(A)$ por $X_0 = A \setminus B$ e $X_{n+1} = F(X_n) = f[X_n]$ para todo $n \in \N$, e seja
                 \[
                     Y := \bigcup_{n \geq 0} X_n.
                 \]
@@ -1662,7 +2499,7 @@ Apresentamos a seguir algumas propriedades algébricas de algumas operações co
                     \whiteproof
                 \end{midproof}
             Logo, $|B| = |A|$. \blackproof
-            \item Como $|C| = |A|$, existe $f : A \to C$ bijetiva. Defina $F : \mathcal{P}(A) \to \mathcal{P}(A)$ por $F(S) := f[S]$ para todo $S \in \mathcal{P}(A)$. Pelo \cref{teo.fund:recursao_peano}, defina recursivamente $X, Y : \N \to \mathcal{P}(A)$ por $X_0 = A$, $Y_0 = B$, e para todo $n \in \N$, $X_{n+1} = F(X_n) = f[X_n]$ e $Y_{n+1} = F(Y_n) = f[Y_n]$. Por fim, defina $Z : \N \to \mathcal{P}(A)$ por $Z_n := X_n \setminus Y_n$, para todo $n \in \N$, e seja
+            \item Como $|C| = |A|$, existe $f : A \to C$ bijetiva. Defina $F : \mathcal{P}(A) \to \mathcal{P}(A)$ por $F(S) := f[S]$ para todo $S \in \mathcal{P}(A)$. Pelo \cref{teo.set:recursao_peano}, defina recursivamente $X, Y : \N \to \mathcal{P}(A)$ por $X_0 = A$, $Y_0 = B$, e para todo $n \in \N$, $X_{n+1} = F(X_n) = f[X_n]$ e $Y_{n+1} = F(Y_n) = f[Y_n]$. Por fim, defina $Z : \N \to \mathcal{P}(A)$ por $Z_n := X_n \setminus Y_n$, para todo $n \in \N$, e seja
                 \[
                     D := \bigcup_{n \geq 0} Z_n.
                 \]
@@ -1712,16 +2549,16 @@ Apresentamos a seguir algumas propriedades algébricas de algumas operações co
         \end{enumerate}
 \end{proof}
 
-\begin{theorem}[Cantor-Schröder-Bernstein] \label{teo.fund:CSB}
+\begin{theorem}[Cantor-Schröder-Bernstein] \label{teo.set:CSB}
     Se $|A| \leq |B|$ e $|B| \leq |A|$, então $|A| = |B|$.
 \end{theorem}
 
 \begin{proof} \fonte[158]{hercules}
-    Como $|A| \leq |B|$, existe $f : A \to B$ injetiva. Como $|B| \leq |A|$, existe $g : B \to A$ injetiva. Como $g$ é bijetiva em $g[B]$, temos $|g[B]| = |B|$. Como $g \circ f : A \to g[B]$ é injetiva, temos $|A| \leq |g[B]|$. Como $g[B] \subseteq A$, pelo \cref{lema.fund:CSB}, temos $|g[B]| = |A|$, de modo que $|A|=|B|$. \blackproof    
+    Como $|A| \leq |B|$, existe $f : A \to B$ injetiva. Como $|B| \leq |A|$, existe $g : B \to A$ injetiva. Como $g$ é bijetiva em $g[B]$, temos $|g[B]| = |B|$. Como $g \circ f : A \to g[B]$ é injetiva, temos $|A| \leq |g[B]|$. Como $g[B] \subseteq A$, pelo \cref{lema.set:CSB}, temos $|g[B]| = |A|$, de modo que $|A|=|B|$. \blackproof    
 \end{proof}
 
 \begin{proof} \fonte[66]{jechhrbacek1999}
-    Como $|A| \leq |B|$, existe $f : A \to B$ injetiva. Como $|B| \leq |A|$, existe $g : B \to A$ injetiva. Como $g$ é bijetiva em $g[B]$, temos $|g[B]| = |B|$. Como $g \circ f$ é bijetiva em $g[f[A]]$, temos $|g[f[A]]| = |A|$. Temos $g[B] \subseteq A$, e como $f[A] \subseteq B$, temos $g[f[A]] \subseteq g[B] \subseteq A$. Logo, pelo \cref{lema.fund:CSB}, temos $|g[B]| = |A|$, de modo que $|A| = |B|$. \blackproof
+    Como $|A| \leq |B|$, existe $f : A \to B$ injetiva. Como $|B| \leq |A|$, existe $g : B \to A$ injetiva. Como $g$ é bijetiva em $g[B]$, temos $|g[B]| = |B|$. Como $g \circ f$ é bijetiva em $g[f[A]]$, temos $|g[f[A]]| = |A|$. Temos $g[B] \subseteq A$, e como $f[A] \subseteq B$, temos $g[f[A]] \subseteq g[B] \subseteq A$. Logo, pelo \cref{lema.set:CSB}, temos $|g[B]| = |A|$, de modo que $|A| = |B|$. \blackproof
 \end{proof}
 
 \begin{proof} \fonte[138]{fajardo2024conjuntos}

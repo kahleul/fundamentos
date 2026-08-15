@@ -1,5 +1,197 @@
 %!TEX root = main.tex
 
+\chapter{Espaços Vetoriais}
+
+\section{Espaços e Subespaços Vetoriais}
+
+\begin{definition}
+    Um \emph{espaço vetorial real} é uma tripla $(V,+,\cdot)$, onde $+ : V \times V \to V$ e $\cdot : \R \times V \to V$ são operações tais que
+        \begin{itemize}
+            \item A1: $u + (v + w) = (u + v) + w$ para quaisquer $u,v,w \in V$;
+            \item A2: $u + v = v + u$ para quaisquer $u,v \in V$;
+            \item A3: existe $0_V \in V$ tal que $u + 0_V = u$ para todo $u \in V$;
+            \item A4: para cada $u \in V$ existe $v \in V$ tal que $u+v=0_V$;
+            \item M1: $\lambda_1 \cdot (\lambda_2 \cdot u) = (\lambda_1 \cdot \lambda_2) \cdot u$ para quaisquer $u \in V$ e $\lambda_1,\lambda_2 \in \R$;
+            \item M2: $(\lambda_1 + \lambda_2) \cdot u = \lambda_1 \cdot u + \lambda_2 \cdot u$ para quaisquer $u \in V$ e $\lambda_1,\lambda_2 \in \R$;
+            \item M3: $\lambda_1 \cdot (u + v) = \lambda_1 \cdot u + \lambda_1 \cdot v$ para quaisquer $u,v \in V$ e $\lambda_1 \in \R$;
+            \item M4: $1 \cdot u = u$ para todo $u \in V$.
+        \end{itemize}
+    Os elementos de $V$ são chamados de \emph{vetores}.
+\end{definition}
+
+\begin{remark}
+    Quando não houver perigo de confunsão, podemos nos referir ao espaço vetorial $(V, +, \cdot)$ simplesmente como o conjunto $V$.
+\end{remark}
+
+\begin{example}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item O espaço $\R^n$, com soma e produto por escalar usuais, é um espaço vetorial real.
+            \item Seja $X \subseteq \R$. O conjunto $\R^X$, com soma e produto por escalar usuais, é um espaço vetorial real.
+            \item O conjunto $\R_{>0}$, com as operações $x\oplus y:=x \cdot y$ e $\alpha \odot x := x^{\alpha}$, é um espaço vetorial real.
+        \end{enumerate}
+\end{example}
+
+\begin{proposition} \label{prop.alglin:manobras_algebricas}
+    Seja $(V, +, \cdot)$ um espaço vetorial.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item (Unicidade)
+                \begin{enumerate}[label=\roman*.]
+                    \item O elemento neutro $0_V$ de $+$ é único.
+                    \item O oposto aditivo de cada elemento de $V$ é único.
+                \end{enumerate}
+            \item (Integridade) Para quaisquer $u \in V$ e $\lambda \in \R$, temos
+                \begin{enumerate}[label=\roman*.]
+                    \item $\lambda \cdot 0_V = 0_V$;
+                    \item $0 \cdot u = 0_V$;
+                    \item se $\lambda \cdot u = 0_V$, então $\lambda = 0$ ou $u = 0_V$.
+                \end{enumerate}
+            \item (Sinais) Para quaisquer $u \in V$ e $\lambda \in \R$, temos
+                \begin{enumerate}[label=\roman*.]
+                    \item $(-1) \cdot u = -u$;
+                    \item $-(-u) = u$;
+                    \item $(- \lambda) \cdot u = \lambda (-u) = -(\lambda \cdot u)$.
+                \end{enumerate}
+            \item (Lei do Corte) Para quaisquer $u,v,w \in V$ e $\lambda, \lambda_1, \lambda_2 \in \R$, temos
+                \begin{enumerate}[label=\roman*.]
+                    \item $u + w = v + w \Rightarrow u = v$;
+                    \item $\lambda \neq 0 \land \lambda \cdot u = \lambda \cdot v \Rightarrow u = v$; 
+                    \item $u \neq 0_V \land \lambda_1 u = \lambda_2 u \Rightarrow \lambda_1 = \lambda_2$.
+                \end{enumerate}
+            \item Se $V \neq \{0 \}$, então $V$ é infinito.
+        \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+\end{proof}
+
+\begin{definition}
+    Sejam $(V, +_V, \cdot_V)$ um espaço vetorial real e $W \subseteq V$. Dizemos que $W$ é um \emph{subespaço vetorial} de $V$ se $(W, +_V \restriction_{W \times W}, \cdot_V \restriction_{\R \times W})$ é um espaço vetorial.
+\end{definition}
+
+\begin{proposition} 
+    Sejam $(V, +_V, \cdot_V)$ um espaço vetorial real e $W \subseteq V$. As seguintes afirmações são equivalentes. 
+        \begin{enumerate}[label=\roman*.]
+            \item $(W, +_V \restriction_{W \times W}, \cdot_V \restriction_{\R \times W})$ é um espaço vetorial.
+            \item $0_V \in W$ e, para quaisquer $u, v \in W$ e $\lambda \in \R$, $u +_V v \in W$ e $\lambda \cdot_V u \in W$.
+        \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\begin{example}
+    Todo espaço vetorial $V$ tem pelo menos dois subespaços vetoriais, dito \emph{triviais}: $\{0_V\}$ e o próprio $V$.
+\end{example}
+
+\section{Combinações Lineares e Geradores}
+
+\begin{definition}
+    Seja $(V, +, \cdot)$ um espaço vetorial. Dizemos que $u \in V$ é uma \emph{combinação linear} de $u_1, u_2 , \ldots, u_n \in V$ se existem $\lambda_1, \lambda_2, \ldots, \lambda_n \in \R$ tais que $\ds u = \sum_{i=1}^{n} \lambda_i u_i$.
+\end{definition}
+
+\section{Dependência e Independência Linear}
+
+\begin{definition}
+    Seja $(V, +, \cdot)$ um espaço vetorial.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Dizemos que $u_1, u_2, \ldots, u_n \in V$ são \emph{linearmente independentes} (L.I.) se a única solução da equação $\lambda_1 u_1 + \cdots + \lambda_n u_n = 0$ é $\lambda_i = 0$ para todo $i \in [n]$. Caso contrário, isto é, se existe uma solução tal que $\lambda_i \neq 0$ para algum $i \in [n]$, dizemos que $u_1, u_2, \ldots, u_n \in V$ são \emph{linearmente dependentes} (L.D.).
+            \item Seja $S \subseteq V$ finito.\footnote{Se $S$ é finito, então $S = V$ somente se $V = \{ 0\}$.}
+                \begin{enumerate}[label=\roman*.]
+                    \item Dizemos que $S$ é L.I. se os vetores de $S$ são L.I..
+                    \item Dizemos que $S$ é L.D. se os vetores de $S$ são L.D..
+                \end{enumerate}
+            \item Seja $S \subseteq V$ infinito.
+                \begin{enumerate}[label=\roman*.]
+                    \item Dizemos que $S$ é L.I. se todo subconjunto finito de $S$ é L.I..
+                    \item Dizemos que $S$ é L.D. se pelo menos um subconjunto finito de $S$ é L.D..
+                \end{enumerate}
+        \end{enumerate}
+\end{definition}
+
+\section{Base e Dimensão}
+
+\begin{lemma} \label{lema.alglin:steinitz}
+    Seja $(V,+,\cdot)$ um espaço vetorial. Seja $S \subseteq V$ finito e L.I.. Para todo $T \subseteq [S]$, se $|T| = |S|+1$, então $T$ é L.D..
+\end{lemma}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\begin{definition}
+    Seja $(V, +, \cdot)$ um espaço vetorial. Dizemos que $\mathcal{B} \subsetneq V$ é uma \emph{base} de $V$ se $\mathcal{B}$ é L.I. e $[\mathcal{B}] = V$.
+\end{definition}
+
+\begin{theorem}[Completamento]
+     Todo espaço vetorial finitamente gerado possui uma base. 
+\end{theorem}
+
+\begin{theorem}[Invariância] \label{teo.alglin:invariancia}
+    Seja $(V, +, \cdot)$ um espaço vetorial finitamente gerado. Se $\mathcal{B}_1$ e $\mathcal{B}_2$ são bases de $V$, então $|\mathcal{B}_1| = |\mathcal{B}_2|$.
+\end{theorem}
+
+\begin{definition}
+    A \emph{dimensão} de um espaço vetorial finitamente gerado $(V, +, \cdot)$ é o número de vetores de qualquer uma de suas bases. Mais especificamente, se $\mathcal{B}$ é uma base de $V$, a dimensão de $V$ é definida como $\dim V := |\mathcal{B}|$.
+\end{definition}
+
+\section{Produto Interno}
+
+\chapter{Transformações Lineares}
+
+\begin{definition}
+    Sejam $(V, +_V, \cdot_V)$ e $(W, +_W, \cdot_W)$ espaços vetoriais.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Uma \emph{transformação linear} é uma função $T : V \to W$ tal que $T(u +_V v) = T(u) +_W T(v)$ e $T(\lambda \cdot_V u) = \lambda \cdot_W T(u)$ para quaisquer $u, v \in V$ e $\lambda \in \R$.
+            \item Um \emph{operador linear} é uma transformação linear $T : V \to V$.
+        \end{enumerate}
+\end{definition}
+
+\begin{example}
+    Sejam $(V, +, \cdot)$ e $(W, +, \cdot)$ espaços vetoriais.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item A função $0 : V \to W$ definida por $0(v) = 0_W$ para todo $v \in V$ é uma transformação linear, chamada de \emph{transformação nula}.
+            \item A função $I_V : V \to V$ definida por $I_V(v) = v$ para todo $v \in V$ é um operador linear, chamada de \emph{transformação identidade}. 
+        \end{enumerate}
+\end{example}
+
+\begin{definition}
+    Sejam $(V, +_V, \cdot_V)$ e $(W, +_W, \cdot_W)$ espaços vetoriais. O conjunto de todas as transformações lineares de $V$ em $W$ é denotado por $\mathcal{L}(V,W)$, isto é,
+        \[
+            \mathcal{L}(V,W) := \{T \in W^V : T \text{ é transformação linear} \}.
+        \]
+\end{definition}
+
+\begin{proposition}
+    Sejam $(V, +_V, \cdot_V)$ e $(W, +_W, \cdot_W)$ espaços vetoriais e $T : V \to W$ uma transformação linear.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $T(0_V) = 0_W$.
+        \end{enumerate}
+\end{proposition}
+
+\begin{definition}
+    Seja $T : V \to W$ uma transformação linear.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item O \emph{núcleo} de $T$ é definido como
+                \[
+                    \ker{T} := \{ v \in V : T(v) = 0_W \}.
+                \]
+            \item A \emph{imagem} de $T$ é definida como
+                \[
+                    \Im{T} := \{ w \in W : \exists v(v \in V \land T(v) = w) \}.
+                \]
+        \end{enumerate}
+\end{definition}
+
+\begin{theorem}
+    Seja $T : V \to W$ uma transformação linear.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $\ker{T}$ é um subespaço vetorial de $V$.
+            \item $\Im{T}$ é um subespaço vetorial de $W$.
+        \end{enumerate}
+\end{theorem}
+
 \chapter{Matrizes e Sistemas Lineares}
 
 \begin{definition}
@@ -550,195 +742,3 @@ Por simplicidade, vamos nos referir a um sistema de equações lineares como um 
 \begin{proof}
     Elon, 27. \blackproof
 \end{proof}
-
-\chapter{Espaços Vetoriais}
-
-\section{Espaços e Subespaços Vetoriais}
-
-\begin{definition}
-    Um \emph{espaço vetorial real} é uma tripla $(V,+,\cdot)$, onde $+ : V \times V \to V$ e $\cdot : \R \times V \to V$ são operações tais que
-        \begin{itemize}
-            \item A1: $u + (v + w) = (u + v) + w$ para quaisquer $u,v,w \in V$;
-            \item A2: $u + v = v + u$ para quaisquer $u,v \in V$;
-            \item A3: existe $0_V \in V$ tal que $u + 0_V = u$ para todo $u \in V$;
-            \item A4: para cada $u \in V$ existe $v \in V$ tal que $u+v=0_V$;
-            \item M1: $\lambda_1 \cdot (\lambda_2 \cdot u) = (\lambda_1 \cdot \lambda_2) \cdot u$ para quaisquer $u \in V$ e $\lambda_1,\lambda_2 \in \R$;
-            \item M2: $(\lambda_1 + \lambda_2) \cdot u = \lambda_1 \cdot u + \lambda_2 \cdot u$ para quaisquer $u \in V$ e $\lambda_1,\lambda_2 \in \R$;
-            \item M3: $\lambda_1 \cdot (u + v) = \lambda_1 \cdot u + \lambda_1 \cdot v$ para quaisquer $u,v \in V$ e $\lambda_1 \in \R$;
-            \item M4: $1 \cdot u = u$ para todo $u \in V$.
-        \end{itemize}
-    Os elementos de $V$ são chamados de \emph{vetores}.
-\end{definition}
-
-\begin{remark}
-    Quando não houver perigo de confunsão, podemos nos referir ao espaço vetorial $(V, +, \cdot)$ simplesmente como o conjunto $V$.
-\end{remark}
-
-\begin{example}
-    \leavevmode
-        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
-            \item O espaço $\R^n$, com soma e produto por escalar usuais, é um espaço vetorial real.
-            \item Seja $X \subseteq \R$. O conjunto $\R^X$, com soma e produto por escalar usuais, é um espaço vetorial real.
-            \item O conjunto $\R_{>0}$, com as operações $x\oplus y:=x \cdot y$ e $\alpha \odot x := x^{\alpha}$, é um espaço vetorial real.
-        \end{enumerate}
-\end{example}
-
-\begin{proposition} \label{prop.alglin:manobras_algebricas}
-    Seja $(V, +, \cdot)$ um espaço vetorial.
-        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
-            \item (Unicidade)
-                \begin{enumerate}[label=\roman*.]
-                    \item O elemento neutro $0_V$ de $+$ é único.
-                    \item O oposto aditivo de cada elemento de $V$ é único.
-                \end{enumerate}
-            \item (Integridade) Para quaisquer $u \in V$ e $\lambda \in \R$, temos
-                \begin{enumerate}[label=\roman*.]
-                    \item $\lambda \cdot 0_V = 0_V$;
-                    \item $0 \cdot u = 0_V$;
-                    \item se $\lambda \cdot u = 0_V$, então $\lambda = 0$ ou $u = 0_V$.
-                \end{enumerate}
-            \item (Sinais) Para quaisquer $u \in V$ e $\lambda \in \R$, temos
-                \begin{enumerate}[label=\roman*.]
-                    \item $(-1) \cdot u = -u$;
-                    \item $-(-u) = u$;
-                    \item $(- \lambda) \cdot u = \lambda (-u) = -(\lambda \cdot u)$.
-                \end{enumerate}
-            \item (Lei do Corte) Para quaisquer $u,v,w \in V$ e $\lambda, \lambda_1, \lambda_2 \in \R$, temos
-                \begin{enumerate}[label=\roman*.]
-                    \item $u + w = v + w \Rightarrow u = v$;
-                    \item $\lambda \neq 0 \land \lambda \cdot u = \lambda \cdot v \Rightarrow u = v$; 
-                    \item $u \neq 0_V \land \lambda_1 u = \lambda_2 u \Rightarrow \lambda_1 = \lambda_2$.
-                \end{enumerate}
-            \item Se $V \neq \{0 \}$, então $V$ é infinito.
-        \end{enumerate}
-\end{proposition}
-
-\begin{proof}
-\end{proof}
-
-\begin{definition}
-    Sejam $(V, +_V, \cdot_V)$ um espaço vetorial real e $W \subseteq V$. Dizemos que $W$ é um \emph{subespaço vetorial} de $V$ se $(W, +_V \restriction_{W \times W}, \cdot_V \restriction_{\R \times W})$ é um espaço vetorial.
-\end{definition}
-
-\begin{proposition} 
-    Sejam $(V, +_V, \cdot_V)$ um espaço vetorial real e $W \subseteq V$. As seguintes afirmações são equivalentes. 
-        \begin{enumerate}[label=\roman*.]
-            \item $(W, +_V \restriction_{W \times W}, \cdot_V \restriction_{\R \times W})$ é um espaço vetorial.
-            \item $0_V \in W$ e, para quaisquer $u, v \in W$ e $\lambda \in \R$, $u +_V v \in W$ e $\lambda \cdot_V u \in W$.
-        \end{enumerate}
-\end{proposition}
-
-\begin{proof}
-    \blackproof
-\end{proof}
-
-\begin{example}
-    Todo espaço vetorial $V$ tem pelo menos dois subespaços vetoriais, dito \emph{triviais}: $\{0_V\}$ e o próprio $V$.
-\end{example}
-
-\section{Combinações Lineares e Geradores}
-
-\begin{definition}
-    Seja $(V, +, \cdot)$ um espaço vetorial. Dizemos que $u \in V$ é uma \emph{combinação linear} de $u_1, u_2 , \ldots, u_n \in V$ se existem $\lambda_1, \lambda_2, \ldots, \lambda_n \in \R$ tais que $\ds u = \sum_{i=1}^{n} \lambda_i u_i$.
-\end{definition}
-
-\section{Dependência e Independência Linear}
-
-\begin{definition}
-    Seja $(V, +, \cdot)$ um espaço vetorial.
-        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
-            \item Dizemos que $u_1, u_2, \ldots, u_n \in V$ são \emph{linearmente independentes} (L.I.) se a única solução da equação $\lambda_1 u_1 + \cdots + \lambda_n u_n = 0$ é $\lambda_i = 0$ para todo $i \in [n]$. Caso contrário, isto é, se existe uma solução tal que $\lambda_i \neq 0$ para algum $i \in [n]$, dizemos que $u_1, u_2, \ldots, u_n \in V$ são \emph{linearmente dependentes} (L.D.).
-            \item Seja $S \subseteq V$ finito.\footnote{Se $S$ é finito, então $S = V$ somente se $V = \{ 0\}$.}
-                \begin{enumerate}[label=\roman*.]
-                    \item Dizemos que $S$ é L.I. se os vetores de $S$ são L.I..
-                    \item Dizemos que $S$ é L.D. se os vetores de $S$ são L.D..
-                \end{enumerate}
-            \item Seja $S \subseteq V$ infinito.
-                \begin{enumerate}[label=\roman*.]
-                    \item Dizemos que $S$ é L.I. se todo subconjunto finito de $S$ é L.I..
-                    \item Dizemos que $S$ é L.D. se pelo menos um subconjunto finito de $S$ é L.D..
-                \end{enumerate}
-        \end{enumerate}
-\end{definition}
-
-\section{Base e Dimensão}
-
-\begin{lemma} \label{lema.alglin:steinitz}
-    Seja $(V,+,\cdot)$ um espaço vetorial. Seja $S \subseteq V$ finito e L.I.. Para todo $T \subseteq [S]$, se $|T| = |S|+1$, então $T$ é L.D..
-\end{lemma}
-
-\begin{proof}
-    \blackproof
-\end{proof}
-
-\begin{definition}
-    Seja $(V, +, \cdot)$ um espaço vetorial. Dizemos que $\mathcal{B} \subsetneq V$ é uma \emph{base} de $V$ se $\mathcal{B}$ é L.I. e $[\mathcal{B}] = V$.
-\end{definition}
-
-\begin{theorem}[Completamento]
-     Todo espaço vetorial finitamente gerado possui uma base. 
-\end{theorem}
-
-\begin{theorem}[Invariância] \label{teo.alglin:invariancia}
-    Seja $(V, +, \cdot)$ um espaço vetorial finitamente gerado. Se $\mathcal{B}_1$ e $\mathcal{B}_2$ são bases de $V$, então $|\mathcal{B}_1| = |\mathcal{B}_2|$.
-\end{theorem}
-
-\begin{definition}
-    A \emph{dimensão} de um espaço vetorial finitamente gerado $(V, +, \cdot)$ é o número de vetores de qualquer uma de suas bases. Mais especificamente, se $\mathcal{B}$ é uma base de $V$, a dimensão de $V$ é definida como $\dim V := |\mathcal{B}|$.
-\end{definition}
-
-\section{Produto Interno}
-
-\chapter{Transformações Lineares}
-
-\begin{definition}
-    Sejam $(V, +_V, \cdot_V)$ e $(W, +_W, \cdot_W)$ espaços vetoriais.
-        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
-            \item Uma \emph{transformação linear} é uma função $T : V \to W$ tal que $T(u +_V v) = T(u) +_W T(v)$ e $T(\lambda \cdot_V u) = \lambda \cdot_W T(u)$ para quaisquer $u, v \in V$ e $\lambda \in \R$.
-            \item Um \emph{operador linear} é uma transformação linear $T : V \to V$.
-        \end{enumerate}
-\end{definition}
-
-\begin{example}
-    Sejam $(V, +, \cdot)$ e $(W, +, \cdot)$ espaços vetoriais.
-        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
-            \item A função $0 : V \to W$ definida por $0(v) = 0_W$ para todo $v \in V$ é uma transformação linear, chamada de \emph{transformação nula}.
-            \item A função $I_V : V \to V$ definida por $I_V(v) = v$ para todo $v \in V$ é um operador linear, chamada de \emph{transformação identidade}. 
-        \end{enumerate}
-\end{example}
-
-\begin{definition}
-    Sejam $(V, +_V, \cdot_V)$ e $(W, +_W, \cdot_W)$ espaços vetoriais. O conjunto de todas as transformações lineares de $V$ em $W$ é denotado por $\mathcal{L}(V,W)$, isto é,
-        \[
-            \mathcal{L}(V,W) := \{T \in W^V : T \text{ é transformação linear} \}.
-        \]
-\end{definition}
-
-\begin{proposition}
-    Sejam $(V, +_V, \cdot_V)$ e $(W, +_W, \cdot_W)$ espaços vetoriais e $T : V \to W$ uma transformação linear.
-        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
-            \item $T(0_V) = 0_W$.
-        \end{enumerate}
-\end{proposition}
-
-\begin{definition}
-    Seja $T : V \to W$ uma transformação linear.
-        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
-            \item O \emph{núcleo} de $T$ é definido como
-                \[
-                    \ker{T} := \{ v \in V : T(v) = 0_W \}.
-                \]
-            \item A \emph{imagem} de $T$ é definida como
-                \[
-                    \Im{T} := \{ w \in W : \exists v(v \in V \land T(v) = w) \}.
-                \]
-        \end{enumerate}
-\end{definition}
-
-\begin{theorem}
-    Seja $T : V \to W$ uma transformação linear.
-        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
-            \item $\ker{T}$ é um subespaço vetorial de $V$.
-            \item $\Im{T}$ é um subespaço vetorial de $W$.
-        \end{enumerate}
-\end{theorem}
