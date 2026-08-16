@@ -688,3 +688,953 @@
             Logo, $\ds \lim_{x \to a^-} f(x) = L \Leftrightarrow \lim_{x \to a} f \restriction_{A \cap \left]-\infty, a \right[ } (x) = L$. \blackproof
         \end{enumerate}
 \end{proof}
+
+\section{Continuidade}
+
+\begin{definition}[Continuidade] \label{def.calc1:continuidade}
+    Dizemos que $f : A \subseteq \R \to \R$ é \emph{contínua em $a \in A$} se para todo $\epsilon \in \R_{>0}$ existe $\delta = \delta(\epsilon, a) \in \R_{>0}$ tal que, para todo $x \in A$, se $|x-a|<\delta$, então $|f(x) - f(a)| < \epsilon$.
+\end{definition}
+
+\begin{definition}
+    Sejam $f : A \subseteq \R \to \R$ e $X \subseteq A$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Dizemos que $f$ é \emph{contínua em $X$} se $f$ é contínua em todos os pontos de $X$.
+            \item Dizemos que $f$ é \emph{contínua} se $f$ é contínua em $A$.
+        \end{enumerate}
+\end{definition}
+
+\begin{proposition} \label{prop.calc1:continuidade_em_ponto_isolado}
+    Uma função $f : A \subseteq \R \to \R$ é contínua em todo ponto $a \in A \setminus A'$.
+\end{proposition}
+
+\begin{proof}
+    Se $a \notin A'$, então existe $\delta \in \R_{>0}$ tal que $V^*_{\delta}(a) \cap A = \emptyset$. Logo, $V_{\delta}(a) \cap A = \{a\}$. Dado $\epsilon \in \R_{>0}$, para todo $x \in A$, se $|x-a| < \delta$, então $x=a$ e $|f(x) - f(a)| = 0 < \epsilon$, o que prova a continuidade de $f$ em $a$. \blackproof
+\end{proof}
+
+\begin{theorem} \label{teo.calc1:continuidade_sse_limite}
+    Sejam $f : A \subseteq \R \to \R$ e $a \in A \cap A'$. Então, $f$ é contínua em $a$ se, e somente se, $\ds \lim_{x \to a} f(x) = f(a)$.
+\end{theorem}
+
+\begin{proof}
+    Seja $\epsilon \in \R_{>0}$.
+        \begin{itemize}[leftmargin=*, style=nextline]
+            \item[($\Rightarrow$)] Se $f$ é contínua em $a$, então existe $\delta \in \R_{>0}$ tal que, para todo $x \in A$, se $|x-a|<\delta$, então $|f(x) - f(a)| < \epsilon$. Em particular, para todo $x \in A$, se $0<|x-a|<\delta$, então $|f(x) - f(a)| < \epsilon$. Logo, $\ds \lim_{x \to a} f(x) = f(a)$.
+            \item[($\Leftarrow$)] Se $\ds \lim_{x \to a} f(x) = f(a)$, então existe $\delta \in \R_{>0}$ tal que, para todo $x \in A$, se $0<|x-a|<\delta$, então $|f(x) - f(a)| < \epsilon$. Agora, seja $x \in A$ tal que $|x-a|<\delta$. Se $x=a$, então $|f(x) - f(a)| = 0 < \epsilon$. Se $x \neq a$, então $0<|x-a|<\delta$, donde $|f(x) - f(a)| < \epsilon$. Portanto, para todo $x \in A$, se $|x-a|<\delta$, então $|f(x) - f(a)| < \epsilon$, o que prova a continuidade de $f$ em $a$.
+        \end{itemize}
+    Isso completa a prova. \blackproof
+\end{proof}
+
+\begin{theorem} \label{teo.calc1:continuidade_sequencial}
+    Sejam $f : A \subseteq \R \to \R$ e $a \in A$. Então, $f$ é contínua em $a$ se, e somente se, para toda sequência $(x_n)$ em $A$, se $\lim x_n = a$, então $\lim f(x_n) = f(a)$.
+\end{theorem}
+
+\begin{proof}
+    \leavevmode
+        \begin{itemize}
+            \item[($\Rightarrow$)] Suponha $f$ contínua em $a$, e seja $(x_n)$ em $A$ tal que $\lim x_n = a$. Seja $\epsilon \in \R_{>0}$. Então existe $\delta \in \R_{>0}$ tal que, para todo $x \in A$, se $|x-a|<\delta$, então $|f(x) - f(a)|<\epsilon$. Como $\lim x_n = a$, existe $N \in \N$ tal que, para todo $n \in \N$, se $n > N$, então $|x_n - a| < \delta$. Logo, para todo $n \in \N$, se $n > N$, então $|f(x_n) - f(a)| < \epsilon$, isto é, $\lim f(x_n) = f(a)$.
+            \item[($\Leftarrow$)] Suponha que $\lim f(x_n) = f(a)$ para toda sequência $(x_n)$ em $A$ tal que $\lim x_n = a$. Suponha, por absurdo, que $f$ não seja contínua em $a$. Então existe $\xi \in \R_{>0}$ tal que, para todo $\delta \in \R_{>0}$, existe $x = x(\delta) \in A$ tal que $|x(\delta)-a|<\delta$ e $|f(x(\delta))-f(a)| \geq \xi$. Em particular, para todo $n \in \N$, tomando $\delta_n := 1/n$, existe $x_n := x(\delta_n) \in A$ tal que $|x_n - a|< 1/n$ e $|f(x_n)-f(a)| \geq \xi$.
+                \begin{claim}
+                    A sequência $(x_n)$ converge para $a$, isto é, $\lim x_n = a$.
+                \end{claim}
+                \begin{midproof}
+                    Seja $\epsilon \in \R_{>0}$. Pela propriedade arquimediana, existe $N \in \N$ tal que $1/N < \epsilon$. Então, para todo $n \in \N$, se $n > N$, temos $1/n < 1/N$, de modo que
+                        \[
+                            |x_n - a| < 1/n < 1/N < \epsilon,
+                        \]
+                    isto é, $\lim x_n = a$ e $(x_n)$ converge para $a$. \whiteproof
+                \end{midproof}
+            Como $x_n \in A$ para todo $n \in \N$, então $(x_n)$ é uma sequência em $A$. Como $\lim x_n = a$, deveríamos ter $\lim f(x_n) = f(a)$, mas existe $\xi \in \R_{>0}$ tal que $|f(x_n)-f(a)| \geq \xi$ para todo $n \in \N$, uma contradição. Logo, $f$ é contínua em $a$.
+        \end{itemize}
+    Isso completa a prova. \blackproof
+\end{proof}
+
+\begin{theorem}
+    Sejam $f,g : A \subseteq \R \to \R$ contínuas em $a \in A$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item A função $f+g : A \to \R$ é contínua em $a$.
+            \item A função $f \cdot g : A \to \R$ é contínua em $a$.
+            \item Se $g(a) \neq 0$, então a função $f / g : \{x \in A : g(x) \neq 0 \} \to \R$ é contínua em $a$.
+        \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    Se $a \in A \setminus A'$, então, pela \cref{prop.calc1:continuidade_em_ponto_isolado}, essas funções são contínuas em $a$. Suponha, então, que $a \in A'$. Logo, pela \cref{teo.calc1:continuidade_sse_limite}, $\ds \lim_{x \to a} f(x) = f(a)$ e $\ds \lim_{x \to a} g(x) = g(a)$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Pelo \cref{teo.calc1:algebra_dos_limites}, temos 
+                \[
+                    \lim_{x \to a} \, (f+g)(x) = \lim_{x \to a} \, (f(x) + g(x)) = \lim_{x \to a} f(x) + \lim_{x \to a} g(x) = f(a) + g(a),
+                \]
+            o que prova a continuidade de $f+g$ em $a$. \blackproof
+            \item Pelo \cref{teo.calc1:algebra_dos_limites}, temos 
+                \[
+                    \lim_{x \to a} \, (f \cdot g)(x) = \lim_{x \to a} \, (f(x) \cdot g(x)) = \left( \lim_{x \to a} f(x) \right) \cdot \left( \lim_{x \to a} g(x) \right) = f(a) \cdot g(a),
+                \]
+            o que prova a continuidade de $f \cdot g$ em $a$. \blackproof
+            \item Pelo \cref{teo.calc1:algebra_dos_limites}, como $g(a) \neq 0$, temos 
+                \[
+                    \lim_{x \to a}  \left(\dfrac{f}{g} \right)(x) = \lim_{x \to a} \dfrac{f(x)}{g(x)} = \dfrac{\ds \lim_{x \to a} f(x)}{\ds \lim_{x \to a} g(x)} = \dfrac{f(a)}{g(a)}, \qedhere
+                \]
+            o que prova a continuidade de $f / g$ em $a$. \blackproof
+        \end{enumerate}
+\end{proof}
+
+\begin{theorem} \label{teo.calc1:limite_da_composta}
+    Sejam $f : A \subseteq \R \to \R$ e $g : B \subseteq \R \to \R$ tais que $f(A) \subseteq B$. Se $g$ é contínua em $\ds \lim_{x \to a} f(x) \in B$, então
+        \[
+            \lim_{x \to a} g(f(x)) = g \left(\lim_{x \to a} f(x) \right).
+        \]
+\end{theorem}
+
+\begin{proof}
+    Seja $\epsilon \in \R_{>0}$. Como $g$ é contínua em $\ds L := \lim_{x \to a} f(x)$, existe $\delta_1 \in \R_{>0}$ tal que, para todo $y \in B$, se $|y-L|<\delta_1$, então $|g(y) - g(L)| < \epsilon$. Como $\ds \lim_{x \to a} f(x) = L$, para esse $\delta_1$ existe $\delta_2 \in \R_{>0}$ tal que, para todo $x \in A$, se $0<|x-a|<\delta_2$, então $|f(x) - L| < \delta_1$. Agora, seja $x \in A$ tal que $0<|x-a|<\delta_2$. Então $|f(x) - L| < \delta_1$, e como $f(x) \in B$, temos $|g(f(x)) - g(L)| < \epsilon$, de modo que $\ds \lim_{x \to a} g(f(x)) = g(L)$. \blackproof
+\end{proof}
+
+\begin{theorem}
+    Sejam $f : A \subseteq \R \to \R$ e $g : B \subseteq \R \to \R$ tais que $f(A) \subseteq B$. Se $f$ é contínua em $a \in A$ e se $g$ é contínua em $f(a) \in B$, então $g \circ f : A \to \R$ é contínua em $a$.    
+\end{theorem}
+
+\begin{proof}
+    Se $a \in A \setminus A'$, então, pela \cref{prop.calc1:continuidade_em_ponto_isolado}, $g \circ f$ é contínua em $a$. Se $a \in A'$, então, pela \cref{teo.calc1:continuidade_sse_limite}, $\ds \lim_{x \to a} f(x) = f(a)$, de modo que, pelo \cref{teo.calc1:limite_da_composta}, temos
+        \[
+            \lim_{x \to a} g(f(x)) = g \left(\lim_{x \to a} f(x) \right) = g(f(a)),
+        \]
+    o que prova a continuidade de $g \circ f$ em $a$. \blackproof
+\end{proof}
+
+\begin{proposition}[Conservação do sinal] \label{prop.calc1:con_sin_cont}
+    Seja $f : A \subseteq \R \to \R$ contínua em $a \in A$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Se $f(a) > 0$, então existe $r \in \R_{>0}$ tal que $f(x) > 0$ para todo $x \in V_{r}(a) \cap A$.
+            \item Se $f(a) < 0$, então existe $r \in \R_{>0}$ tal que $f(x) < 0$ para todo $x \in V_{r}(a) \cap A$.
+        \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Como $f$ é contínua em $a$, para $\epsilon = f(a)$ existe $\delta \in \R_{>0}$ tal que, para todo $x \in A$, se $|x-a|<\delta$, então $|f(x) - f(a)| < f(a)$; em particular,
+                \[
+                    0 = f(a) - f(a) < f(x) < 2f(a).
+                \]
+            Logo, $f(x) > 0$ para todo $x \in V_{\delta}(a) \cap A$. \blackproof
+            \item Como $f$ é contínua em $a$, para $\epsilon = -f(a)$ existe $\delta \in \R_{>0}$ tal que, para todo $x \in A$, se $|x-a|<\delta$, então $|f(x) - f(a)| < -f(a)$; em particular,
+                \[
+                    2f(a) < f(x) < 0 = f(a) - f(a).
+                \]
+            Logo, $f(x) < 0$ para todo $x \in V_{\delta}(a) \cap A$. \blackproof
+        \end{enumerate}
+\end{proof}
+
+\subsection{Continuidade Lateral}
+
+\begin{definition}
+    Sejam $f: A \subseteq \R \to \R$ e $a \in \R$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Dizemos que $f$ é \emph{contínua em $a$ pela direita} se para todo $\epsilon \in \R_{>0}$ existe $\delta = \delta(\epsilon,a) \in \R_{>0}$ tal que, para todo $x \in A$, se $a \leq x < a+\delta$, então $|f(x) - f(a)| < \epsilon$.
+            \item Dizemos que $f$ é \emph{contínua em $a$ pela esquerda} se para todo $\epsilon \in \R_{>0}$ existe $\delta = \delta(\epsilon,a) \in \R_{>0}$ tal que, para todo $x \in A$, se $a - \delta < x \leq a$, então $|f(x) - f(a)| < \epsilon$.
+        \end{enumerate}
+\end{definition}
+
+\begin{proposition}[Conservação do sinal] \label{prop.calc1:con_sin_cont_lat}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Seja $f : A \subseteq \R \to \R$ contínua em $a \in A$ pela direita.
+                \begin{enumerate}[label=\roman*.]
+                    \item Se $f(a) > 0$, então existe $r \in \R_{>0}$ tal que $f(x) > 0$ para todo $x \in \left[ a, a+r \right[ \cap A$.
+                    \item Se $f(a) < 0$, então existe $r \in \R_{>0}$ tal que $f(x) < 0$ para todo $x \in \left[ a, a+r \right[ \cap A$.
+                \end{enumerate}
+            \item Seja $f : A \subseteq \R \to \R$ contínua em $a \in A$ pela esquerda.
+                \begin{enumerate}[label=\roman*.]
+                    \item Se $f(a) > 0$, então existe $r \in \R_{>0}$ tal que $f(x) > 0$ para todo $x \in \left]a-r, a \right] \cap A$.
+                    \item Se $f(a) < 0$, então existe $r \in \R_{>0}$ tal que $f(x) < 0$ para todo $x \in \left]a-r, a \right] \cap A$.
+                \end{enumerate}
+        \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    Segue analogamente ao \cref{prop.calc1:con_sin_cont}.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item 
+                \begin{enumerate}[label=\roman*.]
+                    \item Como $f$ é contínua em $a$ pela direita, para $\epsilon = f(a)$ existe $\delta \in \R_{>0}$ tal que, para todo $x \in A$, se $a \leq x < a+\delta$, então $|f(x) - f(a)| < f(a)$; em particular,
+                        \[
+                            0 = f(a) - f(a) < f(x) < 2f(a).
+                        \]
+                    Logo, $f(x) > 0$ para todo $x \in \left[a,a+\delta\right[ \cap A$.
+                    \item Como $f$ é contínua em $a$ pela direita, para $\epsilon = -f(a)$ existe $\delta \in \R_{>0}$ tal que, para todo $x \in A$, se $a \leq x < a+\delta$, então $|f(x) - f(a)| < -f(a)$; em particular,
+                        \[
+                            2f(a) < f(x) < 0 = f(a) - f(a).
+                        \]
+                    Logo, $f(x) < 0$ para todo $x \in \left[a,a+\delta\right[ \cap A$.
+                \end{enumerate}
+            Logo, existe $r \in \R_{>0}$ tal que $f$ tem o mesmo sinal de $f(a)$ em $\left[ a, a+r \right[ \cap A$. \blackproof
+            \item
+                \begin{enumerate}[label=\roman*.]
+                    \item Como $f$ é contínua em $a$ pela esquerda, para $\epsilon = f(a)$ existe $\delta \in \R_{>0}$ tal que, para todo $x \in A$, se $a-\delta < x \leq a$, então $|f(x) - f(a)| < f(a)$; em particular,
+                        \[
+                            0 = f(a) - f(a) < f(x) < 2f(a).
+                        \]
+                    Logo, $f(x) > 0$ para todo $x \in \left]a-\delta,a\right] \cap A$.
+                    \item Como $f$ é contínua em $a$ pela esquerda, para $\epsilon = -f(a)$ existe $\delta \in \R_{>0}$ tal que, para todo $x \in A$, se $a-\delta < x \leq a$, então $|f(x) - f(a)| < -f(a)$; em particular,
+                        \[
+                            2f(a) < f(x) < 0 = f(a) - f(a).
+                        \]
+                    Logo, $f(x) < 0$ para todo $x \in \left]a-\delta,a\right] \cap A$.
+                \end{enumerate}
+            Logo, existe $r \in \R_{>0}$ tal que $f$ tem o mesmo sinal de $f(a)$ em $\left[ a-r, a \right[ \cap A$. \blackproof
+        \end{enumerate}
+\end{proof}
+
+\subsection{O Teorema do Valor Intermediário}
+
+\begin{theorem}[Anulamento de Bolzano] \label{teo.calc1:anulamento_bolzano}
+    Seja $f : [a,b] \to \R$ contínua. 
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Se $f(a) < 0 < f(b)$, então existe $c \in \left] a,b \right[$ tal que $f(c) = 0$.
+            \item Se $f(b) < 0 < f(a)$, então existe $c \in \left] a,b \right[$ tal que $f(c) = 0$.
+        \end{enumerate}
+\end{theorem}
+
+\begin{proof} \fonte[143]{apostol1}
+    \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+        \item Defina $S := \{x \in [a,b] : f(x) \leq 0\}$. Como $f(a) < 0$, temos $a \in S$, donde $S \neq \emptyset$. Como $S \subseteq [a,b]$, temos que $S$ é limitado superiormente (por $b$). Pela propriedade do supremo, existe $c := \sup S$. 
+            \begin{claim}
+                $c \in \left]a,b \right[$.
+            \end{claim}
+            \begin{midproof}
+                Como $f$ é contínua em $a$ pela direita e $f(a) < 0$, pela \cref{prop.calc1:con_sin_cont_lat} existe $r \in \R_{>0}$ tal que $f < 0$ em $\left[a, a+r \right[ \cap [a,b]$. Se fosse $c=a$, então, para todo $x \in \left]a,b \right]$, deveríamos ter $f(x) > 0$, mas $f < 0$ em $]a,a+r[$, uma contradição. Logo, $a < c$. Como $f$ é contínua em $b$ pela esquerda e $f(b) > 0$, pela \cref{prop.calc1:con_sin_cont_lat} existe $r \in \R_{>0}$ tal que $f > 0$ em $\left]b-r, b \right] \cap [a,b]$. Se fosse $c=b$, como $b-r$ não seria uma cota superior de $S$, existiria $d \in S$ tal que $b-r < d \leq b$; para tal $d$, teríamos $f(d) \leq 0$ e $f(d) > 0$, uma contradição. Logo, $c < b$. Com isso, temos $a<c<b$, isto é, $c \in \left] a,b \right[$. \whiteproof
+            \end{midproof}
+            \begin{claim}
+                $f(c) = 0$.
+            \end{claim}
+            \begin{midproof}
+                Suponha, por absurdo, que $f(c) < 0$. Pela \cref{prop.calc1:con_sin_cont}, existe $r \in \R_{>0}$ tal que $f < 0$ em $V_{r}(c) \cap [a,b]$. Como $c \in \left]a,b \right[$, tomando $\delta := \min \{r, b-c, c-a\}$, temos $V_{\delta}(c) \subseteq [a,b]$. Logo, $f<0$ em $V_{\delta}(c)$. Em particular, temos $f < 0$ em $\left]c, c+\delta \right[$, uma contradição: para todo $x \in [a,b]$, se $x > c$, então $f(x) > 0$, pois $c = \sup S$. Analogamente, suponha, por absurdo, que $f(c) > 0$. Pela \cref{prop.calc1:con_sin_cont}, existe $r \in \R_{>0}$ tal que $f > 0$ em $V_{r}(c) \cap [a,b]$. Como $c \in \left]a,b \right[$, tomando $\delta := \min \{r, b-c, c-a\}$, temos $V_{\delta}(c) \subseteq [a,b]$. Logo, $f>0$ em $V_{\delta}(c)$. Como $c - \delta$ não é uma cota superior de $S$, existe $d \in S$ tal que $c-\delta< d \leq c$. Como $d \in S$, temos $f(d) \leq 0$, mas $f > 0$ em $V_{\delta}(c)$, uma contradição. \whiteproof
+            \end{midproof}
+        Logo, $f(c) = 0$. \blackproof
+                \item Defina $S := \{x \in [a,b] : f(x) \geq 0\}$. Como $f(a) > 0$, temos $a \in S$, donde $S \neq \emptyset$. Como $S \subseteq [a,b]$, temos que $S$ é limitado superiormente (por $b$). Pela propriedade do supremo, existe $c := \sup S$. 
+            \begin{claim}
+                $c \in \left]a,b \right[$.
+            \end{claim}
+            \begin{midproof}
+                Como $f$ é contínua em $a$ pela direita e $f(a) > 0$, pela \cref{prop.calc1:con_sin_cont_lat} existe $r \in \R_{>0}$ tal que $f > 0$ em $\left[a, a+r \right[ \cap [a,b]$. Se fosse $c=a$, então, para todo $x \in \left]a,b \right]$, deveríamos ter $f(x) < 0$, mas $f > 0$ em $]a,a+r[$, uma contradição. Logo, $a < c$. Como $f$ é contínua em $b$ pela esquerda e $f(b) < 0$, pela \cref{prop.calc1:con_sin_cont_lat} existe $r \in \R_{>0}$ tal que $f < 0$ em $\left]b-r, b \right] \cap [a,b]$. Se fosse $c=b$, como $b-r$ não seria uma cota superior de $S$, existiria $d \in S$ tal que $b-r < d \leq b$; para tal $d$, teríamos $f(d) \geq 0$ e $f(d) < 0$, uma contradição. Logo, $c < b$. Com isso, temos $a<c<b$, isto é, $c \in \left] a,b \right[$. \whiteproof
+            \end{midproof}
+            \begin{claim}
+                $f(c) = 0$.
+            \end{claim}
+            \begin{midproof}
+                Suponha, por absurdo, que $f(c) > 0$. Pela \cref{prop.calc1:con_sin_cont}, existe $r \in \R_{>0}$ tal que $f > 0$ em $V_{r}(c) \cap [a,b]$. Como $c \in \left]a,b \right[$, tomando $\delta := \min \{r, b-c, c-a\}$, temos $V_{\delta}(c) \subseteq [a,b]$. Logo, $f>0$ em $V_{\delta}(c)$. Em particular, temos $f > 0$ em $\left]c, c+\delta \right[$, uma contradição: para todo $x \in [a,b]$, se $x > c$, então $f(x) < 0$, pois $c = \sup S$. Analogamente, suponha, por absurdo, que $f(c) < 0$. Pela \cref{prop.calc1:con_sin_cont}, existe $r \in \R_{>0}$ tal que $f < 0$ em $V_{r}(c) \cap [a,b]$. Como $c \in \left]a,b \right[$, tomando $\delta := \min \{r, b-c, c-a\}$, temos $V_{\delta}(c) \subseteq [a,b]$. Logo, $f<0$ em $V_{\delta}(c)$. Como $c - \delta$ não é uma cota superior de $S$, existe $d \in S$ tal que $c-\delta< d \leq c$. Como $d \in S$, temos $f(d) \geq 0$, mas $f < 0$ em $V_{\delta}(c)$, uma contradição. \whiteproof
+            \end{midproof}
+        Logo, $f(c) = 0$. \blackproof
+    \end{enumerate}
+\end{proof}
+
+\begin{proof} \fonte[135]{spivak}
+    \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+        \item Defina $S := \{x \in [a,b] : f \restriction_{[a,x]} < 0\}$. Como $f(a) < 0$, temos $a \in S$, donde $S \neq \emptyset$. Como $S \subseteq [a,b]$, temos que $S$ é limitado superiormente (por $b$). Pela propriedade do supremo, existe $c := \sup S$.
+            \begin{claim}
+                $c \in \left]a,b \right[$.
+            \end{claim}
+            \begin{midproof}
+                Como $f$ é contínua em $a$ pela direita e $f(a) < 0$, pela \cref{prop.calc1:con_sin_cont_lat} existe $r \in \R_{>0}$ tal que $f < 0$ em $\left[a, a+r \right[ \cap [a,b]$. Se fosse $c=a$, então, para todo $x \in \left]a,b \right]$, deveríamos ter $x \notin S$, mas $f < 0$ em $\left[a,a+r\right[$, uma contradição. Logo, $a < c$. Como $f$ é contínua em $b$ pela esquerda e $f(b) > 0$, pela \cref{prop.calc1:con_sin_cont_lat} existe $r \in \R_{>0}$ tal que $f > 0$ em $\left]b-r, b \right] \cap [a,b]$. Se fosse $c=b$, como $b-r$ não seria uma cota superior de $S$, existiria $d \in S$ tal que $b-r < d \leq b$; para tal $d$, teríamos $f \restriction_{[a,d]} < 0$ e $f(d) > 0$, uma contradição. Logo, $c < b$. Com isso, temos $a<c<b$, isto é, $c \in \left] a,b \right[$. \whiteproof
+            \end{midproof}
+            \begin{claim}
+                $f(c) = 0$.
+            \end{claim}
+            \begin{midproof}
+                Suponha, por absurdo, que $f(c) < 0$. Pela \cref{prop.calc1:con_sin_cont}, existe $r \in \R_{>0}$ tal que $f < 0$ em $V_{r}(c) \cap [a,b]$. Como $c \in \left]a,b \right[$, tomando $\delta := \min \{r, b-c, c-a\}$, temos $V_{\delta}(c) \subseteq [a,b]$. Logo, $f<0$ em $V_{\delta}(c)$. Como $c-\delta$ não é uma cota superior de $S$, existe $d \in S$ tal que $c-\delta< d \leq c$. Como $d \in S$, temos $f \restriction_{[a,d]} < 0$, isto é, $f < 0$ em $[a,d]$. Como $f < 0$ em $\left]c, c+\delta \right[$, tomando $d' \in \left]c, c+\delta \right[$, temos $f<0$ em $\left[a, d' \right]$, isto é, $d' \in S$, uma contradição pois $d' > c$. Analogamente, suponha, por absurdo, que $f(c) > 0$. Pela \cref{prop.calc1:con_sin_cont}, existe $r \in \R_{>0}$ tal que $f > 0$ em $V_{r}(c) \cap [a,b]$. Como $c \in \left]a,b \right[$, tomando $\delta := \min \{r, b-c, c-a\}$, temos $V_{\delta}(c) \subseteq [a,b]$. Logo, $f>0$ em $V_{\delta}(c)$. Como $c-\delta$ não é uma cota superior de $S$, existe $d \in S$ tal que $c-\delta< d \leq c$. Como $d \in S$, temos $f \restriction_{[a,d]} < 0$, isto é, $f < 0$ em $[a,d]$, uma contradição pois $f \restriction_{]c-\delta, d]} > 0$, isto é, $f > 0$ em $\left]c-\delta, d \right] \subseteq [a,d]$. \whiteproof
+            \end{midproof}
+        Logo, $f(c) = 0$. \blackproof
+                \item Defina $S := \{x \in [a,b] : f \restriction_{[a,x]} > 0\}$. Como $f(a) > 0$, temos $a \in S$, donde $S \neq \emptyset$. Como $S \subseteq [a,b]$, temos que $S$ é limitado superiormente (por $b$). Pela propriedade do supremo, existe $c := \sup S$.
+            \begin{claim}
+                $c \in \left]a,b \right[$.
+            \end{claim}
+            \begin{midproof}
+                Como $f$ é contínua em $a$ pela direita e $f(a) > 0$, pela \cref{prop.calc1:con_sin_cont_lat} existe $r \in \R_{>0}$ tal que $f > 0$ em $\left[a, a+r \right[ \cap [a,b]$. Se fosse $c=a$, então, para todo $x \in \left]a,b \right]$, deveríamos ter $x \notin S$, mas $f > 0$ em $\left[a,a+r\right[$, uma contradição. Logo, $a < c$. Como $f$ é contínua em $b$ pela esquerda e $f(b) < 0$, pela \cref{prop.calc1:con_sin_cont_lat} existe $r \in \R_{>0}$ tal que $f < 0$ em $\left]b-r, b \right] \cap [a,b]$. Se fosse $c=b$, como $b-r$ não seria uma cota superior de $S$, existiria $d \in S$ tal que $b-r < d \leq b$; para tal $d$, teríamos $f \restriction_{[a,d]} > 0$ e $f(d) < 0$, uma contradição. Logo, $c < b$. Com isso, temos $a<c<b$, isto é, $c \in \left] a,b \right[$. \whiteproof
+            \end{midproof}
+            \begin{claim}
+                $f(c) = 0$.
+            \end{claim}
+            \begin{midproof}
+                Suponha, por absurdo, que $f(c) > 0$. Pela \cref{prop.calc1:con_sin_cont}, existe $r \in \R_{>0}$ tal que $f > 0$ em $V_{r}(c) \cap [a,b]$. Como $c \in \left]a,b \right[$, tomando $\delta := \min \{r, b-c, c-a\}$, temos $V_{\delta}(c) \subseteq [a,b]$. Logo, $f>0$ em $V_{\delta}(c)$. Como $c-\delta$ não é uma cota superior de $S$, existe $d \in S$ tal que $c-\delta< d \leq c$. Como $d \in S$, temos $f \restriction_{[a,d]} > 0$, isto é, $f > 0$ em $[a,d]$. Como $f > 0$ em $\left]c, c+\delta \right[$, tomando $d' \in \left]c, c+\delta \right[$, temos $f>0$ em $\left[a, d' \right]$, isto é, $d' \in S$, uma contradição pois $d' > c$. Analogamente, suponha, por absurdo, que $f(c) < 0$. Pela \cref{prop.calc1:con_sin_cont}, existe $r \in \R_{>0}$ tal que $f < 0$ em $V_{r}(c) \cap [a,b]$. Como $c \in \left]a,b \right[$, tomando $\delta := \min \{r, b-c, c-a\}$, temos $V_{\delta}(c) \subseteq [a,b]$. Logo, $f<0$ em $V_{\delta}(c)$. Como $c-\delta$ não é uma cota superior de $S$, existe $d \in S$ tal que $c-\delta< d \leq c$. Como $d \in S$, temos $f \restriction_{[a,d]} > 0$, isto é, $f > 0$ em $[a,d]$, uma contradição pois $f \restriction_{]c-\delta, d]} < 0$, isto é, $f < 0$ em $\left]c-\delta, d \right] \subseteq [a,d]$. \whiteproof
+            \end{midproof}
+        Logo, $f(c) = 0$. \blackproof
+    \end{enumerate}
+\end{proof}
+
+\begin{theorem}[Valor Intermediário] \label{teo.calc1:TVI}
+    Se $f : [a,b] \to \R$ é contínua, então para todo
+        \[
+            d \in [\min{\{f(a),f(b)\}}, \max{\{f(a),f(b)\}}]
+        \]
+    existe $c \in [a,b]$ tal que $f(c) = d$.    
+\end{theorem}
+
+\begin{proof}
+    O resultado é imediato se $f(a) = f(b)$ ou $d \in \{f(a), f(b)\}$. Suponha, então, que $f(a) \neq f(b)$ e $d \notin \{f(a), f(b) \}$.
+        \begin{claim}
+            Se $f(a) < f(b)$, então existe $c \in [a,b]$ tal que $f(c) = d$.
+        \end{claim}
+        \begin{midproof}
+            Se $f(a) < f(b)$, então
+                \[
+                    [\min{\{f(a),f(b)\}}, \max{\{f(a),f(b)\}}] = [f(a), f(b)].
+                \]
+            Como $d \in \left]f(a), f(b) \right[$, temos $f(a) < d < f(b)$. Defina $g : [a,b] \to \R$ por $g(x) := f(x) - d$ para todo $x \in [a,b]$. Como $f$ é contínua, $g$ é contínua. Como $g(a) < 0$ e $g(b) > 0$, pelo \cref{teo.calc1:anulamento_bolzano} existe $c \in [a,b]$ tal que $g(c) = 0$. Logo, $f(c) = d$. \whiteproof
+        \end{midproof}
+        \begin{claim}
+            Se $f(b) < f(a)$, então existe $c \in [a,b]$ tal que $f(c) = d$.
+        \end{claim}
+        \begin{midproof}
+            Se $f(b) < f(a)$, então
+                \[
+                    [\min{\{f(a),f(b)\}}, \max{\{f(a),f(b)\}}] = [f(b), f(a)].
+                \]
+            Como $d \in \left]f(b), f(a) \right[$, temos $f(b) < d < f(a)$. Defina $g : [a,b] \to \R$ por $g(x) := f(x) - d$ para todo $x \in [a,b]$. Como $f$ é contínua, $g$ é contínua. Como $g(a) > 0$ e $g(b) < 0$, pelo \cref{teo.calc1:anulamento_bolzano} existe $c \in [a,b]$ tal que $g(c) = 0$. Logo, $f(c) = d$. \whiteproof
+        \end{midproof}
+    Em qualquer caso, existe $c \in [a,b]$ tal que $f(c) = d$. \blackproof
+\end{proof}
+
+\begin{corollary}
+    Seja $I \subseteq \R$ um intervalo. Se $f : I  \to \R$ é contínua, então $f(I)$ é um intervalo.
+\end{corollary}
+
+\begin{proof}
+    Sejam $y_1, y_2 \in f(I)$ tais que $y_1 < y_2$, e sejam $a, b \in I$ tais que $y_1 = f(a)$ e $y_2 = f(b)$. Seja $d \in \R$ tal que $y_1<d<y_2$. Se $a < b$, então, pelo \cref{teo.calc1:TVI}, existe $c \in [a,b]$ tal que $d = f(c)$, isto é, $d \in f(I)$. Se $b < a$, então, pelo \cref{teo.calc1:TVI}, existe $c \in [b,a]$ tal que $d = f(c)$, isto é, $d \in f(I)$. Logo, $f(I)$ é um intervalo. \blackproof
+\end{proof}
+
+\begin{corollary}
+    Seja $I \subseteq \R$ um intervalo e $f : I  \to \R$ contínua.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Se $f$ é injetiva, então $f$ é estritamente monótona.
+            \item Se $f$ é estritamente monótona, então $f(I)$ é um intervalo do mesmo tipo que $I$.
+        \end{enumerate}
+\end{corollary}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item \fonte[234]{spivak}
+            Usaremos o seguinte lema, que depende do teorema do valor intermediário (\ref{teo.calc1:TVI}).
+                \begin{claim}
+                    Sejam $a,b,c \in I$ tais que $a<b<c$. 
+                        \begin{enumerate}[label=\roman*.]
+                            \item Se $f(a) < f(c)$, então $f(a)<f(b)<f(c)$.
+                            \item Se $f(a) > f(c)$, então $f(a)>f(b)>f(c)$.
+                        \end{enumerate}
+                \end{claim}
+                \begin{midproof}
+                    Como $f$ é injetiva, temos $f(b) \neq f(a)$ e $f(b) \neq f(c)$.
+                        \begin{enumerate}[label=\roman*.]
+                            \item Se $f(b) < f(a)$, então, pelo \cref{teo.calc1:TVI}, existe $d \in [b,c]$ tal que $f(d) = f(a)$. Como $f$ é injetiva, temos $d=a$, uma contradição pois $a \notin [b,c]$. Logo, $f(a) < f(b)$. Analogamente, se $f(c) < f(b)$, então, pelo \cref{teo.calc1:TVI}, existe $d \in [a,b]$ tal que $f(d)=f(c)$. Como $f$ é injetiva, temos $d=c$, uma contradição pois $c \notin [a,b]$. Logo, $f(b) < f(c)$.
+                            \item Se $f(b) > f(a)$, então, pelo \cref{teo.calc1:TVI}, existe $d \in [b,c]$ tal que $f(d) = f(a)$. Como $f$ é injetiva, temos $d=a$, uma contradição pois $a \notin [b,c]$. Logo, $f(a) > f(b)$. Analogamente, se $f(c) > f(b)$, então, pelo \cref{teo.calc1:TVI}, existe $d \in [a,b]$ tal que $f(d)=f(c)$. Como $f$ é injetiva, temos $d=c$, uma contradição pois $c \notin [a,b]$. Logo, $f(b) > f(c)$.
+                        \end{enumerate}
+                    Logo, $f(b)$ está entre $f(a)$ e $f(c)$. \whiteproof
+                \end{midproof}
+            Em particular, se $a,b,c \in I$ são tais que $a<b<c$, então $f(a)<f(b)<f(c)$ ou $f(a)>f(b)>f(c)$. Logo, se $a,b,c,d \in I$ são tais que $a<b<c<d$, então $f(a)<f(b)<f(c)<f(d)$ ou $f(a)>f(b)>f(c)>f(d)$.
+                \begin{claim}
+                    Sejam $a,b \in I$ tais que $a<b$.
+                        \begin{enumerate}[label=\roman*.]
+                            \item Se $f(a) < f(b)$, então $f$ é estritamente crescente.
+                            \item Se $f(b) < f(a)$, então $f$ é estritamente decrescente.
+                        \end{enumerate}
+                \end{claim}
+                \begin{midproof}
+                    Sejam $x_1, x_2 \in I \setminus \{a,b\}$ tais que $x_1 < x_2$. Temos 6 casos a considerar.
+                        \begin{itemize}
+                            \item $x_1 < x_2 < a < b$.
+                            \item $x_1 < a < x_2 < b$.
+                            \item $x_1 < a < b < x_2$.
+                            \item $a < b < x_1 < x_2$.
+                            \item $a < x_1 < b < x_2$.
+                            \item $a < x_1 < x_2 < b$.
+                        \end{itemize}
+                    Em qualquer um dos casos acima, o sinal de $f(x_2) - f(x_1)$ concorda com o de $f(b) - f(a)$. De fato, se $f(a) < f(b)$, então, pela afirmação anterior, $f(x_1) < f(x_2)$, donde $f$ é estritamente crescente. Analogamente, se $f(a) > f(b)$, então, pela afirmação anterior, $f(x_1) > f(x_2)$, donde $f$ é estritamente decrescente. Por fim, se $x_1 \in \{a,b \}$ ou $x_2 \in \{a,b \}$, o resultado segue diretamente da primeira afirmação. \whiteproof
+                \end{midproof}
+            Logo, $f$ é estritamente monótona. \blackproof
+            \item \blackproof
+        \end{enumerate}
+\end{proof}
+
+\begin{theorem} \label{teo.calc1:continuidade_da_inversa}
+    Seja $I \subseteq \R$ um intervalo e $f : I  \to \R$. 
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Se $f$ é estritamente crescente, então a inversa $f^{-1} : f(I) \to I$ é contínua.
+            \item Se $f$ é estritamente decrescente, então a inversa $f^{-1} : f(I) \to I$ é contínua.
+        \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    Seja $b \in f(I)$. Então existe $a \in I$ tal que $b = f(a)$, isto é, $a = f^{-1}(b)$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Suponha que $a \in \Int I$ e seja $\epsilon \in \R_{>0}$ tal que $\left]a-\epsilon,a+\epsilon \right[ \subseteq I$. Como $a-\epsilon < a < a+\epsilon$, temos $f(a-\epsilon) < f(a) < f(a+\epsilon)$. Tomando
+                \[
+                    \delta := \min \{f(a+\epsilon) - f(a), f(a) - f(a - \epsilon)\},
+                \]
+            temos $\left]b-\delta, b+\delta \right[ \subseteq \left]f(a - \epsilon), f(a+\epsilon) \right[$; logo, para todo $y \in f(I)$, se $|y-b| < \delta$, então, como $f^{-1}$ também é estritamente crescente,
+                \begin{align*}
+                    b - \delta < y < b + \delta &\Rightarrow f(a-\epsilon) < y < f(a + \epsilon) \\
+                    &\Rightarrow f^{-1}(f(a-\epsilon)) < f^{-1}(y) < f^{-1}(f(a+\epsilon)) \\
+                    &\Rightarrow a - \epsilon < f^{-1}(y) < a + \epsilon \\
+                    &\Rightarrow f^{-1}(b) - \epsilon < f^{-1}(y) < f^{-1}(b) + \epsilon \\
+                    &\Rightarrow |f^{-1}(y) - f^{-1}(b)| < \epsilon,
+                \end{align*}
+            isto é, $f^{-1}$ é contínua em $b$. Agora, se $a \notin \Int I$, então $a$ é uma extremidade do intervalo $I$, digamos, a direita. Se $y \in f(I)$, então $y=f(c)$ para algum $c \in I$; logo, $c \leq a$, e então $y \leq f(a) = b$. Seja $\epsilon \in \R_{>0}$ tal que $a-\epsilon \in I$. Como $a-\epsilon < a$, temos $f(a-\epsilon) < f(a)$. Pois tome $\delta := f(a) - f(a-\epsilon)$. Logo, para todo $y \in f(I)$, se $|y-b| < \delta$, então
+                \begin{align*}
+                    b - \delta < y < b + \delta &\Rightarrow b- \delta < y \leq b \\
+                    &\Rightarrow f(a-\epsilon) < y \leq f(a) \\
+                    &\Rightarrow f^{-1}(f(a-\epsilon)) < f^{-1}(y) \leq f^{-1}(f(a)) \\
+                    &\Rightarrow a - \epsilon < f^{-1}(y) \leq a \\
+                    &\Rightarrow f^{-1}(b) - \epsilon < f^{-1}(y) \leq f^{-1}(b) \\
+                    &\Rightarrow |f^{-1}(y) - f^{-1}(b)| < \epsilon,
+                \end{align*}
+            isto é, $f^{-1}$ é contínua em $b$. Por fim, suponha que $a$ é a extremidade esquerda do intervalo $I$. Se $y \in f(I)$, então $y=f(c)$ para algum $c \in I$; logo, $a \leq c$, e então $b = f(a) \leq y$. Seja $\epsilon \in \R_{>0}$ tal que $a+\epsilon \in I$. Como $a < a+\epsilon$, temos $f(a) < f(a+\epsilon)$. Pois tome $\delta := f(a+\epsilon)-f(a)$. Logo, para todo $y \in f(I)$, se $|y-b|<\delta$, então
+                \begin{align*}
+                    b - \delta < y < b + \delta &\Rightarrow b \leq y < b + \delta \\
+                    &\Rightarrow f(a) \leq y < f(a+\epsilon) \\
+                    &\Rightarrow f^{-1}(f(a)) \leq f^{-1}(y) < f^{-1}(f(a+\epsilon)) \\
+                    &\Rightarrow a \leq f^{-1}(y) < a + \epsilon \\
+                    &\Rightarrow f^{-1}(b) \leq f^{-1}(y) < f^{-1}(b) + \epsilon \\
+                    &\Rightarrow |f^{-1}(y) - f^{-1}(b)| < \epsilon,
+                \end{align*}
+            isto é, $f^{-1}$ é contínua em $b$. \blackproof
+        \item Segue analogamente. \blackproof
+        \end{enumerate}
+\end{proof}
+
+\subsection{O Teorema do Valor Extremo}
+
+\begin{theorem}[Limitação] \label{teo.calc1:limitacao}
+    Seja $f : [a,b] \to \R$. Se $f$ é contínua, então $f$ é limitada.
+\end{theorem}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\begin{theorem}[Valor Extremo de Weierstrass] \label{teo.calc1:valor_extremo_weierstrass}
+    Seja $f: [a,b] \to \R$. Se $f$ é contínua, então existem $x_m, x_M \in [a,b]$ tais que $f(x_m) \leq f(x) \leq f(x_M)$ para todo $x \in [a,b]$.
+\end{theorem}
+
+\begin{proof}
+    Se $f$ é contínua, então, pelo \cref{teo.calc1:limitacao}, $f$ é limitada. Como $\Img f \neq \emptyset$, pela propriedade do supremo existem $\sup \, (\Img f)$ e $\inf \, (\Img f)$.
+        \begin{claim}
+            $\sup \, (\Img f) \in \Img f$.
+        \end{claim}
+        \begin{midproof}
+            Seja $M := \sup \, (\Img f)$. Então $f(x) \leq M$ para todo $x \in [a,b]$. Suponha, por absurdo, que $f(x) < M$ para todo $x \in [a,b]$. Defina $g : [a,b] \to \R$ por
+                $
+                    g(x) := \dfrac{1}{M- f(x)}
+                $
+            para todo $x \in [a,b]$. Como $f$ é contínua, $g$ é contínua, e então, pelo \cref{teo.calc1:limitacao}, $g$ é limitada, isto é, existe $L \in \R_{>0}$ tal que $|g(x)| \leq L$. Como $g(x) > 0$ pois $M - f(x) > 0$, temos $g(x) \leq L$, isto é,
+                $
+                    \dfrac{1}{M- f(x)} \leq L.
+                $
+            Daí, $f(x) \leq M - \dfrac{1}{L}$, isto é, $M - \dfrac{1}{L} < M$ é uma cota superior de $f$, uma contradição pois $M$ é a menor das cotas superiores de $f$. Logo, não pode ser $f(x) < M$ para todo $x \in [a,b]$, isto é, existe $x_M \in [a,b]$ tal que $f(x_M) = M$, o que prova que  $\sup \, (\Img f) \in \Img f$. \whiteproof
+        \end{midproof}
+    Com isso, temos $\sup \, (\Img f) = \max \, (\Img f)$, donde $f(x) \leq f(x_M)$ para todo $x \in [a,b]$.
+        \begin{claim}
+            $\inf \, (\Img f) \in \Img f$.
+        \end{claim}
+        \begin{midproof}
+            Seja $m := \inf \, (\Img f)$. Então $f(x) \geq m$ para todo $x \in [a,b]$. Suponha, por absurdo, que $f(x) > m$ para todo $x \in [a,b]$. Defina $h : [a,b] \to \R$ por
+                $
+                    h(x) := \dfrac{1}{f(x) - m}
+                $
+            para todo $x \in [a,b]$. Como $f$ é contínua, $h$ é contínua, e então, pelo \cref{teo.calc1:limitacao}, $h$ é limitada, isto é, existe $K \in \R_{>0}$ tal que $|h(x)| \leq K$. Como $h(x) > 0$ pois $f(x) - m > 0$, temos $h(x) \leq K$, isto é,
+                $
+                    \dfrac{1}{f(x) - m} \leq K.
+                $
+            Daí, $f(x) \geq m + \dfrac{1}{K}$, isto é, $m + \dfrac{1}{K} > m$ é uma cota inferior de $f$, uma contradição pois $m$ é a maior das cotas inferiores de $f$. Logo, não pode ser $f(x) > m$ para todo $x \in [a,b]$, isto é, existe $x_m \in [a,b]$ tal que $f(x_m) = m$, o que prova que  $\inf \, (\Img f) \in \Img f$. \whiteproof
+        \end{midproof}
+    Com isso, temos $\inf \, (\Img f) = \min \, (\Img f)$, donde $f(x_m) \leq f(x)$ para todo $x \in [a,b]$. Concluímos, portanto, que $f(x_m) \leq f(x) \leq f(x_M)$ para todo $x \in [a,b]$. \blackproof
+\end{proof}
+
+\subsection{Continuidade Uniforme}
+
+\begin{definition}
+    Dizemos que $f : A \subseteq \R \to \R$ é \emph{uniformemente contínua} se para todo $\epsilon \in \R_{>0}$ existe $\delta \in \R_{>0}$ tal que, para quaisquer $x,y \in A$, se $|x-y| < \delta$, então $|f(x) - f(y)| < \epsilon$.
+\end{definition}
+
+\begin{definition}
+    Dizemos que $f : A \subseteq \R \to \R$ é \emph{Lipschitz} se existe $L \in \R_{>0}$ tal que
+        \[
+            |f(x) - f(y)| \leq L|x-y|
+        \]
+    para todos $x,y \in A$. Dizemos, nesse caso, que $L$ é uma \emph{constante de Lipschitz} de $f$.
+\end{definition}
+
+\begin{proposition}
+    Seja $f : A \subseteq \R \to \R$ Lipschitz. 
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $f$ é contínua.
+            \item $f$ é uniformemente contínua.
+        \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    Seja $L \in \R_{>0}$ uma constante de Lipschitz de $f$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Sejam $\epsilon \in \R_{>0}$ e $a \in A$. Pois tome $\delta := \dfrac{\epsilon}{L} \in \R_{>0}$. Com isso, para todo $x \in A$, se $|x-a|<\delta$, então
+                \[
+                    |f(x) - f(a)| \leq L|x-a| < L \cdot \dfrac{\epsilon}{L} = \epsilon,
+                \]
+            isto é, $f$ é contínua em $a$. Logo, $f$ é contínua. \blackproof
+            \item Seja $\epsilon \in \R_{>0}$. Pois tome $\delta := \dfrac{\epsilon}{L} \in \R_{>0}$. Com isso, para quaisquer $x,y \in A$, se $|x-y|<\delta$, então
+                \[
+                    |f(x) - f(y)| \leq L|x-y| < L \cdot \dfrac{\epsilon}{L} = \epsilon,
+                \]
+            isto é, $f$ é uniformemente contínua. \blackproof
+        \end{enumerate}
+\end{proof}
+
+\section{Limites Infinitos}
+
+\begin{definition}
+    Sejam $f : A \subseteq \R \to \R$ e $a \in A'$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Dizemos que $f$ \emph{tende ao infinito positivo em $a$} se para todo $N \in \R_{>0}$ existe $\delta = \delta(N,a) \in \R_{>0}$ tal que, para todo $x \in A$, se $0<|x-a|<\delta$, então $f(x) > N$. Isso é denotado por
+                \[
+                    \lim_{x \to a} f(x) = +\infty.
+                \]
+            \item Dizemos que $f$ \emph{tende ao infinito negativo em $a$} se para todo $N \in \R_{>0}$ existe $\delta = \delta(N,a) \in \R_{>0}$ tal que, para todo $x \in A$, se $0<|x-a|<\delta$, então $f(x) < -N$. Isso é denotado por
+                \[
+                    \lim_{x \to a} f(x) = -\infty.
+                \]
+        \end{enumerate}
+\end{definition}
+
+\begin{proposition}
+    Sejam $f,g : A \subseteq \R \to \R$ e $a \in A'$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Se $\ds \lim_{x \to a} f(x) \in \R$ e $\ds \lim_{x \to a} g(x) = \pm \infty$, então
+                \begin{enumerate}[label=\roman*.]
+                    \item $\ds \lim_{x \to a} \, (f+g)(x) = \pm \infty$.
+                    \item $\ds \lim_{x \to a} \left(\dfrac{f}{g} \right)(x) = 0$.
+                \end{enumerate}
+            \item Se $\ds \lim_{x \to a} f(x) \in \R_{>0}$ e $\ds \lim_{x \to a} g(x) = \pm \infty$, então $\ds \lim_{x \to a} \, (f \cdot g)(x) = \pm \infty$.
+            \item Se $\ds \lim_{x \to a} f(x) \in \R_{<0}$ e $\ds \lim_{x \to a} g(x) = \pm \infty$, então $\ds \lim_{x \to a} \, (f \cdot g)(x) = \mp \infty$.
+            \item Se $\ds \lim_{x \to a} f(x)=\pm\infty$ e $\ds \lim_{x \to a} g(x)\in\R_{>0}$, então
+                $\ds
+                    \lim_{x\to a}\left(\frac{f}{g}\right)(x)=\pm\infty.
+                $
+            \item Se $\ds \lim_{x \to a} f(x)=\pm\infty$ e $\ds \lim_{x \to a} g(x)\in\R_{<0}$, então
+                $\ds
+                    \lim_{x\to a}\left(\frac{f}{g}\right)(x)=\mp\infty.
+                $
+            \item Se $\ds \lim_{x \to a} f(x) = \pm \infty$ e $\ds \lim_{x \to a} g(x) = \pm \infty$, então
+                \begin{enumerate}[label=\roman*.]
+                    \item $\ds \lim_{x \to a} \, (f+g)(x) = \pm \infty$.
+                    \item $\ds \lim_{x \to a} \, (f \cdot g)(x) = + \infty$.
+                \end{enumerate}
+            \item Se $\ds \lim_{x \to a} f(x) = \pm \infty$ e $\ds \lim_{x \to a} g(x) = \mp \infty$, então $\ds \lim_{x \to a} \, (f \cdot g)(x) = - \infty$.
+        \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item \blackproof
+            \item \blackproof
+            \item \blackproof
+            \item \blackproof
+            \item \blackproof
+            \item \blackproof
+            \item \blackproof
+        \end{enumerate}
+\end{proof}
+
+\begin{proposition}
+    Sejam $f,g : A \subseteq \R \to \R$ e $a \in A'$ tais que $\ds \lim_{x \to a} g(x) = 0$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Suponha que existe $r \in \R_{>0}$ tal que $g > 0$ em $V^*_{r}(a) \cap A$.
+                \begin{enumerate}[label=\roman*.]
+                    \item Se $\ds \lim_{x \to a} f(x) \in \R_{>0}$, então
+                        $ \ds
+                            \lim_{x \to a} \left(\dfrac{f}{g} \right)(x) = +\infty.
+                        $
+                    \item Se $\ds \lim_{x \to a} f(x) \in \R_{<0}$, então
+                        $ \ds
+                            \lim_{x \to a} \left(\dfrac{f}{g} \right)(x) = -\infty.
+                        $
+                    \item Se $\ds \lim_{x\to a} f(x)=\pm\infty$, então
+                        $\ds
+                            \lim_{x\to a}\left(\frac{f}{g}\right)(x)=\pm\infty.
+                        $
+                \end{enumerate}
+            \item Suponha que existe $r \in \R_{>0}$ tal que $g < 0$ em $V^*_{r}(a) \cap A$.
+                \begin{enumerate}[label=\roman*.]
+                    \item Se $\ds \lim_{x \to a} f(x) \in \R_{>0}$, então
+                        $ \ds
+                            \lim_{x \to a} \left(\dfrac{f}{g} \right)(x) = -\infty.
+                        $
+                    \item Se $\ds \lim_{x \to a} f(x) \in \R_{<0}$, então
+                        $ \ds
+                            \lim_{x \to a} \left(\dfrac{f}{g} \right)(x) = +\infty.
+                        $
+                    \item Se $\ds \lim_{x\to a} f(x)=\pm\infty$, então
+                        $\ds
+                            \lim_{x\to a}\left(\frac{f}{g}\right)(x)=\mp\infty.
+                        $
+                \end{enumerate}
+        \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item \blackproof
+            \item \blackproof
+        \end{enumerate}
+\end{proof}
+
+\subsection{Limites Laterais Infinitos}
+
+\begin{definition}
+    Sejam $f : A \subseteq \R \to \R$ e $a \in A'_+$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Dizemos que $f$ \emph{tende ao infinito positivo em $a$ pela direita} se para todo $N \in \R_{>0}$ existe $\delta = \delta(N,a) \in \R_{>0}$ tal que, para todo $x \in A$, se $a < x < a + \delta$, então $f(x) > N$. Isso é denotado por
+                \[
+                    \lim_{x \to a^+} f(x) = +\infty.
+                \]
+            \item Dizemos que $f$ \emph{tende ao infinito negativo em $a$ pela direita} se para todo $N \in \R_{>0}$ existe $\delta = \delta(N,a) \in \R_{>0}$ tal que, para todo $x \in A$, se $a < x < a + \delta$, então $f(x) < -N$. Isso é denotado por
+                \[
+                    \lim_{x \to a^+} f(x) = -\infty.
+                \]
+        \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    Sejam $f : A \subseteq \R \to \R$ e $a \in A'_-$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Dizemos que $f$ \emph{tende ao infinito positivo em $a$ pela esquerda} se para todo $N \in \R_{>0}$ existe $\delta = \delta(N,a) \in \R_{>0}$ tal que, para todo $x \in A$, se $a-\delta<x<a$, então $f(x) > N$. Isso é denotado por
+                \[
+                    \lim_{x \to a^-} f(x) = +\infty.
+                \]
+            \item Dizemos que $f$ \emph{tende ao infinito negativo em $a$ pela esquerda} se para todo $N \in \R_{>0}$ existe $\delta = \delta(N,a) \in \R_{>0}$ tal que, para todo $x \in A$, se $a-\delta<x<a$, então $f(x) < -N$. Isso é denotado por
+                \[
+                    \lim_{x \to a^-} f(x) = -\infty.
+                \]
+        \end{enumerate}
+\end{definition}
+
+\begin{proposition}
+    Seja $f : A \subseteq \R \to \R$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Se $a \in A'_+$, então
+                \[
+                    \lim_{x \to a^+} f(x) = \pm \infty \Leftrightarrow \lim_{x \to a} f \restriction_{A \cap \left]a,+\infty \right[ } (x) = \pm \infty.
+                \]
+            \item Se $a \in A'_-$, então
+                \[
+                    \lim_{x \to a^-} f(x) = \pm \infty \Leftrightarrow \lim_{x \to a} f \restriction_{A \cap \left]-\infty, a \right[ } (x) = \pm \infty.
+                \]
+        \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Inicialmente, provemos que $\ds \lim_{x \to a^+} f(x) = + \infty \Leftrightarrow \lim_{x \to a} f \restriction_{A \cap \left]a,+\infty \right[ } (x) = + \infty$.
+                \begin{itemize}
+                    \item[($\Rightarrow$)]
+                    \item[($\Leftarrow$)]  
+                \end{itemize}
+            Agora, provemos que $\ds \lim_{x \to a^+} f(x) = - \infty \Leftrightarrow \lim_{x \to a} f \restriction_{A \cap \left]a,+\infty \right[ } (x) = - \infty$.
+                \begin{itemize}
+                    \item[($\Rightarrow$)]
+                    \item[($\Leftarrow$)]  
+                \end{itemize}
+            \blackproof
+            \item Inicialmente, provemos que $\ds \lim_{x \to a^-} f(x) = + \infty \Leftrightarrow \lim_{x \to a} f \restriction_{A \cap \left]-\infty, a \right[ } (x) = + \infty$.
+                \begin{itemize}
+                    \item[($\Rightarrow$)]
+                    \item[($\Leftarrow$)]  
+                \end{itemize}
+            Agora, provemos que $\ds \lim_{x \to a^-} f(x) = - \infty \Leftrightarrow \lim_{x \to a} f \restriction_{A \cap \left]-\infty, a \right[ } (x) = - \infty$
+                \begin{itemize}
+                    \item[($\Rightarrow$)]
+                    \item[($\Leftarrow$)]  
+                \end{itemize}
+            \blackproof
+        \end{enumerate}
+\end{proof}
+
+\begin{theorem}[Bilateral $\Leftrightarrow$ Laterais]
+    Sejam $f : A \subseteq \R \to \R$ e $a \in A'_+ \cap A'_-$. Então, $\ds \lim_{x \to a} f(x) = \pm \infty$ se, e somente se, $\ds \lim_{x \to a^+} f(x) = \pm \infty$ e $\ds \lim_{x \to a^-} f(x) = \pm \infty$.
+\end{theorem}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\section{Limites no Infinito}
+
+\begin{definition}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Sejam $A \subseteq \R$ ilimitado superiormente e $f : A \to \R$. Dizemos que $L \in \R$ é o \emph{limite} de $f$ no infinito positivo se para todo $\epsilon \in \R_{>0}$ existe $N = N(\epsilon) \in \R_{>0}$ tal que, para todo $x \in A$, se $x>N$, então $|f(x) - L| < \epsilon$. Isso é denotado por
+                \[
+                    \lim_{x \to +\infty} f(x) = L.
+                \]
+            \item Sejam $A \subseteq \R$ ilimitado inferiormente e $f : A \to \R$. Dizemos que $L \in \R$ é o \emph{limite} de $f$ no infinito negativo se para todo $\epsilon \in \R_{>0}$ existe $N = N(\epsilon) \in \R_{>0}$ tal que, para todo $x \in A$, se $x<-N$, então $|f(x) - L| < \epsilon$. Isso é denotado por
+                \[
+                    \lim_{x \to -\infty} f(x) = L.
+                \]
+        \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    Seja $L \in \R$. Dizemos que a reta $y = L$ é uma \emph{assíntota horizontal} de $f : A \subseteq \R \to \R$ se $\ds \lim_{x \to \pm \infty} f(x) = L$.
+\end{definition}
+
+\begin{theorem}
+    Sejam $f,g : A \subseteq \to \R$ tais que existem $\ds \lim_{x \to \pm \infty} f(x)$ e $\ds \lim_{x \to \pm \infty} g(x)$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item O limite da soma é a soma dos limites:
+                \[
+                    \lim_{x \to \pm \infty} (f+g)(x) = \lim_{x \to \pm \infty} f(x) + \lim_{x \to \pm \infty} g(x).
+                \]
+            \item O limite do produto é o produto dos limites:
+                \[
+                    \lim_{x \to \pm \infty} (f \cdot g)(x) = \lim_{x \to \pm \infty} f(x) \cdot \lim_{x \to \pm \infty} g(x).
+                \]
+            \item O limite do quociente é igual ao quociente dos limites, desde que o denominador seja diferente de $0$: se $\ds \lim_{x \to \pm \infty} g(x) \neq 0$, então
+                \[
+                    \lim_{x \to \pm \infty} \left(\dfrac{f}{g} \right)(x) = \dfrac{\ds \lim_{x \to \pm \infty} f(x)}{\ds \lim_{x \to \pm \infty} g(x)}.
+                \]
+        \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item \blackproof
+            \item \blackproof
+            \item \blackproof
+        \end{enumerate}
+\end{proof}
+
+\begin{proposition}
+    Sejam $f,g : A \subseteq \R \to \R$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Se $\ds \lim_{x \to + \infty} f(x) \in \R$, então existe $N \in \R_{>0}$ tal que $f$ é limitada em $\left[ N,+\infty \right[ \cap A$.
+            \item Se $\ds \lim_{x \to - \infty} f(x) \in \R$, então existe $N \in \R_{>0}$ tal que $f$ é limitada em $\left[-\infty, -N \right[ \cap A$.
+            \item Se $\ds \lim_{x \to \pm \infty} f(x) = 0$ e $g$ é limitada, então $\ds \lim_{x \to \pm \infty} f(x)g(x) = 0$.
+        \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item \blackproof
+            \item \blackproof
+            \item \blackproof
+        \end{enumerate}
+\end{proof}
+
+\section{Limites Infinitos no Infinito}
+
+\begin{definition}
+    Sejam $A \subseteq \R$ ilimitado superiormente e $f: A \to \R$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Dizemos que $f$ \emph{tende ao infinito positivo no infinito positivo} se para todo $N \in \R_{>0}$ existe $M \in \R_{>0}$ tal que, para todo $x \in A$, se $x>M$, então $f(x)>N$. Isso é denotado por
+                \[
+                    \lim_{x \to +\infty} f(x) = +\infty.
+                \]
+            \item Dizemos que $f$ \emph{tende ao infinito negativo no infinito positivo} se para todo $N \in \R_{>0}$ existe $M \in \R_{>0}$ tal que, para todo $x \in A$, se $x>M$, então $f(x)<-N$. Isso é denotado por
+                \[
+                    \lim_{x \to +\infty} f(x) = -\infty.
+                \]
+        \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    Sejam $A \subseteq \R$ ilimitado inferiormente e $f: A \to \R$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Dizemos que $f$ \emph{tende ao infinito positivo no infinito negativo} se para todo $N \in \R_{>0}$ existe $M \in \R_{>0}$ tal que, para todo $x \in A$, se $x<-M$, então $f(x)>N$. Isso é denotado por
+                \[
+                    \lim_{x \to -\infty} f(x) = +\infty.
+                \]
+            \item Dizemos que $f$ \emph{tende ao infinito negativo no infinito negativo} se para todo $N \in \R_{>0}$ existe $M \in \R_{>0}$ tal que, para todo $x \in A$, se $x<-M$, então $f(x)<-N$. Isso é denotado por
+                \[
+                    \lim_{x \to -\infty} f(x) = -\infty.
+                \]
+        \end{enumerate}
+\end{definition}
+
+\begin{proposition}
+    Sejam $f,g : A \subseteq \R \to \R$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Se $\ds \lim_{x \to \pm \infty} f(x) \in \R$ e $\ds \lim_{x \to \pm \infty} g(x) = \pm \infty$, então
+                \begin{enumerate}[label=\roman*.]
+                    \item $\ds \lim_{x \to \pm \infty} \, (f+g)(x) = \pm \infty$.
+                    \item $\ds \lim_{x \to \pm \infty} \left(\dfrac{f}{g} \right)(x) = 0$.
+                \end{enumerate}
+            \item Se $\ds \lim_{x \to \pm \infty} f(x) \in \R_{>0}$ e $\ds \lim_{x \to \pm \infty} g(x) = \pm \infty$, então $\ds \lim_{x \to \pm \infty} \, (f \cdot g)(x) = \pm \infty$.
+            \item Se $\ds \lim_{x \to \pm \infty} f(x) \in \R_{<0}$ e $\ds \lim_{x \to \pm \infty} g(x) = \pm \infty$, então $\ds \lim_{x \to \pm \infty} \, (f \cdot g)(x) = \mp \infty$.
+            \item Se $\ds \lim_{x \to \pm \infty} f(x)=\pm\infty$ e $\ds \lim_{x \to \pm \infty} g(x)\in\R_{>0}$, então
+                $\ds
+                    \lim_{x\to \pm \infty}\left(\frac{f}{g}\right)(x)=\pm\infty.
+                $
+            \item Se $\ds \lim_{x \to \pm \infty} f(x)=\pm\infty$ e $\ds \lim_{x \to \pm \infty} g(x)\in\R_{<0}$, então
+                $\ds
+                    \lim_{x\to \pm \infty}\left(\frac{f}{g}\right)(x)=\mp\infty.
+                $
+            \item Se $\ds \lim_{x \to \pm \infty} f(x) = \pm \infty$ e $\ds \lim_{x \to \pm \infty} g(x) = \pm \infty$, então
+                \begin{enumerate}[label=\roman*.]
+                    \item $\ds \lim_{x \to \pm \infty} \, (f+g)(x) = \pm \infty$.
+                    \item $\ds \lim_{x \to \pm \infty} \, (f \cdot g)(x) = + \infty$.
+                \end{enumerate}
+            \item Se $\ds \lim_{x \to \pm \infty} f(x) = \pm \infty$ e $\ds \lim_{x \to \pm \infty} g(x) = \mp \infty$, então $\ds \lim_{x \to \pm \infty} \, (f \cdot g)(x) = - \infty$.
+        \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item \blackproof
+            \item \blackproof
+            \item \blackproof
+            \item \blackproof
+            \item \blackproof
+            \item \blackproof
+            \item \blackproof
+        \end{enumerate}
+\end{proof}
+
+\section{Funções Elementares}
+
+\subsection{Potenciação e Radiciação}
+
+\begin{definition}
+    Uma \emph{potenciação} é uma função $P : \R \times \N \to \R$ com as seguintes propriedades.
+        \begin{itemize}
+            \item $P(a,0) = 1$ para todo $a \in \R$.
+            \item $P(a,n+1) = a \cdot P(a,n)$, para quaisquer $a \in \R$ e $n \in \N$.
+        \end{itemize}
+\end{definition}
+
+\begin{theorem}
+    Seja $P : \R \times \N \to \R$ uma potenciação. Sejam $a,b \in \R$ e $m,n \in \N$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item 
+                \begin{enumerate}[label=\roman*.]
+                    \item $P(0,0) = 1$.
+                    \item Se $n \neq 0$, então $P(0,n) = 0$.
+                \end{enumerate}
+            \item
+                \begin{enumerate}[label=\roman*.]
+                    \item $P(a,1) = a$.
+                    \item $P(1,n) = 1$
+                \end{enumerate}
+            \item $P(a,m+n) = P(a,m) \cdot P(a,n)$.
+            \item $P(P(a,m),n) = P(a, m \cdot n) = P(P(a,n),m)$.
+            \item $P(a \cdot b,n) = P(a,n) \cdot P(b,n)$.
+        \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item 
+        \end{enumerate}
+\end{proof}
+
+\begin{theorem}
+    Existe uma única função $P : \R \times \N \to \R$ com as seguintes propriedades.
+        \begin{itemize}
+            \item $P(a,0) = 1$ para todo $a \in \R$.
+            \item $P(a,n+1) = a \cdot P(a,n)$, para quaisquer $a \in \R$ e $n \in \N$.
+        \end{itemize}
+\end{theorem}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\begin{definition}
+    Seja $P : \R \times \N \to \R$ potenciação. Sejam $a \in \R$ e $n \in \N$. Definimos $a^n := P(a,n)$.
+\end{definition}
+
+\begin{corollary}
+    Sejam $a \in \R$ e $n \in \N$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $a^0 = 1$.
+            \item $a^{n+1} = a \cdot a^n$. 
+        \end{enumerate}
+\end{corollary}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\begin{corollary}
+    Sejam $a,b \in \R$ e $m,n \in \N$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item 
+                \begin{enumerate}[label=\roman*.]
+                    \item $0^0 = 1$.
+                    \item Se $n \neq 0$, então $0^n = 0$.
+                \end{enumerate}
+            \item 
+                \begin{enumerate}[label=\roman*.]
+                    \item $a^1 = a$.
+                    \item $1^n = 1$.
+                \end{enumerate}
+            \item $a^{m+n} = a^m \cdot a^n$.
+            \item $(a^m)^n = a^{m \cdot n} = (a^n)^m$.
+            \item $(a \cdot b)^n = a^n \cdot b^n$.
+        \end{enumerate}
+\end{corollary}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\begin{corollary}
+    Sejam $a,b \in \R$ e $m,n \in \N$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Se $a > 0$, então $a^n > 0$.
+            \item Se $a < 0$, então
+                \begin{enumerate}[label=\roman*.]
+                    \item $a^n > 0$, se $n$ é par.
+                    \item $a^n < 0$, se $n$ é ímpar.
+                \end{enumerate}
+            \item Se $0 < a < b$ e $n \neq 0$, então $a^n < b^n$.
+            \item
+                \begin{enumerate}[label=\roman*.]
+                    \item Se $a > 1$ e $m>n$, então $a^m > a^n$.
+                    \item Se $0 < a < 1$ e $m>n$, então $a^m < a^n$.
+                \end{enumerate}
+        \end{enumerate}
+\end{corollary}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item 
+        \end{enumerate}
+\end{proof}
+
+\begin{definition}
+    Definimos $P_{\Z} : (\R \times \Z_{\geq 0}) \cup (\R_{\neq 0} \times \Z_{<0}) \to \R$ por
+        \[
+            P_{\Z}(a,n) :=
+                \begin{cases}
+                    a^n & \text{se } n \geq 0 \\
+                    \dfrac{1}{a^{-n}} & \text{se } n < 0
+                \end{cases}.
+        \]
+\end{definition}
+
+\begin{theorem}
+    Seja $n \in \N_{\geq 2}$. A relação
+        \[
+            \sqrt[n]{} := \{(x,y) \in \R_{\geq 0} \times \R_{\geq 0} : y^n = x \}
+        \]
+    é uma função de $\R_{\geq 0}$ em $\R_{\geq 0}$.
+\end{theorem}
+
+\begin{proof}
+    \blackproof
+\end{proof}

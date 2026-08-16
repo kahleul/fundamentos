@@ -386,12 +386,14 @@ Apresentamos a seguir algumas propriedades algébricas de algumas operações co
         \[
             C := \{x \in \mathcal{P}{(\mathcal{P}{(A \cup B)})} : \exists a \exists b (a \in A \land b \in B \land x = (a,b)) \}.
         \]
-    Afirmamos que $C$ funciona. \blackproof
+    Se $a \in A$ e $b \in B$, então $a,b \in A \cup B$, de modo que $\{a\} \subseteq A \cup B$ e $\{a,b\} \subseteq A \cup B$. Com isso, $\{a\},\{a,b\} \in \mathcal{P}{(A \cup B)}$ e, portanto, $(a,b)=\{\{a\},\{a,b\}\} \subseteq \mathcal{P}{(A \cup B)}$,
+    de modo que $(a,b) \in \mathcal{P}{(\mathcal{P}{(A \cup B)})}$. Com isso, para todo $x$,
+        \begin{itemize}[align=left]
+            \item[($\Rightarrow$)] Se $x \in C$, então, pela definição de $C$, existem $a$ e $b$ tais que $a \in A$, $b \in B$ e $x=(a,b)$.
+            \item[($\Leftarrow$)] Se existem $a$ e $b$ tais que $a \in A$, $b \in B$ e $x=(a,b)$, então, pelo que foi provado, $x=(a,b) \in \mathcal{P}{(\mathcal{P}{(A \cup B)})}$. Logo, pela definição de $C$, temos $x \in C$.
+        \end{itemize}
+    Logo, $\forall x(x \in C \leftrightarrow \exists a \exists b(a \in A \land b \in B \land x=(a,b)))$. A unicidade de $C$ segue do axioma da extensão, de modo que podemos denotar $A \times B := C$. \blackproof
 \end{proof}
-
-\begin{definition}
-    O \emph{produto cartesiano} dos conjuntos $A$ e $B$ é definido como $A \times B$.
-\end{definition}
 
 \begin{proposition}
     \leavevmode
@@ -416,7 +418,63 @@ Apresentamos a seguir algumas propriedades algébricas de algumas operações co
 \end{proposition}
 
 \begin{proof}
-    \blackproof
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item 
+                \begin{itemize}
+                    \item[($\Rightarrow$)] Suponha que $A \times B = \emptyset$. Se $A \neq \emptyset$ e $B \neq \emptyset$, então existem $a \in A$ e $b \in B$, de modo que $(a,b) \in A \times B$, o que contradiz $A \times B = \emptyset$. Logo, $A = \emptyset$ ou $B = \emptyset$.
+                    \item[($\Leftarrow$)] Suponha que $A = \emptyset$ ou $B = \emptyset$. Se existisse $(a,b) \in A \times B$, então teríamos $a \in A$ e $b \in B$, o que é impossível se $A = \emptyset$ ou $B = \emptyset$. Logo, $A \times B = \emptyset$.
+                \end{itemize}
+            Com isso, $A \times B = \emptyset$ se, e somente se, $A = \emptyset$ ou $B = \emptyset$. \blackproof
+            \item
+                \begin{enumerate}[label=\roman*.]
+                    \item Provemos que $(A \cup B) \times C = A \times C \cup B \times C$.
+                        \begin{itemize}
+                            \item[($\subseteq$)] Se $(a,c) \in (A \cup B) \times C$, então $a \in A \cup B$ e $c \in C$. Assim, $a \in A$ ou $a \in B$. Se $a \in A$, então $(a,c) \in A \times C$, e se $a \in B$, então $(a,c) \in B \times C$. Com isso, $(a,c) \in A \times C \cup B \times C$, de modo que $(A \cup B) \times C \subseteq A \times C \cup B \times C$.
+                            \item[($\supseteq$)] Se $(a,c) \in A \times C \cup B \times C$, então $(a,c) \in A \times C$ ou $(a,c) \in B \times C$. No primeiro caso, $a \in A$ e $c \in C$, e no segundo caso, $a \in B$ e $c \in C$. Em ambos os casos, $a \in A \cup B$ e $c \in C$, de modo que $(a,c) \in (A \cup B) \times C$. Com isso, $A \times C \cup B \times C \subseteq (A \cup B) \times C$.
+                        \end{itemize}
+                    Logo, $(A \cup B) \times C = A \times C \cup B \times C$.
+                    \item Provemos que $A \times (B \cup C) = A \times B \cup A \times C$.
+                        \begin{itemize}
+                            \item[($\subseteq$)] Se $(a,b) \in A \times (B \cup C)$, então $a \in A$ e $b \in B \cup C$. Assim, $b \in B$ ou $b \in C$. Se $b \in B$, então $(a,b) \in A \times B$, e se $b \in C$, então $(a,b) \in A \times C$. Com isso, $(a,b) \in A \times B \cup A \times C$, de modo que $A \times (B \cup C) \subseteq A \times B \cup A \times C$.
+                            \item[($\supseteq$)] Se $(a,b) \in A \times B \cup A \times C$, então $(a,b) \in A \times B$ ou $(a,b) \in A \times C$. No primeiro caso, $a \in A$ e $b \in B$, e no segundo caso, $a \in A$ e $b \in C$. Em ambos os casos, $a \in A$ e $b \in B \cup C$, de modo que $(a,b) \in A \times (B \cup C)$. Com isso, $A \times B \cup A \times C \subseteq A \times (B \cup C)$.
+                        \end{itemize}
+                    Logo, $A \times (B \cup C) = A \times B \cup A \times C$.
+                \end{enumerate}
+            Logo, vale a distributividade entre $\times$ e $\cup$. \blackproof
+            \item
+                \begin{enumerate}[label=\roman*.]
+                    \item Provemos que $(A \cap B) \times C = A \times C \cap B \times C$.
+                        \begin{itemize}
+                            \item[($\subseteq$)] Se $(a,c) \in (A \cap B) \times C$, então $a \in A \cap B$ e $c \in C$. Assim, $a \in A$ e $a \in B$, de modo que $(a,c) \in A \times C$ e $(a,c) \in B \times C$. Com isso, $(a,c) \in A \times C \cap B \times C$, de modo que $(A \cap B) \times C \subseteq A \times C \cap B \times C$.
+                            \item[($\supseteq$)] Se $(a,c) \in A \times C \cap B \times C$, então $(a,c) \in A \times C$ e $(a,c) \in B \times C$. Assim, $a \in A$, $a \in B$ e $c \in C$, de modo que $a \in A \cap B$. Com isso, $(a,c) \in (A \cap B) \times C$, de modo que $A \times C \cap B \times C \subseteq (A \cap B) \times C$.
+                        \end{itemize}
+                    Logo, $(A \cap B) \times C = A \times C \cap B \times C$.
+                    \item Provemos que $A \times (B \cap C) = A \times B \cap A \times C$.
+                        \begin{itemize}
+                            \item[($\subseteq$)] Se $(a,b) \in A \times (B \cap C)$, então $a \in A$ e $b \in B \cap C$. Assim, $b \in B$ e $b \in C$, de modo que $(a,b) \in A \times B$ e $(a,b) \in A \times C$. Com isso, $(a,b) \in A \times B \cap A \times C$, de modo que $A \times (B \cap C) \subseteq A \times B \cap A \times C$.
+                            \item[($\supseteq$)] Se $(a,b) \in A \times B \cap A \times C$, então $(a,b) \in A \times B$ e $(a,b) \in A \times C$. Assim, $a \in A$, $b \in B$ e $b \in C$, de modo que $b \in B \cap C$. Com isso, $(a,b) \in A \times (B \cap C)$, de modo que $A \times B \cap A \times C \subseteq A \times (B \cap C)$.
+                        \end{itemize}
+                    Logo, $A \times (B \cap C) = A \times B \cap A \times C$.
+                \end{enumerate}
+            Logo, vale a distributividade entre $\times$ e $\cap$. \blackproof
+            \item
+                \begin{enumerate}[label=\roman*.]
+                    \item Provemos que $(A \setminus B) \times C = A \times C \setminus B \times C$.
+                        \begin{itemize}
+                            \item[($\subseteq$)] Se $(a,c) \in (A \setminus B) \times C$, então $a \in A \setminus B$ e $c \in C$. Assim, $a \in A$ e $a \notin B$, de modo que $(a,c) \in A \times C$ e $(a,c) \notin B \times C$. Com isso, $(a,c) \in A \times C \setminus B \times C$, de modo que $(A \setminus B) \times C \subseteq A \times C \setminus B \times C$.
+                            \item[($\supseteq$)] Se $(a,c) \in A \times C \setminus B \times C$, então $(a,c) \in A \times C$ e $(a,c) \notin B \times C$. De $(a,c) \in A \times C$ segue que $a \in A$ e $c \in C$. Como $c \in C$ e $(a,c) \notin B \times C$, não podemos ter $a \in B$, pois, nesse caso, teríamos $(a,c) \in B \times C$. Assim, $a \in A \setminus B$ e $c \in C$, de modo que $(a,c) \in (A \setminus B) \times C$. Com isso, $A \times C \setminus B \times C \subseteq (A \setminus B) \times C$.
+                        \end{itemize}
+                    Logo, $(A \setminus B) \times C = A \times C \setminus B \times C$.
+                    \item Provemos que $A \times (B \setminus C) = A \times B \setminus A \times C$.
+                        \begin{itemize}
+                            \item[($\subseteq$)] Se $(a,b) \in A \times (B \setminus C)$, então $a \in A$ e $b \in B \setminus C$. Assim, $b \in B$ e $b \notin C$, de modo que $(a,b) \in A \times B$ e $(a,b) \notin A \times C$. Com isso, $(a,b) \in A \times B \setminus A \times C$, de modo que $A \times (B \setminus C) \subseteq A \times B \setminus A \times C$.
+                            \item[($\supseteq$)] Se $(a,b) \in A \times B \setminus A \times C$, então $(a,b) \in A \times B$ e $(a,b) \notin A \times C$. De $(a,b) \in A \times B$ segue que $a \in A$ e $b \in B$. Como $a \in A$ e $(a,b) \notin A \times C$, não podemos ter $b \in C$, pois, nesse caso, teríamos $(a,b) \in A \times C$. Assim, $b \in B \setminus C$ e $a \in A$, de modo que $(a,b) \in A \times (B \setminus C)$. Com isso, $A \times B \setminus A \times C \subseteq A \times (B \setminus C)$.
+                        \end{itemize}
+                    Logo, $A \times (B \setminus C) = A \times B \setminus A \times C$.
+                \end{enumerate}
+            Logo, vale a distributividade entre $\times$ e $\setminus$. \blackproof
+        \end{enumerate}
 \end{proof}
 
 \subsection{Relações}
@@ -534,32 +592,72 @@ Apresentamos a seguir algumas propriedades algébricas de algumas operações co
             \item 
                 \begin{enumerate}[label=\roman*.]
                     \item Temos $(a,b) \in R$ se, e somente se, $(b,a) \in R^{-1}$, o que é equivalente a $(a,b) \in (R^{-1})^{-1}$. Logo, $R = (R^{-1})^{-1}$.
-                    \item 
-                    \item 
-                    \item 
-                    \item 
+                    \item Temos $a \in \Dom R^{-1}$ se, e somente se, existe $b$ tal que $(a,b) \in R^{-1}$, o que é equivalente a $(b,a) \in R$, isto é, $a \in \Img R$. Logo, $\Dom R^{-1} = \Img R$.
+                    \item Temos $a \in \Img R^{-1}$ se, e somente se, existe $b$ tal que $(b,a) \in R^{-1}$, o que é equivalente a $(a,b) \in R$, isto é, $a \in \Dom R$. Logo, $\Img R^{-1} = \Dom R$.
+                    \item Se $(a,a) \in \id_{\Dom R}$, então $a \in \Dom R$, de modo que existe $b \in \Img R$ tal que $(a,b) \in R$. Com isso, $(b,a) \in R^{-1}$ e, portanto, $(a,a) \in R^{-1} \circ R$. Logo, $\id_{\Dom R} \subseteq R^{-1} \circ R$.
+                    \item Se $(b,b) \in \id_{\Img R}$, então $b \in \Img R$, de modo que existe $a \in \Dom R$ tal que $(a,b) \in R$. Com isso, $(b,a) \in R^{-1}$ e, portanto, $(b,b) \in R \circ R^{-1}$. Logo, $\id_{\Img R} \subseteq R \circ R^{-1}$.
                 \end{enumerate}
             \item 
                 \begin{enumerate}[label=\roman*.]
-                    \item 
-                    \item 
+                    \item Suponha que $a \notin \Dom R$. Se $b \in R[\{a\}]$, então existe $x \in \{a\}$ tal que $(x,b) \in R$. Como $x = a$, temos $(a,b) \in R$, donde $a \in \Dom R$, uma contradição. Logo, $R[\{a\}] = \emptyset$.
+                    \item Suponha que $b \notin \Img R$. Se $a \in R^{-1}[\{b\}]$, então existe $y \in \{b\}$ tal que $(y,a) \in R^{-1}$. Como $y = b$, temos $(b,a) \in R^{-1}$, isto é, $(a,b) \in R$, donde $b \in \Img R$, uma contradição. Logo, $R^{-1}[\{b\}] = \emptyset$.
                 \end{enumerate}
             \item 
                 \begin{enumerate}[label=\roman*.]
-                    \item 
-                    \item 
-                    \item 
+                    \item Inicialmente, provemos que $R[X \cup Y] = R[X] \cup R[Y]$.
+                        \begin{itemize}
+                            \item[($\subseteq$)] Se $b \in R[X \cup Y]$, então existe $a \in X \cup Y$ tal que $(a,b) \in R$. Assim, $a \in X$ ou $a \in Y$, de modo que $b \in R[X]$ ou $b \in R[Y]$. Logo, $b \in R[X] \cup R[Y]$ e $R[X \cup Y] \subseteq R[X] \cup R[Y]$.
+                            \item[($\supseteq$)] Se $b \in R[X] \cup R[Y]$, então $b \in R[X]$ ou $b \in R[Y]$. No primeiro caso, existe $a \in X$ tal que $(a,b) \in R$ e, como $X \subseteq X \cup Y$, temos $a \in X \cup Y$, de modo que $b \in R[X \cup Y]$. No segundo caso, existe $a \in Y$ tal que $(a,b) \in R$ e, como $Y \subseteq X \cup Y$, temos novamente $a \in X \cup Y$, de modo que $b \in R[X \cup Y]$. Logo, $R[X] \cup R[Y] \subseteq R[X \cup Y]$.
+                        \end{itemize}
+                    Agora, provemos que $R^{-1}[X \cup Y] = R^{-1}[X] \cup R^{-1}[Y]$.
+                        \begin{itemize}
+                            \item[($\subseteq$)] Se $a \in R^{-1}[X \cup Y]$, então existe $b \in X \cup Y$ tal que $(b,a) \in R^{-1}$. Assim, $b \in X$ ou $b \in Y$, de modo que $a \in R^{-1}[X]$ ou $a \in R^{-1}[Y]$. Logo, $a \in R^{-1}[X] \cup R^{-1}[Y]$ e $R^{-1}[X \cup Y] \subseteq R^{-1}[X] \cup R^{-1}[Y]$.
+                            \item[($\supseteq$)] Se $a \in R^{-1}[X] \cup R^{-1}[Y]$, então $a \in R^{-1}[X]$ ou $a \in R^{-1}[Y]$. No primeiro caso, existe $b \in X$ tal que $(b,a) \in R^{-1}$ e, como $X \subseteq X \cup Y$, temos $b \in X \cup Y$, de modo que $a \in R^{-1}[X \cup Y]$. No segundo caso, existe $b \in Y$ tal que $(b,a) \in R^{-1}$ e, como $Y \subseteq X \cup Y$, temos novamente $b \in X \cup Y$, de modo que $a \in R^{-1}[X \cup Y]$. Logo, $R^{-1}[X] \cup R^{-1}[Y] \subseteq R^{-1}[X \cup Y]$.
+                        \end{itemize}
+                    \item Inicialmente, provemos que $R[X \cap Y] \subseteq R[X] \cap R[Y]$.
+                        \begin{itemize}
+                            \item[($\subseteq$)] Se $b \in R[X \cap Y]$, então existe $a \in X \cap Y$ tal que $(a,b) \in R$. Como $a \in X$ e $a \in Y$, temos $b \in R[X]$ e $b \in R[Y]$, de modo que $b \in R[X] \cap R[Y]$. Logo, $R[X \cap Y] \subseteq R[X] \cap R[Y]$.
+                        \end{itemize}
+                    Agora, provemos que $R^{-1}[X \cap Y] \subseteq R^{-1}[X] \cap R^{-1}[Y]$.
+                        \begin{itemize}
+                            \item[($\subseteq$)] Se $a \in R^{-1}[X \cap Y]$, então existe $b \in X \cap Y$ tal que $(b,a) \in R^{-1}$. Como $b \in X$ e $b \in Y$, temos $a \in R^{-1}[X]$ e $a \in R^{-1}[Y]$, de modo que $a \in R^{-1}[X] \cap R^{-1}[Y]$. Logo, $R^{-1}[X \cap Y] \subseteq R^{-1}[X] \cap R^{-1}[Y]$.
+                        \end{itemize}
+                    \item Inicialmente, provemos que $R[X \setminus Y] \supseteq R[X] \setminus R[Y]$.
+                        \begin{itemize}
+                            \item[($\supseteq$)] Se $b \in R[X] \setminus R[Y]$, então $b \in R[X]$ e $b \notin R[Y]$. Como $b \in R[X]$, existe $a \in X$ tal que $(a,b) \in R$. Como $b \notin R[Y]$, não podemos ter $a \in Y$, pois, nesse caso, teríamos $b \in R[Y]$. Assim, $a \in X \setminus Y$ e $(a,b) \in R$, de modo que $b \in R[X \setminus Y]$. Logo, $R[X] \setminus R[Y] \subseteq R[X \setminus Y]$.
+                        \end{itemize}
+                    Agora, provemos que $R^{-1}[X \setminus Y] \supseteq R^{-1}[X] \setminus R^{-1}[Y]$.
+                        \begin{itemize}
+                            \item[($\supseteq$)] Se $a \in R^{-1}[X] \setminus R^{-1}[Y]$, então $a \in R^{-1}[X]$ e $a \notin R^{-1}[Y]$. Como $a \in R^{-1}[X]$, existe $b \in X$ tal que $(b,a) \in R^{-1}$. Como $a \notin R^{-1}[Y]$, não podemos ter $b \in Y$, pois, nesse caso, teríamos $a \in R^{-1}[Y]$. Assim, $b \in X \setminus Y$ e $(b,a) \in R^{-1}$, de modo que $a \in R^{-1}[X \setminus Y]$. Logo, $R^{-1}[X] \setminus R^{-1}[Y] \subseteq R^{-1}[X \setminus Y]$.
+                        \end{itemize}
                 \end{enumerate}
-            \item Por um lado ($\subseteq$), se $(a,d) \in T \circ (S \circ R)$, então $a \in \Dom \, (S \circ R)$, $d \in \Img T$ e existe $c \in \Img \, (S \circ R) \cap \Dom T$ tal que $(a,c) \in S \circ R$ e $(c,d) \in T$. De $(a,c) \in S \circ R$ segue que $a \in \Dom R$, $c \in \Img S$ e existe $b \in \Img R \cap \Dom S$ tal que $(a,b) \in R$ e $(b,c) \in S$. Como $b \in \Dom S$, $d \in \Img T$ e existe $c \in \Dom T \cap \Img S$ tal que $(b,c) \in S$ e $(c,d) \in T$, temos que $(b,d) \in T \circ S$. Com isso, $b \in \Dom \, (T \circ S)$ e $d \in \Img \, (T \circ S)$. Como $a \in \Dom R$, $d \in \Img \, (T \circ S)$ e existe $b \in \Dom \, (T \circ S) \cap \Img R$ tal que $(a,b) \in R$ e $(b,d) \in T \circ S$, temos que $(a,d) \in (T \circ S) \circ R$. Com isso, $T \circ (S \circ R) \subseteq (T \circ S) \circ R$. A prova de que $(T \circ S) \circ R \subseteq T \circ (S \circ R)$ é completamente análoga. Logo, $T \circ (S \circ R) = (T \circ S) \circ R$. \blackproof
-            \item Por um lado ($\subseteq$), se $(c,a) \in (S \circ R)^{-1}$, então $(a,c) \in S \circ R$, $a \in \Dom R$, $c \in \Img S$ e existe $b \in \Img R \cap \Dom S$ tal que $(a,b) \in R$ e $(b,c) \in S$ isto é, $(c,b) \in S^{-1}$, $(b,a) \in R^{-1}$, com $c \in \Dom S^{-1}$, $a \in \Img R^{-1}$ e $b \in \Img S^{-1} \cap \Dom R^{-1}$. Com isso, $(c,a) \in R^{-1} \circ S^{-1}$, de modo que $(S \circ R)^{-1} \subseteq R^{-1} \circ S^{-1}$. Por outro lado ($\supseteq$), a prova de que $R^{-1} \circ S^{-1} \subseteq (S \circ R)^{-1}$ é completamente análoga. Logo, $(S \circ R)^{-1} = R^{-1} \circ S^{-1}$. \blackproof
-            \item Se $a \in \Dom R$, então existe $b \in \Img R$ tal que $(a,b) \in R$. Se $\Img R \subseteq \Dom S$, então $b \in \Dom S$, de modo que existe $c \in \Img S$ tal que $(b,c) \in S$. Assim, $(a,c) \in S \circ R$, de modo que $a \in \Dom \, (S \circ R)$. Com isso, $\Dom R \subseteq \Dom \, (S \circ R)$. Agora, se $a \in \Dom \, (S \circ R)$, então existe $c \in \Img \, (S \circ R)$ tal que $(a,c) \in S \circ R$, donde $a \in \Dom R$ e $\Dom \, (S \circ R) \subseteq \Dom R$. Com isso, $\Dom R = \Dom \, (S \circ R)$. \blackproof
-            \item Se $c \in \Img S$, então existe $b \in \Dom S$ tal que $(b,c) \in S$. Se $\Dom S \subseteq \Img R$, então $b \in \Img R$, de modo que existe $a \in \Dom R$ tal que $(a,b) \in R$. Assim, $(a,c) \in S \circ R$, de modo que $c \in \Img \, (S \circ R)$. Com isso, $\Img S \subseteq \Img \, (S \circ R)$. Agora, se $c \in \Img \, (S \circ R)$, então existe $a \in \Dom \, (S \circ R)$ tal que $(a,c) \in S \circ R$, donde $c \in \Img S$ e $\Img \, (S \circ R) \subseteq \Img S$. Com isso, $\Img S = \Img \, (S \circ R)$. \blackproof
+            Logo, valem todas essas igualdades e inclusões. \blackproof
+            \item 
+                \begin{itemize}
+                    \item[($\subseteq$)] Se $(a,d) \in T \circ (S \circ R)$, então $a \in \Dom \, (S \circ R)$, $d \in \Img T$ e existe $c \in \Img \, (S \circ R) \cap \Dom T$ tal que $(a,c) \in S \circ R$ e $(c,d) \in T$. Como $(a,c) \in S \circ R$, temos $a \in \Dom R$, $c \in \Img S$ e existe $b \in \Img R \cap \Dom S$ tal que $(a,b) \in R$ e $(b,c) \in S$. Como $b \in \Dom S$, $d \in \Img T$ e existe $c \in \Dom T \cap \Img S$ tal que $(b,c) \in S$ e $(c,d) \in T$, temos que $(b,d) \in T \circ S$. Com isso, $b \in \Dom \, (T \circ S)$ e $d \in \Img \, (T \circ S)$. Como $a \in \Dom R$, $d \in \Img \, (T \circ S)$ e existe $b \in \Dom \, (T \circ S) \cap \Img R$ tal que $(a,b) \in R$ e $(b,d) \in T \circ S$, temos que $(a,d) \in (T \circ S) \circ R$. Com isso, $T \circ (S \circ R) \subseteq (T \circ S) \circ R$.
+                    \item[($\supseteq$)] Se $(a,d) \in (T \circ S) \circ R$, então $a \in \Dom R$, $d \in \Img \, (T \circ S)$ e existe $b \in \Img R \cap \Dom \, (T \circ S)$ tal que $(a,b) \in R$ e $(b,d) \in T \circ S$. Como $(b,d) \in T \circ S$, temos $b \in \Dom S$, $d \in \Img T$ e existe $c \in \Img S \cap \Dom T$ tal que $(b,c) \in S$ e $(c,d) \in T$. Como $a \in \Dom R$, $c \in \Img S$ e existe $b \in \Img R \cap \Dom S$ tal que $(a,b) \in R$ e $(b,c) \in S$, temos que $(a,c) \in S \circ R$. Com isso, $a \in \Dom \, (S \circ R)$ e $c \in \Img \, (S \circ R)$. Como $a \in \Dom \, (S \circ R)$, $d \in \Img T$ e existe $c \in \Img \, (S \circ R) \cap \Dom T$ tal que $(a,c) \in S \circ R$ e $(c,d) \in T$, temos que $(a,d) \in T \circ (S \circ R)$. Com isso, $(T \circ S) \circ R \subseteq T \circ (S \circ R)$.
+                \end{itemize}
+            Logo, $T \circ (S \circ R) = (T \circ S) \circ R$. \blackproof
+            \item
+                \begin{itemize}
+                    \item[($\subseteq$)] Se $(c,a) \in (S \circ R)^{-1}$, então $(a,c) \in S \circ R$, $a \in \Dom R$, $c \in \Img S$ e existe $b \in \Img R \cap \Dom S$ tal que $(a,b) \in R$ e $(b,c) \in S$ isto é, $(c,b) \in S^{-1}$, $(b,a) \in R^{-1}$, com $c \in \Dom S^{-1}$, $a \in \Img R^{-1}$ e $b \in \Img S^{-1} \cap \Dom R^{-1}$. Com isso, $(c,a) \in R^{-1} \circ S^{-1}$, de modo que $(S \circ R)^{-1} \subseteq R^{-1} \circ S^{-1}$.
+                    \item[($\supseteq$)] Se $(c,a) \in R^{-1} \circ S^{-1}$, então $c \in \Dom S^{-1}$, $a \in \Img R^{-1}$ e existe $b \in \Img S^{-1} \cap \Dom R^{-1}$ tal que $(c,b) \in S^{-1}$ e $(b,a) \in R^{-1}$, isto é, $(b,c) \in S$ e $(a,b) \in R$, com $a \in \Dom R$, $c \in \Img S$ e $b \in \Img R \cap \Dom S$. Com isso, $(a,c) \in S \circ R$, de modo que $(c,a) \in (S \circ R)^{-1}$. Logo, $R^{-1} \circ S^{-1} \subseteq (S \circ R)^{-1}$.
+                \end{itemize}
+            Logo, $(S \circ R)^{-1} = R^{-1} \circ S^{-1}$. \blackproof
+            \item Suponha que $\Img R \subseteq \Dom S$.
+                \begin{itemize}
+                    \item[($\subseteq$)] Se $a \in \Dom \, (S \circ R)$, então existe $c \in \Img \, (S \circ R)$ tal que $(a,c) \in S \circ R$, donde $a \in \Dom R$ e $\Dom \, (S \circ R) \subseteq \Dom R$.
+                    \item[($\supseteq$)] Se $a \in \Dom R$, então existe $b \in \Img R$ tal que $(a,b) \in R$. Se $\Img R \subseteq \Dom S$, então $b \in \Dom S$, de modo que existe $c \in \Img S$ tal que $(b,c) \in S$. Assim, $(a,c) \in S \circ R$, de modo que $a \in \Dom \, (S \circ R)$. Com isso, $\Dom R \subseteq \Dom \, (S \circ R)$.
+                \end{itemize}
+            Logo, $\Dom \, (S \circ R) = \Dom R$. \blackproof
+            \item Suponha que $\Dom S \subseteq \Img R$.
+                \begin{itemize}
+                    \item[($\subseteq$)] Se $c \in \Img \, (S \circ R)$, então existe $a \in \Dom \, (S \circ R)$ tal que $(a,c) \in S \circ R$, donde $c \in \Img S$ e $\Img \, (S \circ R) \subseteq \Img S$.
+                    \item[($\supseteq$)] Se $c \in \Img S$, então existe $b \in \Dom S$ tal que $(b,c) \in S$. Se $\Dom S \subseteq \Img R$, então $b \in \Img R$, de modo que existe $a \in \Dom R$ tal que $(a,b) \in R$. Assim, $(a,c) \in S \circ R$, de modo que $c \in \Img \, (S \circ R)$. Com isso, $\Img S \subseteq \Img \, (S \circ R)$.
+                \end{itemize}
+            Logo, $\Img \, (S \circ R) = \Img S$. \blackproof
         \end{enumerate}
 \end{proof}
-
-%\begin{proposition}
-%    Seja $R$ uma relação. A imagem inversa de $X$ por $R$ é igual à imagem de $X$ por $R^{-1}$.
-%\end{proposition}
 
 \begin{definition}
     \leavevmode
@@ -608,11 +706,21 @@ Apresentamos a seguir algumas propriedades algébricas de algumas operações co
 \end{definition}
 
 \begin{proposition}
-    Seja $f: A \to B$. Então $\id_B \circ f = B$ e $f \circ \id_A = A$.
+    Seja $f: A \to B$. Então $\id_B \circ f = f$ e $f \circ \id_A = f$.
 \end{proposition}
 
 \begin{proof}
-    \blackproof
+    Inicialmente, provemos que $\id_B \circ f = f$.
+        \begin{itemize}[align=left]
+            \item[($\subseteq$)] Se $(a,b) \in \id_B \circ f$, então existe $c \in \Img f \cap \Dom \id_B$ tal que $(a,c) \in f$ e $(c,b) \in \id_B$. Como $(c,b) \in \id_B$, temos $c=b$, de modo que $(a,b) \in f$. Com isso, $\id_B \circ f \subseteq f$.
+            \item[($\supseteq$)] Se $(a,b) \in f$, então $a \in A$ e $b \in \Img f \subseteq B$. Como $b \in B$, temos $(b,b) \in \id_B$. Assim, existe $b \in \Img f \cap \Dom \id_B$ tal que $(a,b) \in f$ e $(b,b) \in \id_B$, de modo que $(a,b) \in \id_B \circ f$. Com isso, $f \subseteq \id_B \circ f$.
+        \end{itemize}
+    Logo, $\id_B \circ f = f$. Agora, provemos que $f \circ \id_A = f$.
+        \begin{itemize}[align=left]
+            \item[($\subseteq$)] Se $(a,b) \in f \circ \id_A$, então existe $c \in \Img \id_A \cap \Dom f$ tal que $(a,c) \in \id_A$ e $(c,b) \in f$. Como $(a,c) \in \id_A$, temos $a=c$, de modo que $(a,b) \in f$. Com isso, $f \circ \id_A \subseteq f$.
+            \item[($\supseteq$)] Se $(a,b) \in f$, então $a \in \Dom f = A$. Como $a \in A$, temos $(a,a) \in \id_A$. Assim, existe $a \in \Img \id_A \cap \Dom f$ tal que $(a,a) \in \id_A$ e $(a,b) \in f$, de modo que $(a,b) \in f \circ \id_A$. Com isso, $f \subseteq f \circ \id_A$.
+        \end{itemize}
+    Logo, $f \circ \id_A = f$. \blackproof
 \end{proof}
 
 \begin{proposition}
@@ -705,8 +813,9 @@ Apresentamos a seguir algumas propriedades algébricas de algumas operações co
     Seja $f$ uma função.
         \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
             \item Se a relação $f^{-1}$ é uma função, então $f^{-1}$ é injetiva.
-            \item A relação $f^{-1}$ é uma função se, e somente se,
+            \item As seguintes afirmações são equivalentes.
                 \begin{enumerate}[label=\roman*.]
+                    \item A relação $f^{-1}$ é uma função.
                     \item $f$ é injetiva.
                     \item $f^{-1} \circ f = \id_{\Dom f}$.
                 \end{enumerate}
@@ -717,14 +826,16 @@ Apresentamos a seguir algumas propriedades algébricas de algumas operações co
     \leavevmode
         \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
             \item Se $(y,x) \in f^{-1}$ e $(z,x) \in f^{-1}$, então $(x,y) \in f$ e $(x,z) \in f$, e como $f$ é função, temos $y=z$. Logo, $f^{-1}$ é uma função injetiva. \blackproof
-            \item A equivalência mais importante é com $f$ ser injetiva.
-                \begin{enumerate}[label=\roman*.]
-                    \item Por um lado ($\Rightarrow$), sejam $(y,x) \in f$ e $(z,x) \in f$. Então, $(x,y) \in f^{-1}$ e $(x,z) \in f^{-1}$. Como $f^{-1}$ é uma função, temos $y=z$. Logo, $f$ é injetiva. Por outro lado ($\Leftarrow$), sejam $(x,y) \in f^{-1}$ e $(x,z) \in f^{-1}$. Então, $(y,x) \in f$ e $(z,x) \in f$. Como $f$ é injetiva, temos $y=z$. Logo, $f^{-1}$ é uma função.
-                \end{enumerate}
-            Provemos que $f$ é injetiva se, e somente se, $f^{-1} \circ f = \id_{\Dom f}$.
-                \begin{enumerate}[label=\roman*., resume]
-                    \item Por um lado ($\Rightarrow$), se $(x,z) \in f^{-1} \circ f$, então existe $y \in \Img f \cap \Dom f^{-1}$ tal que $(x,y) \in f$ e $(y,z) \in f^{-1}$. Com isso, $(z,y) \in f$, e como $f$ é injetiva, temos $z=x$, de modo que $(x,x) \in \id_{\Dom f}$, isto é, $f^{-1} \circ f \subseteq \id_{\Dom f}$. Agora, se $(x,x) \in \id_{\Dom f}$, então existe $y \in \Img f$ tal que $(x, y) \in f$, isto é, $(y,x) \in f^{-1}$. Com isso, $(x,x) \in f^{-1} \circ f$, e então $\id_{\Dom f} \subseteq f^{-1} \circ f$. Logo, $f^{-1} \circ f = \id_{\Dom f}$. Por outro lado ($\Leftarrow$), sendo $(x,y) \in f$ e $(z,y) \in f$, temos $(y,x) \in f^{-1}$, de modo que $(z,x) \in f^{-1} \circ f$, e como $f^{-1} \circ f = \id_{\Dom f}$, temos $x=z$. Logo, $f$ é injetiva.
-                \end{enumerate}
+            \item Inicialmente, provemos que $f^{-1}$ é uma função se, e somente se, $f$ é injetiva.
+                \begin{itemize}
+                    \item[($\Rightarrow$)] Sejam $(y,x) \in f$ e $(z,x) \in f$. Então, $(x,y) \in f^{-1}$ e $(x,z) \in f^{-1}$. Como $f^{-1}$ é uma função, temos $y=z$. Logo, $f$ é injetiva.
+                    \item[($\Leftarrow$)] Sejam $(x,y) \in f^{-1}$ e $(x,z) \in f^{-1}$. Então, $(y,x) \in f$ e $(z,x) \in f$. Como $f$ é injetiva, temos $y=z$. Logo, $f^{-1}$ é uma função.
+                \end{itemize}
+            Agora, provemos que $f$ é injetiva se, e somente se, $f^{-1} \circ f = \id_{\Dom f}$.
+                \begin{itemize}
+                    \item[($\Rightarrow$)] Se $(x,z) \in f^{-1} \circ f$, então existe $y \in \Img f \cap \Dom f^{-1}$ tal que $(x,y) \in f$ e $(y,z) \in f^{-1}$. Com isso, $(z,y) \in f$, e como $f$ é injetiva, temos $z=x$, de modo que $(x,x) \in \id_{\Dom f}$, isto é, $f^{-1} \circ f \subseteq \id_{\Dom f}$. Agora, se $(x,x) \in \id_{\Dom f}$, então existe $y \in \Img f$ tal que $(x, y) \in f$, isto é, $(y,x) \in f^{-1}$. Com isso, $(x,x) \in f^{-1} \circ f$, e então $\id_{\Dom f} \subseteq f^{-1} \circ f$. Logo, $f^{-1} \circ f = \id_{\Dom f}$.
+                    \item[($\Leftarrow$)] Sendo $(x,y) \in f$ e $(z,y) \in f$, temos $(y,x) \in f^{-1}$, de modo que $(z,x) \in f^{-1} \circ f$, e como $f^{-1} \circ f = \id_{\Dom f}$, temos $x=z$. Logo, $f$ é injetiva.
+                \end{itemize}
             Com isso, todas as equivalências foram provadas. \blackproof
         \end{enumerate}
 \end{proof}
@@ -747,7 +858,7 @@ Apresentamos a seguir algumas propriedades algébricas de algumas operações co
     Sejam $f: A \to B$ e $g: C \to D$ funções.
         \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
             \item $\Dom \, (g \circ f) = \{ x \in A : f(x) \in C\}$.
-            \item $\Dom \, (g \circ f) = A$ se, e somente se, $f(A) \subseteq C$.
+            \item $\Dom \, (g \circ f) = A$ se, e somente se, $f[A] \subseteq C$.
         \end{enumerate}
 \end{lemma}
 
@@ -756,14 +867,14 @@ Apresentamos a seguir algumas propriedades algébricas de algumas operações co
         \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
             \item Pela \cref{prop.set:domeimdeRAB}, temos
                 \[
-                    \Dom \, (g \circ f) = \{ x \in A : \exists y(y \in D \land (x,y \in g \circ f))\}.
+                    \Dom \, (g \circ f) = \{ x \in A : \exists y(y \in D \land (x,y) \in g \circ f)\}.
                 \]
                 \begin{itemize}
                     \item[($\subseteq$)] Se $x \in \Dom \, (g \circ f)$, então existe $y \in D$ tal que $(x,y) \in g \circ f$. Logo, existe $z \in \Img f \cap \Dom g \subseteq B \cap C$ tal que $(x,z) \in f$ e $(z,y) \in g$, isto é, $z = f(x)$ e $y = g(z)$. Com isso, temos $x \in A$ e $f(x) \in C$, de modo que $x \in \{ x \in A : f(x) \in C\}$, isto é, $\Dom \, (g \circ f) \subseteq \{ x \in A : f(x) \in C\}$.
                     \item[($\supseteq$)] Se $x \in \{ x \in A : f(x) \in C\}$, então $x \in A$ e $f(x) \in C$, isto é, existe (um único) $z \in C$ tal que $(x,z) \in f$. Como $z \in C$, existe $y \in \Img g \subseteq D$ tal que $(z,y) \in g$. Com isso, $x \in A$ e existe $y \in D$ tal que $(x,y) \in g \circ f$, de modo que $x \in \Dom \, (g \circ f)$, isto é, $\{ x \in A : f(x) \in C\} \subseteq \Dom{(g \circ f)}$.  
                 \end{itemize}
             Logo, $\Dom \, (g \circ f) = \{ x \in A : f(x) \in C\}$. \blackproof
-            \item A volta ($\Leftarrow$) já foi provada (\cref{prop.set:relacoes}). Por outro lado ($\Rightarrow$), se $y \in f(A)$, então existe $x \in A$ tal que $y = f(x)$, e como $A = \Dom \, (g \circ f)$, temos $f(x) \in C$, isto é, $y \in C$. Logo, $f(A) \subseteq C$. \blackproof
+            \item A volta ($\Leftarrow$) já foi provada (\cref{prop.set:relacoes}). Por outro lado ($\Rightarrow$), se $y \in f[A]$, então existe $x \in A$ tal que $y = f(x)$, e como $A = \Dom \, (g \circ f)$, temos $f(x) \in C$, isto é, $y \in C$. Logo, $f[A] \subseteq C$. \blackproof
         \end{enumerate}
 \end{proof}
 
@@ -779,7 +890,7 @@ Apresentamos a seguir algumas propriedades algébricas de algumas operações co
     \leavevmode
         \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
             \item Se $B=C$, então $\Dom \, (g \circ f) = A$ pelo \cref{lem.set:fegsob}. Se $g$ é sobrejetiva, então para todo $z \in D$ existe $y \in C = B$ tal que $(y,z) \in g$. Se $f$ é sobrejetiva, então para esse $y \in B$ existe $x \in A$ tal que $(x,y) \in f$. Com isso, para todo $z \in D$ existe $x \in A$ tal que $(x,z) \in g \circ f$, o que prova a sobrejetividade de $g \circ f$. \blackproof
-            \item Se $f(A) \subseteq C$, então $\Dom \, (g \circ f) = A$ pelo \cref{lem.set:fegsob}. Se $g \circ f$ é sobrejetiva, então para todo $z \in D$ existe $x \in A$ tal que $(x,z) \in g \circ f$. Com isso, existe $y \in f(A) \cap C = C$ tal que $(x,y) \in f$ e $(y,z) \in g$. o que prova a sobrejetividade de $g$. \blackproof
+            \item Se $f(A) \subseteq C$, então $\Dom \, (g \circ f) = A$ pelo \cref{lem.set:fegsob}. Se $g \circ f$ é sobrejetiva, então para todo $z \in D$ existe $x \in A$ tal que $(x,z) \in g \circ f$. Com isso, existe $y \in f(A) \cap C \subseteq C$ tal que $(x,y) \in f$ e $(y,z) \in g$. o que prova a sobrejetividade de $g$. \blackproof
         \end{enumerate}
 \end{proof}
 
@@ -788,7 +899,12 @@ Apresentamos a seguir algumas propriedades algébricas de algumas operações co
 \end{lemma}
 
 \begin{proof}
-    Por um lado ($\subseteq$), $(y,z) \in f \circ f^{-1}$, então existe $x \in \Dom f \cap \Img f^{-1}$ tal que $(y,x) \in f^{-1}$ e $(x,z) \in f$. Daí, $(x,y) \in f$, e como $f$ é uma função, temos $y=z$. Logo $f \circ f^{-1} \subseteq \id_{\Img f}$. Por outro lado ($\supseteq$), se $(y,y) \in \id_{\Img f}$, então existe $x \in \Dom f$ tal que $(x,y) \in f$. Logo $(y,x) \in f^{-1}$, de modo que $(y, y) \in f \circ f^{-1}$, isto é, $f \circ f^{-1} \supseteq \id_{\Img f}$. Logo, vem $f \circ f^{-1} = \id_{\Img f}$. \blackproof
+    \leavevmode
+        \begin{itemize}[align=left]
+            \item[($\subseteq$)] Se $(y,z) \in f \circ f^{-1}$, então existe $x \in \Dom f \cap \Img f^{-1}$ tal que $(y,x) \in f^{-1}$ e $(x,z) \in f$. Daí, $(x,y) \in f$, e como $f$ é uma função, temos $y=z$. Logo $f \circ f^{-1} \subseteq \id_{\Img f}$.
+            \item[($\supseteq$)] Se $(y,y) \in \id_{\Img f}$, então existe $x \in \Dom f$ tal que $(x,y) \in f$. Logo $(y,x) \in f^{-1}$, de modo que $(y, y) \in f \circ f^{-1}$, isto é, $f \circ f^{-1} \supseteq \id_{\Img f}$.
+        \end{itemize}
+    Logo, $f \circ f^{-1} = \id_{\Img f}$. \blackproof
 \end{proof}
 
 \begin{theorem} \label{teo.set:sob}
@@ -799,9 +915,9 @@ Apresentamos a seguir algumas propriedades algébricas de algumas operações co
     \leavevmode
         \begin{itemize}[align=left]
             \item[($\Rightarrow$)] Se $f$ é sobrejetiva em $B$, então $\Img f = B$, de modo que, pelo \cref{lema.set:fbolafmenos1}, $f \circ f^{-1} = \id_B$.
-            \item[($\Leftarrow$)] Se $f \circ f^{-1} = \id_B$, então $f$ é sobrejetiva em $B$ porque, como também $f \circ f^{-1} = \id_{\Img f}$ (\cref{lema.set:fbolafmenos1}), temos $\Img f = B$.
+            \item[($\Leftarrow$)] Se $f \circ f^{-1} = \id_B$, então, como também $f \circ f^{-1} = \id_{\Img f}$ (\cref{lema.set:fbolafmenos1}), temos $\Img f = B$, isto é, $f$ sobrejetiva em $B$.
         \end{itemize}
-     \blackproof
+    Logo, $\Img f = B \Leftrightarrow f \circ f^{-1} = \id_B$. \blackproof
 \end{proof}
 
 \subsection{Funções Bijetivas}
@@ -815,23 +931,24 @@ Apresentamos a seguir algumas propriedades algébricas de algumas operações co
 \end{proposition}
 
 \begin{proof}
-    Segue imediatamente da definição. \blackproof
+    Segue da definição. \blackproof
 \end{proof}
 
 \begin{proposition}
-    Se $f : A \to B$ e $g : B \to C$ são funções bijetivas, então a função $g \circ f : A \to C$ é uma função bijetiva.
+    Sejam $f : A \to B$ e $g : B \to C$ bijetivas. Então $g \circ f : A \to C$ é bijetiva.
 \end{proposition}
 
 \begin{proof}
-    Segue como corolário imediato das \cref{prop.set:feginj,prop.set:fegsob}. \blackproof
+    Segue como corolário das \cref{prop.set:feginj,prop.set:fegsob}. \blackproof
 \end{proof}
 
 \begin{theorem} \label{teo.set:bij1}
-    Seja $f : A \to B$ uma função.
+    Seja $f : A \to B$.
         \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
             \item Se a relação $f^{-1}$ é uma função de $B$ em $A$, então $f^{-1}$ é bijetiva em $A$.
-            \item A relação $f^{-1}$ é uma função de $B$ em $A$ se, e somente se,
+            \item As seguintes afirmações são equivalentes.
                 \begin{enumerate}[label=\roman*.]
+                    \item A relação $f^{-1}$ é uma função de $B$ em $A$.
                     \item $f$ é bijetiva em $B$.
                     \item $f^{-1} \circ f = \id_{A}$ e $f \circ f^{-1} = \id_{B}$.
                 \end{enumerate}
@@ -842,14 +959,16 @@ Apresentamos a seguir algumas propriedades algébricas de algumas operações co
     \leavevmode
         \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
             \item Como $f$ é função, para todo $x \in A$ existe um único $y \in B$ tal que $(x,y) \in f$, isto é, $(y,x) \in f^{-1}$. Logo, pela \cref{prop.set:defbij}, $f^{-1}$ é bijetiva em $A$. \blackproof
-            \item A equivalência que mais importa é com $f$ ser bijetiva em $B$.
-                \begin{enumerate}[label=\roman*.]
-                    \item Por um lado ($\Rightarrow$), se $f^{-1} \subseteq B \times A$ é uma função com $\Dom f^{-1} = B$, então para todo $y \in B$ existe um único $x \in A$ tal que $(y,x) \in f^{-1}$, isto é, $(x,y) \in f$. Logo, pela \cref{prop.set:defbij}, $f$ é bijetiva. Por outro lado ($\Leftarrow$), se $f$ é bijetiva, então, pela \cref{prop.set:defbij}, para todo $y \in B$ existe um único $x \in A$ tal que $(x,y) \in f$, isto é, $(y,x) \in f^{-1}$. Daí, pela definição de função, $f^{-1}$ é uma função de $B$ em $A$. \blackproof
-                \end{enumerate}
-            Provemos que $f$ é bijetiva em $B$ se, e somente se, $f^{-1} \circ f = \id_A$ e $f \circ f^{-1} = \id_{B}$.
-                \begin{enumerate}[label=\roman*., resume]
-                    \item Por um lado ($\Rightarrow$), se $f$ é bijetiva em $B$, então $f$ é injetiva e sobrejetiva em $B$, de modo que, pelos \cref{teo.set:inj,teo.set:sob}, temos $f^{-1} \circ f = \id_A$ e $f \circ f^{-1} = \id_B$, respectivamente. Agora, se $f^{-1} \circ f = \id_A$ e $f \circ f^{-1} = \id_B$, então pelos mesmos teoremas $f$ é injetiva e sobrejetiva em $B$, isto é, $f$ é bijetiva em $B$. \blackproof
-                \end{enumerate}
+            \item Inicialmente, provemos que $f^{-1}$ é uma função de $B$ em $A$ se, e somente se, $f$ é bijetiva em $B$.
+                \begin{itemize}
+                    \item[($\Rightarrow$)] Se $f^{-1} \subseteq B \times A$ é uma função com $\Dom f^{-1} = B$, então para todo $y \in B$ existe um único $x \in A$ tal que $(y,x) \in f^{-1}$, isto é, $(x,y) \in f$. Logo, pela \cref{prop.set:defbij}, $f$ é bijetiva.
+                    \item[($\Leftarrow$)] Se $f$ é bijetiva, então, pela \cref{prop.set:defbij}, para todo $y \in B$ existe um único $x \in A$ tal que $(x,y) \in f$, isto é, $(y,x) \in f^{-1}$. Logo, pela definição de função, $f^{-1}$ é uma função de $B$ em $A$.
+                \end{itemize}
+            Agora, provemos que $f$ é bijetiva em $B$ se, e somente se, $f^{-1} \circ f = \id_A$ e $f \circ f^{-1} = \id_{B}$.
+                \begin{itemize}
+                    \item[($\Rightarrow$)] Se $f$ é bijetiva em $B$, então $f$ é injetiva e sobrejetiva em $B$, de modo que, pelos \cref{teo.set:inj,teo.set:sob}, temos $f^{-1} \circ f = \id_A$ e $f \circ f^{-1} = \id_B$, respectivamente.
+                    \item[($\Leftarrow$)] Se $f^{-1} \circ f = \id_A$ e $f \circ f^{-1} = \id_B$, então pelos mesmos teoremas $f$ é injetiva e sobrejetiva em $B$, isto é, $f$ é bijetiva em $B$.
+                \end{itemize}
             Com isso, todas as equivalências foram provadas. \blackproof
         \end{enumerate}
 \end{proof}
@@ -881,7 +1000,7 @@ Apresentamos a seguir algumas propriedades algébricas de algumas operações co
 \end{proof}
 
 \begin{definition}
-    Uma função $f:A \to B$ é \emph{invertível à direita} se existe uma função $g : B \to A$ tal que $f \circ g = \id_{B}$. Dizemos, nesse caso, que $g$ é uma \emph{inversa à direita} de $f$.
+    Dizemos que $f:A \to B$ é \emph{invertível à direita} se existe $g : B \to A$ tal que $f \circ g = \id_{B}$. Dizemos, nesse caso, que $g$ é uma \emph{inversa à direita} de $f$.
 \end{definition}
 
 \begin{theorem} \label{teo.set:invdireita}
@@ -897,7 +1016,7 @@ Apresentamos a seguir algumas propriedades algébricas de algumas operações co
 \end{proof}
 
 \begin{definition}
-    Uma função $f: A \to B$ é \emph{invertível} se existe uma função $g : B \to A$ tal que $g \circ f = \id_A$ e $f \circ g = \id_B$. Dizemos, nesse caso, que $g$ é a \emph{inversa} de $f$.
+    Dizemos que $f: A \to B$ é \emph{invertível} se existe $g : B \to A$ tal que $g \circ f = \id_A$ e $f \circ g = \id_B$. Dizemos, nesse caso, que $g$ é a \emph{inversa} de $f$.
 \end{definition}
 
 \begin{lemma} \label{lema.set:invesqdiriguais}
@@ -927,8 +1046,8 @@ Apresentamos a seguir algumas propriedades algébricas de algumas operações co
                 \[
                     g_1 = g_1 \circ \id_B = g_1 \circ (f \circ g_2) = (g_1 \circ f) \circ g_2 = \id_A \circ g_2 = g_2.    
                 \]
-            Logo, a função inversa da função $f : A \to B$, quando existe, é única. \blackproof
-            \item A ida ($\Rightarrow$) segue imediatamente das definições. A volta ($\Leftarrow$) também, considerando o \cref{lema.set:invesqdiriguais}. \blackproof 
+            Logo, a função inversa $f : A \to B$, quando existe, é única. \blackproof
+            \item A ida ($\Rightarrow$) segue das definições. A volta ($\Leftarrow$) também, considerando o \cref{lema.set:invesqdiriguais}. \blackproof 
         \end{enumerate}
 \end{proof}
 
@@ -944,7 +1063,7 @@ Apresentamos a seguir algumas propriedades algébricas de algumas operações co
     \leavevmode
         \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
             \item Por um lado ($\Rightarrow$), se $f$ é invertível, então existe $g: B \to A$ tal que $g \circ f = \id_A$ e $f \circ g = \id_B$. Logo, $f$ é invertível à esquerda e à direita, isto é, $f$ é injetiva (\cref{teo.set:invesquerda}) e sobrejetiva em $B$ (\cref{teo.set:invdireita}), isto é, $f$ é bijetiva em $B$. Por outro lado ($\Leftarrow$), se $f$ é bijetiva em $B$, então, pelo \cref{teo.set:bij1}, sua relação inversa $f^{-1} \subseteq B \times A$ é uma função de $B$ em $A$ e, mais ainda, satisfaz $f^{-1} \circ f = \id_{A}$ e $f \circ f^{-1} = \id_{B}$. Logo, $f$ é invertível. \blackproof   
-            \item Segue imediatamente do primeiro item. \blackproof
+            \item Segue do primeiro item. \blackproof
         \end{enumerate}
 \end{proof}
 
@@ -985,9 +1104,9 @@ Apresentamos a seguir algumas propriedades algébricas de algumas operações co
         \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
             \item Uma \emph{relação de ordem parcial} em $X$ é uma relação ${\leq} \subseteq X \times X$ que tem as seguintes propriedades.
                 \begin{enumerate}[label=\roman*.]
-                    \item Reflexividade: $\forall x(x \in X \rightarrow (x,x) \in \leq)$.
-                    \item Antissimetria: $\forall x \forall y (x,y \in X \rightarrow (x \leq y \land y \leq x \rightarrow x=y))$.
-                    \item Transitividade: $\forall x \forall y \forall z (x,y,z \in X \rightarrow (x \leq y \land y \leq z \rightarrow x \leq z))$. 
+                    \item Reflexividade: $\forall x(x \in X \rightarrow (x,x) \in {\leq})$.
+                    \item Antissimetria: $\forall x \forall y (x,y \in X \rightarrow ((x,y) \in {\leq} \land (y,x) \in {\leq} \rightarrow x=y))$.
+                    \item Transitividade: $\forall x \forall y \forall z (x,y,z \in X \rightarrow ((x,y) \in {\leq} \land (y,z) \in {\leq} \rightarrow (x,z) \in {\leq}))$. 
                 \end{enumerate}
             Dizemos que $X$ é o \emph{domínio} de $\leq$.
             \item Um \emph{conjunto parcialmente ordenado} é um par $(X, \leq)$, onde ${\leq} \subseteq X \times X$ é uma relação de ordem parcial.
@@ -1003,8 +1122,8 @@ Apresentamos a seguir algumas propriedades algébricas de algumas operações co
         \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
             \item Uma \emph{relação de ordem estrita} em $X$ é uma relação ${<} \subseteq X \times X$ que tem as seguintes propriedades.
                 \begin{enumerate}[label=\roman*.]
-                    \item Assimetria: $\forall x \forall y (x,y \in X \rightarrow ((x,y) \in < \rightarrow (y,x) \notin <))$.
-                    \item Transitividade: $\forall x \forall y \forall z (x,y,z \in X \rightarrow ( (x, y) \in < \land (y, z) \in < \rightarrow (x,z) \in <))$. 
+                    \item Assimetria: $\forall x \forall y (x,y \in X \rightarrow ((x,y) \in {<} \rightarrow (y,x) \notin {<}))$.
+                    \item Transitividade: $\forall x \forall y \forall z (x,y,z \in X \rightarrow ( (x, y) \in {<} \land (y, z) \in {<} \rightarrow (x,z) \in {<}))$. 
                 \end{enumerate}
             Dizemos que $X$ é o \emph{domínio} de $<$.
             \item Um \emph{conjunto estritamente ordenado} é um par $(X, <)$, onde ${<} \subseteq X \times X$ é uma relação de ordem estrita.
@@ -1222,7 +1341,7 @@ Apresentamos a seguir algumas propriedades algébricas de algumas operações co
 \end{proof}
 
 \begin{theorem}[Recursão] \label{teo.set:recursao_peano}
-    Seja $(N,s,a)$ um sistema de Peano. Sejam $X \neq \emptyset$, $x_0 \in X$ e $f:X \to X$. Existe uma única $\varphi : N \to X$ tal que
+    Seja $(N,s,a)$ um sistema de Peano. Sejam $X \neq \emptyset$, $x_0 \in X$ e $f:X \to X$. Existe uma única função $\varphi : N \to X$ tal que
         \begin{itemize}
             \item $\varphi(a) = x_0$;
             \item $\varphi(s(n)) = f(\varphi(n))$, para todo $n \in N$.
@@ -2215,7 +2334,7 @@ Apresentamos a seguir algumas propriedades algébricas de algumas operações co
 
 \subsection{Os Teoremas da Recursão}
 
-\begin{theorem}[da recursão finita] \label{teo.set:recfin}
+\begin{theorem}[Recursão] \label{teo.set:recfin}
     Sejam $A \neq \emptyset$, $a \in A$ e $f:A \to A$. Existe uma única função $\varphi : \omega \to A$ tal que
         \begin{itemize}
             \item $\varphi(0) = a$;
@@ -2227,8 +2346,8 @@ Apresentamos a seguir algumas propriedades algébricas de algumas operações co
     Segue como corolário dos \cref{teo.set:recursao_peano,teo.set:existe_peano}. \blackproof
 \end{proof}
 
-\begin{theorem}[da recursão com parâmetro] \label{teo.set:recpar}
-    Sejam $a \in A$ e $f : A \times \omega \to A$. Existe uma única função $\varphi : \omega \to A$ tal que
+\begin{theorem}[Recursão com parâmetro] \label{teo.set:recpar}
+    Sejam $A \neq \emptyset$, $a \in A$ e $f : A \times \omega \to A$. Existe uma única função $\varphi : \omega \to A$ tal que
         \begin{itemize}
             \item $\varphi(0) = a$;
             \item $\varphi(n^+) = f(\varphi(n), n)$, para todo $n \in \omega$.
@@ -2246,8 +2365,8 @@ Apresentamos a seguir algumas propriedades algébricas de algumas operações co
         \]
 \end{definition}
 
-\begin{theorem}[da recursão completa] \label{teo.set:reccom}
-    Seja $f :  X^{<\omega} \to X$. Existe uma única  $\varphi : \omega \to X$ tal que $\varphi(n) = f(\varphi \restriction_n)$ para todo $n \in \omega$.
+\begin{theorem}[Recursão Completa] \label{teo.set:reccom}
+    Seja $f :  X^{<\omega} \to X$. Existe uma única função $\varphi : \omega \to X$ tal que $\varphi(n) = f(\varphi \restriction_n)$ para todo $n \in \omega$.
 \end{theorem}
 
 \begin{proof}
@@ -2346,6 +2465,92 @@ Apresentamos a seguir algumas propriedades algébricas de algumas operações co
 
 \begin{proof}
     \blackproof
+\end{proof}
+
+\section{O Axioma da Escolha}
+
+\begin{axiom}[da Escolha]
+    Para todo conjunto $x$ de conjuntos não vazios existe $\varphi : x \to \bigcup x$ tal que $\varphi(y) \in y$ para todo $y \in x$.
+        \[
+            \boxed{
+                \forall x \left(\emptyset \notin x \rightarrow \exists \varphi \left( \varphi : x \to \bigcup x \land \forall y (y \in x \rightarrow \varphi(y) \in y) \right)\right)
+            }        
+        \]
+\end{axiom}
+
+\begin{theorem}
+    O axioma da escolha é equivalente a cada uma das seguintes afirmações.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $\ds \forall x \exists \varphi \left( \varphi : x \setminus \{\emptyset\} \to \bigcup x \land \forall y (y \in x \setminus \{\emptyset\} \rightarrow \varphi(y) \in y) \right)$.
+            \item Para toda função $f$, se $f(x) \neq \emptyset$ para todo $x \in \Dom f$, então $\prod f \neq \emptyset$.
+            \item Para toda relação $R$ existe uma função $f \subseteq R$ tal que $\Dom f = \Dom R$.
+            \item Para todo conjunto $x$ tal que $\emptyset \notin x$ e $a \cap b = \emptyset$ para quaisquer $a,b \in x$ tais que $a \neq b$, existe $S \subseteq \bigcup x$ tal que $S \cap y$ é unitário para todo $y \in x$.
+        \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Por um lado ($\Rightarrow$), suponha \textsf{AC}. Para todo conjunto $x$, como $\emptyset \notin x \setminus \{\emptyset \}$, existe $\varphi : x \setminus \{\emptyset \} \to \bigcup (x \setminus \{\emptyset \})$ tal que $\varphi(y) \in y$ para todo $y \in x \setminus \{\emptyset \}$. Como $x \setminus \{\emptyset \} \subseteq x$, temos $\bigcup (x \setminus \{\emptyset \}) \subseteq \bigcup x$, e então $\varphi : x \setminus \{\emptyset \} \to \bigcup x$. Por outro lado ($\Leftarrow$), para todo conjunto $x$ tal que $\emptyset \notin x$ existe uma função $\varphi : x \setminus \{\emptyset\} \to \bigcup x$ tal que $\varphi(y) \in y$ para todo $y \in x \setminus \{\emptyset\}$, e como $\emptyset \notin x$, temos $x \setminus \{\emptyset\} = x$, donde $\varphi : x \to \bigcup x$ e $\varphi(y) \in y$ para todo $y \in x$. \blackproof
+            \item Por um lado ($\Rightarrow$), suponha \textsf{AC}. Se $f$ é uma função tal que $f(x) \neq \emptyset$ para todo $x \in \Dom f$, então $\emptyset \notin \Img f$, de modo que, pelo axioma da escolha, existe uma função $g: \Img f \to \bigcup \Img f$ tal que $g(y) \in y$ para todo $y \in \Img f$. Como para todo $y \in \Img f$ existe $x \in \Dom f$ tal que $y=f(x)$, temos $g(f(x)) \in f(x)$. Tomando $\varphi := g \circ f$, temos $\varphi : \Dom f \to \bigcup \Img f$ e, para todo $x \in \Dom f$, temos $\varphi(x) = (g \circ f)(x) = g(f(x)) \in f(x)$, de modo que $\varphi \in \prod f$, isto é, $\prod f \neq \emptyset$. Por outro lado ($\Leftarrow$), seja $x$ um conjunto tal que $\emptyset \notin x$. O caso $x = \emptyset$ segue por vacuidade; suponha, então, que $x \neq \emptyset$. Como $\emptyset \notin x$, temos $\id_{x}(y) \neq \emptyset$ para todo $y \in x$, de modo que $\prod \id_{x} \neq \emptyset$. Tomando $\varphi \in \prod \id_{x}$, temos $\varphi : \Dom \id_{x} \to \bigcup \Img \id_{x}$, isto é, $\varphi : x \to \bigcup x$. Além disso, temos $\varphi(y) \in \id_{x}(y) = y$ para todo $y \in x$. Com isso, $\varphi$ é uma função escolha em $x$. \blackproof
+            \item \blackproof
+            \item \blackproof
+        \end{enumerate}
+\end{proof}
+
+\subsection{O Lema de Zorn}
+
+\begin{definition}
+    Seja $(X, \leq)$ um poset. Seja $S \subseteq X$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Dizemos que $x \in S$ é \emph{maximal} em $S$ se não existe $y \in S$ tal que $x < y$.
+            \item Dizemos que $x \in S$ é \emph{minimal} em $S$ se não existe $y \in S$ tal que $y < x$.
+            \item Dizemos que $S$ é uma cadeia em $X$ se
+                \[
+                    \forall x \forall y (x,y \in S \rightarrow (x \leq y \lor y \leq x)).
+                \]
+        \end{enumerate}
+\end{definition}
+
+\begin{theorem}[Lema de Zorn]
+    Seja $(X, \leq)$ um poset. Se toda cadeia em $X$ é limitada superiormente em $X$, então $X$ possui um elemento maximal.
+\end{theorem}
+
+\subsection{O Princípio da Boa Ordem}
+
+\section{O Axioma da Substituição}
+
+\section{O Axioma da Regularidade}
+
+\begin{axiom}[da Regularidade]
+    Para todo conjunto $x \neq \emptyset$ existe $y \in x$ tal que $x \cap y = \emptyset$.
+        \[
+            \boxed{
+                \forall x ((x \neq \emptyset) \rightarrow \exists y ( (y \in x) \land (x \cap y = \emptyset)))
+            }
+        \]
+\end{axiom}
+
+\begin{proposition} \label{prop.set:xinyeyinxabs}
+    Não existem conjuntos $x$ e $y$ tais que $x \in y$ e $y \in x$.
+        \[
+            \neg (\exists x \exists y ((x \in y) \land (y \in x)))
+        \]
+\end{proposition}
+
+\begin{proof}
+    Basta provar $\forall x \forall y ((x \notin y) \lor (y \notin x))$. Pelo axioma do par, tome $z := \{ x,y \}$. Como $z \neq \emptyset$, pelo axioma da regularidade existe $w \in z$ tal que $w \cap z = \emptyset$. Se $w = x$, então $y \notin x$, porque se fosse $y \in x$ teríamos $x \cap z = \{ y\} \neq \emptyset$, uma contradição. Analogamente, se $w = y$, então $x \notin y$. \blackproof
+\end{proof}
+
+\begin{corollary} \label{cor.set:xnotinx}
+    Não existe $x$ tal que $x \in x$.
+        \[
+            \forall x(x \notin x)
+        \]
+\end{corollary}
+
+\begin{proof}
+    Segue do teorema anterior com $y = x$. \blackproof
 \end{proof}
 
 \chapter{Equipotência}
@@ -2597,3 +2802,647 @@ Apresentamos a seguir algumas propriedades algébricas de algumas operações co
         \end{midproof}
     Logo, $|A| < |\mathcal{P}(A)|$. \blackproof
 \end{proof}
+
+\chapter{Números Reais}
+
+\section{Anéis}
+
+\begin{definition}
+    Um \emph{anel} é uma tripla $(A, +, \cdot)$, onde $+:A \times A \to A$ e $\cdot: A \times A \to A$ são operações tais que
+        \begin{itemize}
+            \item A1: $a + (b + c) = (a + b) + c$ para quaisquer $a,b,c \in A$;
+            \item A2: $a + b = b + a$ para quaisquer $a, b \in A$; 
+            \item A3: existe $0 \in A$ tal que $a + 0 = a$ para todo $a \in A$;
+            \item A4: para todo $a \in A$ existe $b \in A$ tal que $a + b = 0$;
+            \item M1: $a \cdot (b \cdot c) = (a \cdot b) \cdot c$ para quaisquer $a,b,c \in A$;
+            \item AM: $a \cdot ( b + c) = a \cdot b + a \cdot c$ e $(a+b) \cdot c = a \cdot c + b \cdot c$ para quaisquer $a,b,c \in A$.
+        \end{itemize}
+\end{definition}
+
+\begin{proposition}
+    Seja $(A,+, \cdot)$ um anel.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item (Unicidade)
+                \begin{enumerate}[label=\roman*.]
+                    \item O elemento neutro $0$ de $+$ é único.
+                    \item O oposto aditivo de cada elemento de $A$ é único.
+                \end{enumerate}
+            \item (Lei do corte aditiva) Para quaisquer $a, b, c \in A$, se $a+c = b+c$, então $a=b$.
+            \item $a \cdot 0 = 0 \cdot a = 0$ para todo $a \in A$.
+            \item (Regras dos sinais) Para quaisquer $a,b \in A$,
+                \begin{enumerate}[label=\roman*.]
+                    \item $-(-a) = a$.
+                    \item $(-a) \cdot b = a \cdot (-b) = - (a \cdot b)$.
+                    \item $(-a) \cdot (-b) = a \cdot b$.
+                \end{enumerate}
+        \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item 
+                \begin{enumerate}[label=\roman*.]
+                    \item Se $0' \in A$ é um elemento neutro de $+$, então
+                        \[
+                            0' = 0' + 0 = 0 + 0' = 0,
+                        \]
+                    o que prova a unicidade do elemento neutro $0$ de $+$.
+                    \item Seja $a \in A$. Se $b, b' \in A$ são opostos aditivos de $a$, então
+                        \[
+                            b' = b' + 0 = b' + (a+b) = (b' + a) + b = 0 + b = b,
+                        \]
+                    o que prova a unicidade do oposto aditivo de $a$.
+                \end{enumerate}
+            Logo, $0$ e $-a$ são únicos. \blackproof
+            \item Se $a+c = b+c$, então $(a+c)+(-c) = (b+c)+(-c)$, de modo que $a+(c+(-c)) = b+(c+(-c))$. Como $c+(-c) = 0$, temos $a+0 = b+0$, de modo que $a=b$. \blackproof
+            \item Como
+                \[
+                    0 + (a \cdot 0) = a \cdot 0 = a \cdot (0+0) = (a \cdot 0) + (a \cdot 0),
+                \]
+            temos $a \cdot 0 = 0$ pela lei do corte aditiva. Analogamente, como
+                \[
+                    0 + (0 \cdot a) = 0 \cdot a = (0 + 0) \cdot a = (0 \cdot a) + (0 \cdot a),
+                \]
+            temos $0 \cdot a = 0$ pela lei do corte aditiva. \blackproof
+            \item Sejam $a, b \in A$.
+                \begin{enumerate}[label=\roman*.]
+                    \item Como
+                        \[
+                            (-a) + a = a + (-a) = 0,
+                        \]
+                    temos $-(-a) = a$ pela unicidade do oposto aditivo de $-a$.
+                    \item Como
+                        \[
+                            (a \cdot b) + ((-a) \cdot b) = (a + (-a)) \cdot b = 0 \cdot b = 0,
+                        \]
+                    temos $(-a) \cdot b = -(a \cdot b)$ pela unicidade do oposto aditivo de $a \cdot b$. Analogamente, como
+                        \[
+                            (a \cdot b) + (a \cdot (-b)) = a \cdot (b + (-b)) = a \cdot 0 = 0,
+                        \]
+                    temos $a \cdot (-b) = -(a \cdot b)$ pela unicidade do oposto aditivo de $a \cdot b$.
+                    \item Pelos itens anteriores, temos
+                        \[
+                            (-a) \cdot (-b) = -(a \cdot (-b)) = -(-(a \cdot b)) = a \cdot b.
+                        \]
+                \end{enumerate}
+            Logo, valem as regras dos sinais. \blackproof
+        \end{enumerate}
+\end{proof}
+
+\begin{definition}
+    Um \emph{anel comutativo} é um anel $(A, +, \cdot)$ tal que
+        \begin{itemize}
+            \item M2: $a \cdot b = b \cdot a$ para quaisquer $a,b \in A$.
+        \end{itemize}
+\end{definition}
+
+\begin{definition}
+    Um \emph{anel com unidade} é um anel $(A, +, \cdot)$ tal que
+        \begin{itemize}
+            \item M3: existe $1 \in A_{\neq 0}$ tal que $a \cdot 1 = 1 \cdot a = a$ para todo $a \in A$.
+        \end{itemize}
+\end{definition}
+
+\begin{proposition}
+    Seja $(A, +, \cdot)$ um anel com unidade.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item O elemento neutro $1$ de $\cdot$ é único.
+            \item $(-1) \cdot a = -a$ para todo $a \in A$.
+        \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Se $1' \in A_{\neq 0}$ é um elemento neutro de $\cdot$, então
+                \[
+                    1' = 1' \cdot 1 = 1 \cdot 1' = 1,
+                \]
+            o que prova a unicidade do elemento neutro $1$ de $\cdot$. \blackproof
+            \item Seja $a \in A$. Como 
+                \[
+                    a + (-1) \cdot a = 1 \cdot a + (-1) \cdot a = (1 + (-1)) \cdot a = 0 \cdot a = 0,
+                \]
+            temos $(-1) \cdot a = -a$ pela unicidade do oposto aditivo de $a$. \blackproof
+        \end{enumerate}
+\end{proof}
+
+\subsection{Anéis Ordenados}
+
+\begin{definition}
+    Um anel $(A, +, \cdot)$ é dito \emph{ordenado} se existe uma relação de ordem total ${\leq} \subseteq A \times A$ tal que
+        \begin{itemize}
+            \item OA: para quaisquer $a,b,c \in A$, se $a \leq b$, então $a+c \leq b+c$;
+            \item OM: para quaisquer $a,b,c \in A$, se $a \leq b$ e $0 \leq c$, então $a \cdot c \leq b \cdot c$ e $c \cdot a \leq c \cdot b$.
+        \end{itemize}
+    Isso é denotado por $(A, +, \cdot, \leq)$.
+\end{definition}
+
+\begin{proposition}
+    Seja $(A,+,\cdot,\leq)$ um anel ordenado. A relação ${<} \subseteq A \times A$ definida como
+        \[
+            {<} := \{(a,b) \in A \times A : a \leq b \land a \neq b\}
+        \]
+    é de ordem estrita total.
+\end{proposition}
+
+\begin{proof}
+    Segue da \cref{prop.set:parcial_e_estrita}. \blackproof
+\end{proof}
+
+\begin{proposition}
+    Seja $(A, +, \cdot, \leq)$ um anel ordenado.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Para quaisquer $a, b, c, d \in A$,
+                \begin{enumerate}[label=\roman*.]
+                    \item se $a + c \leq b + c$, então $a \leq b$.
+                    \item se $a \leq b$ e $c \leq d$, então $a+c \leq b+d$.
+                    \item se $a \leq b$ e $c \leq 0$, então $a \cdot c \geq b \cdot c$ e $c \cdot a \geq c \cdot b$.
+                \end{enumerate}
+            \item Para todo $a \in A$,
+                \begin{enumerate}[label=\roman*.]
+                    \item se $a \geq 0$, então $-a \leq 0$.
+                    \item se $a \leq 0$, então $-a \geq 0$.
+                \end{enumerate}
+            \item Para quaisquer $a, b \in A$,
+                \begin{enumerate}[label=\roman*.]
+                    \item se $a \geq 0$ e $b \geq 0$, então $a \cdot b \geq 0$.
+                    \item se $a \geq 0$ e $b \leq 0$, então $a \cdot b \leq 0$.
+                    \item se $a \leq 0$ e $b \geq 0$, então $a \cdot b \leq 0$.
+                    \item se $a \leq 0$ e $b \leq 0$, então $a \cdot b \geq 0$.
+                \end{enumerate}
+            \item $a^2 \geq 0$ para todo $a \in A$.
+            \item Se o anel $(A, +, \cdot, \leq)$ tem unidade, então $-1 < 0 < 1$.
+        \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Sejam $a, b, c, d \in A$.
+                \begin{enumerate}[label=\roman*.]
+                    \item Se $a+c \leq b+c$, então $(a+c)+(-c) \leq (b+c)+(-c)$, de modo que $a+(c+(-c)) \leq b+(c+(-c))$. Como $c+(-c) = 0$, temos $a+0 \leq b+0$, de modo que $a \leq b$.
+                    \item Se $a \leq b$ e $c \leq d$, então $a+c \leq b+c$ e $c+b \leq d+b$, de modo que $a+c \leq b+d$.
+                    \item Se $c \leq 0$, então $c+(-c) \leq 0+(-c)$, de modo que $0 \leq -c$. Se $a \leq b$, então $a \cdot (-c) \leq b \cdot (-c)$, de modo que $-(a \cdot c) \leq -(b \cdot c)$. Adicionando $(a \cdot c) + (b \cdot c)$ em ambos os lados, obtemos $b \cdot c \leq a \cdot c$, isto é, $a \cdot c \geq b \cdot c$. Analogamente, se $c \leq 0$, então $c+(-c) \leq 0+(-c)$, de modo que $0 \leq -c$. Se $a \leq b$, então $(-c) \cdot a \leq (-c) \cdot b$, de modo que $-(c \cdot a) \leq -(c \cdot b)$. Adicionando $(c \cdot a) + (c \cdot b)$ em ambos os lados, obtemos $c \cdot b \leq c \cdot a$, isto é, $c \cdot a \geq c \cdot b$.
+                \end{enumerate}
+            \blackproof
+            \item Seja $a \in A$.
+                \begin{enumerate}[label=\roman*.]
+                    \item Se $a \geq 0$, então $a+(-a) \geq 0+(-a)$, de modo que $0 \geq -a$, isto é, $-a \leq 0$.
+                    \item Se $a \leq 0$, então $a+(-a) \leq 0+(-a)$, de modo que $0 \leq -a$, isto é, $-a \geq 0$.
+                \end{enumerate}
+            \blackproof
+            \item Sejam $a, b \in A$.
+                \begin{enumerate}[label=\roman*.]
+                    \item Se $a \geq 0$ e $b \geq 0$, então $0 \leq a$ e $0 \leq b$, de modo que $0 \cdot b \leq a \cdot b$. Como $0 \cdot b = 0$, temos $0 \leq a \cdot b$, isto é, $a \cdot b \geq 0$.
+                    \item Se $b \leq 0$, então $-b \geq 0$, de modo que, como $a \geq 0$, temos $a \cdot (-b) \geq 0$, isto é, $-(a \cdot b) \geq 0$. Logo, $-(-(a \cdot b)) \leq 0$, isto é, $a \cdot b \leq 0$.
+                    \item Se $a \leq 0$, então $-a \geq 0$, de modo que, como $b \geq 0$, temos $(-a) \cdot b \geq 0$, isto é, $-(a \cdot b) \geq 0$. Logo, $-(-(a \cdot b)) \leq 0$, isto é, $a \cdot b \leq 0$.
+                    \item Se $a \leq 0$ e $b \leq 0$, então $-a \geq 0$ e $-b \geq 0$, de modo que $(-a) \cdot (-b) \geq 0$, isto é, $a \cdot b \geq 0$.
+                \end{enumerate}
+            \blackproof
+            \item Seja $a \in A$. Então $a \geq 0$ ou $a \leq 0$ pois $\leq$ é total. Se $a \geq 0$, então $a \cdot a \geq 0$, isto é, $a^2 \geq 0$. Se $a \leq 0$, então $a \cdot a \geq 0$, isto é, $a^2 \geq 0$. Logo, $a^2 \geq 0$ para todo $a \in A$. \blackproof
+            \item Pelo item anterior, temos $1^2 \geq 0$. Como $1^2 = 1 \cdot 1 = 1$, temos $1 \geq 0$, e como $1 \neq 0$, temos $1 > 0$. Além disso, como $1 \geq 0$, temos $-1 \leq 0$. Se fosse $-1 = 0$, teríamos $(-1) + 1 = 0 + 1$, de modo que $0 = 1$, uma contradição. Com isso, $-1 \neq 0$, de modo que $-1 < 0$. Logo, $-1 < 0 < 1$. \blackproof
+        \end{enumerate}
+\end{proof}
+
+\begin{definition}
+    Seja $(A, +, \cdot, \leq)$ um anel ordenado. A função $|\cdot| : A \to A$ definida por
+        \[ |a| :=
+            \begin{cases}
+                a & \text{se }  a \in A_{\geq 0} \\
+                -a & \text{se } a \in A_{<0}
+            \end{cases}
+        \]
+    é chamada de \emph{função modular}. O \emph{módulo}, ou o \emph{valor absoluto}, de $a \in A$, é a imagem de $a$ pela função modular.
+\end{definition}
+
+\begin{proposition}
+    Seja $(A, +, \cdot, \leq)$ um anel ordenado.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $|\cdot| \geq 0$, isto é, $|a| \geq 0$ para todo $a \in A$.
+            \item Para todo $a \in A$,
+                \begin{enumerate}[label=\roman*.]
+                    \item $|-a| = |a|$, isto é, $|\cdot|$ é uma função par.
+                    \item $a \leq |a|$.
+                \end{enumerate}
+            \item Para quaisquer $a,b \in A$,
+                \begin{enumerate}[label=\roman*.]
+                    \item $|a \cdot b| = |a| \cdot |b|$.
+                    \item $|a + b| \leq |a| + |b|$.
+                \end{enumerate}
+            \item Para quaisquer $a,b \in A$,
+                \begin{enumerate}[label=\roman*.]
+                    \item $|a| \leq b$ se, e somente se, $-b \leq a \leq b$.
+                    \item $|a| \geq b$ se, e somente se, $a \geq b$ ou $a \leq -b$.
+                \end{enumerate}
+            \item $|a| - |b| \leq ||a|-|b|| \leq |a-b|$ para quaisquer $a, b \in A$.
+            \item $|a-b| \leq |a-c| + |b-c|$ para quaisquer $a, b, c \in A$.
+        \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Seja $a \in A$. Como $\leq$ é total, temos $a \geq 0$ ou $a < 0$. Se $a \geq 0$, então $|a| = a \geq 0$. Se $a < 0$, então $-a \geq 0$, de modo que $|a| = -a \geq 0$. Logo, $|a| \geq 0$ para todo $a \in A$. \blackproof
+            \item Seja $a \in A$. Como $\leq$ é total, temos $a \geq 0$ ou $a < 0$.
+                \begin{enumerate}[label=\roman*.]
+                    \item Se $a \geq 0$, então $|a| = a$ e $-a \leq 0$, de modo que $|-a| = -(-a) = a = |a|$. Se $a < 0$, então $|a| = -a$ e $-a \geq 0$, de modo que $|-a| = -a = |a|$.
+                    \item Se $a \geq 0$, então $|a| = a$, de modo que $a \leq a = |a|$. Se $a < 0$, então $a \leq 0$, e como $0 \leq |a|$, temos $a \leq |a|$.
+                \end{enumerate}
+             Logo, $|-a| = |a|$ e $a \leq |a|$ para todo $a \in A$. \blackproof
+            \item Sejam $a,b \in A$.
+                \begin{enumerate}[label=\roman*.]
+                    \item Se $a \geq 0$ e $b \geq 0$, então $a \cdot b \geq 0$, de modo que $|a \cdot b| = a \cdot b = |a| \cdot |b|$. Se $a \geq 0$ e $b < 0$, então $a \cdot b \leq 0$, de modo que $|a \cdot b| = -(a \cdot b) = a \cdot (-b) = |a| \cdot |b|$. Se $a < 0$ e $b \geq 0$, então $a \cdot b \leq 0$, de modo que $|a \cdot b| = -(a \cdot b) = (-a) \cdot b = |a| \cdot |b|$. Se $a < 0$ e $b < 0$, então $a \cdot b \geq 0$, de modo que $|a \cdot b| = a \cdot b = (-a) \cdot (-b) = |a| \cdot |b|$.
+                    \item Se $a+b \geq 0$, então $|a+b| = a+b$. Como $a \leq |a|$ e $b \leq |b|$, temos $a+b \leq |a| + |b|$, de modo que $|a+b| \leq |a| + |b|$. Se $a+b < 0$, então $|a+b| = -(a+b) = (-a) + (-b)$. Como $-a \leq |-a| = |a|$ e $-b \leq |-b| = |b|$, temos $(-a) + (-b) \leq |a| + |b|$, de modo que $|a+b| \leq |a| + |b|$.
+                \end{enumerate}
+            Logo, $|a \cdot b| = |a| \cdot |b|$ e $|a + b| \leq |a| + |b|$ para quaisquer $a,b \in A$. \blackproof
+            \item Sejam $a,b \in A$.
+                \begin{enumerate}[label=\roman*.]
+                    \item Por um lado ($\Rightarrow$), suponha que $|a| \leq b$. Como $0 \leq |a| \leq b$, temos $b \geq 0$. Se $a \geq 0$, então $a = |a| \leq b$, e como $-b \leq 0 \leq a = |a| \leq b$, temos $-b \leq a \leq b$. Se $a < 0$, então $-a = |a| \leq b$, e como $a \leq 0 \leq b$ e $-b \leq a$, temos $-b \leq a \leq b$. Por outro lado ($\Leftarrow$), suponha que $-b \leq a \leq b$. Se $a \geq 0$, então $|a| = a \leq b$. Se $a < 0$, então $|a| = -a$, e como $-b \leq a$, temos $-a \leq b$, de modo que $|a| \leq b$.
+                    \item Por um lado ($\Rightarrow$), suponha que $|a| \geq b$. Se $a \geq 0$, então $a = |a| \geq b$. Se $a < 0$, então $-a = |a| \geq b$, de modo que $a \leq -b$. Logo, $a \geq b$ ou $a \leq -b$. Por outro lado ($\Leftarrow$), suponha que $a \geq b$ ou $a \leq -b$. Se $a \geq b$, então, como $a \leq |a|$, temos $b \leq |a|$. Se $a \leq -b$, então $b \leq -a$, e como $-a \leq |-a| = |a|$, temos $b \leq |a|$.
+                \end{enumerate}
+            Logo, $|a| \leq b \Leftrightarrow -b \leq a \leq b$ e $|a| \geq b \Leftrightarrow a \geq b \lor a \leq -b$. \blackproof
+            \item Sejam $a, b \in A$. Como $|a| = |(a-b)+b| \leq |a-b| + |b|$, temos $|a| - |b| \leq |a-b|$. Analogamente, como $|b| = |(b-a)+a| \leq |b-a| + |a|$, temos $|b| - |a| \leq |b-a| = |a-b|$. Como $||a|-|b||$ é igual a $|a|-|b|$ ou a $|b|-|a|$, temos $||a|-|b|| \leq |a-b|$, e como $|a|-|b| \leq ||a|-|b||$, temos $|a| - |b| \leq ||a|-|b|| \leq |a-b|$. \blackproof
+            \item Sejam $a,b,c \in A$. Como $a-b = (a-c)+(c-b)$, temos $|a-b| \leq |a-c|+|c-b|$, e como $|c-b| = |b-c|$, temos $|a-b| \leq |a-c|+|b-c|$. \blackproof
+        \end{enumerate}
+\end{proof}
+
+\section{Domínios}
+
+\begin{definition}
+    Dizemos que um anel $(A, +, \cdot)$ \emph{não tem divisores de $0$} se
+        \begin{itemize}
+            \item M4: para quaisquer $a, b \in A$, se $a \cdot b = 0$, então $a=0$ ou $b=0$.
+        \end{itemize}
+\end{definition}
+
+\begin{proposition}
+    Seja $(A, +, \cdot)$ um anel sem divisores de $0$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item (Leis do corte multiplicativo) Para quaisquer $a, b, c \in A$, 
+                \begin{enumerate}[label=\roman*.]
+                    \item se $a \cdot c = b \cdot c$ e $c \neq 0$, então $a = b$.
+                    \item se $c \cdot a = c \cdot b$ e $c \neq 0$, então $a = b$.
+                \end{enumerate}
+            \item Para todo $a \in A$, temos $a^2 = 0$ se, e somente se, $a=0$.
+            \item Se $(A, +, \cdot)$ tem unidade, então, para todo $a \in A$,
+                \begin{enumerate}[label=\roman*.]
+                    \item $a^2 = 1$ se, e somente se, $a=1$ ou $a=-1$.
+                    \item $a^2 = a$ se, e somente se, $a = 0$ ou $a=1$.
+                \end{enumerate}
+        \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Sejam $a,b,c \in A$.
+                \begin{enumerate}[label=\roman*.]
+                    \item Se $a \cdot c = b \cdot c$, então $(a \cdot c) + (-(b \cdot c)) = 0$. Como $-(b \cdot c) = (-b) \cdot c$, temos $(a \cdot c) + ((-b) \cdot c) = 0$, de modo que $(a + (-b)) \cdot c = 0$. Como $c \neq 0$, temos, pela integridade, $a + (-b) = 0$, isto é, $a = b$.
+                    \item Se $c \cdot a = c \cdot b$, então $(c \cdot a) + (-(c \cdot b)) = 0$. Como $-(c \cdot b) = c \cdot (-b)$, temos $(c \cdot a) + (c \cdot (-b)) = 0$, de modo que $c \cdot (a + (-b)) = 0$. Como $c \neq 0$, temos, pela integridade, $a + (-b) = 0$, isto é, $a = b$.
+                \end{enumerate}
+            Logo, valem as leis do corte multiplicativo. \blackproof
+            \item Por um lado ($\Rightarrow$), se $a \cdot a = 0$, então, pela integridade, $a = 0$ ou $a = 0$, isto é, $a = 0$. Por outro lado ($\Leftarrow$), se $a = 0$, então $a^2 = 0 \cdot 0 = 0$. Logo, $a^2 = 0$ se, e somente se, $a = 0$. \blackproof
+            \item Seja $a \in A$.
+                \begin{enumerate}[label=\roman*.]
+                    \item Por um lado ($\Rightarrow$), se $a^2 = 1$, então $a^2 + (-1) = 0$. Como $(a + (-1)) \cdot (a + 1) = a \cdot a + a \cdot 1 + (-1) \cdot a + (-1) \cdot 1 = a^2 + a + (-a) + (-1) = a^2 + (-1)$, temos $(a + (-1)) \cdot (a + 1) = 0$. Pela integridade, $a + (-1) = 0$ ou $a + 1 = 0$, de modo que $a = 1$ ou $a = -1$. Por outro lado ($\Leftarrow$), se $a = 1$, então $a^2 = 1 \cdot 1 = 1$. Se $a = -1$, então $a^2 = (-1) \cdot (-1) = 1 \cdot 1 = 1$. Logo, $a^2 = 1$ se, e somente se, $a=1$ ou $a=-1$.
+                    \item Por um lado ($\Rightarrow$), se $a^2 = a$, então $a^2 + (-a) = 0$. Como $a \cdot (a + (-1)) = a \cdot a + a \cdot (-1) = a^2 + (-a)$, temos $a \cdot (a + (-1)) = 0$. Pela integridade, $a = 0$ ou $a + (-1) = 0$, de modo que $a = 0$ ou $a = 1$. Por outro lado ($\Leftarrow$), se $a = 0$, então $a^2 = 0 \cdot 0 = 0 = a$. Se $a = 1$, então $a^2 = 1 \cdot 1 = 1 = a$. Logo, $a^2 = a$ se, e somente se, $a = 0$ ou $a=1$.
+                \end{enumerate}
+        \end{enumerate}
+\end{proof}
+
+\begin{proposition}
+    Seja $(A,+,\cdot,\leq)$ um anel ordenado sem divisores de $0$. Existe um subconjunto $A_{>0} \subseteq A$ tal que
+        \begin{enumerate}[label=\roman*.]
+            \item para quaisquer $a,b \in A_{>0}$, tem-se $a+b \in A_{>0}$ e $a \cdot b \in A_{>0}$; e
+            \item para todo $a \in A$, ou $a=0$, ou $a \in A_{>0}$, ou $-a \in A_{>0}$, exclusivamente.
+        \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    Como a notação ``$A_{>0}$'' sugere, basta tomar $A_{>0} := \{x \in A : x > 0\}$. \blackproof
+\end{proof}
+
+\begin{definition}
+    Um \emph{domínio de integridade}, ou, simplesmente, um \emph{domínio}, é um anel comutativo, com unidade, e que não possui divisores de $0$.
+\end{definition}
+
+\subsection*{A Cópia dos Naturais}
+
+Seja $(A,+,\cdot,\leq)$ um domínio ordenado. Quando necessário, enfatizamos que a adição $+$ é uma operação em $A$ usando o símbolo $+_{A}$, e o mesmo vale para $\cdot$ e $\leq$.
+
+\begin{definition}
+    Seja $a \in A$. Dizemos que $I \subseteq A$ é $a$-\emph{indutivo} se $a \in I$ e $n +_{A} 1_{A} \in I$ para todo $n \in I$.
+\end{definition}
+
+\begin{example}
+    Para todo $a \in A$, $A$ é um conjunto $a$-indutivo. Com isso, o conjunto de todos os subconjuntos $a$-indutivos de $A$ é não vazio, isto é,
+        \[
+            \{ I \in \mathcal{P}{(A)} : I \text{ é } a\text{-indutivo} \} \neq \emptyset.
+        \]
+    Em particular, isso nos permite considerar
+        \[
+            \bigcap \{ I \in \mathcal{P}{(A)} : I \text{ é } a\text{-indutivo} \}.
+        \]
+\end{example}
+
+\begin{proposition}
+    Sejam $a \in A$ e
+        \[
+            \mathcal{A} \in \mathcal{P}{(\{ I \in \mathcal{P}{(A)} : I \text{ é } a\text{-indutivo} \})}_{\neq \emptyset}.
+        \]
+    Então $\bigcap \mathcal{A}$ é $a$-indutivo.
+\end{proposition}
+
+\begin{proof} 
+    Como $a \in I$ para todo $I \in \mathcal{A}$, temos $a \in \bigcap \mathcal{A}$. Agora, se $n \in \bigcap \mathcal{A}$, então $n \in I$ para todo $I \in \mathcal{A}$; como cada $I \in \mathcal{A}$ é $a$-indutivo, temos $n +_{A} 1_{A} \in I$, donde $n +_{A} 1_{A} \in \bigcap \mathcal{A}$. Logo, $\bigcap \mathcal{A}$ é $a$-indutivo. \blackproof
+\end{proof}
+
+\begin{definition}
+    Seja $a \in A$. Definimos
+        \[
+            \N_{a} := \bigcap \{ I \in \mathcal{P}{(A)} : I \text{ é } a\text{-indutivo} \}.
+        \]
+\end{definition}
+
+\begin{theorem} \label{teo.set:indução_imersão_domínios}
+    Seja $a \in A$. Para todo $I \subseteq \N_{a}$ $a$-indutivo, temos $I = \N_{a}$.
+\end{theorem}
+
+\begin{proof}
+    Seja $I \subseteq \N_{a}$ $a$-indutivo. Então, pela definição de $\N_{a}$, temos $\N_{a} \subseteq I$. Logo, $I = \N_{a}$. \blackproof
+\end{proof}
+
+\begin{lemma}
+    Seja $a \in A$. Para todo $n \in \N_{a}$, temos $n \geq_{A} a$.\footnote{Isso significa, em particular, que $\N_{a}$ é limitado inferiormente para todo $a \in A$.}
+\end{lemma}
+
+\begin{proof}
+    Seja $I := \{ n \in \N_{a} : n \geq_{A} a\}$. Como $a \geq_{A} a$, temos $a \in I$. Agora, supondo que $n \in I$, provemos que $n +_{A} 1_{A} \in I$. Se $n \in I$, então $n \geq_{A} a$, e como $1_{A} >_{A} 0_{A}$, temos $n +_{A} 1_{A} >_{A} n \geq_{A} a$, de modo que $n +_{A} 1_{A} \geq_{A} a$, isto é, $n +_{A} 1_{A} \in I$. Logo, pelo princípio de indução, temos $I = \N_{a}$. \blackproof
+\end{proof}
+
+\begin{theorem} \label{teo.set:imersao_naturais_dominio_ordenado}
+    Para todo $a \in A$, a tripla $(\N_{a}, n \mapsto n +_{A} 1_{A}, a)$ é um sistema de Peano.
+\end{theorem}
+
+\begin{proof}
+    Seja $a \in A$. Defina $s : \N_{a} \to \N_{a}$ por $s(n) := n +_{A} 1_{A}$ para todo $n \in \N_{a}$. Como $\N_{a}$ é $a$-indutivo, temos $n +_{A} 1_{A} \in \N_{a}$ para todo $n \in \N_{a}$, de modo que $s$ está bem definida.
+        \begin{claim}
+            $s$ é injetiva.
+        \end{claim}
+        \begin{midproof}
+            Sejam $n,m \in \N_{a}$ tais que $s(n) = s(m)$. Então $n +_{A} 1_{A} = m +_{A} 1_{A}$, e pela lei do corte de $+_{A}$, temos $m=n$. Logo, $s$ é injetiva.    
+        \end{midproof}
+        \begin{claim}
+            $a \in \N_{a} \setminus s[\N_{a}]$.
+        \end{claim}
+        \begin{midproof}
+            Como $\N_{a}$ é $a$-indutivo, temos $a \in \N_{a}$. Se fosse $s(n) = a$ para algum $n \in \N_{a}$, teríamos $n +_{A} 1_{A} = a$, e como $1_{A} >_{A} 0_{A}$, teríamos $a = n +_{A} 1_{A} >_{A} n$, de modo que $a >_{A} n$, uma contradição pois $n \geq_{A} a$ para todo $n \in \N_{a}$. Logo, $a \notin s[\N_{a}]$, de modo que $a \in \N_{a} \setminus s[\N_{a}]$. \whiteproof
+        \end{midproof}
+        \begin{claim}
+            Para todo $I \subseteq \N_{a}$, se $a \in I$ e $n +_{A} 1_{A} \in I$ para todo $n \in I$, então $I = \N_{a}$.
+        \end{claim}
+        \begin{midproof}
+            Segue do \cref{teo.set:indução_imersão_domínios}. \whiteproof
+        \end{midproof}
+    Logo, $(\N_{a}, n \mapsto n +_{A} 1_{A}, a)$ é um sistema de Peano. \blackproof
+\end{proof}
+
+\begin{proposition}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Para quaisquer $m,n \in \N_{0_{A}}$, tem-se $m +_{A} n \in \N_{0_{A}}$.
+            \item Para quaisquer $m,n \in \N_{0_{A}}$, tem-se $m \cdot_{A} n \in \N_{0_{A}}$.
+        \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Fixe $m \in \N_{0_{A}}$ e defina $I := \{n \in \N_{0_{A}} : m +_{A} n \in \N_{0_{A}}\}$. Como $m +_{A} 0_{A} = m$ e $m \in \N_{0_{A}}$, temos $0_{A} \in I$. Agora, supondo que $n \in I$, provemos que $n +_{A} 1_{A} \in I$. Se $n \in I$, então, pela hipótese de indução, temos $m +_{A} n \in \N_{0_{A}}$, e como $\N_{0_{A}}$ é $0_{A}$-indutivo, temos $(m +_{A} n) +_{A} 1_{A} \in \N_{0_{A}}$, e como $(m +_{A} n) +_{A} 1_{A} = m +_{A} (n +_{A} 1_{A})$, temos $m +_{A} (n +_{A} 1_{A}) \in \N_{0_{A}}$, o que completa o passo indutivo. Logo, pelo princípio de indução, temos $I = \N_{0_{A}}$. Logo, $m +_{A} n \in \N_{0_{A}}$ para quaisquer $m,n \in \N_{0_{A}}$.
+            \item Fixe $m \in \N_{0_{A}}$ e defina $I := \{n \in \N_{0_{A}} : m \cdot_{A} n \in \N_{0_{A}}\}$. Como $m \cdot_{A} 0_{A} = 0_{A}$ e $0_{A} \in \N_{0_{A}}$, temos $0_{A} \in I$. Agora, supondo que $n \in I$, provemos que $n +_{A} 1_{A} \in I$. Se $n \in I$, então, pela hipótese de indução, temos $m \cdot_{A} n \in \N_{0_{A}}$. Como $m \in \N_{0_{A}}$, pelo item anterior temos $(m \cdot_{A} n) +_{A} m \in \N_{0_{A}}$, e como $(m \cdot_{A} n) +_{A} m = m \cdot_{A} (n +_{A} 1_{A})$, temos $m \cdot_{A} (n +_{A} 1_{A}) \in \N_{0_{A}}$, o que completa o passo indutivo. Logo, pelo princípio de indução, temos $I = \N_{0_{A}}$. Logo, $m \cdot_{A} n \in \N_{0_{A}}$ para quaisquer $m,n \in \N_{0_{A}}$.
+        \end{enumerate}
+\end{proof}
+
+\begin{corollary}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $+_{\N_{0_{A}}} = +_{A} \restriction_{\N_{0_{A}} \times \N_{0_{A}}}$
+            \item $\cdot_{\N_{0_{A}}} = \cdot_{A} \restriction_{\N_{0_{A}} \times \N_{0_{A}}}$
+            \item $\leq_{\N_{0_{A}}} = \leq_{A} \restriction_{\N_{0_{A}} \times \N_{0_{A}}}$
+        \end{enumerate}
+\end{corollary}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item \blackproof
+            \item \blackproof
+            \item \blackproof
+        \end{enumerate}
+\end{proof}
+
+\begin{proposition}
+    Seja $a \in A$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Temos $m +_{A} n \in \N_{a}$ para quaisquer $m,n \in \N_{a}$ se, e somente se, $a \in \N_{0_{A}}$.
+            \item Temos $m \cdot_{A} n \in \N_{a}$ para quaisquer $m,n \in \N_{a}$ se, e somente se, $a \in \N_{0_{A}}$.
+        \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item \blackproof
+            \item \blackproof
+        \end{enumerate}
+\end{proof}
+
+\begin{theorem} \label{teo.set:soma_produto_ordem_coincidem_em_dominios}
+    Seja $a \in A$. 
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $+_{\N_{a}} = +_{A} \restriction_{\N_{a} \times \N_{a}}$ se, e somente se, $a=0_{A}$.
+            \item $\cdot_{\N_{a}} = \cdot_{A} \restriction_{\N_{a} \times \N_{a}}$ se, e somente se, $a=0_{A}$.
+            \item ${\leq}_{\N_{a}} = {\leq}_{A} \restriction_{\N_{a} \times \N_{a}}$.
+        \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item \blackproof
+            \item \blackproof
+            \item \blackproof
+        \end{enumerate}
+\end{proof}
+
+\begin{corollary}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item (Princípio de Indução Forte) Seja $I \subseteq \N$ tal que, para todo $n \in N$, se $m \in I$ para todo $m \in \N$ tal que $m < n$, então $n \in I$. Então, $I = \N$.
+            \item (Princípio da Boa Ordem) Para todo $I \in \mathcal{P}(\N)_{\neq \emptyset}$ existe $b \in I$ tal que $b \leq x$ para todo $x \in I$.
+        \end{enumerate}
+\end{corollary}
+
+\begin{proof}
+    Segue dos \cref{teo.set:imersao_naturais_dominio_ordenado,teo.set:inducao_e_boaordem}. \blackproof
+\end{proof}
+
+\begin{corollary}[da Recursão] \label{teo.reais:recursão}
+    Sejam $X \neq \emptyset$, $a \in X$ e $f:X \to X$. Existe uma única função $\varphi : \N \to X$ tal que
+        \begin{itemize}
+            \item $\varphi(0) = a$;
+            \item $\varphi(n + 1) = f(\varphi(n))$, para todo $n \in \N$.
+        \end{itemize}
+\end{corollary}
+
+\begin{proof}
+    Segue dos \cref{teo.set:imersao_naturais_dominio_ordenado,teo.set:recursao_peano}. \blackproof
+\end{proof}
+
+\begin{corollary}
+    Sejam $(A, +_{A}, \cdot_{A}, \leq_{A})$ e $(B, +_{B}, \cdot_{B}, \leq_{B})$ domínios ordenados. Existe uma única bijeção $\varphi : \N_{0_{A}} \to \N_{0_{B}}$ tal que, para quaisquer $m,n \in \N_{0_{A}}$,
+        \begin{enumerate}[label=\roman*.]
+            \item $\varphi (m +_{A} n) = \varphi(m) +_{B} \varphi(n)$.
+            \item $\varphi (m \cdot_{A} n) = \varphi(m) \cdot_{B} \varphi(n)$.
+            \item $m \leq_{A} n \Leftrightarrow \varphi(m) \leq_{B} \varphi(n)$.
+        \end{enumerate}
+\end{corollary}
+
+\begin{proof}
+    Pelo \cref{teo.set:imersao_naturais_dominio_ordenado}, $(\N_{0_{A}}, n \mapsto n +_{A} 1_{A}, 0_{A})$ e $(\N_{0_{B}}, n +_{B} 1_{B}, 0_{B})$ são sistemas de Peano. Pelo \cref{teo.set:isomorfismo_sistemas_peano}, eles são isomorfos, por meio de um único isomorfismo. Pelo \cref{teo.set:isomorfismo_sistemas_peano_soma_produto_ordem}, esse isomorfismo preserva as somas, multiplicações e as ordens induzidas. Como $\N_{0_{A}}$ começa com $0_{A}$ e $\N_{0_{B}}$ começa com $0_{B}$, pelo \cref{teo.set:soma_produto_ordem_coincidem_em_dominios}, as adições, multiplicações e ordens induzidas pelo sistemas de Peano coincidem com as dos respectivos domínios ordenados. \blackproof
+\end{proof}
+
+\subsection{Domínios Bem Ordendos}
+
+\begin{proposition}
+    Seja $(A, +, \cdot, \leq)$ um domínio ordenado. As seguintes afirmações são equivalentes.
+        \begin{enumerate}[label=\roman*.]
+            \item Para todo $S \in \mathcal{P}(A)_{\neq \emptyset}$, limitado superiormente, existe $\max S$.
+            \item Para todo $S \in \mathcal{P}(A)_{\neq \emptyset}$, limitado inferiormente, existe $\min S$.
+        \end{enumerate} 
+\end{proposition}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\begin{definition}
+    Um domínio ordenado $(A, +, \cdot, \leq)$ é dito \emph{bem ordenado} se
+        \begin{itemize}
+            \item PBO: todo subconjunto não vazio de $A$, limitado inferiormente, possui um menor elemento.
+        \end{itemize}
+\end{definition}
+
+\begin{theorem}
+    Seja $(A, +, \cdot, \leq)$ um domínio bem ordenado.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $\N_{0_{A}} = A_{\geq 0_{A}}$.
+            \item $A = -\N_{1_{A}} \cup \{0_{A}\} \cup \N_{1_{A}}$.
+        \end{enumerate} 
+\end{theorem}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\begin{theorem}
+    Sejam $(A_1, +_1, \cdot_1, \leq_1)$ e $(A_2, +_2, \cdot_2, \leq_2)$ domínios de integridade bem ordenados. Existe uma única bijeção $\varphi : A_1 \to A_2$ tal que, para quaisquer $m,n \in A_1$,
+        \begin{enumerate}[label=\roman*.]
+            \item $\varphi (m +_1 n) = \varphi(m) +_2 \varphi(n)$.
+            \item $\varphi (m \cdot_1 n) = \varphi(m) \cdot_2 \varphi(n)$.
+            \item $m \leq_1 n \Leftrightarrow \varphi(m) \leq_2 \varphi(n)$.
+        \end{enumerate}
+\end{theorem}
+
+\section{Corpos}
+
+\begin{definition}
+    Seja $(A, +, \cdot)$ um anel comutativo com unidade. Dizemos que $a \in A$ é \emph{invertível} se existe $b \in A$ tal que $a \cdot b = 1$. Dizemos, nesse caso, que $b$ é o \emph{inverso multiplicativo} de $a$.
+\end{definition}
+
+\begin{definition}
+    Um \emph{corpo} é um anel comutativo com unidade $(A, +, \cdot)$ tal que todo elemento de $A_{\neq 0}$ é invertível, isto é, tal que
+        \begin{itemize}
+            \item M5: para todo $a \in A_{\neq 0}$ existe $b \in A$ tal que $a \cdot b = 1$.
+        \end{itemize}
+\end{definition}
+
+\begin{proposition}
+    Todo corpo é um domínio de integridade.
+\end{proposition}
+
+\begin{proof}
+    Seja $(\F, +, \cdot)$ um corpo. \blackproof
+\end{proof}
+
+\begin{definition}
+    Um corpo ordenado $(\F, +, \cdot, \leq)$ é \emph{arquimediano} se para quaisquer $a \in \F_{>0}$ e $b \in \F$ existe $n \in \N_{\F}$ tal que $n \cdot a > b$.
+\end{definition}
+
+\subsection{Corpos de Frações}
+
+\subsection{Corpos Ordenados Completos}
+
+\begin{lemma} \label{teo.reais:supinf}
+    Sejam $(\F,+,\cdot, \leq)$ um corpo ordenado e $S \in \mathcal{P}(\F)_{\neq \emptyset}$. 
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Suponha que existe $\sup{S}$.
+                \begin{enumerate}[label=\roman*.]
+                    \item Para todo $\beta \in \F$, se $\beta < \sup{S}$, então existe $x \in S$ tal que $x > \beta$.
+                    \item Para todo $\epsilon \in \F_{>0}$ existe $x \in S$ tal que $\sup{S} - \epsilon < x$.
+                \end{enumerate}
+            \item Suponha que existe $\inf{S}$.
+                \begin{enumerate}[label=\roman*.]
+                    \item Para todo $\beta \in \F$, se $\beta > \inf{S}$, então existe $x \in S$ tal que $x < \beta$.
+                    \item Para todo $\epsilon \in \F_{>0}$ existe $x \in S$ tal que $x < \inf{S} + \epsilon$.
+                \end{enumerate}
+        \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Segue facilmente por contradição.
+                \begin{enumerate}[label=\roman*.]
+                    \item Do contrário, seria $x \leq \beta < \sup{S}$ para todo $x \in S$, de modo que $\beta$ seria uma cota superior de $S$ menor que $\sup{S}$, um absurdo. \blackproof
+                    \item Do contrário, existiria $\epsilon \in \F_{>0}$ tal que $x \leq \sup{S} - \epsilon < \sup{S}$ para todo $x \in S$, de modo que $\sup{S} - \epsilon$ seria uma cota superior de $S$ menor que $\sup{S}$, um absurdo. \blackproof
+                \end{enumerate}
+            \item Segue analogamente. \blackproof
+        \end{enumerate}
+\end{proof}
+
+\begin{definition}
+    Um corpo ordenado $\F$ é \emph{completo} se todo subconjunto não vazio de $\F$ limitado superiormente possui supremo em $\F$.
+\end{definition}
+
+\begin{proposition}
+    Todo corpo ordenado completo é arquimediano.
+\end{proposition}
+
+\begin{proof}
+    
+\end{proof}
+
+\subsubsection{Intervalos}
+
+\section{A Existência de um Corpo Ordenado Completo}
+
+\subsection{Relações de Equivalência}
+
+\subsection{Números Inteiros}
+
+\subsection{Números Racionais}
+
+\subsection{Números Reais}
+
+\subsubsection{Cortes de Dedekind}
+
+\subsubsection{Sequências de Cauchy}
+
+\section{Teoria Elementar dos Números}
+
+%\chapter{Ordinais}
+
+%\chapter{Cardinais}
