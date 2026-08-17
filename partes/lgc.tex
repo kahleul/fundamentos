@@ -735,7 +735,7 @@ Seguimos \cite{shoenfield1967}.
                             \mathbf{x}_1 = \mathbf{y}_1 \rightarrow \cdots \rightarrow \mathbf{x}_n = \mathbf{y}_n \rightarrow \mathbf{p} \mathbf{x}_1 \ldots \mathbf{x}_n \rightarrow \mathbf{p} \mathbf{y}_1 \ldots \mathbf{y}_n.
                         \]
                 \end{enumerate}
-            \item (Regras Lógicas de Inferência)
+            \item (Regras de Inferência Lógicas)
                 \begin{enumerate}[label=\roman*.]
                     \item (Expansão) É possível inferir $\mathbf{B} \lor \mathbf{A}$ de $\mathbf{A}$.
                     \item (Contração) É possível inferir $\mathbf{A}$ de $\mathbf{A} \lor \mathbf{A}$.
@@ -750,8 +750,8 @@ Seguimos \cite{shoenfield1967}.
     Uma \emph{teoria de primeira ordem} é um sistema formal $T$ com as seguintes propriedades.
         \begin{enumerate}[label=\roman*.]
             \item A linguagem de $T$ é uma linguagem de primeira ordem.
-            \item Os axiomas de $T$ são os axiomas lógicos e uma coleção de fórmulas, chamdas de \emph{axiomas não lógicos}.
-            \item As regras de infererência de $T$ são somente as regras lógicas de inferência.
+            \item Os axiomas de $T$ são os axiomas lógicos e uma coleção de fórmulas, chamadas de \emph{axiomas não lógicos}.
+            \item As regras de infererência de $T$ são somente as regras de inferência lógicas.
         \end{enumerate}
     Uma teoria de primeira ordem fica bem especificada quando os símbolos não lógicos e os axiomas não lógicos são especificados.
 \end{definition}
@@ -765,3 +765,164 @@ Seguimos \cite{shoenfield1967}.
         \end{enumerate}
     Dizemos, nesse caso, que $\mathbf{A}$ é um \emph{teorema}\footnote{Na verdade, \cite{shoenfield1967} define \emph{teorema} num contexto muito mais geral, o de sistemas formais, e então prova que uma fórmula é um teorema se, e somente se, tem prova.} de $T$. Isso é denotado por $T \vdash \mathbf{A}$ ou $\vdash_T \mathbf{A}$.
 \end{definition}
+
+\section{Semântica}
+
+\begin{definition}
+    Seja $\mathcal{L}$ uma linguagem de primeira ordem. Uma $\mathcal{L}$-\emph{estrutura} $\mathfrak{A}$ consiste em um conjunto não vazio $|\mathfrak{A}|$, chamado de \emph{universo} de $\mathfrak{A}$ e cujos elementos são chamados de \emph{indivíduos} de $\mathfrak{A}$, com as seguintes propriedades.
+        \begin{enumerate}[label=\roman*.]
+            \item Para cada símbolo de função $n$-ário $\mathbf{f}$ de $\mathcal{L}$, existe uma função $n$-ária $f_{\mathfrak{A}} : |\mathfrak{A}|^n \to |\mathfrak{A}|$ em $|\mathfrak{A}|$; em particular, para cada símbolo de constante $\mathbf{e}$ de $\mathcal{L}$, existe um indivíduo $\mathbf{e}_{\mathfrak{A}}$ em $|\mathfrak{A}|$.
+            \item para cada símbolo de relação $n$-ário $\mathbf{p}$ de $\mathcal{L}$ diferente de $=$, existe uma relação $n$-ária $\mathbf{p}_{\mathfrak{A}} \subseteq |\mathfrak{A}|^n$ em $|\mathfrak{A}|$.
+        \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    Sejam $\mathcal{L}$ uma linguagem de primeira ordem e $\mathfrak{A}$ uma $\mathcal{L}$-estrutura.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Para cada indivíduo $a$ de $\mathfrak{A}$, definimos o \emph{nome} de $a$ como um novo símbolo de constante $\bar{a}$.
+            \item Denotamos por $\mathcal{L}(\mathfrak{A})$ a linguagem de primeira ordem obtida pela adição dos nomes dos indivíduos de $\mathfrak{A}$ em $\mathcal{L}$. Usamos $\mathbf{i}$ e $\mathbf{j}$ para denotar variáveis sintáticas que variam entre nomes.
+        \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Uma expressão é \emph{livre de variáveis} se não ocorrem variáveis nessa expressão.
+            \item Dizemos que $\mathbf{A}$ é \emph{fechada} se não tem variáveis livres.
+        \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    Sejam $\mathcal{L}$ uma linguagem de primeira ordem e $\mathfrak{A}$ uma $\mathcal{L}$-estrutura. Seja $\mathbf{a}$ em $\mathcal{L}(\mathfrak{A})$ livre de variáveis. Definimos o indivíduo $\mathfrak{A}(\mathbf{a})$ em $|\mathfrak{A}|$ por indução na complexidade de $\mathbf{a}$ do seguinte modo.
+        \begin{enumerate}[label=\roman*.]
+            \item Se $\mathbf{a}$ é um nome, então $\mathfrak{A}(\mathbf{a})$ é o indivíduo de $\mathfrak{A}$ do qual $\mathbf{a}$ é nome.
+            \item Se $\mathbf{a}$ é $\mathbf{f} \mathbf{a}_1 \ldots, \mathbf{a}_n$, então $\mathfrak{A}(\mathbf{a})$ é $\mathbf{f}_{\mathfrak{A}}(\mathfrak{A}(\mathbf{a}_1), \ldots, \mathfrak{A}(\mathbf{a}_n))$.
+        \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    Sejam $\mathcal{L}$ uma linguagem de primeira ordem e $\mathfrak{A}$ uma $\mathcal{L}$-estrutura. Seja $\mathbf{A}$ em $\mathcal{L}(\mathfrak{A})$ fechada. Definimos o valor verdade $\mathfrak{A}(\mathbf{A})$ em $\{\mathbf{T}, \mathbf{F}\}$ por indução na complexidade de $\mathbf{A}$ do seguinte modo.
+        \begin{enumerate}[label=\roman*.]
+            \item Se $\mathbf{A}$ é $\mathbf{a} = \mathbf{b}$, então $\mathfrak{A}(\mathbf{A}) = \mathbf{T}$ se, e somente se, $\mathfrak{A}(\mathbf{a}) = \mathfrak{A}(\mathbf{b})$.
+            \item Se $\mathbf{A}$ é $\mathbf{p} \mathbf{a}_1 \ldots \mathbf{a}_n$, então $\mathfrak{A}(\mathbf{A}) = \mathbf{T}$ se, e somente se, $(\mathfrak{A}(\mathbf{a}_1), \ldots, \mathfrak{A}(\mathbf{a}_n)) \in \mathbf{p}_\mathfrak{A}$.
+            \item Se $\mathbf{A}$ é $\neg \mathbf{B}$, então $\mathfrak{A}(\mathbf{A}) = H_{\neg}(\mathfrak{A}(\mathbf{B}))$.
+            \item Se $\mathbf{A}$ é $\mathbf{B} \lor \mathbf{C}$, então $\mathfrak{A}(\mathbf{A}) = H_{\lor}(\mathfrak{A}(\mathbf{B}), \mathfrak{A}(\mathbf{C}))$.
+            \item Se $\mathbf{A}$ é $\exists \mathbf{x} \mathbf{B}$, então $\mathfrak{A}(\mathbf{A}) = \mathbf{T}$ se, e somente se, $\mathfrak{A}(\mathbf{B}_{\mathbf{x}}[\mathbf{i}]) = \mathbf{T}$ para algum $\mathbf{i}$.
+        \end{enumerate}
+\end{definition}
+
+\begin{proposition}
+    Sejam $\mathcal{L}$ uma linguagem de primeira ordem e $\mathfrak{A}$ uma $\mathcal{L}$-estrutura.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Sejam $\mathbf{A}$ e $\mathbf{B}$ em $\mathcal{L}(\mathfrak{A})$ fechadas.
+                \begin{enumerate}[label=\roman*.]
+                    \item $\mathfrak{A}(\mathbf{A} \land \mathbf{B}) = H_{\land}(\mathfrak{A}(\mathbf{A}), \mathfrak{A}(\mathbf{B}))$.
+                    \item $\mathfrak{A}(\mathbf{A} \rightarrow \mathbf{B}) = H_{\rightarrow}(\mathfrak{A}(\mathbf{A}), \mathfrak{A}(\mathbf{B}))$.
+                    \item $\mathfrak{A}(\mathbf{A} \leftrightarrow \mathbf{B}) = H_{\leftrightarrow}(\mathfrak{A}(\mathbf{A}), \mathfrak{A}(\mathbf{B}))$.
+                \end{enumerate}
+            \item Sejam $\mathbf{A}_1, \ldots,\mathbf{A}_n$ em $\mathcal{L}(\mathfrak{A})$ fechadas.
+                \begin{enumerate}[label=\roman*.]
+                    \item $\mathfrak{A}(\mathbf{A}_1 \lor \cdots \lor \mathbf{A}_n) = \mathbf{T}$ se, e somente se, $\mathfrak{A}(\mathbf{A}_i) = \mathbf{T}$ para algum $i$.
+                    \item $\mathfrak{A}(\mathbf{A}_1 \land \cdots \land \mathbf{A}_n) = \mathbf{T}$ se, e somente se, $\mathfrak{A}(\mathbf{A}_i) = \mathbf{T}$ para todo $i$.
+                \end{enumerate}
+            \item Seja $\forall \mathbf{x} \mathbf{A}$ em $\mathcal{L}(\mathfrak{A})$ fechada. Então $\mathfrak{A}(\forall \mathbf{x} \mathbf{A}) = \mathbf{T}$ se, e somente se, $\mathfrak{A}(\mathbf{A}_{\mathbf{x}}[\mathbf{i}]) = \mathbf{T}$ para todo $\mathbf{i}$.
+        \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item 
+        \end{enumerate}
+\end{proof}
+
+\begin{definition}
+    Seja $\mathfrak{A}$ uma $\mathcal{L}$-estrutura. Seja $\mathbf{A}$ em $\mathcal{L}$. 
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Uma \emph{$\mathfrak{A}$-instância} de $\mathbf{A}$ é uma fórmula fechada de $\mathcal{L}(\mathfrak{A})$ da forma $\mathbf{A}[\mathbf{i}_1, \ldots, \mathbf{i}_n]$.
+            \item Dizemos que $\mathbf{A}$ é válida em $\mathfrak{A}$ se $\mathfrak{A}(\mathbf{A}') = \mathbf{T}$ para toda $\mathfrak{A}$-instância $\mathbf{A}'$ de $\mathbf{A}$. Isso é denotado por $\mathfrak{A} \vDash \mathbf{A}$.
+        \end{enumerate}
+\end{definition}
+
+\begin{proposition}
+    Sejam $\mathcal{L}$ uma linguagem de primeira ordem e $\mathfrak{A}$ uma $\mathcal{L}$-estrutura. Seja $\mathbf{A}$ em $\mathcal{L}$ fechada. Então $\mathfrak{A} \vDash \mathbf{A}$ se, e somente se, $\mathfrak{A}(\mathbf{A}) = \mathbf{T}$.
+\end{proposition}
+
+\begin{proof}
+    \leavevmode
+        \begin{itemize}[align=left]
+            \item[($\Rightarrow$)] Suponha que $\mathfrak{A} \vDash \mathbf{A}$. Então, para toda $\mathfrak{A}$-instância $\mathbf{A}'$ de $\mathbf{A}$ em $\mathcal{L}(\mathfrak{A})$, temos $\mathfrak{A}(\mathbf{A}') = \mathbf{T}$. Uma tal $\mathfrak{A}$-instância de $\mathbf{A}$ tem a forma $\mathbf{A}[\mathbf{i}_1, \ldots, \mathbf{i}_n]$, e como $\mathbf{A}$ é fechada, temos $\mathbf{A}[\mathbf{i}_1, \ldots, \mathbf{i}_n] \equiv \mathbf{A}$. Então, para toda $\mathfrak{A}$-instância $\mathbf{A}'$ de $\mathbf{A}$ em $\mathcal{L}(\mathfrak{A})$, temos $\mathbf{A}' \equiv \mathbf{A}$, e como $\mathfrak{A}(\mathbf{A}') = \mathbf{T}$, temos $\mathfrak{A}(\mathbf{A}) = \mathbf{T}$.
+            \item[($\Leftarrow$)] Suponha que $\mathfrak{A}(\mathbf{A}) = \mathbf{T}$. Seja $\mathbf{A}'$ em $\mathcal{L}(\mathfrak{A})$ uma $\mathfrak{A}$-instância de $\mathbf{A}$.
+            Como $\mathbf{A}$ é fechada, temos $\mathbf{A}' \equiv \mathbf{A}$, e como $\mathfrak{A}(\mathbf{A}) = \mathbf{T}$, temos $\mathfrak{A}(\mathbf{A}') = \mathbf{T}$. Logo, $\mathfrak{A} \vDash \mathbf{A}$.
+        \end{itemize}
+    Logo, se $\mathbf{A}$ é fechada, então $\mathfrak{A} \vDash \mathbf{A} \Leftrightarrow \mathfrak{A}(\mathbf{A}) = \mathbf{T}$. \blackproof
+\end{proof}
+
+\begin{lemma}
+    Sejam $\mathcal{L}$ uma linguagem de primeira ordem e $\mathfrak{A}$ uma $\mathcal{L}$-estrutura. Sejam $\mathbf{a}$ em $\mathcal{L}(\mathfrak{A})$ livre de variáveis e $\mathbf{i}$ o nome de $\mathfrak{A}(\mathbf{a})$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Seja $\mathbf{b}$ em $\mathcal{L}(\mathfrak{A})$ tal que nenhuma variável diferente de $\mathbf{x}$ ocorre em $\mathbf{b}$. Então
+                \[
+                    \mathfrak{A}(\mathbf{b}_{\mathbf{x}}[\mathbf{a}]) = \mathfrak{A}(\mathbf{b}_{\mathbf{x}}[\mathbf{i}]).
+                \]
+            \item Seja $\mathbf{A}$ em $\mathcal{L}(\mathfrak{A})$ tal que nenhuma variável diferente de $\mathbf{x}$ é livre em $\mathbf{A}$. Então
+                \[
+                    \mathfrak{A}(\mathbf{A}_{\mathbf{x}}[\mathbf{a}]) = \mathfrak{A}(\mathbf{A}_{\mathbf{x}}[\mathbf{i}]).
+                \]
+        \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item 
+        \end{enumerate}
+\end{proof}
+
+\begin{definition}
+    Seja $\mathcal{L}$ uma linguagem de primeira ordem.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Dizemos que $\mathbf{A}$ em $\mathcal{L}$ é \emph{logicamente válida} se $\mathfrak{A} \vDash \mathbf{A}$ para toda $\mathcal{L}$-estrutura $\mathfrak{A}$. Isso é denotado por $\vDash \mathbf{A}$.
+            \item Dizemos que $\mathbf{A}$ em $\mathcal{L}$ é uma \emph{consequência lógica} de um conjunto $\Gamma$ de fórmulas de $\mathcal{L}$ se para toda $\mathcal{L}$-estrutura $\mathfrak{A}$ tal que $\mathfrak{A} \vDash \Gamma$, tem-se também $\mathfrak{A} \vDash \mathbf{A}$. Isso é denotado por $\Gamma \vDash \mathbf{A}$.
+        \end{enumerate}
+\end{definition}
+
+\begin{theorem}
+    Seja $\mathcal{L}$ uma linguagem de primeira ordem.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Os axiomas lógicos são logicamente válidos.
+            \item A conclusão de cada regra lógica de inferência é uma consequência lógica de suas hipóteses.
+        \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item \blackproof
+            \item \blackproof
+        \end{enumerate}
+\end{proof}
+
+\begin{definition}
+    Seja $T$ uma teoria de primeira ordem.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Um \emph{modelo} de $T$ é uma $\mathcal{L}_T$-estrutura $\mathfrak{A}$ tal que $\mathfrak{A} \vDash \mathbf{A}$ para todo axioma não lógico $\mathbf{A}$ de $\mathcal{L}_T$.
+            \item Dizemos que $\mathbf{A}$ em $\mathcal{L}_T$ é \emph{válida em $T$} se $\mathfrak{A} \vDash \mathbf{A}$ para todo modelo $\mathfrak{A}$ de $T$. Isso é denotado por $T \vDash \mathbf{A}$.
+        \end{enumerate}
+\end{definition}
+
+\begin{proposition}
+    Sejam $T$ uma teoria de primeira ordem e $\mathbf{A}$ em $\mathcal{L}_T$. Então $T \vDash \mathbf{A}$ se, e somente, $\Gamma \vDash \mathbf{A}$, onde $\Gamma$ é um conjunto de fórmulas de $\mathcal{L}_T$ que contém os axiomas não lógicos de $T$.
+\end{proposition}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\begin{theorem}[Correção]
+    Seja $T$ uma teoria de primeira ordem. Se $T \vdash \mathbf{A}$, então $T \vDash \mathbf{A}$.
+\end{theorem}
+
+\begin{proof}
+    \blackproof
+\end{proof}
