@@ -1638,3 +1638,109 @@
 \begin{proof}
     \blackproof
 \end{proof}
+
+\chapter{Derivadas}
+
+\begin{definition}
+    Sejam $f : A \subseteq \R \to \R$ e $a \in A$. O \emph{quociente de diferenças de $f$ em $a$} é a função $\left. \dfrac{\Delta f}{\Delta x} \right|_a : A \setminus \{ a\} \to \R$ definida por
+        \[
+            \left. \dfrac{\Delta f}{\Delta x} \right|_a (x) := \dfrac{f(x) - f(a)}{x-a}
+        \]
+    para todo $x \in A \setminus \{a\}$.
+\end{definition}
+
+\begin{definition} \label{defi.calc:derivada}
+    Uma função $f : A \subseteq \R \to \R$ é \emph{derivável} em $a \in A \cap A'$ se existe o limite
+        \[
+            f'(a) := \lim_{x \to a} \left. \dfrac{\Delta f}{\Delta x} \right|_a (x).
+        \]
+    Dizemos, nesse caso, que $f'(a)$ é a \emph{derivada} de $f$ em $a$.
+\end{definition}
+
+\begin{proposition} \label{prop.calc1:amaish}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Sejam $A \subseteq \R$ e $a \in \R$. Então, $a \in A'$ se, e somente se, $0 \in \{h \in \R : a+h \in A\}'$.
+            \item Sejam $f : A \subseteq \R \to \R$, $a \in A'$ e $L \in \R$. Então, $\ds \lim_{x \to a} f(x) = L$ se, e somente se, $\ds \lim_{h \to 0} f(a+h) = L$.
+        \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item 
+                \begin{itemize}[leftmargin=*, style=nextline]
+                    \item[($\Rightarrow$)] Seja $\delta \in \R_{>0}$. Como $a \in A'$, existe $x \in V^*_{\delta}(a) \cap A$. Tomando $h := x-a$, temos $a+h = x \in A$, donde $h \in \{h \in \R : a+h \in A\}$. Como $x \in V^*_{\delta}(a)$, temos $0 < |x-a| < \delta$, isto é, $0 < |h-0| < \delta$, de modo que $h \in V^*_{\delta}(0)$. Logo, existe $h \in V^*_{\delta}(0) \cap \{h \in \R : a+h \in A\}$, o que prova que $0 \in \{h \in \R : a+h \in A\}'$.
+                    \item[($\Leftarrow$)] Seja $\delta \in \R_{>0}$. Como $0 \in \{h \in \R : a+h \in A\}'$, existe $h \in V^*_{\delta}(0) \cap \{h \in \R : a+h \in A\}$. Tomando $x := a+h$, como $h \in \{h \in \R : a+h \in A\}$, temos $x \in A$. Como $h \in V^*_{\delta}(0)$, temos $0 < |h-0| < \delta$, isto é, $0 < |x-a| < \delta$, de modo que $x \in V^*_{\delta}(a)$. Logo, existe $x \in V^*_{\delta}(a) \cap A$, o que prova que $a \in A'$.
+                \end{itemize}
+            Logo, $a \in A' \Leftrightarrow 0 \in \{h \in \R : a+h \in A\}'$. \blackproof
+            \item Defina $g : \{h \in \R : a+h \in A\} \to \R$ por $g(h) := f(a+h)$. Como $a \in A'$, pelo item anterior temos $0 \in (\Dom g)'$, e então faz sentido estudar o comportamento de $g$ próximo de $0$.
+                \begin{itemize}
+                    \item[($\Rightarrow$)] Suponha que $\ds \lim_{x \to a} f(x) = L$. Seja $\epsilon \in \R_{>0}$. Então existe $\delta \in \R_{>0}$ tal que, para todo $x \in A$, se $0<|x-a|<\delta$, então $|f(x) - L| < \epsilon$. Com isso, para todo $h \in \Dom g$, se $0<|h-0|<\delta$, tomando $x := a+h$, temos $x \in A$ e $0 < |x-a| < \delta$, donde $|f(x) - L| < \epsilon$, isto é, $|g(h) - L| < \epsilon$. Logo, $\ds \lim_{h \to 0} g(h) = L$, ou seja, $\ds \lim_{h \to 0} f(a+h) = L$.
+                    \item[($\Leftarrow$)] Suponha que $\ds \lim_{h \to 0} f(a+h) = L$, isto é, $\ds \lim_{h \to 0} g(h) = L$. Seja $\epsilon \in \R_{>0}$. Então existe $\delta \in \R_{>0}$ tal que, para todo $h \in \Dom g$, se $0<|h-0|<\delta$, então $|g(h) - L| < \epsilon$. Com isso, para todo $x \in A$, se $0<|x-a|<\delta$, tomando $h := x-a$, temos $a+h = x \in A$, donde $h \in \Dom g$, e $0 < |h-0| < \delta$. Logo, $|g(h) - L| < \epsilon$, isto é, $|f(a+h) - L| < \epsilon$, donde $|f(x) - L| < \epsilon$. Logo, $\ds \lim_{x \to a} f(x) = L$.
+                \end{itemize}
+            Logo, $\ds \lim_{x \to a} f(x) = L \Leftrightarrow \lim_{h \to 0} f(a+h) = L$. \blackproof
+        \end{enumerate}
+\end{proof}
+
+\begin{proposition}
+    Sejam $f : A \subseteq \R \to \R$ e $a \in A \cap A'$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Se $f$ é derivável em $a$, então
+                \[
+                    f'(a) = \lim_{h \to 0} \left. \dfrac{\Delta f}{\Delta x} \right|_a (a+h).
+                \]
+            \item Se existe $\ds \lim_{h \to 0} \left. \dfrac{\Delta f}{\Delta x} \right|_a (a+h)$, então $f$ é derivável em $a$ e
+                \[
+                    f'(a) = \lim_{h \to 0} \left. \dfrac{\Delta f}{\Delta x} \right|_a (a+h).
+                \]
+        \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    Como $a \in A \cap A'$, temos $a \in (A \setminus \{a\})'$, isto é, $a \in \left(\Dom \left. \dfrac{\Delta f}{\Delta x} \right|_a \right)'$. Pela \cref{prop.calc1:amaish}, temos $0 \in (\Dom g)'$, onde $g : \{h \in \R : a+h \in A \setminus \{a\} \} \to \R$ é definida por $g(h) := \left. \dfrac{\Delta f}{\Delta x} \right|_a (a+h)$. 
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Se $f$ é derivável em $a$, então existe $f'(a) := \ds \lim_{x \to a} \left. \dfrac{\Delta f}{\Delta x} \right|_a (x)$. Pela \cref{prop.calc1:amaish}, existe $\ds \lim_{h \to 0} \left. \dfrac{\Delta f}{\Delta x} \right|_a (a+h)$, com
+                $ \ds
+                    f'(a) = \lim_{h \to 0} \left. \dfrac{\Delta f}{\Delta x} \right|_a (a+h).
+                $
+            \blackproof
+            \item Se existe $\ds \lim_{h \to 0} \left. \dfrac{\Delta f}{\Delta x} \right|_a (a+h)$, então, pela \cref{prop.calc1:amaish}, existe $\ds \lim_{x \to a} \left. \dfrac{\Delta f}{\Delta x} \right|_a (x)$, com
+                $ \ds
+                    \lim_{x \to a} \left. \dfrac{\Delta f}{\Delta x} \right|_a (x) = \lim_{h \to 0} \left. \dfrac{\Delta f}{\Delta x} \right|_a (a+h).
+                $
+            Logo, $f$ é derivável em $a$, com
+                $ \ds
+                    f'(a) = \lim_{h \to 0} \left. \dfrac{\Delta f}{\Delta x} \right|_a (a+h).
+                $
+            \blackproof
+        \end{enumerate}
+\end{proof}
+
+\begin{theorem}
+    Sejam $f : A \subseteq \R \to \R$ e $a \in A \cap A'$. Se $f$ é derivável em $a$, então $f$ é contínua em $a$.
+\end{theorem}
+
+\begin{proof}
+\end{proof}
+
+\begin{theorem} \label{teo.calc1:algebradasderivadas}
+    Sejam $f, g : A \subseteq \R \to \R$ deriváveis em $a \in A \cap A'$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item A função $f + g : A \to \R$ é derivável em $a$ e
+                \[
+                    (f + g)'(a) = f(a) + g(a).
+                \]
+            \item A função $f \cdot g : A \to \R$ é derivável em $a$ e
+                \[
+                    (f \cdot g)'(a) = f'(a) \cdot g(a) + g'(a) \cdot f(a).
+                \]
+            \item Se $g(a) \neq 0$, então a função $\frac{f}{g} : \{x \in A : g(x) \neq 0 \} \to \R$ é derivável em $a$ e
+                \[
+                    \left( \dfrac{f}{g} \right)'(a) = \dfrac{f'(a) \cdot g(a) - g'(a) \cdot f(a)}{[g(a)]^2}.
+                \]
+        \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\end{proof}

@@ -895,24 +895,16 @@ Seguimos \cite{shoenfield1967}.
         \end{enumerate}
 \end{theorem}
 
-\begin{proof}
-    \leavevmode
-        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
-            \item \blackproof
-            \item \blackproof
-        \end{enumerate}
-\end{proof}
-
 \begin{definition}
     Seja $T$ uma teoria de primeira ordem.
         \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
-            \item Um \emph{modelo} de $T$ é uma $\mathcal{L}_T$-estrutura $\mathfrak{A}$ tal que $\mathfrak{A} \vDash \mathbf{A}$ para todo axioma não lógico $\mathbf{A}$ de $\mathcal{L}_T$.
+            \item Um \emph{modelo} de $T$ é uma $\mathcal{L}_T$-estrutura $\mathfrak{A}$ tal que $\mathfrak{A} \vDash \mathbf{A}$ para todo axioma não lógico $\mathbf{A}$ de $T$.
             \item Dizemos que $\mathbf{A}$ em $\mathcal{L}_T$ é \emph{válida em $T$} se $\mathfrak{A} \vDash \mathbf{A}$ para todo modelo $\mathfrak{A}$ de $T$. Isso é denotado por $T \vDash \mathbf{A}$.
         \end{enumerate}
 \end{definition}
 
 \begin{proposition}
-    Sejam $T$ uma teoria de primeira ordem e $\mathbf{A}$ em $\mathcal{L}_T$. Então $T \vDash \mathbf{A}$ se, e somente, $\Gamma \vDash \mathbf{A}$, onde $\Gamma$ é um conjunto de fórmulas de $\mathcal{L}_T$ que contém os axiomas não lógicos de $T$.
+    Sejam $T$ uma teoria de primeira ordem e $\mathbf{A}$ em $\mathcal{L}_T$. Então $T \vDash \mathbf{A}$ se, e somente, $\Gamma_T \vDash \mathbf{A}$, onde $\Gamma_T$ é o conjunto de axiomas não lógicos de $T$.
 \end{proposition}
 
 \begin{proof}

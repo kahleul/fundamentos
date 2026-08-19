@@ -192,6 +192,55 @@
         \end{enumerate}
 \end{theorem}
 
+\chapter{Determinantes}
+
+\section{Grupos}
+
+\begin{definition}[Grupo]
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Um par $(G, *)$ é um \emph{grupo} se no conjunto $G \neq \emptyset$ existe uma operação $* : G \times G \to G$ para a qual
+                \begin{itemize}
+                    \item G1:
+                        $x * (y * z) = (x * y) * z$
+                    para quaisquer $x, y, z \in G$;
+                    \item G3: existe $e \in G$ tal que
+                        $x * e = x = e * x$
+                    para todo $x \in G$;
+                    \item G4: para todo $x \in G$ existe $y \in G$ tal que
+                        $x * y = e = y * x$.
+                \end{itemize}
+            \item Umm grupo $(G,*)$ é \emph{comutativo}, ou \emph{abeliano}, se
+                \begin{itemize}
+                    \item G2: $x * y = y * x$ para quaisquer $x, y \in G$,
+                \end{itemize}
+        \end{enumerate}
+\end{definition}
+
+\begin{remark}
+    As propriedades descritas em G1--G4 se chamam, respectivamente, \emph{associatividade}, \emph{comutatividade}, existência de um \emph{elemento neutro} e \emph{invertibilidade} (ou existência de \emph{inversos operativos}). 
+\end{remark}
+
+\begin{proposition}
+    Seja $(G,*)$ um grupo.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item O elemento neutro de $*$ é único.
+            \item O inverso de cada elemento de $G$ é único.
+        \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Se $e' \in G$ é um elemento neutro de $*$, então
+                \[
+                    e = e * e' = e' * e = e',
+                \]
+            como havíamos afirmado. \blackproof
+            \item Segue analogamente. \blackproof
+        \end{enumerate}
+\end{proof}
+
 \chapter{Matrizes e Sistemas Lineares}
 
 \begin{definition}
