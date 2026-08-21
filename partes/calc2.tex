@@ -99,3 +99,57 @@
                 \]
         \end{enumerate}
 \end{definition}
+
+\section{Limites}
+
+\begin{definition}
+    Dizemos que $L \in \R^m$ é o \emph{limite} de $f : A \subseteq \R^n \to \R^m$ em $a \in A'$ se para todo $\epsilon \in \R_{>0}$ existe $\delta = \delta(\epsilon, a) \in \R_{>0}$ tal que, para todo $x \in A$, se $0 < \| x-a \| < \delta$, então $\| f(x)-L \| < \epsilon$. Isso é denotado por 
+        \[
+            \lim_{x \to a} f(x) = L.
+        \]
+\end{definition}
+
+\begin{proposition}[Unicidade] \label{teo.calc2:unicidade_limite_bilateral}
+    O limite de $f : A \subseteq \R^n \to \R^m$ em $a \in A'$, quando existe, é único.
+\end{proposition}
+
+\begin{proposition}
+    Sejam $f : A \subseteq \R^n \to \R^m$, $a \in A'$ e $L \in \R^m$. Então
+        \[
+            \lim_{x \to a} f(x) = L \Leftrightarrow \lim_{\| x-a \| \to 0} \|f(x) - L \| = 0.
+        \]
+\end{proposition}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\section{Continuidade}
+
+\begin{definition}[Continuidade] \label{def.calc2:continuidade}
+    Dizemos que $f : A \subseteq \R^n \to \R^m$ é \emph{contínua em $a \in A$} se para todo $\epsilon \in \R_{>0}$ existe $\delta = \delta(\epsilon, a) \in \R_{>0}$ tal que, para todo $x \in A$, se $\| x-a \| < \delta$, então $\| f(x) - f(a) \| < \epsilon$.
+\end{definition}
+
+\begin{definition}
+    Sejam $f : A \subseteq \R^n \to \R^m$ e $X \subseteq A$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Dizemos que $f$ é \emph{contínua em $X$} se $f$ é contínua em todos os pontos de $X$.
+            \item Dizemos que $f$ é \emph{contínua} se $f$ é contínua em $A$.
+        \end{enumerate}
+\end{definition}
+
+\begin{theorem} \label{teo.calc2:continuidade_sse_limite}
+    Sejam $f : A \subseteq \R^n \to \R^m$ e $a \in A \cap A'$. Então, $f$ é contínua em $a$ se, e somente se, $\ds \lim_{x \to a} f(x) = f(a)$.
+\end{theorem}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\begin{proposition}
+    Sejam $f : A \subseteq \R^n \to \R^m$ e $g : B \subseteq \R^m \to \R^k$ tais que $f(A) \subseteq B$. Se $f$ é contínua em $a \in A$ e $g$ é contínua em $f(a) \in B$, então $g \circ f : X \subseteq \R^n \to \R^k$ é contínua em $a$.
+\end{proposition}
+
+\begin{proof}
+    \blackproof
+\end{proof}

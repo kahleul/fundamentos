@@ -40,29 +40,142 @@
                     \item O elemento neutro $0_V$ de $+$ é único.
                     \item O oposto aditivo de cada elemento de $V$ é único.
                 \end{enumerate}
-            \item (Integridade) Para quaisquer $u \in V$ e $\lambda \in \R$, temos
+            \item (Integridade) Para quaisquer $u \in V$ e $\lambda \in \R$,
                 \begin{enumerate}[label=\roman*.]
-                    \item $\lambda \cdot 0_V = 0_V$;
-                    \item $0 \cdot u = 0_V$;
+                    \item $\lambda \cdot 0_V = 0_V$.
+                    \item $0 \cdot u = 0_V$.
                     \item se $\lambda \cdot u = 0_V$, então $\lambda = 0$ ou $u = 0_V$.
                 \end{enumerate}
-            \item (Sinais) Para quaisquer $u \in V$ e $\lambda \in \R$, temos
+            \item (Sinais) Para quaisquer $u \in V$ e $\lambda \in \R$,
                 \begin{enumerate}[label=\roman*.]
-                    \item $(-1) \cdot u = -u$;
-                    \item $-(-u) = u$;
+                    \item $(-1) \cdot u = -u$.
+                    \item $-(-u) = u$.
                     \item $(- \lambda) \cdot u = \lambda (-u) = -(\lambda \cdot u)$.
                 \end{enumerate}
-            \item (Lei do Corte) Para quaisquer $u,v,w \in V$ e $\lambda, \lambda_1, \lambda_2 \in \R$, temos
+            \item (Leis do Corte) Para quaisquer $u,v,w \in V$ e $\lambda, \lambda_1, \lambda_2 \in \R$,
                 \begin{enumerate}[label=\roman*.]
-                    \item $u + w = v + w \Rightarrow u = v$;
-                    \item $\lambda \neq 0 \land \lambda \cdot u = \lambda \cdot v \Rightarrow u = v$; 
-                    \item $u \neq 0_V \land \lambda_1 u = \lambda_2 u \Rightarrow \lambda_1 = \lambda_2$.
+                    \item se $u + w = v + w$, então $u = v$.
+                    \item se $\lambda \neq 0 \land \lambda \cdot u = \lambda \cdot v$, então $u = v$.
+                    \item se $u \neq 0_V \land \lambda_1 u = \lambda_2 u$, então $\lambda_1 = \lambda_2$.
                 \end{enumerate}
             \item Se $V \neq \{0 \}$, então $V$ é infinito.
         \end{enumerate}
 \end{proposition}
 
 \begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item
+                \begin{enumerate}[label=\roman*.]
+                    \item Se $0'_V \in V$ é um elemento neutro de $+$, então
+                        \[
+                            0'_V = 0'_V + 0_V = 0_V + 0'_V = 0_V,
+                        \]
+                    o que prova a unicidade do elemento neutro $0_V$ de $+$.
+                    \item Seja $u \in V$. Se $v, v' \in V$ são opostos aditivos de $u$, então
+                        \[
+                            v' = v' + 0_V = v' + (u+v) = (v' + u) + v = 0_V + v = v,
+                        \]
+                    o que prova a unicidade do oposto aditivo de $u$.
+                \end{enumerate}
+            Logo, $0_V$ e $-u$ são únicos. \blackproof
+            \item Sejam $u \in V$ e $\lambda \in \R$.
+                \begin{enumerate}[label=\roman*.]
+                    \item Como
+                        \[
+                            \lambda \cdot 0_V = \lambda \cdot (0_V+0_V)
+                            = (\lambda \cdot 0_V) + (\lambda \cdot 0_V),
+                        \]
+                    temos
+                        \[
+                            0_V
+                            = -(\lambda \cdot 0_V) + (\lambda \cdot 0_V)
+                            = -(\lambda \cdot 0_V) + ((\lambda \cdot 0_V) + (\lambda \cdot 0_V))
+                            = \lambda \cdot 0_V.
+                        \]
+                    \item Como
+                        \[
+                            0 \cdot u = (0+0) \cdot u
+                            = (0 \cdot u) + (0 \cdot u),
+                        \]
+                    temos
+                        \[
+                            0_V
+                            = -(0 \cdot u) + (0 \cdot u)
+                            = -(0 \cdot u) + ((0 \cdot u) + (0 \cdot u))
+                            = 0 \cdot u.
+                        \]
+                    \item Se $\lambda \cdot u = 0_V$ e $\lambda \neq 0$, então
+                        \[
+                            u
+                            = 1 \cdot u
+                            = \left(\frac{1}{\lambda}\lambda\right) \cdot u
+                            = \frac{1}{\lambda} \cdot (\lambda \cdot u)
+                            = \frac{1}{\lambda} \cdot 0_V
+                            = 0_V.
+                        \]
+                    Logo, se $\lambda \cdot u = 0_V$, então $\lambda=0$ ou $u=0_V$.
+                \end{enumerate}
+            Logo, valem as propriedades de integridade. \blackproof
+            \item Sejam $u \in V$ e $\lambda \in \R$.
+                \begin{enumerate}[label=\roman*.]
+                    \item Como
+                        \[
+                            u + (-1) \cdot u
+                            = 1 \cdot u + (-1) \cdot u
+                            = (1+(-1)) \cdot u
+                            = 0 \cdot u
+                            = 0_V,
+                        \]
+                    temos $(-1) \cdot u = -u$ pela unicidade do oposto aditivo de $u$.
+                    \item Como
+                        \[
+                            (-u) + u = u + (-u) = 0_V,
+                        \]
+                    temos $-(-u)=u$ pela unicidade do oposto aditivo de $-u$.
+                    \item Como
+                        \[
+                            (\lambda \cdot u) + ((-\lambda) \cdot u)
+                            = (\lambda+(-\lambda)) \cdot u
+                            = 0 \cdot u
+                            = 0_V,
+                        \]
+                    temos $(-\lambda) \cdot u = -(\lambda \cdot u)$ pela unicidade do oposto aditivo de $\lambda \cdot u$. Analogamente, como
+                        \[
+                            (\lambda \cdot u) + \lambda \cdot (-u)
+                            = \lambda \cdot (u+(-u))
+                            = \lambda \cdot 0_V
+                            = 0_V,
+                        \]
+                    temos $\lambda \cdot (-u) = -(\lambda \cdot u)$ pela unicidade do oposto aditivo de $\lambda \cdot u$.
+                \end{enumerate}
+            Logo, valem as regras dos sinais. \blackproof
+            \item Sejam $u,v,w \in V$ e $\lambda,\lambda_1,\lambda_2 \in \R$.
+                \begin{enumerate}[label=\roman*.]
+                    \item Se $u+w=v+w$, então $(u+w)+(-w)=(v+w)+(-w)$, de modo que $u+(w+(-w))=v+(w+(-w))$. Como $w+(-w)=0_V$, temos $u+0_V=v+0_V$, de modo que $u=v$.
+                    \item Se $\lambda \neq 0$ e $\lambda \cdot u=\lambda \cdot v$, então
+                        \[
+                            \frac{1}{\lambda} \cdot (\lambda \cdot u)
+                            = \frac{1}{\lambda} \cdot (\lambda \cdot v),
+                        \]
+                    de modo que
+                        \[
+                            \left(\frac{1}{\lambda}\lambda\right) \cdot u
+                            = \left(\frac{1}{\lambda}\lambda\right) \cdot v,
+                        \]
+                    isto é, $u=v$.
+                    \item Se $u \neq 0_V$ e $\lambda_1 \cdot u=\lambda_2 \cdot u$, então
+                        \[
+                            0_V
+                            = (\lambda_1 \cdot u) + (-(\lambda_2 \cdot u))
+                            = (\lambda_1 \cdot u) + ((-\lambda_2) \cdot u)
+                            = (\lambda_1-\lambda_2) \cdot u.
+                        \]
+                    Pela integridade, $\lambda_1-\lambda_2=0$ ou $u=0_V$. Como $u \neq 0_V$, temos $\lambda_1-\lambda_2=0$, de modo que $\lambda_1=\lambda_2$.
+                \end{enumerate}
+            Logo, valem as leis do corte. \blackproof
+            \item Se $V \neq \{0_V\}$, tome $u \in V_{\neq 0_V}$. Defina $f:\R \to V$ por $f(\lambda):=\lambda \cdot u$. Se $f(\lambda_1)=f(\lambda_2)$, então $\lambda_1 \cdot u=\lambda_2 \cdot u$, de modo que $\lambda_1=\lambda_2$ pela lei do corte. Logo, $f$ é injetiva. Como $\R$ é infinito, $V$ é infinito. \blackproof
+        \end{enumerate}
 \end{proof}
 
 \begin{definition}
@@ -791,3 +904,151 @@ Por simplicidade, vamos nos referir a um sistema de equações lineares como um 
 \begin{proof}
     Elon, 27. \blackproof
 \end{proof}
+
+\chapter{Geometria Analítica}
+
+\section{Retas}
+
+\begin{definition}
+    Dizemos que $r \subseteq \R^n$ é uma \emph{reta} se existem $P \in \R^n$ e $u \in \R^n_{\neq 0}$ tais que $r = \Im \gamma$, onde $\gamma : \R \to \R^n$ é definida por $\gamma(t) := P + tu$ para todo $t \in \R$. Isso é denotado por $r = P + \R u$.
+\end{definition}
+
+\begin{proposition} \fonte[473, 13.1]{apostol1}
+    Sejam $P \in \R^n$ e $u,v \in \R^n_{\neq 0}$. Então $P + \R u = P + \R v$ se, e somente se, $u \parallel v$.
+\end{proposition}
+
+\begin{proof}
+    \leavevmode
+        \begin{itemize}[align=left]
+            \item[($\Rightarrow$)] Considere $P + u \in P + \R u$. Então $P+u \in P + \R v$, de modo que existe $t \in \R$ tal que $P+u = P + tv$, isto é, $u=tv$. Logo, $u \parallel v$.
+            \item[($\Leftarrow$)] Como $u \parallel v$, existe $t \in \R$ tal que $u = tv$, e como $u,v \neq 0$, temos $t \neq 0$. 
+                \begin{itemize}
+                    \item[($\subseteq$)] Seja $Q \in P + \R u$. Então existe $c \in  \R$ tal que $Q = P + c u$, e como $u = tv$, temos $Q = P + (ct)v$, de modo que $Q \in P + \R v$. Com isso, $P + \R u \subseteq P + \R v$.
+                    \item[($\supseteq$)] Seja $Q \in P + \R v$. Então existe $c \in  \R$ tal que $Q = P + c v$, e como $u = tv$ e $t \neq 0$, temos $v = \frac{1}{t}u$, de modo que $Q = P + \left(\frac{c}{t}\right)u$, isto é, $Q \in P + \R u$. Com isso, $P + \R u \supseteq P + \R v$. 
+                \end{itemize}
+            Logo, $P + \R u = P + \R v$.
+        \end{itemize}
+    Logo, $P + \R u = P + \R v \Leftrightarrow u \parallel v$. \blackproof
+\end{proof}
+
+\begin{corollary}[Axioma da Determinação da Reta] \fonte[474, 13.4]{apostol1}
+    Para quaisquer $P, Q \in \R^n$, se $P \neq Q$, então existe uma única reta $r \subseteq \R^n$ tal que $P,Q \in r$.
+\end{corollary}
+
+\begin{proof}
+    Defina $r := P + \R (Q-P)$. Como $P = P + 0 \cdot (Q-P)$, temos $P \in r$, e como $Q = P + 1 \cdot (Q-P)$, temos $Q \in r$. Agora, seja $s \subseteq \R^n$ uma reta com $P, Q \in s$. Então existe $u \in \R^n_{\neq 0}$ tal que $s = P + \R u$. Como $Q \in P + \R u$, existe $t \in \R$ tal que $Q = P + t u$, de modo que $Q-P = t u$. Como $P \neq Q$, temos $Q - P \neq 0$, de modo que $Q-P \parallel u$. Logo $s = r$. \blackproof
+\end{proof}
+
+\begin{proposition} \fonte[473, 13.2]{apostol1}
+    Sejam $P, Q \in \R^n$ e $u \in \R^n_{\neq 0}$. Então $P + \R u = Q + \R u$ se, e somente se, $Q \in P + \R u$ ou $P \in Q + \R u$.
+\end{proposition}
+
+\begin{proof}
+    \leavevmode
+        \begin{itemize}[align=left]
+            \item[($\Rightarrow$)] Como $Q = Q + 0 \cdot u$, temos $Q \in Q + \R u$, e como $P + \R u = Q + \R u$, temos $Q \in P + \R u$. Logo, $Q \in P + \R u$ ou $P \in Q + \R u$.
+            \item[($\Leftarrow$)] Suponha, inicialmente, que $Q \in P + \R u$. Então existe $t \in \R$ tal que $Q = P + tu$. 
+                \begin{itemize}
+                    \item[($\subseteq$)] Seja $R \in P + \R u$. Então existe $c \in \R$ tal que $R = P + cu$, e como $Q = P + tu$, temos $P = Q-tu$, de modo que $R = Q + (c-t)u$, isto é, $R \in Q + \R u$. Com isso, $P + \R u \subseteq Q + \R u$.
+                    \item[($\supseteq$)] Seja $R \in Q + \R u$. Então existe $c \in \R$ tal que $R = Q + cu$, e como $Q = P + tu$, temos $R = P + (t+c)u$, de modo que $R \in P + \R u$. Com isso, $P + \R u \supseteq Q + \R u$.
+                \end{itemize}
+            Logo, $P + \R u = Q + \R u$. Agora, suponha que $P \in Q + \R u$. Então existe $t \in \R$ tal que $P = Q + tu$. 
+                \begin{itemize}
+                    \item[($\subseteq$)] Seja $R \in P + \R u$. Então existe $c \in \R$ tal que $R = P + cu$, e como $P = Q + tu$, temos $R = Q + (t+c)u$, de modo que $R \in Q + \R u$. Com isso, $P + \R u \subseteq Q + \R u$.
+                    \item[($\supseteq$)] Seja $R \in Q + \R u$. Então existe $c \in \R$ tal que $R = Q + cu$, e como $P = Q + tu$, temos $Q = P-tu$, de modo que $R = P + (c-t)u$, isto é, $R \in P + \R u$.
+                \end{itemize}
+            Logo, $P + \R u = Q + \R u$.
+        \end{itemize}
+    Logo, $P + \R u = Q + \R u \Leftrightarrow Q \in P + \R u \lor P \in Q + \R u$. \blackproof
+\end{proof}
+
+\begin{definition}
+    Duas retas $P + \R u$ e $Q + \R v$ são \emph{paralelas} se $u \parallel v$. Isso é denotado por $P + \R u \parallel Q + \R v$.
+\end{definition}
+
+\begin{corollary}[Axioma das Paralelas] \fonte[473, 13.3]{apostol1}
+    Seja $r \subseteq \R^n$ uma reta. Para todo $P \notin r$ existe uma única reta $s \subseteq \R^n$ tal que $P \in s$ e $s \parallel r$. 
+\end{corollary}
+
+\begin{proof}
+    Como $r$ é uma reta, existem $Q \in \R^n$ e $u \in \R^n_{\neq 0}$ tais que $r = Q + \R u$. Defina $s := P + \R u$. Como $P = P + 0 \cdot u$, temos $P \in s$, e como $u \parallel u$, temos $s \parallel r$. Agora, seja $t \subseteq \R^n$ uma reta tal que $P \in t$ e $t \parallel r$. Então existe $v \in \R^n_{\neq 0}$ tal que $t = P + \R v$. Como $t \parallel r$, temos $v \parallel u$, de modo que $P + \R v = P + \R u$. Logo, $t = s$. \blackproof
+\end{proof}
+
+\subsection{Retas no Plano}
+
+\begin{theorem}
+    Sejam $a,b,c \in \R$ tais que $(a,b) \neq (0,0)$. Então
+        \[
+            r := \{(x,y) \in \R^2 : ax+by=c \}
+        \]
+    é uma reta.
+\end{theorem}
+
+\begin{proof}
+    Como $(a,b) \neq (0,0)$, temos $a^2+b^2 \neq 0$. Defina
+        \[
+            P := \left(\frac{ac}{a^2+b^2},\frac{bc}{a^2+b^2}\right).
+        \]
+    Defina $u := (-b,a)$. Como $(a,b) \neq (0,0)$, temos $u \neq 0$. Logo, $P + \R u$ é uma reta. 
+        \begin{itemize}[align=left]
+            \item[($\subseteq$)] Seja $(x,y) \in r$. Então $ax+by=c$. Defina
+                \[
+                    t := \frac{ay-bx}{a^2+b^2}.
+                \]
+            Como $ax+by=c$, temos
+                \[
+                    x-\frac{ac}{a^2+b^2}
+                    = \frac{(a^2+b^2)x-a(ax+by)}{a^2+b^2}
+                    = \frac{b^2x-aby}{a^2+b^2}
+                    = -bt
+                \]
+            e
+                \[
+                    y-\frac{bc}{a^2+b^2}
+                    = \frac{(a^2+b^2)y-b(ax+by)}{a^2+b^2}
+                    = \frac{a^2y-abx}{a^2+b^2}
+                    = at.
+                \]
+            Logo,
+                \[
+                    (x,y)
+                    = \left(\frac{ac}{a^2+b^2},\frac{bc}{a^2+b^2}\right) + t(-b,a)
+                    = P+tu,
+                \]
+            de modo que $(x,y) \in P + \R u$. Com isso, $r \subseteq P + \R u$.
+            \item[($\supseteq$)] Seja $(x,y) \in P + \R u$. Então existe $t \in \R$ tal que
+                \[
+                    (x,y)
+                    = \left(\frac{ac}{a^2+b^2},\frac{bc}{a^2+b^2}\right)+t(-b,a),
+                \]
+            de modo que
+                \[
+                    ax+by
+                    = a\left(\frac{ac}{a^2+b^2}-bt\right)+b\left(\frac{bc}{a^2+b^2}+at\right)
+                    = \frac{(a^2+b^2)c}{a^2+b^2}
+                    = c,
+                \]
+            isto é, $(x,y) \in r$. Com isso, $r \supseteq P + \R u$.
+        \end{itemize}
+    Logo, $r=P + \R u$, de modo que $r$ é uma reta. \blackproof
+\end{proof}
+
+\begin{theorem}
+    Sejam $P \in \R^2$ e $u \in \R^2_{\neq 0}$. Seja $n \in \R^2$ com $n \perp u$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Temos
+                \[
+                    \{ X \in \R^2 : (X-P) \cdot n = 0 \} = P + \R u.
+                \]
+            \item Para todo $X \in P + \R u$, temos
+                \[
+                    \| X \| \geq \dfrac{|P \cdot n|}{\| n\|},
+                \]
+            com igualdade se, e somente se, $X = \op{proj}_{n}{P}$.
+            \item Para quaisquer $Q \notin P + \R u$ e $X \in P + \R u$, temos
+                \[
+                    \| X-Q \| \geq \dfrac{|(P-Q)\cdot n|}{\|n\|},
+                \]
+            com igualdade se, e somente se, $Q = \op{proj}_{n}{(P-Q)}$.
+        \end{enumerate}
+\end{theorem}
