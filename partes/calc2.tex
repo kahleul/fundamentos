@@ -19,17 +19,17 @@
 \end{definition}
 
 \begin{corollary}
-    Sejam $a \in \R$ e $r \in \R_{>0}$. Então $B^*_r(a) = B_r(a) \setminus \{a\}$.
+    Sejam $a \in \R^n$ e $r \in \R_{>0}$. Então $B^*_r(a) = B_r(a) \setminus \{a\}$.
 \end{corollary}
 
 \begin{proof}
 \end{proof}
 
 \begin{definition}
-    Sejam $a \in \R^n$ e $A \subseteq \R^n$.
+    Seja $A \subseteq \R^n$.
         \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
-            \item Dizemos que $a$ é um \emph{ponto interior} de $A$ se existe $r \in \R_{>0}$ tal que $B_r(a) \subseteq A$.
-            \item O \emph{interior} de $A$ é definido como o conjunto de todos os pontos interiores de $A$, isto é,
+            \item Dizemos que $a \in A$ é um \emph{ponto interior} de $A$ se existe $r \in \R_{>0}$ tal que $B_r(a) \subseteq A$.
+            \item O \emph{interior} de $A$ é definido como
                 \[
                     \op{int}{A} := \{ x \in A : \exists r (r \in \R_{>0} \land B_r(x) \subseteq A ) \}.
                 \]
@@ -37,11 +37,7 @@
 \end{definition}
 
 \begin{definition}
-    Seja $A \in \mathcal{P}(\R^n)_{\neq \emptyset}$.
-        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
-            \item Dizemos que $A$ é \emph{aberto} se $\op{int}{A} = A$. Em particular, $\emptyset$ é aberto.
-            \item Dizemos que $A$ é \emph{fechado} se $A^C$ é aberto.
-        \end{enumerate}
+    Dizemos que $A \subseteq \R^n$ é \emph{aberto} se $\op{int}{A} = A$.
 \end{definition}
 
 \begin{corollary}
@@ -49,12 +45,13 @@
 \end{corollary}
 
 \begin{proof}
-    Ver \cite{guidorizzi2}, página 113. \blackproof
+    \blackproof
 \end{proof}
 
 \begin{theorem}
     \leavevmode
         \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $\emptyset$ e $\R^n$ são abertos.
             \item Toda união de abertos do $\R^n$ é aberta.
             \item Toda interseção finita de abertos do $\R^n$ é aberta.
         \end{enumerate}
@@ -64,9 +61,86 @@
 \end{proof}
 
 \begin{definition}
-    Sejam $a \in \R^n$ e $A \subseteq \R^n$.
+    Sejam $a \in \R^n$ e $r \in \R_{>0}$.
         \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
-            \item Dizemos que $a$ é um \emph{ponto de acumulação} de $A$ se
+            \item A \emph{bola fechada de centro $a$ e raio $r$} é definida como
+                \[
+                    B_r[a] := \{x \in \R^n : \|x-a\| \leq r\}.
+                \]
+            \item A \emph{bola fechada furada de centro $a$ e raio $r$} é definida como
+                \[
+                    B^*_r[a] := \{x \in \R^n : 0 < \|x-a\| \leq r\}.
+                \]
+        \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    Dizemos que $A \subseteq \R^n$ é \emph{fechado} se $A^C$ é aberto.
+\end{definition}
+
+\begin{corollary}
+    Toda bola fechada é fechada.
+\end{corollary}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\begin{theorem}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $\emptyset$ e $\R^n$ são fechados.
+            \item Toda união finita de fechados do $\R^n$ é fechada.
+            \item Toda interseção de fechados do $\R^n$ é fechada.
+        \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\begin{definition}
+    Seja $A \subseteq \R^n$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Dizemos que $a \in \R^n$ é um \emph{ponto exterior} de $A$ se $a \in \op{int}{A^C}$.
+            \item O \emph{exterior} de $A$ é definido como $\op{ext}{A} := \op{int}{A^C}$.
+        \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    Seja $A \subseteq \R^n$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Dizemos que $a \in \R^n$ é um \emph{ponto da fronteira} de $A$ se $a \notin \op{int}{A}$ e $a \notin \op{ext}{A}$.
+            \item A \emph{fronteira} de $A$ é definida como
+                \[
+                    \partial A := \{ x \in \R^n : x \notin \op{int}{A} \land x \notin \op{ext}{A} \}.
+                \]
+        \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    Sejam $a \in \R^n$ e $r \in \R_{>0}$. A \emph{esfera de centro $a$ e raio $r$} é definida como
+        \[
+            S_r(a) := \{x \in \R^n : \|x-a\| = r\}.
+        \]
+\end{definition}
+
+\begin{proposition}
+    Sejam $a \in \R^n$ e $r \in \R_{>0}$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $B_r[a] = B_r(a) \cup S_r(a)$.
+            \item $\partial (B_r(a)) = \partial (B_r[a]) = S_r(a)$.
+        \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\begin{definition}
+    Seja $A \subseteq \R^n$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Dizemos que $a \in \R^n$ é um \emph{ponto de acumulação} de $A$ se
                 \[
                     B^*_r(a) \cap A \neq \emptyset
                 \]
@@ -79,25 +153,54 @@
 \end{definition}
 
 \begin{definition}
-    Sejam $a \in \R^n$ e $A \subseteq \R^n$.
+    Dizemos que $a \in A$ é um \emph{ponto isolado} de $A \subseteq \R^n$ se $a \notin A'$.
+\end{definition}
+
+\begin{definition}
+    Seja $A \subseteq \R^n$.
         \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
-            \item Dizemos que $a$ é um \emph{ponto exterior} de $A$ se existe $r \in \R_{>0}$ tal que $B_r(a) \cap A = \emptyset$.
-            \item O \emph{exterior} de $A$, é definido como o conjunto de todos os pontos exteriores de $A$, isto é,
+            \item Dizemos que $a \in \R^n$ é um \emph{ponto de aderência} de $A$ se
                 \[
-                    \op{ext}{A} := \{ x \in \R^n : \exists r (r \in \R_{>0} \land B_r(x) \cap A = \emptyset ) \}.
+                    B_r(a) \cap A \neq \emptyset
+                \]
+            para todo $r \in \R_{>0}$.
+            \item O \emph{fecho} de $A$ é definido como
+                \[
+                    \bar{A} := \{x \in \R^n : \forall r (r \in \R_{>0} \rightarrow B_r(x) \cap A \neq \emptyset) \}.
                 \]
         \end{enumerate}
 \end{definition}
 
-\begin{definition}
-    Sejam $a \in \R^n$ e $A \subseteq \R^n$.
+\begin{proposition}
+    Seja $A \subseteq \R^n$. 
         \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
-            \item Dizemos que $a$ é um \emph{ponto da fronteira} de $A$ se $a \notin \op{int}{A}$ e $a \notin \op{ext}{A}$.
-            \item O conjunto de todos os pontos da fronteira de $A$ é denotado por $\partial A$, isto é,
-                \[
-                    \partial A := \{ x \in \R^n : x \notin \op{int}{A} \land x \notin \op{ext}{A} \}.
-                \]
+            \item 
+                \begin{enumerate}[label=\roman*.]
+                    \item $\op{int}{A}$ é aberto.
+                    \item $\bar{A}$ é fechado.
+                    \item $\partial A$ é fechado.
+                \end{enumerate}
+            \item 
+                \begin{enumerate}[label=\roman*.]
+                    \item $\op{int}{A} \cap \partial A = \emptyset$.
+                    \item $\bar{A} = A \cup A'$.
+                    \item $\bar{A} = A \cup \partial A$.
+                \end{enumerate}
+            \item Se $a \in A'$, então $a \in \op{int}{A}$ ou $a \in \partial A$.
+            \item $A$ é fechado se, e somente se, $\bar{A} = A$.
         \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\begin{definition}
+    Dizemos que $A \subseteq \R^n$ é \emph{limitado} se existe $r \in \R_{>0}$ tal que $A \subseteq B_r(0)$.
+\end{definition}
+
+\begin{definition}
+    Dizemos que $A \subseteq \R^n$ é \emph{compacto} se é fechado e limitado.
 \end{definition}
 
 \section{Limites}

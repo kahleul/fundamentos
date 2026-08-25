@@ -208,11 +208,11 @@
 \begin{definition}
     Sejam $a \in \R$ e $r \in \R_{>0}$.
         \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
-            \item A \emph{$r$-vizinhança de $a$} é definida como
+            \item A \emph{vizinhança aberta de $a$ e raio $r$} é definida como
                 \[
                     V_r(a) := \{x \in \R : |x-a|<r \}.
                 \]
-            \item A \emph{$r$-vizinhança furada de $a$} é definida como
+            \item A \emph{vizinhança aberta furada de $a$ e raio $r$} é definida como
                 \[
                     V^*_r(a) := \{x \in \R : 0<|x-a|<r \}.
                 \]
@@ -236,11 +236,104 @@
 \end{proof}
 
 \begin{definition}
-    Dizemos que $a \in \R$ é um \emph{ponto de acumulação} de $A \subseteq \R$ se 
-        \[
-            V^*_{r}(a) \cap A \neq \emptyset
-        \]
-    para todo $r \in \R_{>0}$. O conjunto de todos os pontos de acumulação de $A$ é denotado por $A'$.
+    Seja $A \subseteq \R$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Dizemos que $a \in A$ é um \emph{ponto interior} de $A$ se existe $r \in \R_{>0}$ tal que $V_r(a) \subseteq A$.
+            \item O \emph{interior} de $A$ é definido como
+                \[
+                    \op{int}{A} := \{ x \in A : \exists r (r \in \R_{>0} \land V_r(x) \subseteq A ) \}.
+                \]
+        \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    Dizemos que $A \subseteq \R$ é \emph{aberto} se $\op{int}{A} = A$.
+\end{definition}
+
+\begin{proposition}
+    Toda vizinhança aberta é aberta.
+\end{proposition}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\begin{theorem}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $\emptyset$ e $\R$ são abertos.
+            \item Toda união de abertos de $\R$ é aberta.
+            \item Toda interseção finita de abertos de $\R$ é aberta.
+        \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\end{proof}
+
+\begin{definition}
+    Sejam $a \in \R$ e $r \in \R_{>0}$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item A \emph{vizinhança fechada de $a$ e raio $r$} é definida como
+                \[
+                    V_r[a] := \{x \in \R : |x-a| \leq r \}.
+                \]
+            \item A \emph{vizinhança fechada furada de $a$ e raio $r$} é definida como
+                \[
+                    V^*_r[a] := \{x \in \R : 0<|x-a| \leq r \}.
+                \]
+        \end{enumerate}
+\end{definition}
+
+\begin{corollary}
+    Sejam $a \in \R$ e $r \in \R_{>0}$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $V_r[a] = \left[a-r, a+r \right]$.
+            \item $V^*_r[a] = V_r[a] \setminus \{a\}$.
+        \end{enumerate}
+\end{corollary}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item \blackproof
+            \item \blackproof
+        \end{enumerate}
+\end{proof}
+
+\begin{proposition}
+    Toda vizinhança fechada é fechada.
+\end{proposition}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\begin{theorem}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $\emptyset$ e $\R$ são fechados.
+            \item Toda união finita de fechados de $\R$ é fechada.
+            \item Toda interseção de fechados de $\R$ é fechada.
+        \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\begin{definition}
+    Seja $A \subseteq \R$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Dizemos que $a \in \R$ é um \emph{ponto de acumulação} de $A$ se
+                \[
+                    V^*_r(a) \cap A \neq \emptyset
+                \]
+            para todo $r \in \R_{>0}$.
+            \item O conjunto de todos os pontos de acumulação de $A$ é denotado por $A'$, isto é,
+                \[
+                    A' := \{x \in \R : \forall r (r \in \R_{>0} \rightarrow V^*_r(x) \cap A \neq \emptyset) \}.
+                \]
+        \end{enumerate}
 \end{definition}
 
 \begin{theorem} \label{teo.calc1:a_linha_sse_sequencia}
@@ -335,7 +428,7 @@
                         &= \epsilon,
                 \end{align*}
             de modo que $\ds \lim_{x \to a} (f+g)(x) = L_1 + L_2$. \blackproof
-            \item \fonte[30]{aurichi}
+            \item \fonte[30]{aurichi2025calculo}
             Seja $\epsilon \in \R_{>0}$. Como $\ds \lim_{x \to a} f(x) = L_1$, para $\epsilon_1 = 1$ existe $\delta_1 \in \R_{>0}$ tal que, para todo $x \in A$, se $0<|x-a|<\delta_1$, então $|f(x) - L_1| < \epsilon_1 = 1$; em particular, $|f(x)| \leq 1 + |L_1|$. De fato, 
                 \[
                     |f(x)| = |f(x) - L_1 + L_1| \leq |f(x) - L_1| + |L_1| < 1 + |L_1|.
