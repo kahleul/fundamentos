@@ -354,7 +354,7 @@
 \end{definition}
 
 \begin{lemma} \label{calc1.lemma:existe_x0}
-    Sejam $a \in \R$ e $A \subseteq \R$. Temos $a \in A'$ se, e somente se, para todo $\delta \in \R_{>0}$ existe $x_0 \in V^*_{\delta}(a) \cap A$.
+    Sejam $a \in \R$ e $A \subseteq \R$. Então, $a \in A'$ se, e somente se, para todo $\delta \in \R_{>0}$ existe $x_0 \in V^*_{\delta}(a) \cap A$.
 \end{lemma}
 
 \begin{proof}
@@ -366,7 +366,7 @@
 \end{proposition}
 
 \begin{proof} \fonte[135]{cursodeanalise1}
-    Provemos que se $\ds \lim_{x \to a} f(x) = L_1$ e $\ds \lim_{x \to a} f(x) = L_2$, então $L_1 = L_2$. Suponha, por absurdo, que $L_1 \neq L_2$, e seja $\epsilon := \dfrac{|L_1 - L_2|}{2} \in \R_{>0}$. Como $\ds \lim_{x \to a} f(x) = L_1$, existe $\delta_1 \in \R_{>0}$ tal que, para todo $x \in A$, se $0 < |x-a| < \delta_1$, então $|f(x) - L_1| < \epsilon$. Analogamente, como $\ds \lim_{x \to a} f(x) = L_2$, existe $\delta_2 \in \R_{>0}$ tal que, para todo $x \in A$, se $0 < |x-a| < \delta_2$, então $|f(x) - L_2| < \epsilon$. Pois tome $\delta := \min\{\delta_1, \delta_2 \}$. como $a \in A'$, pelo \cref{calc1.lemma:existe_x0} existe $x_0 \in A$ tal que $0<|x_0-a|<\delta$; com isso, obtemos $|f(x_0) - L_1| < \epsilon$ e $|f(x_0) - L_2| < \epsilon$, donde
+    Provemos que se $\ds \lim_{x \to a} f(x) = L_1$ e $\ds \lim_{x \to a} f(x) = L_2$, então $L_1 = L_2$. Suponha, por absurdo, que $L_1 \neq L_2$. Seja $\epsilon := \dfrac{|L_1 - L_2|}{2} \in \R_{>0}$. Como $\ds \lim_{x \to a} f(x) = L_1$, existe $\delta_1 \in \R_{>0}$ tal que, para todo $x \in A$, se $0 < |x-a| < \delta_1$, então $|f(x) - L_1| < \epsilon$. Analogamente, como $\ds \lim_{x \to a} f(x) = L_2$, existe $\delta_2 \in \R_{>0}$ tal que, para todo $x \in A$, se $0 < |x-a| < \delta_2$, então $|f(x) - L_2| < \epsilon$. Pois tome $\delta := \min\{\delta_1, \delta_2 \}$. Como $a \in A'$, pelo \cref{calc1.lemma:existe_x0} existe $x_0 \in A$ tal que $0<|x_0-a|<\delta$; com isso, obtemos $|f(x_0) - L_1| < \epsilon$ e $|f(x_0) - L_2| < \epsilon$, donde
         \begin{align*}
             |L_1 - L_2| &= |(f(x_0) - L_2) - (f(x_0)-L_1)| \\
             &\leq |f(x_0) - L_2| + |f(x_0)-L_1| \\
@@ -482,7 +482,7 @@
 \end{corollary}
 
 \begin{proof}
-    Por indução. \blackproof
+    Por indução.
         \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
             \item \blackproof
             \item \blackproof

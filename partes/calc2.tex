@@ -212,19 +212,226 @@
         \]
 \end{definition}
 
+\begin{lemma} \label{lemma.calc2:existe_x0}
+    Sejam $a \in \R^n$ e $A \subseteq \R^n$. Então, $a \in A'$ se, e somente se, para todo $\delta \in \R_{>0}$ existe $x_0 \in B^*_{\delta}(a) \cap A$.
+\end{lemma}
+
+\begin{proof}
+    Por um lado ($\Rightarrow$), suponha que $a \in A'$. Seja $\delta \in \R_{>0}$. Como $a \in A'$, temos $B^*_{\delta}(a) \cap A \neq \emptyset$. Logo, existe $x_0 \in B^*_{\delta}(a) \cap A$. Por outro lado ($\Leftarrow$), suponha que, para todo $\delta \in \R_{>0}$, existe $x_0 \in B^*_{\delta}(a) \cap A$. Então $B^*_{\delta}(a) \cap A \neq \emptyset$ para todo $\delta \in \R_{>0}$, de modo que $a \in A'$. \blackproof
+\end{proof}
+
 \begin{proposition}[Unicidade] \label{teo.calc2:unicidade_limite_bilateral}
     O limite de $f : A \subseteq \R^n \to \R^m$ em $a \in A'$, quando existe, é único.
 \end{proposition}
 
+\begin{proof}
+    Provemos que se $\ds \lim_{x \to a} f(x) = L_1$ e $\ds \lim_{x \to a} f(x) = L_2$, então $L_1 = L_2$. Suponha, por absurdo, que $L_1 \neq L_2$. Seja $\epsilon := \dfrac{\|L_1 - L_2\|}{2} \in \R_{>0}$. Como $\ds \lim_{x \to a} f(x) = L_1$, existe $\delta_1 \in \R_{>0}$ tal que, para todo $x \in A$, se $0 < \|x-a\| < \delta_1$, então $\|f(x) - L_1\| < \epsilon$. Analogamente, como $\ds \lim_{x \to a} f(x) = L_2$, existe $\delta_2 \in \R_{>0}$ tal que, para todo $x \in A$, se $0 < \|x-a\| < \delta_2$, então $\|f(x) - L_2\| < \epsilon$. Pois tome $\delta := \min\{\delta_1, \delta_2 \}$. Como $a \in A'$, pelo \cref{lemma.calc2:existe_x0} existe $x_0 \in A$ tal que $0<\|x_0-a\|<\delta$; com isso, obtemos $\|f(x_0) - L_1\| < \epsilon$ e $\|f(x_0) - L_2\| < \epsilon$, donde
+        \begin{align*}
+            \|L_1 - L_2\| &= \|(f(x_0) - L_2) - (f(x_0)-L_1)\| \\
+            &\leq \|f(x_0) - L_2\| + \|f(x_0)-L_1\| \\
+            &< 2 \epsilon = \|L_1 - L_2\|,
+        \end{align*}
+    uma contradição. Logo, $L_1 = L_2$. \blackproof
+\end{proof}
+
 \begin{proposition}
-    Sejam $f : A \subseteq \R^n \to \R^m$, $a \in A'$ e $L \in \R^m$. Então
+    Sejam $f : A \subseteq \R^n \to \R^m$, $a \in A'$ e $L \in \R^m$. Então $\ds \lim_{x \to a} f(x) = L$ se, e somente se, para todo $\epsilon \in \R_{>0}$ existe $\delta = \delta(\epsilon, a) \in \R_{>0}$ tal que
         \[
-            \lim_{x \to a} f(x) = L \Leftrightarrow \lim_{\| x-a \| \to 0} \|f(x) - L \| = 0.
+            f[B^*_{\delta}(a) \cap A] \subseteq B_{\epsilon}(L).
         \]
 \end{proposition}
 
 \begin{proof}
-    \blackproof
+    \leavevmode
+        \begin{itemize}[align=left]
+            \item[($\Rightarrow$)] Seja $\epsilon \in \R_{>0}$. Então existe $\delta = \delta(\epsilon, a) \in \R_{>0}$ tal que, para todo $x \in A$, se $0 < \|x-a\| < \delta$, então $\|f(x) - L\| < \epsilon$. Seja $y \in f[B^*_{\delta}(a) \cap A]$. Então existe $x \in B^*_{\delta}(a) \cap A$ tal que $y = f(x)$. Como $x \in A$ e $0 < \|x-a\| < \delta$, temos $\|y - L\| = \|f(x) - L\| < \epsilon$, de modo que $y \in B_{\epsilon}(L)$. Logo, $f[B^*_{\delta}(a) \cap A] \subseteq B_{\epsilon}(L)$.
+            \item[($\Leftarrow$)] Seja $\epsilon \in \R_{>0}$. Então existe $\delta \in \R_{>0}$ tal que $f[B^*_{\delta}(a) \cap A] \subseteq B_{\epsilon}(L)$. Seja $x \in A$ tal que $0 < \|x-a\| < \delta$. Então $x \in B^*_{\delta}(a) \cap A$, de modo que $f(x) \in f[B^*_{\delta}(a) \cap A] \subseteq B_{\epsilon}(L)$, isto é, $\|f(x) - L\| < \epsilon$. Logo, $\ds \lim_{x \to a} f(x) = L$.
+        \end{itemize}
+    Logo, $\ds \lim_{x \to a} f(x) = L \Leftrightarrow \forall \epsilon(\epsilon \in \R_{>0} \rightarrow \exists \delta (\delta \in \R_{>0} \land f[B^*_{\delta}(a) \cap A] \subseteq B_{\epsilon}(L)))$. \blackproof
+\end{proof}
+
+\begin{proposition}
+    Sejam $f : A \subseteq \R^n \to \R$ e $a \in A'$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Seja $X \subseteq A$ tal que $a \in X'$.
+                \begin{enumerate}[label=\roman*.]
+                    \item Se $\ds \lim_{x \to a} f(x) = L$, então $\ds \lim_{x \to a} f \restriction_X (x) = L$.
+                    \item Se $\ds \lim_{x \to a} f \restriction_X (x) \notin \R$, então $\ds \lim_{x \to a} f (x) \notin \R$. 
+                \end{enumerate}
+            \item Sejam $X,Y \subseteq A$ tais que $a \in X' \cap Y'$. Se $\ds \lim_{x \to a} f \restriction_X (x) = L_1$ e $\ds \lim_{x \to a} f \restriction_Y (x) = L_2$, com $L_1 \neq L_2$, então $\ds \lim_{x \to a} f (x) \notin \R$.
+        \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Seja $X \subseteq A$ tal que $a \in X'$.
+                \begin{enumerate}[label=\roman*.]
+                    \item Seja $\epsilon \in \R_{>0}$. Como $\ds \lim_{x \to a} f(x) = L$, existe $\delta \in \R_{>0}$ tal que, para todo $x \in A$, se $0<\|x-a\|<\delta$, então $|f(x)-L|<\epsilon$. Como $X \subseteq A$, para todo $x \in X$, se $0<\|x-a\|<\delta$, então $x \in A$ e, portanto,
+                        \[
+                            |f \restriction_X(x)-L| = |f(x)-L| < \epsilon.
+                        \]
+                    Logo, $\ds \lim_{x \to a} f \restriction_X(x) = L$. \blackproof
+                    \item Contrapositiva. \blackproof
+                \end{enumerate}
+            \item Suponha, por absurdo, que $\ds \lim_{x \to a} f(x) = L \in \R$. Como $X \subseteq A$ e $a \in X'$, temos $\ds \lim_{x \to a} f \restriction_X (x) = L$. Pela unicidade do limite, $L = L_1$. Analogamente, como $Y \subseteq A$ e $a \in Y'$, temos $\ds \lim_{x \to a} f \restriction_Y (x) = L$. Pela unicidade do limite, $L = L_2$. Logo, $L_1 = L_2$, uma contradição. Logo, $\ds \lim_{x \to a} f(x) \notin \R$. \blackproof
+        \end{enumerate}
+\end{proof}
+
+\begin{theorem} \label{teo.calc2:algebra_dos_limites}
+    Sejam $f,g : A \subseteq \R^n \to \R$ e $a \in A'$ tais que existem $\ds \lim_{x \to a} f(x)$ e $\ds \lim_{x \to a} g(x)$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item O limite da soma é a soma dos limites:
+                \[
+                    \lim_{x \to a} \, (f+g)(x) = \lim_{x \to a} f(x) + \lim_{x \to a} g(x).
+                \]
+            \item O limite do produto é o produto dos limites:
+                \[
+                    \lim_{x \to a} \, (f \cdot g)(x) = \lim_{x \to a} f(x) \cdot \lim_{x \to a} g(x).
+                \]
+            \item O limite do quociente é igual ao quociente dos limites, desde que o denominador seja diferente de $0$: se $\ds \lim_{x \to a} g(x) \neq 0$, então
+                \[
+                    \lim_{x \to a} \left(\dfrac{f}{g} \right)(x) = \dfrac{\ds \lim_{x \to a} f(x)}{\ds \lim_{x \to a} g(x)}.
+                \]
+        \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    Sejam $\ds \lim_{x \to a} f(x) = L_1$ e $\ds \lim_{x \to a} g(x) = L_2$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Seja $\epsilon \in \R_{>0}$. Como $\ds \lim_{x \to a} f(x) = L_1$, para $\ds \epsilon_1 = \dfrac{\epsilon}{2} \in \mathbb{R}_{>0}$ existe $\delta_1 \in \mathbb{R}_{>0}$ tal que, para todo $x \in A$, se $0<\|x-a\|<\delta_1$, então $|f(x) - L_1| < \epsilon_1$. Como $\ds \lim_{x \to a} g(x) = L_2$, para $\ds \epsilon_2 = \dfrac{\epsilon}{2} \in \mathbb{R}_{>0}$ existe $\delta_2 \in \mathbb{R}_{>0}$ tal que, para todo $x \in A$, se $0<\|x-a\|<\delta_2$, então $|g(x) - L_2| < \epsilon_2$. Pois tome $\delta := \min \{\delta_1, \delta_2 \}$. Com isso, para todo $x \in A$ tal que $0 < \|x-a\| < \delta$, temos
+                \begin{align*}
+                    |(f(x) + g(x)) - (L_1 + L_2)|
+                        &\leq |f(x) - L_1| + |g(x) - L_2| \\
+                        &< \dfrac{\epsilon}{2} + \dfrac{\epsilon}{2} \\
+                        &= \epsilon,
+                \end{align*}
+            de modo que $\ds \lim_{x \to a} (f+g)(x) = L_1 + L_2$. \blackproof
+            \item Seja $\epsilon \in \R_{>0}$. Como $\ds \lim_{x \to a} f(x) = L_1$, para $\epsilon_1 = 1$ existe $\delta_1 \in \R_{>0}$ tal que, para todo $x \in A$, se $0<\|x-a\|<\delta_1$, então $|f(x) - L_1| < \epsilon_1 = 1$; em particular, $|f(x)| \leq 1 + |L_1|$. De fato, 
+                \[
+                    |f(x)| = |f(x) - L_1 + L_1| \leq |f(x) - L_1| + |L_1| < 1 + |L_1|.
+                \]
+            Como $\ds \lim_{x \to a} f(x) = L_1$, para $\ds \epsilon_2 = \dfrac{\epsilon}{2(1 + |L_2|)} \in \R_{>0}$ existe $\delta_2 \in \R_{>0}$ tal que, para todo $x \in A$, se $0<\|x-a\|<\delta_2$, então $|f(x) - L_1| < \epsilon_2$. Como $\ds \lim_{x \to a} g(x) = L_2$, para $\epsilon_3 = \dfrac{\epsilon}{2(1 + |L_1|)} \in \R_{>0}$ existe $\delta_3 \in \R_{>0}$ tal que, para todo $x \in A$, se $0<\|x-a\|<\delta_3$, então $|g(x) - L_2| < \epsilon_3$. Pois tome $\delta := \min \{\delta_1, \delta_2, \delta_3 \}$. Observando que
+                \[
+                    f(x) g(x) - L_1 L_2 = f(x) (g(x) - L_2) + L_2 (f(x) - L_1),
+                \]
+            para todo $x \in A$ tal que $0 < \|x-a\| < \delta$, temos
+                \begin{align*}
+                    |f(x) g(x) - L_1 L_2|
+                        &\leq |f(x)| |g(x) - L_2| + |L_2| |f(x) - L_1| \\
+                        &< (1+|L_1|) \dfrac{\epsilon}{2(1+|L_1|)} + |L_2| \dfrac{\epsilon}{2(1+|L_2|)} \\
+                        &< \dfrac{\epsilon}{2} + 1 \cdot \dfrac{\epsilon}{2} \\
+                        &= \epsilon,
+                \end{align*}
+            de modo que $\ds \lim_{x \to a} f(x)g(x) = L_1 L_2$. \blackproof
+            \item Suponha $L_2 \neq 0$. Seja $\epsilon \in \R_{>0}$. Como $\ds \lim_{x \to a} g(x) = L_2$, para $\ds \epsilon_1 = \dfrac{|L_2|}{2} \in \R_{>0}$ existe $\delta_1 \in \R_{>0}$ tal que, para todo $x \in A$, se $0<\|x-a\|<\delta_1$, então $|g(x) - L_2| < \epsilon_1$; em particular, $\dfrac{1}{|g(x)|} < \dfrac{2}{|L_2|}$. De fato,
+                \[
+                    |g(x)| = |g(x) - L_2 + L_2| \geq |L_2| - |g(x) - L_2| > |L_2| - \dfrac{|L_2|}{2} = \dfrac{|L_2|}{2},
+                \]
+            donde $\dfrac{1}{|g(x)|} < \dfrac{2}{|L_2|}$. Como $\ds \lim_{x \to a} f(x) = L_1$, para $\ds \epsilon_2 = \dfrac{|L_2| \epsilon}{4} \in \R_{>0}$ existe $\delta_2 \in \R_{>0}$ tal que, para todo $x \in A$, se $0<\|x-a\|<\delta_2$, então $|f(x) - L_1| < \epsilon_2$. Como $\ds \lim_{x \to a} g(x) = L_2$, para $\ds \epsilon_3 = \dfrac{|L_2|^2 \epsilon}{4(1 + |L_1|)} \in \R_{>0}$ existe $\delta_3 \in \R_{>0}$ tal que, para todo $x \in A$, se $0<\|x-a\|<\delta_3$, então $|g(x) - L_2| < \epsilon_3$. Pois tome $\delta := \min \{\delta_1, \delta_2, \delta_3 \}$. Observando que
+                \[
+                    \dfrac{f(x)}{g(x)} - \dfrac{L_1}{L_2} = \dfrac{L_2(f(x) - L_1) - L_1(g(x) - L_2)}{g(x)L_2},
+                \]
+            para todo $x \in A$ tal que $0 < \|x-a\| < \delta$, temos
+                \begin{align*}
+                    \left| \dfrac{f(x)}{g(x)} - \dfrac{L_1}{L_2} \right|
+                        &= \dfrac{|L_2(f(x) - L_1) - L_1(g(x) - L_2)|}{|g(x)| |L_2|} \\
+                        &\leq \dfrac{|L_2| |f(x) - L_1| + |L_1| |g(x) - L_2|}{|g(x)| |L_2|} \\
+                        &< \dfrac{2}{|L_2|^2} \left( |L_2| \dfrac{|L_2| \epsilon}{4} + |L_1| \dfrac{|L_2|^2 \epsilon}{4(1 + |L_1|)} \right) \\
+                        &< \dfrac{2}{|L_2|^2} \left( \dfrac{|L_2|^2 \epsilon}{4} + 1 \cdot \dfrac{|L_2|^2 \epsilon}{4} \right) \\
+                        &= \epsilon,
+                \end{align*}
+            de modo que $\ds \lim_{x \to a} \dfrac{f(x)}{g(x)} = \dfrac{L_1}{L_2}$. \blackproof
+        \end{enumerate}
+\end{proof}
+
+\begin{theorem}[Confronto]
+    Sejam $f,g,h : A \subseteq \R^n \to \R$, $a \in A'$ e $L \in \R$. Se existe $r \in \R_{>0}$ tal que $f \leq g \leq h$ em $B^*_r(a) \cap A$, e se $\ds \lim_{x \to a} f(x) = L$ e $\ds \lim_{x \to a} h(x) = L$, então $\ds \lim_{x \to a} g(x) = L$.
+\end{theorem}
+
+\begin{proof}
+    Seja $\epsilon \in \R_{>0}$. Como $\ds \lim_{x \to a} f(x) = L$, existe $\delta_1 \in \R_{>0}$ tal que, para todo $x \in A$, se $0<\|x-a\|<\delta_1$, então $L-\epsilon < f(x) < L+\epsilon$. Como $\ds \lim_{x \to a} h(x) = L$, existe $\delta_2 \in \R_{>0}$ tal que, para todo $x \in A$, se $0<\|x-a\|<\delta_2$, então $L-\epsilon < h(x) < L+\epsilon$. Seja $\delta := \min \{r, \delta_1, \delta_2 \}$. Com isso, para todo $x \in A$, se $0<\|x-a\|<\delta$, então 
+        \[
+            L-\epsilon < f(x) \leq g(x) \leq h(x) < L+\epsilon,
+        \]
+    isto é, $|g(x) - L| < \epsilon$. Logo, $\ds \lim_{x \to a} g(x) = L$. \blackproof
+\end{proof}
+
+\begin{theorem}[Conservação da Ordem] \label{teo.calc2:conservacao_da_ordem}
+    Sejam $f,g : A \subseteq \R^n \to \R$ e $a \in A'$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Se $\ds \lim_{x \to a} f(x) < \lim_{x \to a} g(x)$, então existe $r \in \R_{>0}$ tal que $f < g$ em $B^*_r(a) \cap A$.
+            \item Se existe $r \in \R_{>0}$ tal que $f \leq g$ em $B^*_r(a) \cap A$, então $\ds \lim_{x \to a} f(x) \leq \lim_{x \to a} g(x)$.
+        \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    Sejam $\ds \lim_{x \to a} f(x) = L_1$ e $\ds \lim_{x \to a} g(x) = L_2$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Seja $\ds \epsilon = \dfrac{L_2 - L_1}{2} \in \R_{>0}$. Como $\ds \lim_{x \to a} f(x) = L_1$, existe $\delta_1 \in \R_{>0}$ tal que, para todo $x \in A$, se $0<\|x-a\|<\delta_1$, então $|f(x) - L_1| < \epsilon$; em particular, $f(x) < L_1 + \epsilon$. Como $\ds \lim_{x \to a} g(x) = L_2$, existe $\delta_2 \in \R_{>0}$ tal que, para todo $x \in A$, se $0<\|x-a\|<\delta_2$, então $|g(x) - L_2| < \epsilon$; em particular, $L_2 - \epsilon < g(x)$. Pois tome $r := \min \{\delta_1, \delta_2 \}$. Logo, para todo $x \in B^*_r(a) \cap A$, isto é, $x \in A$ tal que $0 < \|x-a\| < r$, temos
+                \[
+                    f(x) < L_1 + \epsilon = L_2 - \epsilon < g(x),
+                \]
+            isto é, $f(x) < g(x)$ para todo $x \in B^*_r(a) \cap A$. \blackproof
+            \item Suponha, por absurdo, que $L_2 < L_1$. Pelo item anterior, existe $r' \in \R_{>0}$ tal que $f > g$ em $B^*_{r'}(a) \cap A$. Pois tome $\delta := \min \{r, r'\}$. Então $f \leq g$ e $f > g$ em $B^*_{\delta}(a) \cap A$, uma contradição. Logo, $L_1 \leq L_2$. \blackproof
+            \repeatitem Suponha, por absurdo, que $L_2 < L_1$. Como $\ds \lim_{x \to a} (f(x) - g(x)) = L_1 - L_2$, tomando $L:= L_1 - L_2$, para $\epsilon = L/2 \in \R_{>0}$ existe $\delta_1 \in \R_{>0}$ tal que, para todo $x \in A$, se $0<\|x-a\|<\delta_1$, então $|(f(x) - g(x)) - L| < L/2$. Em particular, $g < f$ em $B^*_{\delta_1}(a) \cap A$. Agora, seja $\delta := \min \{r, \delta_1\}$. Como $a \in A'$, existe $x_0 \in B^*_{\delta}(a) \cap A$. Como $x_0 \in B^*_{\delta_1}(a) \cap A$, temos $g(x_0) < f(x_0)$, e como $x_0 \in B^*_{r}(a) \cap A$, temos $f(x_0) \leq g(x_0)$, uma contradição. Logo, $L_1 \leq L_2$. \blackproof
+        \end{enumerate}
+\end{proof}
+
+\begin{definition}
+    Dizemos que $f : A \subseteq \R^n \to \R$ é \emph{localmente limitada} em $a \in A \cup A'$ se existe $r \in \R_{>0}$ tal que $f \restriction_{B_r(a) \cap A}$ é limitada.
+\end{definition}
+
+\begin{proposition}
+    Sejam $f,g : A \subseteq \R^n \to \R$ e $a \in A'$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Se $\ds \lim_{x \to a} f(x) \in \R$, então $f$ é localmente limitada em $a$.
+            \item Se $\ds \lim_{x \to a} f(x) = 0$ e $g$ é localmente limitada em $a$, então $\ds \lim_{x \to a} f(x)g(x) = 0$.
+        \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Seja $\ds L := \lim_{x \to a} f(x)$. Para $\epsilon = 1$, existe $\delta \in \R_{>0}$ tal que, para todo $x \in A$, se $0 < \|x-a\| < \delta$, então $|f(x) - L| < 1$. Com isso, para todo $x \in B^*_{\delta}(a) \cap A$, temos
+                \[
+                    |f(x)| = |f(x) - L + L| \leq |f(x)-L| + |L| < 1 + |L|.
+                \]
+            Se $a \notin A$, então $B^*_{\delta}(a) \cap A = B_{\delta}(a) \cap A$ e $f$ é localmente limitada em $a$. Se $a \in A$, então, para todo $x \in B_{\delta}(a) \cap A$, temos
+                \[
+                    |f(x)| \leq \max \{ 1+|L|, |f(a)| \},
+                \]
+            de modo que $f$ é localmente limitada em $a$. \blackproof
+            \item Seja $\epsilon \in \R_{>0}$. Como $g$ é localmente limitada em $a$, existem $\delta_1, M \in \R_{>0}$ tal que, para todo $x \in A$, se $x \in B_{\delta_1}(a)$, então $|g(x)| \leq M$. Como $\ds \lim_{x \to a} f(x) = 0$, existe $\delta_2 \in \R_{>0}$ tal que, para todo $x \in A$, se $0<\|x-a\|<\delta_2$, então $|f(x)| < \frac{\epsilon}{M}$. Agora, tome $\delta := \min \{\delta_1, \delta_2\}$. Com isso, para todo $x \in A$, se $0<\|x-a\|<\delta$, então
+                \[
+                    |f(x) g(x)| = |f(x)| |g(x)| < M \cdot \dfrac{\epsilon}{M} = \epsilon,
+                \]
+            de modo que $\ds \lim_{x \to a} f(x) g(x) = 0$. \blackproof
+        \end{enumerate}
+\end{proof}
+
+\begin{proposition}[Conservação do sinal]
+    Sejam $f : A \subseteq \R^n \to \R$ e $a \in A'$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Se $\ds \lim_{x \to a} f(x) \in \R_{>0}$, então existe $r \in \R_{>0}$ tal que $f(x) > 0$ para todo $x \in B^*_{r}(a) \cap A$.
+            \item Se $\ds \lim_{x \to a} f(x) \in \R_{<0}$, então existe $r \in \R_{>0}$ tal que $f(x) < 0$ para todo $x \in B^*_{r}(a) \cap A$.
+        \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    Seja $\ds \lim_{x \to a} f(x) = L$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Como $L \in \R_{>0}$, para $\epsilon = L$ existe $\delta \in \R_{>0}$ tal que, para todo $x \in A$, se $0<\|x-a\|<\delta$, então $|f(x) - L| < L$; em particular,
+                \[
+                    0 = L - L < f(x) < 2L.
+                \]
+            Logo, $f(x) > 0$ para todo $x \in B^*_{\delta}(a) \cap A$. \blackproof
+            \item Como $L \in \R_{<0}$, para $\epsilon = -L$ existe $\delta \in \R_{>0}$ tal que, para todo $x \in A$, se $0<\|x-a\|<\delta$, então $|f(x) - L| < -L$; em particular,
+                \[
+                    2L < f(x) < 0 = L - L.
+                \]
+            Logo, $f(x) < 0$ para todo $x \in B^*_{\delta}(a) \cap A$. \blackproof
+        \end{enumerate}
 \end{proof}
 
 \section{Continuidade}
@@ -246,7 +453,12 @@
 \end{theorem}
 
 \begin{proof}
-    \blackproof
+    Seja $\epsilon \in \R_{>0}$.
+        \begin{itemize}[align=left]
+            \item[($\Rightarrow$)] Se $f$ é contínua em $a$, então existe $\delta \in \R_{>0}$ tal que, para todo $x \in A$, se $\|x-a\|<\delta$, então $\|f(x) - f(a)\| < \epsilon$. Em particular, para todo $x \in A$, se $0<\|x-a\|<\delta$, então $\|f(x) - f(a)\| < \epsilon$. Logo, $\ds \lim_{x \to a} f(x) = f(a)$.
+            \item[($\Leftarrow$)] Se $\ds \lim_{x \to a} f(x) = f(a)$, então existe $\delta \in \R_{>0}$ tal que, para todo $x \in A$, se $0<\|x-a\|<\delta$, então $\|f(x) - f(a)\| < \epsilon$. Agora, seja $x \in A$ tal que $\|x-a\|<\delta$. Se $x=a$, então $\|f(x) - f(a)\| = 0 < \epsilon$. Se $x \neq a$, então $0<\|x-a\|<\delta$, donde $\|f(x) - f(a)\| < \epsilon$. Portanto, para todo $x \in A$, se $\|x-a\|<\delta$, então $\|f(x) - f(a)\| < \epsilon$, o que prova a continuidade de $f$ em $a$.
+        \end{itemize}
+    Isso completa a prova. \blackproof
 \end{proof}
 
 \begin{proposition}
@@ -256,3 +468,4 @@
 \begin{proof}
     \blackproof
 \end{proof}
+
