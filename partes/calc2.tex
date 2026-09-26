@@ -448,6 +448,14 @@
         \end{enumerate}
 \end{definition}
 
+\begin{proposition} \label{prop.calc2:continuidade_em_ponto_isolado}
+    Uma função $f : A \subseteq \R^n \to \R^m$ é contínua em todo ponto $a \in A \setminus A'$.
+\end{proposition}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
 \begin{theorem} \label{teo.calc2:continuidade_sse_limite}
     Sejam $f : A \subseteq \R^n \to \R^m$ e $a \in A \cap A'$. Então, $f$ é contínua em $a$ se, e somente se, $\ds \lim_{x \to a} f(x) = f(a)$.
 \end{theorem}
@@ -462,7 +470,15 @@
 \end{proof}
 
 \begin{proposition}
-    Sejam $f : A \subseteq \R^n \to \R^m$ e $g : B \subseteq \R^m \to \R^k$ tais que $f(A) \subseteq B$. Se $f$ é contínua em $a \in A$ e $g$ é contínua em $f(a) \in B$, então $g \circ f : X \subseteq \R^n \to \R^k$ é contínua em $a$.
+    Sejam $f : A \subseteq \R^n \to \R^m$ e $f_i : A \subseteq \R^n \to \R$, com $i \in [m]$, tais que $f = (f_1, \ldots, f_m)$. Então, $f$ é contínua em $a \in A$ se, e somente se, $f_i$ é contínua em $a$, para todo $i \in [m]$.
+\end{proposition}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\begin{proposition}
+    Sejam $f : A \subseteq \R^n \to \R^m$ e $g : B \subseteq \R^m \to \R^k$ tais que $f[A] \subseteq B$. Se $f$ é contínua em $a \in A$ e $g$ é contínua em $f(a) \in B$, então $g \circ f : A \subseteq \R^n \to \R^k$ é contínua em $a$.
 \end{proposition}
 
 \begin{proof}
@@ -487,8 +503,7 @@
     Sejam $U \subseteq \R^n$ aberto e $f : U \to \R$.
         \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
             \item Dizemos que \emph{$f$ é parcialmente derivável em $a \in U$} se $f$ é parcialmente derivável em $a$ com relação a $x_i$ para todo $i \in [n]$.
-            \item Dizemos que \emph{$f$ é parcialmente derivável em $X \subseteq U$} se $f$ é parcialmente derivável em todo $a \in X$.
-            \item Dizemos que \emph{$f$ é parcialmente derivável} se $f$ é parcialmente derivável em $U$.
+            \item Dizemos que \emph{$f$ é parcialmente derivável em $X \subseteq U$} se $f$ é parcialmente derivável em todo $a \in X$. Dizemos que \emph{$f$ é parcialmente derivável} se $f$ é parcialmente derivável em $U$.
         \end{enumerate}
 \end{definition}
 
@@ -508,6 +523,17 @@
                     \dfrac{\partial \left(\dfrac{f}{g} \right)}{\partial x_i} (a) = \dfrac{g(a) \dfrac{\partial f}{\partial x_i} (a) - f(a) \dfrac{\partial g}{\partial x_i} (a)}{[g(a)]^2}.
                 \]
         \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\begin{proposition}
+    Sejam $U \subseteq \R^n$ aberto, $f : U \to \R$ e $g : A \subseteq \R \to \R$ tais que $f[U] \subseteq A$. Se $f$ é parcialmente derivável em $a \in U$ com relação a $x_i$, $i \in [n]$, e $g$ é derivável em $f(a)$, então $h := g \circ f$ é parcialmente derivável em $a \in U$ com relação a $x_i$, com
+        \[
+            \dfrac{\partial h}{\partial x_i}(a) = g'(f(a)) \dfrac{\partial f}{\partial x_i}(a).
+        \]
 \end{proposition}
 
 \begin{proof}
@@ -613,7 +639,7 @@
 \end{proof}
 
 \begin{theorem}
-    Sejam $U \subseteq \R^n$ aberto, $f : U \to \R$ e $a \in U$. Se $f$ é parcialmente derivável e $\dfrac{\partial f}{\partial x_i}$ é contínua em $a$ para todo $i \in [n]$, então $f$ é diferenciável em $a$.
+    Sejam $U \subseteq \R^n$ aberto, $f : U \to \R$ e $a \in U$. Se $f$ é parcialmente derivável e $\dfrac{\partial f}{\partial x_i} : U \to \R$ é contínua em $a$ para todo $i \in [n]$, então $f$ é diferenciável em $a$.
 \end{theorem}
 
 \begin{proof}
@@ -627,3 +653,82 @@
 \begin{proof}
     \blackproof
 \end{proof}
+
+\begin{theorem}[Regra da Cadeia]
+    Sejam $U \subseteq \R^n$ aberto, $f : U \to \R$ e $g : A \subseteq \R \to \R^n$ tais que $g[A] \subseteq U$. Se $g$ é derivável em $a \in A \cap A'$ e $f$ é diferenciável em $g(a)$, então $f \circ g : A \to \R$ é derivável em $a$, com
+        \[
+            (f \circ g)'(a) = \langle \nabla f(g(a)), g'(a) \rangle.
+        \]
+\end{theorem}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\begin{proposition}
+    Sejam $U \subseteq \R^n$ aberto e $f : U \to \R$ diferenciável em $a \in U$. Seja $g : A \subseteq \R \to \R^n$, com $g[A] \subseteq f^{-1}(\{f(a)\})$, derivável em $p \in A \cap A'$, com $g(p)=a$. Então, $\nabla f(g(p)) \perp g'(p)$.
+\end{proposition}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\subsection{Derivadas Direcionais}
+
+\begin{definition}
+    Sejam $U \subseteq \R^n$ aberto, $f : U \to \R$ e $a \in U$. Seja $v \in \R^n$ com $\|v \| = 1$. Defina $g : \{h \in \R : a + hv \in U\} \to \R$ por $g(h) := f(a+hv)$. Dizemos que \emph{$f$ é direcionalmente derivável em $a$ na direção de $v$} se existe
+        \[
+            \dfrac{\partial f}{\partial v} (a) := g'(0).
+        \]
+    Dizemos, nesse caso, que $\dfrac{\partial f}{\partial v} (a)$ é a \emph{derivada direcional de $f$ em $a$ na direção de $v$}.
+\end{definition}
+
+\begin{corollary}
+    Sejam $U \subseteq \R^n$ aberto, $f : U \to \R$ e $a \in U$. Seja $i \in [n]$. Então, $f$ é parcialmente derivável em $a$ com relação a $x_i$ se, e somente se, $f$ é direcionalmente derivável em $a$ na direção de $e_i$. Nesse caso,
+        \[
+            \dfrac{\partial f}{\partial e_i}(a) = \dfrac{\partial f}{\partial x_i}(a).
+        \]
+\end{corollary}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\begin{theorem}
+    Sejam $U \subseteq \R^n$ aberto, $f : U \to \R$ e $a \in U$. Se $f$ é diferenciável em $a$, então $f$ é direcionalmente derivável na direção de todo $v \in \R^n$ unitário, com
+        \[
+            \dfrac{\partial f}{\partial v}(a) = \langle \nabla f(a), v \rangle.
+        \]
+\end{theorem}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\begin{remark}
+    Seja $i \in [n]$. Nas condições do teorema acima, $\ds \dfrac{\partial f}{\partial x_i}(a) = \langle \nabla f(a), e_i \rangle$.
+\end{remark}
+
+\begin{theorem}
+    Sejam $U \subseteq \R^n$ aberto e $f : U \to \R$ diferenciável em $a \in U$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Se $\nabla f(a) \neq 0$. Então, para todo $v \in \R^n$ unitário,
+                \[
+                    \dfrac{\partial f}{\partial v_m}(a) \leq \dfrac{\partial f}{\partial v}(a) \leq \dfrac{\partial f}{\partial v_M}(a), 
+                \]
+            onde $v_m := - \dfrac{\nabla f(a)}{\| \nabla f(a) \|}$ e $v_M := \dfrac{ \nabla f(a)}{\| \nabla f(a) \|}$.
+            \item Seja $g : A \subseteq \R \to \R^n$, com $g[A] \subseteq f^{-1}(\{f(a)\})$, derivável em $p \in A \cap A'$, com $g'(p) \neq 0$ e $g(p)=a$. Então, $\ds \dfrac{\partial f}{\partial v}(a) = 0$, onde $v := \dfrac{g'(p)}{\|g'(p)\|}$.
+        \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\begin{theorem}
+    Sejam $U \subseteq \R^n$ aberto e $f : U \to \R$ diferenciável em $a \in U$ com $\nabla f(a) \neq 0$. Então, para todo $v \in \R^n$ unitário,
+        \[
+            \dfrac{\partial f}{\partial v_m}(a) \leq \dfrac{\partial f}{\partial v}(a) \leq \dfrac{\partial f}{\partial v_M}(a), 
+        \]
+    onde $v_m := - \dfrac{\nabla f(a)}{\| \nabla f(a) \|}$ e $v_M := \dfrac{ \nabla f(a)}{\| \nabla f(a) \|}$.
+\end{theorem}

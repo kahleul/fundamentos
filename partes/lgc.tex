@@ -1,10 +1,12 @@
 %!TEX root = main.tex
 
-\chapter{Lógica Proposicional}
+\chapter{Teorias de Primeira Ordem}
 
 Seguimos \cite{herculespaulovich}.
 
-\section{Sintaxe}
+\section{Lógica Proposicional}
+
+\subsection{Sintaxe}
 
 \begin{definition}
     \leavevmode
@@ -210,7 +212,7 @@ Seguimos \cite{herculespaulovich}.
         \end{enumerate}
 \end{proof}
 
-\section{Semântica}
+\subsection{Semântica}
 
 \begin{definition}
     \leavevmode
@@ -292,7 +294,7 @@ Seguimos \cite{herculespaulovich}.
         \end{enumerate}
 \end{proof}
 
-\section{Completude}
+\subsection{Completude}
 
 \begin{lemma}[Kalmár] \label{lem.fund:troca}
     Sejam $\mathbf{A}(p_1, \ldots, p_n) \in \mathcal{F}$ e $v : \mathcal{F} \to \{\mathfrak{t}, \mathfrak{f} \}$ uma valoração. Definindo
@@ -554,12 +556,11 @@ Seguimos \cite{herculespaulovich}.
     A ida ($\Rightarrow$) é imediata. Provemos a volta $(\Leftarrow)$. Suponha, por absurdo, que $\Gamma$ não tenha modelo. Então, pelo \cref{teo.fund:consistentetemmodelo}, $\Gamma$ é inconsistente, de modo que existe $\mathbf{A} \in \mathcal{F}$ tal que $\Gamma \vdash \mathbf{A}$ e $\Gamma \vdash \neg \mathbf{A}$. Sendo $\Gamma_0$ o conjunto das fórmulas de $\Gamma$ que aparecem nas deduções de $\mathbf{A}$ e $\neg \mathbf{A}$, temos $\Gamma_0 \vdash \mathbf{A}$ e $\Gamma_0 \vdash \neg \mathbf{A}$, de modo que $\Gamma_0$ é inconsistente. Daí, pelo \cref{cor.fund:temmodeloehconsistente}, $\Gamma_0$ não tem modelo, uma contradição, pois $\Gamma_0$ é finito e, por hipótese, todo subconjunto finito de $\Gamma$ tem modelo. \blackproof
 \end{proof}
 
-
-\chapter{Teorias de Primeira Ordem}
+\section{Lógica de Primeira Ordem}
 
 Seguimos \cite{shoenfield1967}.
 
-\section{Sintaxe}
+\subsection{Sintaxe}
 
 \begin{definition}[Linguagens de Primeira Ordem]
     \leavevmode
@@ -716,7 +717,7 @@ Seguimos \cite{shoenfield1967}.
     A partir de agora, consideramos definidas as convenções usuais de notação, parênteses, abreviações, etc. Especificamente, seguimos as convenções da seção 2.4 de \cite{shoenfield1967}.
 \end{remark}
 
-\subsection{Provas}
+\subsubsection*{Provas}
 
 \begin{definition}
     Seja $\mathcal{L}$ uma linguagem de primeira ordem.
@@ -766,7 +767,7 @@ Seguimos \cite{shoenfield1967}.
     Dizemos, nesse caso, que $\mathbf{A}$ é um \emph{teorema}\footnote{Na verdade, \cite{shoenfield1967} define \emph{teorema} num contexto muito mais geral, o de sistemas formais, e então prova que uma fórmula é um teorema se, e somente se, tem prova.} de $T$. Isso é denotado por $T \vdash \mathbf{A}$ ou $\vdash_T \mathbf{A}$.
 \end{definition}
 
-\section{Semântica}
+\subsection{Semântica}
 
 \begin{definition}
     Seja $\mathcal{L}$ uma linguagem de primeira ordem. Uma $\mathcal{L}$-\emph{estrutura} $\mathfrak{A}$ consiste em um conjunto não vazio $|\mathfrak{A}|$, chamado de \emph{universo} de $\mathfrak{A}$ e cujos elementos são chamados de \emph{indivíduos} de $\mathfrak{A}$, com as seguintes propriedades.
