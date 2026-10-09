@@ -251,6 +251,14 @@
 \end{proof}
 
 \begin{proposition}
+    Sejam $f : A \subseteq \R^n \to \R^m$, $a \in A'$ e $L \in \R^m$. Para cada $i \in [m]$, sejam $f_i : A \subseteq \R^n \to \R$ e $L_i \in \R$ tais que $f = (f_1, \ldots, f_m)$ e $L = (L_1, \ldots, L_m)$. Então, $\ds \lim_{x \to a} f(x) = L$ se, e somente se, $\ds \lim_{x \to a} f_i(x) = L_i$, para todo $i \in [m]$.
+\end{proposition}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\begin{proposition}
     Sejam $f : A \subseteq \R^n \to \R$ e $a \in A'$.
         \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
             \item Seja $X \subseteq A$ tal que $a \in X'$.
@@ -470,7 +478,7 @@
 \end{proof}
 
 \begin{proposition}
-    Sejam $f : A \subseteq \R^n \to \R^m$ e $f_i : A \subseteq \R^n \to \R$, com $i \in [m]$, tais que $f = (f_1, \ldots, f_m)$. Então, $f$ é contínua em $a \in A$ se, e somente se, $f_i$ é contínua em $a$, para todo $i \in [m]$.
+    Sejam $f : A \subseteq \R^n \to \R^m$ e $a \in A$. Então, $f$ é contínua em $a$ se, e somente se, para todo $i \in [m]$, a coordenada $f_i : A \subseteq \R^n \to \R$ é contínua em $a$.
 \end{proposition}
 
 \begin{proof}
@@ -486,6 +494,8 @@
 \end{proof}
 
 \chapter{Derivadas}
+
+\section{Funções Vetoriais}
 
 \section{Campos Escalares}
 
@@ -540,8 +550,8 @@
     \blackproof
 \end{proof}
 
-\begin{theorem}
-    Sejam $U \subseteq \R^n$ aberto, $f : U \to \R$ e $a \in U$. Se $f$ é parcialmente derivável em $B_r(a) \subseteq U$ para algum $r \in \R_{>0}$ e $\dfrac{\partial f}{\partial x_i} : B_r(a) \to \R$ é contínua em $a$ para todo $i \in [n]$, então $f$ é contínua em $a$.
+\begin{theorem} \label{teo.calc2:continuidade_parciais_implica_continuidade}
+    Sejam $U \subseteq \R^n$ aberto, $f : U \to \R$ e $a \in U$. Se $f$ é parcialmente derivável em $B_r(a) \subseteq U$ para algum $r \in \R_{>0}$ e, para todo $i \in [n]$, $\dfrac{\partial f}{\partial x_i} : B_r(a) \to \R$ é contínua em $a$, então $f$ é contínua em $a$.
 \end{theorem}
 
 \begin{proof}
@@ -589,7 +599,7 @@
 \end{definition}
 
 \begin{proposition}
-    Sejam $U \subseteq \R^n$ aberto, $f : U \to \R$ e $a \in U$. Então, $f$ é diferenciável em $a$ se, e somente se, existe $\nabla f(a)$, com
+    Sejam $U \subseteq \R^n$ aberto, $f : U \to \R$ e $a \in U$. Então, $f$ é diferenciável em $a$ se, e somente se, existe $\nabla f(a)$ e
         \[
             \lim_{x \to a} \dfrac{f(x) - f(a) - \langle \nabla f(a), x-a \rangle}{\|x-a\|} = 0.
         \]
@@ -604,7 +614,7 @@
 \end{proof}
 
 \begin{corollary}
-    Sejam $U \subseteq \R^n$ aberto, $f : U \to \R$ e $a \in U$. Então, $f$ é diferenciável em $a$ se, e somente se, existe $\nabla f(a)$, com
+    Sejam $U \subseteq \R^n$ aberto, $f : U \to \R$ e $a \in U$. Então, $f$ é diferenciável em $a$ se, e somente se, existe $\nabla f(a)$ e
         \[
             \lim_{h \to 0} \dfrac{f(a+h) - f(a) - \langle \nabla f(a), h \rangle}{\|h\|} = 0.
         \]
@@ -638,17 +648,47 @@
     \blackproof
 \end{proof}
 
-\begin{theorem}
-    Sejam $U \subseteq \R^n$ aberto, $f : U \to \R$ e $a \in U$. Se $f$ é parcialmente derivável e $\dfrac{\partial f}{\partial x_i} : U \to \R$ é contínua em $a$ para todo $i \in [n]$, então $f$ é diferenciável em $a$.
+\begin{theorem} \label{teo.calc2:continuidade_parciais_implica_diferenciavel}
+    Sejam $U \subseteq \R^n$ aberto, $f : U \to \R$ e $a \in U$. Se $f$ é parcialmente derivável em $B_r(a) \subseteq U$ para algum $r \in \R_{>0}$ e, para todo $i \in [n]$, $\dfrac{\partial f}{\partial x_i} : B_r(a) \to \R$ é contínua em $a$, então $f$ é diferenciável em $a$.
 \end{theorem}
 
 \begin{proof}
     \blackproof
 \end{proof}
 
+\begin{remark}
+    Os \cref{teo.calc2:continuidade_parciais_implica_diferenciavel,teo.calc2:continuidade_parciais_implica_continuidade} têm exatamente as mesmas hipóteses.
+\end{remark}
+
 \begin{corollary}
     Sejam $U \subseteq \R^n$ aberto e $f : U \to \R$. Se $f$ é de classe $C^1$, então $f$ é diferenciável.
 \end{corollary}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\begin{proposition}
+    Sejam $U \subseteq \R^n$ aberto e $f,g : U \to \R$ diferenciáveis em $a \in U$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item A função $f + g : U \to \R$ é diferenciável em $a$ e
+                \[
+                    \nabla(f+g)(a) = \nabla f(a) + \nabla g(a).
+                \]
+            \item Para todo $\lambda \in \R$, a função $\lambda f : U \to \R$ é diferenciável em $a$ e
+                \[
+                    \nabla (\lambda f) (a) = \lambda \nabla f(a).
+                \]
+            \item A função $f \cdot g : U \to \R$ é diferenciável em $a$ e
+                \[
+                    \nabla(f \cdot g)(a) = g(a) \nabla f(a) + f(a) \nabla g(a).
+                \]
+            \item Se $g(a) \neq 0$, então a função $\frac{f}{g}$ é diferenciável em $a$ e
+                \[
+                    \nabla \left( \dfrac{f}{g}\right)(a) = \dfrac{g(a) \nabla f(a) - f(a) \nabla g(a)}{[g(a)]^2}.
+                \]
+        \end{enumerate}
+\end{proposition}
 
 \begin{proof}
     \blackproof
@@ -705,10 +745,186 @@
     \blackproof
 \end{proof}
 
-\begin{remark}
-    Seja $i \in [n]$. Nas condições do teorema acima, $\ds \dfrac{\partial f}{\partial x_i}(a) = \langle \nabla f(a), e_i \rangle$.
-\end{remark}
+\begin{corollary}
+    Nas condições do teorema acima, $\ds \dfrac{\partial f}{\partial x_i}(a) = \langle \nabla f(a), e_i \rangle$, para todo $i \in [n]$. 
+\end{corollary}
 
+\begin{theorem}
+    Sejam $U \subseteq \R^n$ aberto e $f : U \to \R$ diferenciável em $a \in U$. Se $\nabla f(a) \neq 0$, então, para todo $v \in \R^n$ unitário,
+        \[
+            \dfrac{\partial f}{\partial v_m}(a) \leq \dfrac{\partial f}{\partial v}(a) \leq \dfrac{\partial f}{\partial v_M}(a), 
+        \]
+    onde $v_m := - \dfrac{\nabla f(a)}{\| \nabla f(a) \|}$ e $v_M := \dfrac{ \nabla f(a)}{\| \nabla f(a) \|}$.
+\end{theorem}
+
+\section{Campos Vetoriais}
+
+\begin{definition}
+    Sejam $U \subseteq \R^n$ aberto, $f : U \to \R^m$, $a \in U$ e $i \in [n]$. Defina $g :\{h \in \R : a + h e_i \in U \} \to \R^m$ por $g(h) := f(a + h e_i)$. Dizemos que \emph{$f$ é parcialmente derivável em $a$ com relação a $x_i$} se existe
+        \[
+            \dfrac{\partial f}{\partial x_i} (a) := g'(0).
+        \]
+    Dizemos, nesse caso, que $\dfrac{\partial f}{\partial x_i} (a)$ é a \emph{derivada parcial de $f$ em $a$ com relação a $x_i$}.
+\end{definition}
+
+\begin{proposition}
+    Sejam $U \subseteq \R^n$ aberto, $f : U \to \R^m$, $a \in U$ e $i \in [n]$. Então, $f$ é parcialmente derivável em $a$ com relação a $x_i$ se, e somente se, para todo $j \in [m]$, a coordenada $f_j : U \to \R$ de $f$ é parcialmente derivável em $a$ com relação a $x_i$. Nesse caso,
+        \[
+            \dfrac{\partial f}{\partial x_i} (a) = \left( \dfrac{\partial f_1}{\partial x_i} (a), \ldots, \dfrac{\partial f_m}{\partial x_i} (a) \right).
+        \]
+\end{proposition}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\begin{definition}
+    Sejam $U \subseteq \R^n$ aberto e $f : U \to \R^m$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Dizemos que \emph{$f$ é parcialmente derivável em $a \in U$} se $f$ é parcialmente derivável em $a$ com relação a $x_i$ para todo $i \in [n]$.
+            \item Dizemos que \emph{$f$ é parcialmente derivável em $X \subseteq U$} se $f$ é parcialmente derivável em todo $a \in X$. Dizemos que \emph{$f$ é parcialmente derivável} se $f$ é parcialmente derivável em $U$.
+        \end{enumerate}
+\end{definition}
+
+\subsection{Diferenciabilidade}
+
+\begin{definition}[Diferenciabilidade de Campos Vetoriais]
+\end{definition}
+
+\begin{definition}
+    Sejam $U \subseteq \R^n$ aberto e $f : U \to \R^m$ diferenciável em $a \in U$. A \emph{matriz jacobiana de $f$ em $a$} é definida como
+        \begin{align*}
+                J_f(a) &=
+                \begin{bmatrix}
+                    \dfrac{\partial f_1}{\partial x_1} (a) & \dfrac{\partial f_1}{\partial x_2} (a) & \cdots & \dfrac{\partial f_1}{\partial x_n} (a) \\
+                    \dfrac{\partial f_2}{\partial x_1} (a) & \dfrac{\partial f_2}{\partial x_2} (a) & \cdots & \dfrac{\partial f_2}{\partial x_n} (a) \\
+                    \vdots & \vdots & \ddots &  \vdots \\
+                    \dfrac{\partial f_m}{\partial x_1} (a) & \dfrac{\partial f_m}{\partial x_2} (a) & \cdots & \dfrac{\partial f_m}{\partial x_n} (a)
+                \end{bmatrix} \\
+                &=
+                    \begin{bmatrix}
+                        \left( \dfrac{\partial f}{\partial x_1} (a)\right)^T & \left( \dfrac{\partial f}{\partial x_2} (a)\right)^T & \cdots & \left( \dfrac{\partial f}{\partial x_n} (a)\right)^T
+                    \end{bmatrix}
+                =
+                    \begin{bmatrix}
+                        \nabla f_1(a) \\
+                        \nabla f_2(a) \\
+                        \vdots \\
+                        \nabla f_m(a)
+                    \end{bmatrix}.   
+            \end{align*}
+\end{definition}
+
+\begin{proposition}
+    Sejam $U \subseteq \R^n$ aberto, $f : U \to \R^m$ e $a \in U$. Então, $f$ é diferenciável em $a$ se, e somente se, existe $J_f(a)$, com
+        \[
+            \lim_{x \to a} \dfrac{\| f(x) - (f(a) + J_f(a)(x-a)) \|}{\|x-a\|} = 0.
+        \]
+\end{proposition}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\begin{corollary}
+    Sejam $U \subseteq \R^n$ aberto, $f : U \to \R^m$ e $a \in U$. Então, $f$ é diferenciável em $a$ se, e somente se, existe $J_f(a)$ e
+        \[
+            \lim_{h \to 0} \dfrac{\| f(a+h) - (f(a) + J_f(a)h)}{\|h\|} = 0.
+        \]
+\end{corollary}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\begin{proposition}
+    Sejam $U \subseteq \R^n$ aberto, $f : U \to \R^m$ e $a \in U$. Então, $f$ é diferenciável em $a$ se, e somente se, para todo $i \in [m]$, a coordenada $f_i : U \to \R$ é diferenciável em $a$.
+\end{proposition}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\begin{proposition}
+    Sejam $U \subseteq \R^n$ aberto, $f : U \to \R^m$ e $a \in U$. Se $f$ é diferenciável em $a$, então $f$ é contínua em $a$.
+\end{proposition}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\begin{theorem}
+    Sejam $U \subseteq \R^n$ aberto, $f : U \to \R^m$ e $a \in U$. Se $f$ é parcialmente derivável em $B_r(a) \subseteq U$ para algum $r \in \R_{>0}$ e, para quaisquer $i \in [n]$ e $j \in [m]$, $\dfrac{\partial f_j}{\partial x_i} : B_r(a) \to \R$ é contínua em $a$, então $f$ é diferenciável em $a$.
+\end{theorem}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\begin{proposition}
+    Sejam $U \subseteq \R^n$ aberto e $f,g : U \to \R^m$ diferenciáveis em $a \in U$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item A função $f + g : U \to \R^m$ é diferenciável em $a$ e
+                \[
+                    J_{f+g}(a) = J_f(a) + J_g(a).
+                \]
+            \item Para todo $\lambda \in \R$, a função $\lambda f : U \to \R^m$ é diferenciável em $a$ e
+                \[
+                    J_{\lambda f}(a) = \lambda J_f(a).
+                \]
+        \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\begin{proposition}
+    Sejam $U \subseteq \R^n$ aberto e $f : U \to \R$ e $g : U \to \R^m$ diferenciáveis em $a \in U$. Então, a função $fg : U \to \R^m$ é diferenciável em $a$ e
+        \[
+            J_{fg}(a) = g(a) \nabla f(a) + f(a) J_g(a).
+        \] 
+\end{proposition}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\begin{theorem}[Regra da Cadeia]
+    Sejam $U \subseteq \R^n$ aberto, $f : U \to \R^m$ e $a \in U$. Sejam $V \subseteq \R^m$ aberto e $g : V \to \R$ tais que $f[U] \subseteq V$. Se $f$ é diferenciável em $a$ e $g$ é diferenciável em $f(a)$, então $g \circ f : U \to \R$ é diferenciável em $a$, com
+        \[
+            \nabla (g \circ f)(a) = \nabla g(f(a)) J_f(a)
+        \]
+    e, para todo $i \in [n]$,
+        \[
+            \dfrac{\partial (g \circ f)}{\partial x_i}(a) = \langle \nabla g(f(a)), \dfrac{\partial f}{\partial x_i}(a) \rangle.
+        \]
+\end{theorem}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\begin{theorem}[Regra da Cadeia]
+    Sejam $U \subseteq \R^n$ aberto, $f : U \to \R^m$ e $a \in U$. Sejam $V \subseteq \R^m$ aberto e $g : V \to \R^p$ tais que $f[U] \subseteq V$. Se $f$ é diferenciável em $a$ e $g$ é diferenciável em $f(a)$, então $g \circ f : U \to \R^p$ é diferenciável em $a$, com
+        \[
+            J_{g \circ f}(a) = J_g(f(a)) J_f(a)
+        \]
+    e, para quaisquer $i \in [n]$ e $j \in [p]$,
+        \[
+            \dfrac{\partial (g \circ f)_j}{\partial x_i}(a) = \langle \nabla g_j(f(a)), \dfrac{\partial f}{\partial x_i}(a) \rangle.
+        \]
+\end{theorem}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\begin{definition}
+    Sejam $U \subseteq \R^n$ aberto e $f : U \to \R^m$ diferenciável em $a \in U$. O \emph{jacobiano} de $f$ em $a$ é definido como $\det J_f(a)$.
+\end{definition}
+
+\begin{comment}
 \begin{theorem}
     Sejam $U \subseteq \R^n$ aberto e $f : U \to \R$ diferenciável em $a \in U$.
         \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
@@ -724,11 +940,4 @@
 \begin{proof}
     \blackproof
 \end{proof}
-
-\begin{theorem}
-    Sejam $U \subseteq \R^n$ aberto e $f : U \to \R$ diferenciável em $a \in U$ com $\nabla f(a) \neq 0$. Então, para todo $v \in \R^n$ unitário,
-        \[
-            \dfrac{\partial f}{\partial v_m}(a) \leq \dfrac{\partial f}{\partial v}(a) \leq \dfrac{\partial f}{\partial v_M}(a), 
-        \]
-    onde $v_m := - \dfrac{\nabla f(a)}{\| \nabla f(a) \|}$ e $v_M := \dfrac{ \nabla f(a)}{\| \nabla f(a) \|}$.
-\end{theorem}
+\end{comment}
