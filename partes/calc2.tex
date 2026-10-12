@@ -757,6 +757,24 @@
     onde $v_m := - \dfrac{\nabla f(a)}{\| \nabla f(a) \|}$ e $v_M := \dfrac{ \nabla f(a)}{\| \nabla f(a) \|}$.
 \end{theorem}
 
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\subsection{Taylor}
+
+\begin{theorem}
+    Sejam $U \subseteq \R^2$ aberto e $f : U \to \R$ de classe $C^{n+1}$. Sejam $a \in U$ e $h \in \R^2$ tais que $\Img g \subseteq U$, onde $g : [0,1] \to \R^2$ é definida por $g(t) = a+th$. Então, existe $t_0 \in \left]0,1 \right[$ tal que
+        \begin{align*}
+            f(a+h) &= \sum_{i=0}^{n} \dfrac{1}{i!} \left[ \sum_{j=0}^{i} \binom{i}{j} h_1^{i-j} h_2^j \dfrac{\partial^i f}{\partial x^{i-j} \partial y^j} (a) \right] \\
+            &+ \dfrac{1}{(n+1)!} \sum_{j=0}^{n+1} \binom{n+1}{j} h_1^{n+1-j} h_2^j \dfrac{\partial^{n+1} f}{\partial x^{n+1-j} \partial y^j} (g(t_0)).
+        \end{align*}
+\end{theorem}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
 \section{Campos Vetoriais}
 
 \begin{definition}
@@ -792,7 +810,7 @@
 \end{definition}
 
 \begin{definition}
-    Sejam $U \subseteq \R^n$ aberto e $f : U \to \R^m$ diferenciável em $a \in U$. A \emph{matriz jacobiana de $f$ em $a$} é definida como
+    Sejam $U \subseteq \R^n$ aberto e $f : U \to \R^m$ parcialmente derivável em $a \in U$. A \emph{matriz jacobiana de $f$ em $a$} é definida como
         \begin{align*}
                 J_f(a) &=
                 \begin{bmatrix}

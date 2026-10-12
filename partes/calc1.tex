@@ -1599,6 +1599,8 @@
 
 \subsection{Potenciação e Radiciação}
 
+\subsubsection{Expoentes Naturais}
+
 \begin{definition}
     Uma \emph{potenciação} é uma função $P : \R \times \N \to \R$ com as seguintes propriedades.
         \begin{itemize}
@@ -1607,33 +1609,133 @@
         \end{itemize}
 \end{definition}
 
-\begin{theorem}
+\begin{theorem} \label{teo.calc1:propriedades_potenciação}
     Seja $P : \R \times \N \to \R$ uma potenciação. Sejam $a,b \in \R$ e $m,n \in \N$.
-        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
-            \item 
-                \begin{enumerate}[label=\roman*.]
-                    \item $P(0,0) = 1$.
-                    \item Se $n \neq 0$, então $P(0,n) = 0$.
-                \end{enumerate}
-            \item
-                \begin{enumerate}[label=\roman*.]
-                    \item $P(a,1) = a$.
-                    \item $P(1,n) = 1$
-                \end{enumerate}
-            \item $P(a,m+n) = P(a,m) \cdot P(a,n)$.
-            \item $P(P(a,m),n) = P(a, m \cdot n) = P(P(a,n),m)$.
-            \item $P(a \cdot b,n) = P(a,n) \cdot P(b,n)$.
-        \end{enumerate}
+    \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+        \item
+            \begin{enumerate}[label=\roman*.]
+                \item $P(0,0) = 1$.
+                \item Se $n \neq 0$, então $P(0,n) = 0$.
+            \end{enumerate}
+        \item
+            \begin{enumerate}[label=\roman*.]
+                \item $P(a,1) = a$.
+                \item $P(1,n) = 1$.
+            \end{enumerate}
+        \item
+            \begin{enumerate}[label=\roman*.]
+                \item $P(a,m+n) = P(a,m) \cdot P(a,n)$.
+                \item Se $a \neq 0$ e $m \geq n$, então $P(a,m-n) = \dfrac{P(a,m)}{P(a,n)}$.
+                \item $P(P(a,m),n) = P(P(a,n),m) = P(a,m \cdot n)$.
+            \end{enumerate}
+        \item
+            \begin{enumerate}[label=\roman*.]
+                \item $P(a \cdot b,n) = P(a,n) \cdot P(b,n)$.
+                \item Se $b \neq 0$, então $P\left(\dfrac{a}{b},n\right) = \dfrac{P(a,n)}{P(b,n)}$.
+            \end{enumerate}
+    \end{enumerate}
 \end{theorem}
 
 \begin{proof}
     \leavevmode
         \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item
+                \begin{enumerate}[label=\roman*.]
+                    \item Segue imediatamente da definição.
+                    \item Seja $n \in \N$ tal que $n \neq 0$. Então existe $k \in \N$ tal que $n = k+1$. Com isso,
+                        \[
+                            P(0,n) = P(0,k+1) = 0 \cdot P(0,k) = 0.
+                        \]
+                    Logo, se $n \neq 0$, então $P(0,n) = 0$.
+                \end{enumerate}
+            \blackproof
+            \item
+                \begin{enumerate}[label=\roman*.]
+                    \item Segue da definição: $P(a,1) = a \cdot P(a,0) = a \cdot 1 = a$.
+                    \item Por indução. Defina $A := \{n \in \N : P(1,n) = 1\}$. Como $P(1,0) = 1$, temos $0 \in A$. Agora, supondo que $n \in A$, provemos que $n+1 \in A$. Se $n \in A$, então, pela hipótese de indução, temos $P(1,n) = 1$, de modo que
+                        \[
+                            P(1,n+1) = 1 \cdot P(1,n) = 1 \cdot 1 = 1,
+                        \]
+                    isto é, $n+1 \in A$. Logo, pelo princípio de indução, temos $A = \N$. Logo, $P(1,n) = 1$, para todo $n \in \N$.
+                \end{enumerate}
+            \blackproof
             \item 
+                \begin{enumerate}[label=\roman*.]
+                    \item Por indução. Fixe $a \in \R$ e $m \in \N$ e defina
+                        \[
+                            A := \{n \in \N : P(a,m+n) = P(a,m) \cdot P(a,n)\}.
+                        \]
+                    Como $m+0 = m$ e $P(a,0) = 1$, temos
+                        \[
+                            P(a,m+0) = P(a,m) = P(a,m) \cdot P(a,0),
+                        \]
+                    de modo que $0 \in A$. Agora, supondo que $n \in A$, provemos que $n+1 \in A$. Se $n \in A$, então, pela hipótese de indução, temos $P(a,m+n) = P(a,m) \cdot P(a,n)$, de modo que
+                        \begin{align*}
+                            P(a,m+(n+1)) &= P(a,(m+n)+1) \\
+                            &= a \cdot P(a,m+n) \\
+                            &= a \cdot (P(a,m) \cdot P(a,n)) \\
+                            &= P(a,m) \cdot (a \cdot P(a,n)) \\
+                            &= P(a,m) \cdot P(a,n+1),
+                        \end{align*}
+                    isto é, $n+1 \in A$. Logo, pelo princípio de indução, temos $A = \N$. Logo, $P(a,m+n) = P(a,m) \cdot P(a,n)$, para quaisquer $a \in \R$ e $m,n \in \N$.
+                    \item Inicialmente, provemos que se $a \neq 0$ então $P(a,n) \neq 0$. Defina $A := \{n \in \N : P(a,n) \neq 0\}$. Como $P(a,0) = 1 \neq 0$, temos $0 \in A$. Agora, supondo que $n \in A$, provemos que $n+1 \in A$. Se $n \in A$, então, pela hipótese de indução, temos $P(a,n) \neq 0$, de modo que $P(a,n+1) = a \cdot P(a,n) \neq 0$, isto é, $n+1 \in A$. Logo, pelo princípio de indução, temos $A = \N$. Logo, se $a \neq 0$, então $P(a,n) \neq 0$ para todo $n \in \N$. Finalmente, temos
+                        \begin{align*}
+                            P(a,m) &= P(a,(m-n)+n) \\
+                            &= P(a,m-n) \cdot P(a,n),
+                        \end{align*}
+                    e como $P(a,n) \neq 0$, temos
+                        \[
+                            P(a,m-n) = \dfrac{P(a,m)}{P(a,n)}.
+                        \]
+                    Logo, se $a \neq 0$ e $m \geq n$, então $P(a,m-n) = \dfrac{P(a,m)}{P(a,n)}$.
+                    \item Por indução. Fixe $a \in \R$ e $m \in \N$ e defina
+                        \[
+                            A := \{n \in \N : P(P(a,m),n) = P(a,m \cdot n)\}.
+                        \]
+                    Como $P(P(a,m),0) = 1$ e $P(a,m \cdot 0) = P(a,0) = 1$, temos $P(P(a,m),0) = P(a,m \cdot 0)$, de modo que $0 \in A$. Agora, supondo que $n \in A$, provemos que $n+1 \in A$. Se $n \in A$, então, pela hipótese de indução, temos $P(P(a,m),n) = P(a,m \cdot n)$, de modo que
+                        \begin{align*}
+                            P(P(a,m),n+1) &= P(a,m) \cdot P(P(a,m),n) \\
+                            &= P(a,m) \cdot P(a,m \cdot n) \\
+                            &= P(a,m + m \cdot n) \\
+                            &= P(a,m \cdot (n+1)),
+                        \end{align*}
+                    isto é, $n+1 \in A$. Logo, pelo princípio de indução, temos $A = \N$. Logo, $P(P(a,m),n) = P(a,m \cdot n)$, para quaisquer $a \in \R$ e $m,n \in \N$. Por fim, observando que
+                        \[
+                            P(P(a,n),m) = P(a,n \cdot m) = P(a,m \cdot n) = P(P(a,m),n),
+                        \]
+                    temos que $P(P(a,m),n) = P(a,m \cdot n) = P(P(a,n),m)$, para quaisquer $a \in \R$ e $m,n \in \N$.
+                \end{enumerate}
+            \blackproof
+            \item 
+                \begin{enumerate}[label=\roman*.]
+                    \item Por indução. Fixe $a,b \in \R$ e defina
+                        \[
+                            A := \{n \in \N : P(a \cdot b,n) = P(a,n) \cdot P(b,n)\}.
+                        \]
+                    Como $P(a \cdot b,0) = 1$ e $P(a,0) \cdot P(b,0) = 1 \cdot 1 = 1$, temos $P(a \cdot b,0) = P(a,0) \cdot P(b,0)$, de modo que $0 \in A$. Agora, supondo que $n \in A$, provemos que $n+1 \in A$. Se $n \in A$, então, pela hipótese de indução, temos $P(a \cdot b,n) = P(a,n) \cdot P(b,n)$, de modo que
+                        \begin{align*}
+                            P(a \cdot b,n+1) &= (a \cdot b) \cdot P(a \cdot b,n) \\
+                            &= (a \cdot b) \cdot (P(a,n) \cdot P(b,n)) \\
+                            &= (a \cdot P(a,n)) \cdot (b \cdot P(b,n)) \\
+                            &= P(a,n+1) \cdot P(b,n+1),
+                        \end{align*}
+                    isto é, $n+1 \in A$. Logo, pelo princípio de indução, temos $A = \N$. Logo, $P(a \cdot b,n) = P(a,n) \cdot P(b,n)$, para quaisquer $a,b \in \R$ e $n \in \N$.
+                    \item Se $b \neq 0$, então $P(b,n) \neq 0$. Com isso,
+                        \begin{align*}
+                            P(a,n) &= P\left(\dfrac{a}{b} \cdot b,n\right) \\
+                            &= P\left(\dfrac{a}{b},n\right) \cdot P(b,n),
+                        \end{align*}
+                    de modo que
+                        \[
+                            P\left(\dfrac{a}{b},n\right) = \dfrac{P(a,n)}{P(b,n)}.
+                        \]
+                    Logo, se $b \neq 0$, então $P\left(\dfrac{a}{b},n\right) = \dfrac{P(a,n)}{P(b,n)}$.
+                \end{enumerate}
+            \blackproof
         \end{enumerate}
 \end{proof}
 
-\begin{theorem}
+\begin{theorem} \label{teo.calc1:existe_potenciação}
     Existe uma única função $P : \R \times \N \to \R$ com as seguintes propriedades.
         \begin{itemize}
             \item $P(a,0) = 1$ para todo $a \in \R$.
@@ -1642,10 +1744,10 @@
 \end{theorem}
 
 \begin{proof}
-    \blackproof
+    Defina $f : \R \to \R$ por $f(a) = 1$ para todo $a \in \R$, e $g : \R \times \R \times \N \to \R$ por $g(a,x,n) = a \cdot x$ para quaisquer $a,x \in \R$ e $n \in \N$. Pelo \cref{lema.set:recpar2}, existe uma única função $P : \R \times \N \to \R$ tal que $P(a,0) = f(a) = 1$ para todo $a \in \R$, e $P(a,n+1) = g(a,P(a,n),n) = a \cdot P(a,n)$ para quaisquer $a \in \R$ e $n \in \N$. \blackproof
 \end{proof}
 
-\begin{definition}
+\begin{definition} \label{def.calc1:a^n}
     Seja $P : \R \times \N \to \R$ potenciação. Sejam $a \in \R$ e $n \in \N$. Definimos $a^n := P(a,n)$.
 \end{definition}
 
@@ -1658,7 +1760,7 @@
 \end{corollary}
 
 \begin{proof}
-    \blackproof
+    Segue imediatamente de \ref{teo.calc1:existe_potenciação} e \ref{def.calc1:a^n}. \blackproof
 \end{proof}
 
 \begin{corollary}
@@ -1674,14 +1776,22 @@
                     \item $a^1 = a$.
                     \item $1^n = 1$.
                 \end{enumerate}
-            \item $a^{m+n} = a^m \cdot a^n$.
-            \item $(a^m)^n = a^{m \cdot n} = (a^n)^m$.
-            \item $(a \cdot b)^n = a^n \cdot b^n$.
+            \item 
+                \begin{enumerate}[label=\roman*.]
+                    \item $a^{m+n} = a^m \cdot a^n$.
+                    \item Se $a \neq 0$ e $m \geq n$, então $a^{m-n} = \dfrac{a^m}{a^n}$.
+                    \item $(a^m)^n = (a^n)^m = a^{m \cdot n}$.
+                \end{enumerate}
+            \item 
+                \begin{enumerate}[label=\roman*.]
+                    \item $(a \cdot b)^n = a^n \cdot b^n$.
+                    \item Se $b \neq 0$, então $\left( \dfrac{a}{b} \right)^n = \dfrac{a^n}{b^n}$.
+                \end{enumerate}
         \end{enumerate}
 \end{corollary}
 
 \begin{proof}
-    \blackproof
+    Segue imediatamente de \ref{teo.calc1:existe_potenciação}, \ref{def.calc1:a^n} e \ref{teo.calc1:propriedades_potenciação}. \blackproof
 \end{proof}
 
 \begin{corollary}
@@ -1705,9 +1815,39 @@
 \begin{proof}
     \leavevmode
         \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
-            \item 
+            \item Por indução. Suponha $a > 0$ e defina $A := \{n \in \N : a^n > 0\}$. Como $a^0 = 1 > 0$, temos $0 \in A$. Agora, supondo que $n \in A$, provemos que $n+1 \in A$. Se $n \in A$, então, pela hipótese de indução, temos $a^n > 0$, de modo que $a^{n+1} = a \cdot a^n > 0$, isto é, $n+1 \in A$. Logo, pelo princípio de indução, temos $A = \N$. Logo, se $a > 0$, então $a^n > 0$ para todo $n \in \N$. \blackproof
+            \item Suponha $a < 0$.
+                \begin{enumerate}[label=\roman*.]
+                    \item Seja $n$ par. Então existe $k \in \N$ tal que $n = 2k$. Como $a < 0$, temos $a^2 > 0$, de modo que, pelo item anterior, $(a^2)^k > 0$. Com isso, $a^n = a^{2k} = (a^2)^k > 0$. Logo, se $a < 0$ e $n$ é par, então $a^n > 0$.
+                    \item Seja $n$ ímpar. Então existe $k \in \N$ tal que $n = 2k+1$. Como $a^2 > 0$, pelo item anterior temos $(a^2)^k > 0$, de modo que $a^n = a^{2k+1} = a \cdot (a^2)^k < 0$. Logo, se $a < 0$ e $n$ é ímpar, então $a^n < 0$.
+                \end{enumerate}
+            \blackproof
+            \item Por indução. Defina $A := \{n \in \N : a^{n+1} < b^{n+1}\}$. Como $a^{0+1} = a < b = b^{0+1}$, temos $0 \in A$. Agora, supondo que $n \in A$, provemos que $n+1 \in A$. Se $n \in A$, então, pela hipótese de indução, temos $a^{n+1} < b^{n+1}$, de modo que
+                \begin{align*}
+                    a^{(n+1)+1} &= a \cdot a^{n+1} \\
+                    &< a \cdot b^{n+1} \\
+                    &< b \cdot b^{n+1} \\
+                    &= b^{(n+1)+1},
+                \end{align*}
+            isto é, $n+1 \in A$. Logo, pelo princípio de indução, temos $A = \N$. Como todo $n \in \N_{\neq 0}$ é sucessor de algum elemento de $\N$, temos $a^n < b^n$ para todo $n \in \N_{\neq 0}$. \blackproof
+            \item Suponha $m > n$. Então existe $k \in \N_{\neq 0}$ tal que $m = n+k$.
+                \begin{enumerate}[label=\roman*.]
+                    \item Se $a > 1$, então, pelo item anterior, temos $a^k > 1^k = 1$. Como $a^n > 0$, temos
+                        \[
+                            a^m = a^{n+k} = a^n \cdot a^k > a^n \cdot 1 = a^n.
+                        \]
+                    Logo, se $a > 1$ e $m > n$, então $a^m > a^n$.
+                    \item Se $0 < a < 1$, então, pelo item anterior, temos $a^k < 1^k = 1$. Como $a^n > 0$, temos
+                        \[
+                            a^m = a^{n+k} = a^n \cdot a^k < a^n \cdot 1 = a^n.
+                        \]
+                    Logo, se $0 < a < 1$ e $m > n$, então $a^m < a^n$.
+                \end{enumerate}
+            \blackproof
         \end{enumerate}
 \end{proof}
+
+\subsubsection{Expoentes Inteiros}
 
 \begin{definition}
     Definimos $P_{\Z} : (\R \times \Z_{\geq 0}) \cup (\R_{\neq 0} \times \Z_{<0}) \to \R$ por
@@ -1720,8 +1860,62 @@
         \]
 \end{definition}
 
+\begin{definition}
+    Sejam $a \in \R_{\neq 0}$ e $n \in \Z$. Definimos $a^n := P_{\Z}(a,n)$.
+\end{definition}
+
+\begin{corollary}
+    Sejam $a,b \in \R_{\neq 0}$ e $m,n \in \Z$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item
+                \begin{enumerate}[label=\roman*.]
+                    \item $1^n = 1$.
+                    \item $a^{-n} = \dfrac{1}{a^n}$.
+                \end{enumerate}
+            \item
+                \begin{enumerate}[label=\roman*.]
+                    \item $a^{m+n} = a^m \cdot a^n$.
+                    \item $a^{m-n} = \dfrac{a^m}{a^n}$.
+                    \item $(a^m)^n = (a^n)^m = a^{m \cdot n}$.
+                \end{enumerate}
+            \item
+                \begin{enumerate}[label=\roman*.]
+                    \item $(a \cdot b)^n = a^n \cdot b^n$.
+                    \item $\left(\dfrac{a}{b}\right)^n = \dfrac{a^n}{b^n}$.
+                \end{enumerate}
+        \end{enumerate}
+\end{corollary}
+
+\begin{corollary}
+    Sejam $a,b \in \R_{\neq 0}$ e $m,n \in \Z$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Se $a > 0$, então $a^n > 0$.
+            \item Se $a < 0$, então
+                \begin{enumerate}[label=\roman*.]
+                    \item $a^n > 0$, se $n$ é par.
+                    \item $a^n < 0$, se $n$ é ímpar.
+                \end{enumerate}
+            \item Se $0 < a < b$ e $n \neq 0$, então
+                \begin{enumerate}[label=\roman*.]
+                    \item $a^n < b^n$, se $n > 0$.
+                    \item $a^n > b^n$, se $n < 0$.
+                \end{enumerate}
+            \item
+                \begin{enumerate}[label=\roman*.]
+                    \item Se $a > 1$ e $m>n$, então $a^m > a^n$.
+                    \item Se $0 < a < 1$ e $m>n$, então $a^m < a^n$.
+                \end{enumerate}
+        \end{enumerate}
+\end{corollary}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\subsubsection{Radiciação}
+
 \begin{theorem}
-    Seja $n \in \N_{\geq 2}$. A relação
+    Seja $n \in \N_{\geq 1}$. A relação
         \[
             \sqrt[n]{} := \{(x,y) \in \R_{\geq 0} \times \R_{\geq 0} : y^n = x \}
         \]
@@ -1731,6 +1925,40 @@
 \begin{proof}
     \blackproof
 \end{proof}
+
+\begin{theorem} \label{teo.calc1:propriedades_raizes}
+    Sejam $a,b \in \R_{\geq 0}$ e $m,n \in \N_{\neq 0}$.
+    \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+        \item
+            \begin{enumerate}[label=\roman*.]
+                \item $\sqrt[n]{0} = 0$.
+                \item $\sqrt[n]{1} = 1$.
+                \item $\sqrt[1]{a} = a$.
+            \end{enumerate}
+        \item
+            \begin{enumerate}[label=\roman*.]
+                \item $(\sqrt[n]{a})^n = a$.
+                \item $\sqrt[n]{a^n} = a$.
+            \end{enumerate}
+        \item
+            \begin{enumerate}[label=\roman*.]
+                \item $\sqrt[n]{a \cdot b} = \sqrt[n]{a} \cdot \sqrt[n]{b}$.
+                \item Se $b \neq 0$, então $\sqrt[n]{\dfrac{a}{b}} = \dfrac{\sqrt[n]{a}}{\sqrt[n]{b}}$.
+            \end{enumerate}
+        \item
+            \begin{enumerate}[label=\roman*.]
+                \item $\sqrt[m]{\sqrt[n]{a}} = \sqrt[m \cdot n]{a}$.
+                \item $\sqrt[n]{a^m} = (\sqrt[n]{a})^m$.
+            \end{enumerate}
+        \item Se $a < b$, então $\sqrt[n]{a} < \sqrt[n]{b}$.
+    \end{enumerate}
+\end{theorem}
+
+
+
+\subsubsection{Expoentes Racionais}
+
+\subsubsection{Expoentes Reais}
 
 \chapter{Derivadas}
 
@@ -1743,7 +1971,7 @@
 \end{definition}
 
 \begin{definition} \label{defi.calc:derivada}
-    Uma função $f : A \subseteq \R \to \R$ é \emph{derivável} em $a \in A \cap A'$ se existe o limite
+    Uma função $f : A \subseteq \R \to \R$ é \emph{derivável} em $a \in A \cap A'$ se existe
         \[
             f'(a) := \lim_{x \to a} \left. \dfrac{\Delta f}{\Delta x} \right|_a (x).
         \]
