@@ -201,7 +201,7 @@
 \section{Combinações Lineares e Geradores}
 
 \begin{definition}
-    Seja $(V, +, \cdot)$ um espaço vetorial. Dizemos que $u \in V$ é uma \emph{combinação linear} de $u_1, u_2 , \ldots, u_n \in V$ se existem $\lambda_1, \lambda_2, \ldots, \lambda_n \in \R$ tais que $\ds u = \sum_{i=1}^{n} \lambda_i u_i$.
+    Sejam $(V, +, \cdot)$ um espaço vetorial real e $u : [n] \to V$. Dizemos que $v \in V$ é uma \emph{combinação linear} de $u_1, u_2 , \ldots, u_n \in V$ se existe $\lambda : [n] \to \R$ tal que $\ds v = \sum_{i=1}^{n} \lambda_i u_i$.
 \end{definition}
 
 \begin{proposition}
@@ -219,7 +219,7 @@
 \section{Dependência e Independência Linear}
 
 \begin{definition}
-    Seja $(V, +, \cdot)$ um espaço vetorial.
+    Sejam $(V, +, \cdot)$ um espaço vetorial e $u : [n] \to V$.
         \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
             \item Dizemos que $u_1, u_2, \ldots, u_n \in V$ são \emph{linearmente independentes} (L.I.) se a única solução da equação $\lambda_1 u_1 + \cdots + \lambda_n u_n = 0$ é $\lambda_i = 0$ para todo $i \in [n]$. Caso contrário, isto é, se existe uma solução tal que $\lambda_i \neq 0$ para algum $i \in [n]$, dizemos que $u_1, u_2, \ldots, u_n \in V$ são \emph{linearmente dependentes} (L.D.).
             \item Seja $S \subseteq V$ finito.\footnote{Se $S$ é finito, então $S = V$ somente se $V = \{ 0\}$.}
@@ -268,7 +268,10 @@
 \begin{definition}
     Sejam $(V, +_V, \cdot_V)$ e $(W, +_W, \cdot_W)$ espaços vetoriais.
         \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
-            \item Uma \emph{transformação linear} é uma função $T : V \to W$ tal que $T(u +_V v) = T(u) +_W T(v)$ e $T(\lambda \cdot_V u) = \lambda \cdot_W T(u)$ para quaisquer $u, v \in V$ e $\lambda \in \R$.
+            \item Uma \emph{transformação linear} é uma função $T : V \to W$ tal que, para quaisquer $u, v \in V$ e $\lambda \in \R$,
+                \[
+                    T(u +_V v) = T(u) +_W T(v) \text{ e } T(\lambda \cdot_V u) = \lambda \cdot_W T(u).
+                \]
             \item Um \emph{operador linear} é uma transformação linear $T : V \to V$.
         \end{enumerate}
 \end{definition}
@@ -367,6 +370,8 @@
 \end{proof}
 
 \chapter{Matrizes e Sistemas Lineares}
+
+\section{Matrizes}
 
 \begin{definition}
     Sejam $m,n \in \N$.
