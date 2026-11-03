@@ -2064,4 +2064,503 @@
 \end{theorem}
 
 \begin{proof}
+    \blackproof
+\end{proof}
+
+\begin{definition}[Derivadas laterais]
+    Seja $f : A \subseteq \R \to \R$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Dizemos que $f$ é \emph{derivável à direita} em $a \in A \cap A'_+$ se existe
+                \[
+                    f'_+(a) := \lim_{x \to a^+} \left. \dfrac{\Delta f}{\Delta x} \right|_a (x).
+                \]
+            Dizemos, nesse caso, que $f'_+(a)$ é a \emph{derivada lateral à direita} de $f$ em $a$.
+            \item Dizemos que $f$ é \emph{derivável à esquerda} em $a \in A \cap A'_-$ se existe
+                \[
+                    f'_-(a) := \lim_{x \to a^-} \left. \dfrac{\Delta f}{\Delta x} \right|_a (x).
+                \]
+            Dizemos, nesse caso, que $f'_-(a)$ é a \emph{derivada lateral à esquerda} de $f$ em $a$.
+        \end{enumerate}
+\end{definition}
+
+\begin{proposition}
+    Sejam $f: A \subseteq \R \to \R$ e $a \in A \cap A'_+ \cap A'_-$. Então, existe $f'(a)$ se, e somente se, existem $f'_+(a)$ e $f'_-(a)$, com $f'_+(a) = f'_-(a)$. Nesse caso,
+        \[
+            f'(a) = f'_+(a) = f'_-(a).
+        \]
+\end{proposition}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\begin{definition}
+    Seja $f: A \subseteq \R \to \R$ derivável em $a \in A \cap A'$. Dizemos que a reta
+        \[
+            \{(x,y) \in \R^2 : y = f(a) + f'(a)(x-a) \}
+        \]
+    é \emph{tangente} ao gráfico de $f$ em $(a,f(a))$.
+\end{definition}
+
+\begin{proposition}
+    Seja $f: A \subseteq \R \to \R$ derivável em $a \in A \cap A'$. Se $f'(a) \neq 0$, então a reta
+        \[
+            \{(x,y) \in \R^2 : y = f(a) - \dfrac{1}{f'(a)}(x-a) \}
+        \]
+    é perpendicular à reta tangente ao gráfico de $f$ em $(a,f(a))$.
+\end{proposition}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\begin{theorem}[Regra da Cadeia]
+    Sejam $f : A \subseteq \R \to \R$ e $g : B \subseteq \R \to \R$ tais que $f[A] \subseteq B$. Se $f$ é derivável em $a \in A \cap A'$ e $g$ é derivável em $f(a) \in B \cap B'$, então $g \circ f : A \to \R$ é derivável em $a$ e
+        \[
+            (g \circ f)'(a) = g'(f(a))f'(a).
+        \]
+\end{theorem}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\section{O Teorema do Valor Médio}
+
+\begin{theorem}[Fermat] \label{teo.calc1:extremolocalfermat}
+    Seja $f: A \subseteq \R \to \R$ derivável em
+    $a \in A \cap A'_+ \cap A'_-$.
+    \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+        \item Se $a$ é um ponto de máximo local de $f$, então $f'(a)=0$.
+        \item Se $a$ é um ponto de mínimo local de $f$, então $f'(a)=0$.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\begin{theorem}[Rolle] \label{teo.calc1:rolle}
+    Seja $f: [a,b] \to \R$ contínua em $[a,b]$ e derivável em $]a,b[$. Se $f(a) = f(b)$, então existe $c \in \left]a,b\right[$ tal que $f'(c) = 0$.
+\end{theorem}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\begin{theorem}[Valor Médio] \label{teo.calc1:tvm}
+    Seja $f: [a,b] \to \R$ contínua em $[a,b]$ e derivável em $]a,b[$. Existe $c \in \left]a,b\right[$ tal que
+        \[
+            f(b) - f(a) = f'(c) \cdot (b-a).
+        \]
+\end{theorem}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\begin{theorem}[Cauchy] \label{teo.calc1:tvm_cauchy}
+    Sejam $f,g : [a,b] \to \R$ contínuas em $[a,b]$ e deriváveis em $]a,b[$. Existe $c \in \left] a,b \right[$ tal que
+        \[
+            (f(b) - f(a)) g'(c) = (g(b) - g(a)) f'(c).
+        \]
+    Em particular, se $g'(c) \neq 0$, então
+        \[
+            \dfrac{f(b) - f(a)}{g(b) - g(a)} = \dfrac{f'(c)}{g'(c)}.
+        \]
+\end{theorem}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\chapter{Integrais}
+
+\section{A Integral de Darboux}
+
+Sejam $a,b \in \R$ tais que $a<b$.
+
+\begin{definition}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Uma \emph{partição} de $[a,b]$ é uma função estritamente crescente $x : [n]_0 \to [a,b]$ tal que $x_0 = a$ e $x_n = b$. Isso é denotado por
+                \[
+                    P : a = x_0 < \cdots < x_n = b,
+                \]
+            isto é, $P := \Im x$.
+            \item Seja $i \in [n]$. A \emph{amplitude} do $i$-ésimo intervalo $[x_{i-1}, x_i]$ é definida como $\Delta x_i := x_i - x_{i-1}$.
+        \end{enumerate}
+\end{definition}
+
+\begin{definition} \label{defi:somassupinf}
+    Sejam $f : [a,b] \to \R$ limitada e $P : a = x_0 < \cdots < x_n = b$ uma partição de $[a,b]$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Para cada $i \in [n]$, seja
+                \begin{align*}
+                    M_i &:= \sup_{x \in [x_{i-1}, x_i]}{f(x)} \\ 
+                    &:= \sup \Im f \restriction_{[x_{i-1}, x_i]}.
+                \end{align*}
+            A \emph{soma superior de $f$ em $P$} é definida como
+                \[ \ds
+                    U(f,P) := \sum_{i=1}^{n}{M_i \Delta{x_i}}.
+                \]
+            \item Para cada $i \in [n]$, seja
+                \begin{align*}
+                    m_i &:= \inf_{x \in [x_{i-1}, x_i]}{f(x)} \\ 
+                    &:= \inf \Im f \restriction_{[x_{i-1}, x_i]}.
+                \end{align*}
+            A \emph{soma inferior de $f$ em $P$} é definida como
+                \[ \ds
+                    L(f,P) := \sum_{i=1}^{n}{m_i \Delta{x_i}}.
+                \]
+        \end{enumerate}
+\end{definition}
+
+\begin{proposition}
+    Sejam $f:[a,b] \to \R$ e $P \in \mathcal{P}[a,b]$. Se $f$ é limitada, então $L(f,P) \leq U(f,P)$.
+\end{proposition}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\begin{definition}
+    Sejam $P, \bar{P} \in \mathcal{P}[a,b]$. Dizemos que $\bar{P}$ é um \emph{refinamento} de $P$ se $\bar{P} \supseteq P$.
+\end{definition}
+
+\begin{proposition}
+    Sejam $f : [a,b] \to \R$ limitada e $P, \bar{P} \in \mathcal{P}[a,b]$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Se $\bar{P}$ é um refinamento de $P$, então
+                $
+                    U(f,\bar{P}) \leq U(f,P)
+                $
+            e
+                $
+                    L(f,\bar{P}) \geq L(f,P)
+                $.
+            \item Para qualquer $Q \in \mathcal{P}[a,b]$, temos $L(f,P) \leq U(f,Q)$.
+        \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\begin{definition}
+    Seja $f:[a,b] \to \R$ limitada.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item A \emph{integral inferior} de $f$ é definida como
+                \begin{align*}
+                    \lowerint_{a}^{b} f(x) \, dx &:= \sup_{P \in \mathcal{P}{[a,b]}} L(f,P) \\
+                    &:= \sup{\{x \in \R : \exists P(P \in \mathcal{P}[a,b] \land x = L(f,P))\}}.
+                \end{align*}
+            \item A \emph{integral superior} de $f$ é definida como
+                \begin{align*}
+                    \upperint_{a}^{b} f(x) \, dx &:= \inf_{P \in \mathcal{P}{[a,b]}} U(f,P) \\
+                    &:= \inf{\{x \in \R : \exists P(P \in \mathcal{P}[a,b] \land x = U(f,P))\}}.
+                \end{align*}
+        \end{enumerate}
+\end{definition}
+
+\begin{proposition}
+    Seja $f: [a,b] \to \R$. Se $f$ é limitada, então
+        \[
+             \lowerint_{a}^{b} f(x) \, dx \leq \upperint_{a}^{b} f(x) \, dx.
+        \]
+\end{proposition}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\begin{definition}
+    Seja $f : [a,b] \to \R$ limitada. Dizemos que $f$ é \emph{Darboux-integrável em $[a,b]$} se
+        \[
+            \lowerint_{a}^{b} f(x) \, dx = \upperint_{a}^{b} f(x) \, dx.
+        \]
+    Dizemos, nesse caso, que
+        \[
+            \int_{a}^{b} f(x) \, dx := \lowerint_{a}^{b} f(x) \, dx \quad \left( = \upperint_{a}^{b} f(x) \, dx \right)
+        \]
+    é a \emph{integral de Darboux de $f$ em $[a,b]$}.
+\end{definition}
+
+\begin{example}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Sejam $c \in \R$ e $f: [a,b] \to \R$ tais que $f(x) = c$ para todo $x \in [a,b]$. Então, $f$ é integrável em $[a,b]$ e
+                \[
+                    \int_{a}^{b} c \, dx = c(b-a).    
+                \]
+            \item Seja $f: [0,1] \to \R$ tal que $f(x) = x$ para todo $x \in [0,1]$. Então, $f$ é integrável em $[0,1]$ e
+                \[
+                    \int_{0}^{1} x \, dx = \frac{1}{2}.        
+                \]
+        \end{enumerate}
+\end{example}
+
+\begin{proposition}
+    Seja $f: [a,b] \to \R$ integrável. Então, para qualquer $P \in \mathcal{P}[a,b]$,
+        \[
+            L(f,P) \leq \lowerint_{a}^{b} f(x) \, dx = \int_{a}^{b} f(x) \, dx = \upperint_{a}^{b} f(x) \, dx \leq U(f,P).
+        \]
+\end{proposition}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\begin{definition}[Extensões da definição]
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Sejam $c \in \R$ e $f : \{c\} \to \R$. Dizemos que $f$ é integrável em $\{c\}$ e definimos
+                \[
+                    \int_{c}^{c} f(x) \, dx := 0.
+                \]                
+            \item Seja $f : [a,b] \to \R$ integrável. Definimos
+                \[
+                    \int_{b}^{a} f(x) \, dx := - \int_{a}^{b} f(x) \, dx.
+                \]
+        \end{enumerate}
+\end{definition}
+
+\subsection{Propriedades}
+
+\begin{proposition}
+    Sejam $f,g : [a,b] \to \R$ integráveis.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item A função $f + g : [a,b] \to \R$ é integrável e
+                \[
+                    \int_{a}^{b} [f(x) + g(x)] \, dx = \int_{a}^{b} f(x) \, dx + \int_{a}^{b} g(x) \, dx.
+                \]
+            \item Para todo $c \in \R$, a função $c \cdot f : [a,b] \to \R$ é integrável e
+                \[
+                    \int_{a}^{b} [c \cdot f(x)] \, dx = c \cdot \int_{a}^{b} f(x) \, dx.
+                \]
+            \item A função $f \cdot g : [a,b] \to \R$ é integrável em $[a,b]$.
+        \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\begin{proposition}
+    Sejam $f,g : [a,b] \to \R$ integráveis.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Se $f \leq g$ em $[a,b]$, então
+                \[
+                    \int_{a}^{b} f(x) \, dx \leq \int_{a}^{b} g(x) \, dx
+                \]
+            \item A função $|f| : [a,b] \to \R$ é integrável e
+                \[
+                    \left| \int_{a}^{b} f(x) \, dx  \right| \leq \int_{a}^{b} |f(x)| \, dx.
+                \]
+        \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\begin{proposition}
+    Sejam $I \subseteq \R$ compacto e $f : I \to \R$ integrável. Então, para quaisquer $a,b,c \in I$,
+        \[
+            \int_{a}^{b} f(x) \, dx = \int_{a}^{c} f(x) \, dx + \int_{c}^{b} f(x) \, dx
+        \]
+\end{proposition}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\subsection{Condições de Integrabilidade}
+
+\begin{theorem}
+    Seja $f:[a,b] \to \R$ limitada. Então, $f$ integrável se, e somente se, para todo $\epsilon \in \R_{>0}$ existe $P \in \mathcal{P}[a,b]$ tal que $U(f,P) - L(f,P) < \epsilon$.
+\end{theorem}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\begin{theorem}
+    Seja $f:[a,b] \to \R$ limitada.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Se $f$ é contínua, então $f$ é integrável.
+            \item Se $f$ é descontínua em apenas um número finito de pontos, então $f$ é integrável.
+        \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\begin{proposition}
+    Seja $f:[a,b] \to \R$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Se $f$ é monótona, então $f$ é integrável.
+            \item Se $f$ é integrável, $\Im f = [c,d]$ e $g : [c,d] \to \R$ é contínua, então $g \circ f : [a,b] \to \R$ é integrável.
+        \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\begin{proposition}
+    Sejam $f,g : [a,b] \to \R$. 
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Seja $c \in [a,b]$ tal que $f(c) \neq 0$. Se $f \restriction_{[a,b] \setminus \{c\}} = 0$, então $f$ é integrável e
+                \[
+                    \int_{a}^{b} f(x) \, dx = 0.
+                \] 
+            \item Seja $c : [n] \to [a,b]$ tal que $f(c_i) \neq 0$ para todo $i \in [n]$. Se $f \restriction_{[a,b] \setminus \Im c} = 0$, então $f$ é integrável e
+                \[
+                    \int_{a}^{b} f(x) \, dx = 0.
+                \]
+            \item Seja $c : [n] \to [a,b]$ tal que $f(c_i) \neq g(c_i)$ para todo $i \in [n]$. Se $f = g$ em $[a,b] \setminus \Im c$, e $f$ (ou $g$) é integrável, então $g$ (ou $f$) é integrável e
+                \[
+                    \int_{a}^{b} g(x) \, dx  = \int_{a}^{b} f(x) \, dx.
+                \]
+        \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\begin{definition}
+    Sejam $c : [n] \to [a,b]$ e $f:[a,b] \setminus \Im c \to \R$. Dizemos que $f$ é integrável em $[a,b]$ se toda extensão $g$ de $f$ a $[a,b]$ é integrável. Nesse caso,
+        \[
+            \int_{a}^{b} f(x) \, dx  := \int_{a}^{b} g(x) \, dx.
+        \]
+\end{definition}
+
+\subsection{A Integral de Riemann}
+
+\begin{definition}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item A \emph{norma} de $P \in \mathcal{P}[a,b]$ é definida como $\|P\| := \max{\{ \Delta x_i \}_{i \in [n]}}$.
+            \item Uma \emph{partição pontilhada} de $[a,b]$ é um par $(P, \xi)$, onde $P \in \mathcal{P}[a,b]$ e $\xi : [n] \to [a,b]$ é uma função tal que $\xi_i \in [x_{i-1}, x_i]$ para todo $i \in [n]$.
+        \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    Sejam $f : [a,b] \to \R$ e $(P, \xi)$ um pontilhamento de $[a,b]$. A \emph{soma de Riemann de $f$ em $(P, \xi)$} é definida como
+        \[
+            S(f, P, \xi) := \sum_{i=1}^{n} f(\xi_i) \Delta x_i.
+        \]
+\end{definition}
+
+\begin{definition}
+    Dizemos que \emph{as somas de Riemann de $f : [a,b] \to \R$ tem limite $I \in \R$} se para todo $\epsilon \in \R_{>0}$ existe $\delta \in \R_{>0}$ tal que, para toda partição pontilhada $(P, \xi)$ de $[a,b]$, se $\|P\| < \delta$, então $|S(f,P,\xi) - I| < \epsilon$. Isso é denotado por
+        \[
+            \lim_{\|P\| \to 0} S(f,P,\xi) := I.
+        \]
+\end{definition}
+
+\begin{proposition}
+    O limite das somas de Riemann de $f : [a,b] \to \R$, quando existe, é único.
+\end{proposition}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\begin{definition}
+    Dizemos que \emph{$f : [a,b] \to \R$ é Riemann-integrável em $[a,b]$} se existe
+        \[
+            \int_{a}^{b} f(x) \, dx := \lim_{\|P\| \to 0} S(f,P,\xi).
+        \]
+    Dizemos, nesse caso, que
+        $ \ds
+            \int_{a}^{b} f(x) \, dx
+        $
+    é a \emph{integral de Riemann de $f$ em $[a,b]$}.
+\end{definition}
+
+\begin{proposition}
+    Seja $f : [a,b] \to \R$. Então, $f$ é Riemann-integrável se, e somente se, $f$ é Darboux-integral. Nesse caso, as integrais de Riemann e de Darboux coincidem.
+\end{proposition}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\section{Os Teoremas Fundamentais do Cálculo}
+
+\begin{theorem}(Fundamental do Cálculo, parte I) \label{teo.calc1:TFC1}
+     Seja $f: [a,b] \to \R$ integrável.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item  A função $F: [a,b] \to \R$ definida por
+                \[
+                    F(x) := \int_{a}^{x} f(t) \, dt
+                \]
+            é uniformemente contínua.
+            \item Se $f$ é contínua em $x_0 \in [a,b]$, então $F$ é derivável em $x_0$ e $F'(x_0) = f(x_0)$.
+        \end{enumerate} 
+\end{theorem}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\begin{definition}
+    Sejam $I \subseteq \R$ um intervalo e $f,F : I \to \R$. Dizemos que $F$ é uma \emph{primitiva} de $f$ em $I$ se $F' = f$.
+\end{definition}
+
+\begin{corollary}
+    Seja $f : [a,b] \to \R$ contínua.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item A função $F: [a,b] \to \R$ definida por
+                \[
+                    F(x) := \int_{a}^{x} f(t) \, dt
+                \]
+            é uma primitiva de $f$: para todo $x \in [a,b]$,
+                \[
+                    \dfrac{d}{dx} \int_{a}^{x} f(t) \, dt = f(x).
+                \]
+            \item Seja $G: [a,b] \to \R$ uma primitiva de $f$. Então, para todo $x \in [a,b]$,
+                \[
+                    G(x) = G(a) + \int_{a}^{x} f(t) \, dt
+                \]
+            Em particular,
+                \[
+                    \int_{a}^{b} f(t) \, dt = G(b) - G(a).
+                \]
+        \end{enumerate}
+\end{corollary}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\begin{theorem}
+    Sejam $I \subseteq \R$ um intervalo e $f , g : I \to \R$ deriváveis.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Se $f' = 0$, então existe $C \in \R$ tal que $f = C$.
+            \item Se $f' = g'$, então existe $C \in \R$ tal que $f = g + C$.
+        \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\begin{theorem}[Fundamental do Cálculo, parte II] \label{teo.calc1:TFC2}
+    Sejam $f : [a,b] \to \R$ integrável e $F : [a,b] \to \R$ uma primitiva de $f$. Então, para todo $x \in [a,b]$,
+        \[
+            F(x) = F(a) + \int_{a}^{x} f(t) \, dt
+        \]
+    Em particular,
+        \[
+            \int_{a}^{b} f(t) \, dt = F(b) - F(a).
+        \]
+\end{theorem}
+
+\begin{proof}
+    \blackproof
 \end{proof}

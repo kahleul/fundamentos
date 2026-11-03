@@ -1017,7 +1017,74 @@ Antes de tratar o caso geral, vamos tratar alguns casos particulares.
         \end{enumerate}
 \end{definition}
 
+\chapter{Integrais}
+
+\section{Integrais Múltiplas}
+
+\subsection{Integrais Duplas}
+
+\begin{definition}
+    Sejam $a,b,c,d \in \R$ tais que $a<b$ e $c<d$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Dizemos que $R := [a,b] \times [c,d]$ é um retângulo.
+            \item Uma \emph{partição de $R$} é um par $P := (P_1, P_2)$ em que $P_1 : a = x_0 < \cdots < x_n = b$ é uma partição de $[a,b]$ e $P_2 : c = y_0 < \cdots < y_m = d$ é uma partição de $[c,d]$.
+            \item A \emph{norma} de uma partição $P$ de $R$ é definida como
+                \[
+                    \|P\| := \max{\left(\{\Delta x_i\}_{i \in [n]} \cup \{\Delta y_j\}_{j \in [m]} \right)}.
+                \]
+            \item Uma \emph{partição pontilhada de $R$} é um par $(P, \xi)$, onde $P$ é uma partição de $R$ e $\xi : [n] \times [m] \to R$ é uma função tal que
+                \[
+                    \xi_{ij} \in [x_{i-1}, x_i] \times [y_{j-1}, y_j] 
+                \]
+            para quaisquer $i \in [n]$ e $j \in [m]$.
+        \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    Sejam $B \subseteq \R^2$ limitado e $f : B \to \R$. Sejam $R \supseteq B$ um retângulo e $\bar{f} : R \to \R$ tais que $\bar{f} \restriction_{B} = f$ e $\bar{f} \restriction_{R \setminus B} = 0$. Seja $(P, \xi)$ uma partição pontilhada de $R$. A \emph{soma de Riemann de $f$ em $(P, \xi)$} é definida como
+        \[
+            S(f, P, \xi) := \sum_{i=1}^{n} \sum_{j = 1}^{m} \bar{f}(\xi_{ij}) \Delta x_i \Delta y_j.
+        \]
+\end{definition}
+
+\begin{definition}
+    Sejam $B \subseteq \R^2$ limitado, $R \supseteq B$ um retângulo e $f : B \to \R$. Dizemos que \emph{as somas de Riemann de $f$ têm limite $I \in \R$} se para todo $\epsilon \in \R_{>0}$ existe $\delta \in \R_{>0}$ tal que, para toda partição pontilhada $(P, \xi)$ de $R$, se $\|P\| < \delta$, então $|S(f,P,\xi) - I| < \epsilon$. Isso é denotado por
+        \[
+            \lim_{\|P\| \to 0} S(f,P,\xi) := I.
+        \]
+\end{definition}
+
+\begin{proposition}
+    Sejam $B \subseteq \R^2$ limitado, $R \supseteq B$ um retângulo e $f : B \to \R$. O limite das somas de Riemann de $f$, quando existe, é único.
+\end{proposition}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
+\begin{definition}
+    Sejam $B \subseteq \R^2$ limitado e $f : B \to \R$. Dizemos que \emph{$f$ é integrável em $B$} se existe
+        \[
+            \iint_{B} f(x,y) \, dx \, dy := \lim_{\|P\| \to 0} S(f,P,\xi).
+        \]
+    Dizemos, nesse caso, que
+        $ \ds
+            \iint_{B} f(x,y) \, dx \, dy
+        $
+    é a \emph{integral de $f$ em $B$}.
+\end{definition}
+
+\subsection{Integrais Triplas}
+
 \begin{comment}
+\begin{proposition}
+    Sejam $B \subseteq \R^2$ limitado e $f : B \to \R$. As somas de Riemann de $f$ coincidem.
+\end{proposition}
+
+\begin{proof}
+    \blackproof
+\end{proof}
+
 \begin{theorem}
     Sejam $U \subseteq \R^n$ aberto e $f : U \to \R$ diferenciável em $a \in U$.
         \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
